@@ -1,0 +1,132 @@
+---
+title: "neurogenes synteny project"
+csl: plos.csl
+output:
+  pdf_document: default
+  github_document: default
+  html_document: default
+bibliography: Bib.bib
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	message = FALSE,
+	warning = FALSE,
+	echo=FALSE,
+	dpi=300,
+	cache=TRUE
+	)
+```
+
+```{r preliminaries}
+#library( tidyverse )
+```
+
+
+1. 
+#Paper notes
+###Moroz et al., 2014  [@Moroz2014]
+Table 34S
+-structure of figure shows that it is from bilaterian perspective (closer to bilateria more rectangles filled in)  
+-remember there are also random absences in cnidaria; the mirror of bilateria, but all the proteins are characterized from bilateria  
+-no examples where ctenophores or sponges don't have something present in fungi, capsaspora, monosiga  
+-Suppl Table 12as - it's possible didn't use Amphimedon genome, but Amphimedon was covered by the other papers and I crossreferenced them.  
+
+Mentioned in text:  
+Not in ctenophores:   
+neurogenin  
+NeuroD  
+Achaete-scute  
+REST  
+HOX  
+Otx  
+
+-not that much overlap in genes looked at by Riesgo vs Moroz  
+
+###Ryan et al., 2013  [@Ryan2013]
+*netrin, slit, unc-5 (axon guidance) not in Mnemiopsis or Amphimedon*  
+-used genomes, since based on Alie and Manuel 2010  
+Supplementary Table S17: Presence and absence of post-synaptic genes  - pretty much Alie and Manuel 2010
+Supplementary Table S19: Presence and absence of Dopamine / Norepinephrine /Epinephrine Biosynthetic Pathway components   
+
+-are seqs of the animals in S17 genomes? Unsure, but all animals in table have genomes (and the Mle seqs are from the genome)  
+-AMPA iGluR and NMDA iGluR included as iGluR  
+
+###Alie and Manuel, 2010  [@Alie2010]
+-used genomes  
+-Ryan built on Fig. 1. Cross ref with current data to make sure have everything.  
+-Only use Monosiga, Trichoplax, Amphimedon, Nematostella, Hydra, Homo  
+  Capitella (3 absences), Drosophila (2 absences), Homo very similar with few differences  
+  Unicellular animals mostly missing everything (except B-cat and PMCA). Start with Monosiga which has more things.
+B-cat and PMCA are ancient - interesting?  
+AMPAR and NMDAR collapsed into iGluR in table; presence of one of these trumped absence of the other  
+PKC alpha-beta-gamma = PKC on table  
+
+#[Table](https://github.com/jasminelmah/compgen/blob/master/neurogenes_table.numbers)  
+_Table abbreviations_  
+DBH - dopamine-B-hydroxylase  
+DDC - DOPA decarboxylase  
+TH - tyrosine hydroxylase  
+TPH - tryptophan hydroxylase  
+PAH - phenylalanine hydroxylase  
+GAD - glutamate decarboxylase  
+Qdpr -  quinoid dihydropteridine reductase,  
+Slc18A2 = Homo sapiens solute carrier family 18 member 2,  
+Pnmt = phenylethanolamine N-methyltransferase  
+
+Missing domains  
+Piccolo - Pleurobrachia - missing ZF (Moroz et al., 2014)  
+Erbin - Pleurobrachia - missing PDZ (Moroz et al., 2014)  
+
+Species names written to the broadest level - eg. Monosiga brevicollis in Riesgo et al but only Monosiga in Moroz, so put Monosiga only  
+
+Many entries have NA but if combine:  
+Salpingoeca + Monosiga = Choanoflagellida  
+Pleurobrachia + Mnemiopsis = Ctenophora  
+Amphimedon + Oscarella = Porifera  
+Nematostella + Hydra = Cnidaria  
+Get only 4 entries that have an NA.  
+*(What about 0/1s (conflicting info?)*  >> decided to transform 0/1s into NA
+
+Loss_Status:
+P1C0: present in Porifera, absent in Ctenphora - 6 instances  
+C1P0: present in Ctenophora, absent in Porifera - 3 instances  
+T0: absent in Trichoplax but present in Ctenophora or Porifera - 5 instances  
+
+There is only 2 instances where Capsaspora has a 1 while choanoflagellates have 0: GABAR and DDC. Don't use column in second iteration  
+'Fungi' is very vaguely defined - don't use column in second iteration  
+Stopped at Delta catenin
+
+Make new table where all 0/1s or missing_domains (i.e. not 0,1,NA) into NA  
+
+Create a new table where species for Ctenophora, Porifera combined: https://stackoverflow.com/questions/14563531/combine-column-to-remove-nas  
+
+#Papers+Links
+Riesgo et al., 2014  
+https://academic.oup.com/mbe/article/31/5/1102/993377  
+Neural genes Fig  
+https://academic.oup.com/view-large/figure/74385341/msu057f3p.jpeg  
+
+Moroz et al., 2014  
+https://www.nature.com/articles/nature13400  
+Table 34S:  
+https://media.nature.com/original/nature-assets/nature/journal/v510/n7503/extref/nature13400-s1.pdf  
+
+Ryan et al, 2013  
+http://science.sciencemag.org/content/342/6164/1242592  
+Suppl Mat:  
+http://science.sciencemag.org/content/sci/suppl/2013/12/11/342.6164.1242592.DC1/Ryan.SM.pdf  
+
+Alie and Manuel, 2010  
+https://bmcevolbiol.biomedcentral.com/articles/10.1186/1471-2148-10-34  
+
+Srivastava et al., 2010  
+Suppl.S8.9
+https://media.nature.com/original/nature-assets/nature/journal/v466/n7307/extref/nature09201-s1.pdf
+
+
+2. Should we be expecting these genes in these animals?  
+Why should they use similar genes?  
+How misguided is this approach? What is the true question implied by this approach?  
+
+
+##References  
