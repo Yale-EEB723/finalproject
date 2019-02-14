@@ -18,6 +18,7 @@ This is a final project for the [Comparative Genomics](https://github.com/Yale-E
 ## The goal
 
 The specific problem I/we sought to explore was ... Our goal was...
+Salmonella host specificity, functional genomic data related to broad host and host specific Salmonella serovars and species
 
 ## The data
 
