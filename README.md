@@ -17,7 +17,7 @@ This is a final project for the [Comparative Genomics](https://github.com/Yale-E
 
 ## The goal
 
-The specific problem I/we sought to explore was ... Our goal was...
+The specific problem I sought to explore was annotating a genome. My goal was...
 
 ## The data
 
