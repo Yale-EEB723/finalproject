@@ -1,0 +1,119 @@
+Casey Dunn Class 14.02.2019:
+
+Assembly stuff:
+
+Assembly: No biological inference -> We start with an animal with long contiguous chromosomes ->
+ Sample prep -> Chromosomes get broken down -> Then chopped into tiny sequences. -> Then assembly.
+
+
+
+Annotator: Take reads and puzzle them together
+⎝	Assembly: Identify and fix errors.
+
+
+Challenges in extention now: We puzzle reads together -> Assembly graphs ->
+ complicated branching and merging structure.
+
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+There is not ONE human genome that tells us all about human variation ->
+Lie. If we reconcile sequences of every human in the room -> Every place where there is a diference
+between us will lead to problems.
+Differences between haplotypes is major challenges -> Try individual sequencing
+Heterozygozity is a problem.
+
+Bats and Whales or rare species -> collect wing clips AND release the bats -> do tissue culture
+grow up and then sequence those cells. -> Reduces number of haplotypes in population to sequence
+single individuals.
+
+How much is due to error, Heterozygozity,
+Instead of comming up with 23 chromosome sequences -> Assemble 46 chromosomes (diploud organisms)
+0> Depends on our actual goal: ->
+
+
+I need read lengths that are long enough.
+
+
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+Take assembly graph -> Alts is a bag you call Alts ->
+Then take assembly through these paths ->
+Genome assembly -> Building assembly has gotten good.
+# Contigs and scaffold: Definition:
+
+# Do I have too many repeats, maybe i have polyploidy -> What is causing
+shattering of the assembly?
+
+# Learn Atoms
+
+
+Really long reads => Frequent order misscalls ->
+How do we fix those error? (pacbio)
+
+Short reads: High quality (illumina)
+
+Map illumina to pacbio data and correct the errors with the reads.
+
+
+Ab initio: ML purely computaitonal. Neural Nets. Here is a sequence, i know there isa  gene there and not a gene there. RUn 100000 times once I have trained it. Hard to know, need big enouh training dataset.
+Evidence bases: Have new assembly and have MRNA, i know which regions are being transcriped
+Reference based: Compare to most closely related platinum related genome or blast agains all of ref-seq. Downaod all known genes and look which are present in my genome of interest.
+I sequence new genome of an organism cuz there is something different thats not the same as drosophila or mouse -> collect sq data and assembly and basically ask "Which mouse genes are here or which drosophila genes are there" -> Wont find the biochemical and unique gene pathways that make this nonmodel organisms unique.
+This perpetuates that we cant find the unique stuff in our non-model organism.This method is bad at findng things that are NOT present in model organism.
+For all denovo genome assembly -> Do all 3. Some have false positives , gives me idea how confident i sould be with annotation.
+
+Good to take all reads and concatenate to N:
+Key parameters:
+Correctness
+Contiguity: How long are genome products.  -> Length distance, N50 summarizes length.
+Completeness: What fraction of actual genome is covered.
+zB BUSCO manially cureated sets of genes (present in allmost all animals) -> how many busco genes are in my sequence
+Correctness:
+Need to balance these 3 parameters.
+
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+
+Genome: Collection of single gene annotations.
+Can manage sensitivity and get really high.
+Sepcificity: How often is gene annotaiton that im finding actually a gene (might be contaimnate, pseudogene)
+
+e-value of blast is a parameter of sensitivity, specificity (to blast all genes).
+
+All annotations in genomes have an error!
+ENCODE: overimplies funcitonal annotation of stuff
+All that glitters is not gold.
+
+All should be quesiton based: -> How compelte does my genome need to be,
+whats good contiguityu?
+Dony think of goal as maxiimuzing the 3C -> thingk about what i wanna answer ith that genome?
+Only criteria all 3C must answer: Does this answer my research question of interest?
+
+
+
+
+Transcript: Hey tell me where your genes are (on an organism) getting cheapter
+RNA seq and other methods that are good to understand genome function and relevant to annotation.
+
+# --- ---
+
+Yale-EEB723 is an organization. Has set of repos.
+A repository: Syllabus, excersize is one, final project, course docker.
+
+finalproject Repo: Fork it ->
+# Git repo is folder of documents with version control
+# Save snapshots called commits.
+# Backup files, track all changes, easy for sharing. Work with someone on a word document.
+# The unit is the repo.
+# Readme: When someone goes to github, thats whats treated as the landing page -> describe intent of the work.
+# the sylabus is the readme zB.
+# Fork vs clone ->Clone (local copy of a repo that exists somewhere else)
+# fork is compeltely dif repo that is templated from the original repo.
+
+# Clone my repo: github in cloud now has my final copy of my project
+clone create local copy of the forked final project -> Work on changes locally and then commit locally.
+
+
+
+git clone https://github.com/diego-ellis-soto/finalproject
+# Change something
+git status # git stil hasnt done anything about it
+git commit -am "first change during class" # Im gonna type a commit message
+git push
