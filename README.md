@@ -23,7 +23,7 @@ Our goal is to classify whether absences for particular 'neural' genes in sponge
 ## The data
 
 - Data source: Published, and unpublished but publically available    
-So far:  
+So far, will likely use:  
 -Mnemiopsis genome [@Ryan2013]  
 -Pleurobrachia genome [@Moroz2014]  
 -Amphimedon genome [@Srivastava2010]  
@@ -44,7 +44,7 @@ One timely discussion is whether sponges have lost a nervous system. The flip si
 Synteny analysis provides one method of determining loss. In particular, the ghost locus hypothesis suggests that in the case of gene loss, the synteny surrounding the locus of the gene may be preserved even in the absence of the gene itself @Ramos2012. I will look for the ghost loci of absent 'neural' genes in sponges and ctenophores using synteny analysis.   
 
 
-That's all I really got at the moment... thoughts welcome. One major *assumption* I make is that that surrounding syntenic block does not exist before the emergence of the gene itself. (How bad is that assumption?).  
+That's all I really got at the moment... thoughts welcome. One *major assumption* I make is that that surrounding syntenic block does not exist before the emergence of the gene itself. (How bad is that assumption?).  
 
 ## Methods
 Synteny analysis to search for ghost loci of absent 'neural' genes in sponges and ctenophores.   
