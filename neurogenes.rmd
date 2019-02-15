@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 1. 
 #Paper notes
 ###Moroz et al., 2014  [@Moroz2014]
-Table 34S
+-Table 34S:
 -structure of figure shows that it is from bilaterian perspective (closer to bilateria more rectangles filled in)  
 -remember there are also random absences in cnidaria; the mirror of bilateria, but all the proteins are characterized from bilateria  
 -no examples where ctenophores or sponges don't have something present in fungi, capsaspora, monosiga  
