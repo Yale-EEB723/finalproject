@@ -24,10 +24,10 @@ Our goal is to classify whether absences for particular 'neural' genes in sponge
 
 - Data source: Published, and unpublished but publically available    
 So far, will likely use:  
--Mnemiopsis genome [@Ryan2013]  
--Pleurobrachia genome [@Moroz2014]  
--Amphimedon genome [@Srivastava2010]  
--No paper for Oscarella genome, but deposited in Compgen. See presence/absence of 'neural' gene table in Riesgo et al., 2014 [@Riesgo2014]  
+-Mnemiopsis leidyi genome [@Ryan2013]  
+-Pleurobrachia bachei genome [@Moroz2014]  
+-Amphimedon queenslandica genome [@Srivastava2010]  
+-Oscarella carmela [@Nichols2012]. See presence/absence of 'neural' gene table in Riesgo et al., 2014 [@Riesgo2014]  
 
 These genomes were selected because there are presence/absence lists of 'neural' genes readily available for them.  
 

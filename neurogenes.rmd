@@ -119,8 +119,14 @@ Liu et al 2018
 https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2026-4  
 -most synteny programs designed with assumption working on complete high quality genomes.  
 -need N50 of at least 1Mb for robust synteny analysis  
--Can synteny analysis be biased according to quality of genome? Probably...  
+-Fig. 5 - Below 0.5 Mb error rate skyrockets - looks like close to 20-30% for ~100-200 kbs N50s
+-This can represent a major source of systemic bias in my analysis   
 **Look up N50s of your genomes.**  
+Mnemiopsis (from orig @Ryan2013): 187 kb  
+Pleurobachia: 20.63 kb?? (Find real source)  
+Amphimedon orig, Ensembl (https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Annotation/): 120 kb  
+Oscarella carmela (Suppl from @Nichols2010 ): 5.897 kb!! :O  
+
 
 #Papers+Links
 Riesgo et al., 2014  
@@ -145,6 +151,10 @@ Srivastava et al., 2010
 Suppl.S8.9
 https://media.nature.com/original/nature-assets/nature/journal/v466/n7307/extref/nature09201-s1.pdf
 
+Nichols et al., 2012  
+https://www.pnas.org/content/109/32/13046  
+Suppl
+https://www.pnas.org/content/pnas/suppl/2012/07/25/1120685109.DCSupplemental/sapp.pdf  
 
 2. Should we be expecting these genes in these animals?  
 Why should they use similar genes?  
