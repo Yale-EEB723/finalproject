@@ -100,6 +100,28 @@ Make new table where all 0/1s or missing_domains (i.e. not 0,1,NA) into NA
 
 Create a new table where species for Ctenophora, Porifera combined: https://stackoverflow.com/questions/14563531/combine-column-to-remove-nas  
 
+#Synteny programs/papers  
+ghost locus hypothesis:  
+Ramos et al., 2012  
+https://www.sciencedirect.com/science/article/pii/S0960982212009888  
+-first ghost locus paper - parahox, Amphimedon + Trichoplax  
+
+Fortunato et al, 2014  - sycon Parahox  
+https://www.nature.com/articles/nature13881  
+-second ghost locus paper?  
+
+Ferrier 2015 (review)  
+https://academic.oup.com/bfg/article/15/5/333/1741867  
+
+
+Reviews:  
+Liu et al 2018  
+https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2026-4  
+-most synteny programs designed with assumption working on complete high quality genomes.  
+-need N50 of at least 1Mb for robust synteny analysis  
+-Can synteny analysis be biased according to quality of genome? Probably...  
+**Look up N50s of your genomes.**  
+
 #Papers+Links
 Riesgo et al., 2014  
 https://academic.oup.com/mbe/article/31/5/1102/993377  
