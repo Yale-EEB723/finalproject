@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 
 
 1. 
-#Paper notes
+#Paper notes - neural genes presence/absences  
 
 ###Moroz et al., 2014  [@Moroz2014]
 -Table 34S:
@@ -130,8 +130,56 @@ Amphimedon orig, Ensembl (https://metazoa.ensembl.org/Amphimedon_queenslandica/I
   - Slightly confused with scaffold N50 stats in @Srivastava2010 suppl Table S2.3.2  
 Oscarella carmela (Suppl from @Nichols2012): 5.897 kb!! :O  
 
+#Data/downloads
+_Pleurobachia genome_:  https://www.ncbi.nlm.nih.gov/assembly/GCA_000695325.1  
+P.bachei_draft_genome_v.1.1  
+Organism: Pleurobrachia bachei (ctenophores)  
+Submitter: University of Florida  
+Date: 2014/05/21  
+Assembly level: Scaffold  
+Genome representation: full  
+RefSeq category: representative genome  
+GenBank assembly accession: GCA_000695325.1 (latest)  
+RefSeq assembly accession: n/a  
+IDs: 180401 [UID] 1073948 [GenBank]  
+-paper said deposited at Moroz's website; links don't work on website.  
 
-#Papers+Links
+_Mnemiopsis leidyi_: https://www.ncbi.nlm.nih.gov/assembly/GCA_000226015.1/    
+MneLei_Aug2011  
+Organism name: Mnemiopsis leidyi (sea walnut)  
+BioSample: SAMN02953801BioProject: PRJNA64405  
+Submitter: National Human Genome Research Institute, National Institutes of Health  
+Date: 2011/09/19  
+Assembly level: Scaffold  
+Genome representation: full  
+RefSeq category: representative genome  
+GenBank assembly accession: GCA_000226015.1 (latest)  
+RefSeq assembly accession: n/a  
+RefSeq assembly and GenBank assembly identical: n/a  
+WGS Project: AGCP01  
+Assembly method: Phusion v. 1.02  
+Genome coverage: 12xSequencing technology: 454 GS-FLX Titanium; Illumina GA IIX  
+IDs: 304208 [UID] 304208 [GenBank]  
+
+_Amphimedon queenslandica: v1.0_: https://www.ncbi.nlm.nih.gov/assembly/GCF_000090795.1  
+Organism: Amphimedon queenslandica (sponges)  
+Submitter: US DOE Joint Genome Institute (JGI-PGF)   
+Date: 2010/05/28  
+Assembly level: Scaffold   
+Genome representation: full  
+RefSeq category: representative genome  
+GenBank assembly accession: GCA_000090795.1 (latest)  
+RefSeq assembly accession: GCF_000090795.1 (latest)  
+IDs: 293608 [UID] 111438 [GenBank] 293608 [RefSeq]  
+
+_Oscarella carmela_: http://www.compagen.org/datasets.html  OCAR not Oscarella sp.  
+-added .fna and gzipped  
+-Oscarella carmela (this assembly) renamed Oscarella pearsei; Oscarella sp. in Compgen redescribed Oscarella carmela. See 
+https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0183002 - old O. carmela papers based on two species (carmela + pearsei). Both in compagen, but although there is  press release compagen didn't change their names in db. *Can't find annotation file*.  
+
+
+
+#Papers+Links  
 Riesgo et al., 2014  
 https://academic.oup.com/mbe/article/31/5/1102/993377  
 Neural genes Fig  
