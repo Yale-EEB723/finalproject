@@ -24,6 +24,7 @@ knitr::opts_chunk$set(
 
 1. 
 #Paper notes
+
 ###Moroz et al., 2014  [@Moroz2014]
 -Table 34S:
 -structure of figure shows that it is from bilaterian perspective (closer to bilateria more rectangles filled in)  
@@ -102,30 +103,32 @@ Create a new table where species for Ctenophora, Porifera combined: https://stac
 
 #Synteny programs/papers  
 ghost locus hypothesis:  
-Ramos et al., 2012  
+Ramos et al., 2012 [@Ramos2012]  
 https://www.sciencedirect.com/science/article/pii/S0960982212009888  
 -first ghost locus paper - parahox, Amphimedon + Trichoplax  
 
-Fortunato et al, 2014  - sycon Parahox  
+Fortunato et al, 2014 [@Fortunato2014] - sycon Parahox  
 https://www.nature.com/articles/nature13881  
 -second ghost locus paper?  
 
-Ferrier 2015 (review)  
+Ferrier 2015 [@Ferrier2015] (review)  
 https://academic.oup.com/bfg/article/15/5/333/1741867  
 
 
 Reviews:  
-Liu et al 2018  
+Liu et al 2018 [@Liu2018]  
 https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2026-4  
 -most synteny programs designed with assumption working on complete high quality genomes.  
 -need N50 of at least 1Mb for robust synteny analysis  
 -Fig. 5 - Below 0.5 Mb error rate skyrockets - looks like close to 20-30% for ~100-200 kbs N50s
 -This can represent a major source of systemic bias in my analysis   
-**Look up N50s of your genomes.**  
+
+**Scaffold N50s of my genomes**  
 Mnemiopsis (from orig @Ryan2013): 187 kb  
-Pleurobachia: 20.63 kb?? (Find real source)  
-Amphimedon orig, Ensembl (https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Annotation/): 120 kb  
-Oscarella carmela (Suppl from @Nichols2010 ): 5.897 kb!! :O  
+Pleurobachia (Suppl Table 5S from @Moroz2014): 20.607 kb  
+Amphimedon orig, Ensembl (https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Annotation/): 120 kb >> likely improved, looking for Aqu2.1 (or is this only a re-annotation not reassembly?)  
+  - Slightly confused with scaffold N50 stats in @Srivastava2010 suppl Table S2.3.2  
+Oscarella carmela (Suppl from @Nichols2012): 5.897 kb!! :O  
 
 
 #Papers+Links
@@ -136,7 +139,7 @@ https://academic.oup.com/view-large/figure/74385341/msu057f3p.jpeg
 
 Moroz et al., 2014  
 https://www.nature.com/articles/nature13400  
-Table 34S:  
+Table 34S: neural genes  
 https://media.nature.com/original/nature-assets/nature/journal/v510/n7503/extref/nature13400-s1.pdf  
 
 Ryan et al, 2013  
@@ -148,13 +151,16 @@ Alie and Manuel, 2010
 https://bmcevolbiol.biomedcentral.com/articles/10.1186/1471-2148-10-34  
 
 Srivastava et al., 2010  
-Suppl.S8.9
+Suppl.S8.9 - neural genes
 https://media.nature.com/original/nature-assets/nature/journal/v466/n7307/extref/nature09201-s1.pdf
 
 Nichols et al., 2012  
 https://www.pnas.org/content/109/32/13046  
-Suppl
+Suppl  
 https://www.pnas.org/content/pnas/suppl/2012/07/25/1120685109.DCSupplemental/sapp.pdf  
+
+
+
 
 2. Should we be expecting these genes in these animals?  
 Why should they use similar genes?  
