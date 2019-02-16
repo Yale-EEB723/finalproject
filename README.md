@@ -27,13 +27,12 @@ Synteny analysis provides one method of determining loss. In particular, the gho
 
 Our goal is to classify whether absences for particular 'neural' genes in sponges and ctenophores are ancestral (i.e. gene was never there) or secondary.  
 
-I must first determine whether my genes of interest are found within conserved blocks of synteny.  
-If absence in a particular taxon is ancestral, I would expect that the genes defining the synteny block not to be co-localized. If absence is secondary, I expect to find conservation of the synteny block in the absence of the gene of interest.  
+I must first determine whether my genes of interest are found within conserved blocks of synteny in other animals. If absence in a particular taxon is ancestral, I would expect that the genes defining the synteny block not to be co-localized. If absence is secondary, I expect to find conservation of the synteny block in the absence of the gene of interest.  
 
 ## The data
 
 - Data source: Published, and unpublished but publically available    
-So far have:  
+So far have:  [NOTE: couldn't add to public fork via git lfs]  
 -Mnemiopsis leidyi genome [@Ryan2013]  
 -Pleurobrachia bachei genome [@Moroz2014]  
 -Amphimedon queenslandica genome [@Srivastava2010]  
@@ -57,8 +56,8 @@ Synteny analysis to search for ghost loci of absent 'neural' genes in sponges an
 
 ## Discussion  
 Some major assumptions:  
-- surrounding syntenic block does not exist before the emergence of the gene itself...  
-- there IS conservation of synteny around these genes across taxa...  
+- surrounding syntenic block does not exist before the emergence of the gene itself.  
+- there IS conservation of synteny around these genes across taxa.  
 
 
 ## Assessment
