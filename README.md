@@ -1,4 +1,4 @@
-# Final Project
+# _Portulaca amilis_ genome annotation: genomic architecture of carbon concentrating mechanisms
 
 ## Instructions
 
