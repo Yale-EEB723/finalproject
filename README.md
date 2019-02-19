@@ -45,21 +45,21 @@ What the reader needs to know to understand the project
 ## Methods
   As of right now, I have a general understanding of what tools are available to complete this project, with more perhaps coming into my view as I read more literature on comparative genomics in Salmonella/ pathogens.
 
-  General software packages
-    -Anaconda/ Bioconda
-    SPIFinder > Salmonella Pathogenicity Island finder, useful for IDing where to look for comparing genomes potentially
-    SRST2 > Short Read Sequence Typing for Bacterial Pathogens, don't think I'll need this but works with Illumina sequences to ID genes of interest within the sequences
+    General software packages
+      - Anaconda/ Bioconda
+      SPIFinder > Salmonella Pathogenicity Island finder, useful for IDing where to look for comparing genomes potentially
+      SRST2 > Short Read Sequence Typing for Bacterial Pathogens, don't think I'll need this but works with Illumina sequences to ID genes of interest within the sequences
 
-  Annotation Tools (for potentially reannotating previously assembled Genomes)
-    - Prokka > Standalone command line tool for rapidly annotating prokaryotic Genomes
-    - RAST > Takes ~a day to annotate a single genome, may be too slow
+    Annotation Tools (for potentially reannotating previously assembled Genomes)
+      - Prokka > Standalone command line tool for rapidly annotating prokaryotic Genomes
+      - RAST > Takes ~a day to annotate a single genome, may be too slow
     Virulence gene annotation software
       - PATRIC > have to check if this will work for Salmonella; Online/ browser based annotation tools available
       - VFDB > Virulence factor database that contains pathogenic serotypes of multiple Salmonella species/ strains, also plasmids found in Salmonella
 
-  Genome Viewing tools
-    - Artemis > Genome Browser to look at annotated genes, either published or newly annotated through this Project; Runs either on Windows or through Bioconda on UNIX; Java based
-    - Artemis Comparison Tool > Similar software to above, but can compare multiple genomes concurrently to find similarities and differences
+    Genome Viewing tools
+      - Artemis > Genome Browser to look at annotated genes, either published or newly annotated through this Project; Runs either on Windows or through Bioconda on UNIX; Java based
+      - Artemis Comparison Tool > Similar software to above, but can compare multiple genomes concurrently to find similarities and differences
 
     Genome Comparisons
       - Mauve > Multiple genome aligner, able to show large scale evolutionary events; Java based
