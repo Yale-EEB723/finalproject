@@ -13,12 +13,11 @@ are from public sources, or track them with [git-lfs](https://git-lfs.github.com
 
 ## Introduction
 
-This is a final project for the [Comparative Genomics](https://github.com/Yale-EEB723/syllabus) seminar in the spring of 2019. This project (a very brief, ie 1-2 sentence, overview of the project)...
+This is a final project for the [Comparative Genomics](https://github.com/Yale-EEB723/syllabus) seminar in the spring of 2019. This project will attempt to identify differences between different Salmonella species and serovars by comparing host-specific and broad host range genomes of Salmonella.
 
 ## The goal
 
-The specific problem I/we sought to explore was ... Our goal was...
-Salmonella host specificity, functional genomic data related to broad host and host specific Salmonella serovars and species
+Specifically, I will try and find similarities and differences between Salmonella that are host-specific (eg: Salmonella gallinarium [Chickens]/ S. enterica serovar typhi [Humans]), either for pathogenicity islands, other genes, or even structure and evolution of the genomes. The goal is to see if there are any readily identifiable differences in gene content between these pathogens which target either specific hosts or a wide range of hosts. This problem has not been attempted to any great depth in Salmonella, although there have been increased efforts to compare Salmonella genomes in general.
 
 ## The data
 
