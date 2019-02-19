@@ -122,6 +122,14 @@ https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2026-4
 -need N50 of at least 1Mb for robust synteny analysis  
 -Fig. 5 - Below 0.5 Mb error rate skyrockets - looks like close to 20-30% for ~100-200 kbs N50s
 -This can represent a major source of systemic bias in my analysis   
+-Satsuma does not have a positive correlation with error rate and level of fragmentation, but it struggles to find nucleotide homology and so underestimates degree of synteny between two diff species.  
+-SynChro performed the best with fragmented assemblies. (How did it perform between species? see section again)  
+-Check to see whether genomes assembled via ref to related species -> leads to false synteny due to assumption of shared synteny  
+-annotation qualityt really doesn't matter.  
+
+#SYNTENY ANALYSIS PLAN  
+Test programs against the same genome - concentrate on the four cteno and por genomes (?).  
+
 
 **Scaffold N50s of my genomes**  
 Mnemiopsis (from orig @Ryan2013): 187 kb  
