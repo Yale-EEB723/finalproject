@@ -86,19 +86,20 @@ Pleurobrachia + Mnemiopsis = Ctenophora
 Amphimedon + Oscarella = Porifera  
 Nematostella + Hydra = Cnidaria  
 Get only 4 entries that have an NA.  
-*(What about 0/1s (conflicting info?)*  >> decided to transform 0/1s into NA
+(What about 0/1s (conflicting info?)  >> decided to transform 0/1s into NA
 
 Loss_Status:
 P1C0: present in Porifera, absent in Ctenphora - 6 instances  
 C1P0: present in Ctenophora, absent in Porifera - 3 instances  
 T0: absent in Trichoplax but present in Ctenophora or Porifera - 5 instances  
 
-There is only 2 instances where Capsaspora has a 1 while choanoflagellates have 0: GABAR and DDC. Don't use column in second iteration  
-'Fungi' is very vaguely defined - don't use column in second iteration  
-Stopped at Delta catenin
+Second Iteration:  
+-There is only 2 instances where Capsaspora has a 1 while choanoflagellates have 0: GABAR and DDC. Don't use column in second iteration  
+-'Fungi' is very vaguely defined - don't use column in second iteration  
+-Stopped at Delta catenin
+-Make new table where all 0/1s or missing_domains (i.e. not 0,1,NA) into NA  
 
-Make new table where all 0/1s or missing_domains (i.e. not 0,1,NA) into NA  
-
+Via R
 Create a new table where species for Ctenophora, Porifera combined: https://stackoverflow.com/questions/14563531/combine-column-to-remove-nas  
 
 #Synteny programs/papers  
@@ -118,18 +119,27 @@ https://academic.oup.com/bfg/article/15/5/333/1741867
 Reviews:  
 Liu et al 2018 [@Liu2018]  
 https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2026-4  
--most synteny programs designed with assumption working on complete high quality genomes.  
--need N50 of at least 1Mb for robust synteny analysis  
--Fig. 5 - Below 0.5 Mb error rate skyrockets - looks like close to 20-30% for ~100-200 kbs N50s
--This can represent a major source of systemic bias in my analysis   
--Satsuma does not have a positive correlation with error rate and level of fragmentation, but it struggles to find nucleotide homology and so underestimates degree of synteny between two diff species.  
--SynChro performed the best with fragmented assemblies. (How did it perform between species? see section again)  
+ 
+Liu Results:  
+-Pos control (default params): comparison of genome with itself: SynChro (most synteny), DAGchainer/i-ADHoRe, MCScanX 
+-Fragmentation: break 2 species genomes [C. elegans, C. briggsae, S. rattis, S. stercoralis] (diff gene density) into diff fragment lengths. pos corr between error rate and level of fragmentation except for Satsuma. For anchor-based programs, fragmentation has biggest effect on MCScanX and lowest on SynChro.  
+-Find synteny between sister species: Satsuma worst (diff with alignments/nt homology), Anchor-based programs found much higher synteny - can't access Add. file 2 Table S1 that describes this.  
+-Fragmented species and compared to its own genome: MCScanX worst. The rest of anchor-based progs performed similarly.k SyncChro often better or second best.Degree of error differed per species.  
+-high gene density, less error (more anchors)  
+-fragmented assemblies lead to erroneous GO terms.  
+-reference-guided assembly methods rely on assumption of synteny = synteny errors.  
+
+Bottom line:  
+-most synteny programs designed with assumption working on complete high quality genomes. 
+-SynChro best for fragmented assemblies in general, imo.  
+-Satsuma does not have a positive correlation with error rate and level of fragmentation, but performed poorly comparing two closely related species due to failure of alignment - go with anchor-based.   
+-need N50 of at least 200 kb and gene density 290 genes/Mb, or N50 1 Mb and gene density 200 genes/Mb for error rate < 5%. Higher N50 for genomes with less gene density or many paralogues/expansion of gene families.   
+-annotation qualityt really doesn't matter just need high genome assembly contiguity.  
+-more paralogues less synteny finding?? may have misunderstood.  
+
+##To do:
 -Check to see whether genomes assembled via ref to related species -> leads to false synteny due to assumption of shared synteny  
--annotation qualityt really doesn't matter.  
-
-#SYNTENY ANALYSIS PLAN  
-Test programs against the same genome - concentrate on the four cteno and por genomes (?).  
-
+-Check N50s of my genomes  
 
 **Scaffold N50s of my genomes**  
 Mnemiopsis (from orig @Ryan2013): 187 kb  
@@ -137,6 +147,32 @@ Pleurobachia (Suppl Table 5S from @Moroz2014): 20.607 kb
 Amphimedon orig, Ensembl (https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Annotation/): 120 kb >> likely improved, looking for Aqu2.1 (or is this only a re-annotation not reassembly?)  
   - Slightly confused with scaffold N50 stats in @Srivastava2010 suppl Table S2.3.2  
 Oscarella carmela (Suppl from @Nichols2012): 5.897 kb!! :O  
+
+#SYNTENY ANALYSIS PLAN  
+Test programs against the same genome - concentrate on the four cteno and por genomes (?).  
+Determine whether genes of interest are actually found within blocks of synteny (in other animals). Characterize these blocks of synteny.  
+Examine Cteno and Por genomes.  
+-ancestral absence: no synteny  
+-secondary loss: synteny without gene of interest. 
+
+#First run attempt with Synchro  
+-Aqu with Aqu: A vs B    
+.gbff from Genbank = ".dat" for Synchro   
+f.dat lat file from embl = ".embl" for Synchro    
+Found .dat aka .embl here: https://www.ebi.ac.uk/ena/data/view/GCA_000090795.1  
+Found .gbff aka genbank .dat here: ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/090/795/GCA_000090795.1_v1.0  
+
+genbank: it's possible .dat is outdated. .gbff has replaced .gbk and Synchro. Yeah, C. elegans gbff doesn't work.  
+*Big wall: Can't get file types to work.*  
+
+#ALTERNATE  
+Ramos method:  
+Identify all orthologous genes on scaffold = curated list of homologous genes (eg. 27 in Ramos)  
+Classify as belonging to chromosome in comparison animal where gene of interest is found or somewhere else.  
+If many paralogues, two tests: single location of each of teh human orthologues, or collapsed location of human paralogues if all located at same locus  
+Do a bunch of stuff to calculate probabilities.  
+Do Exact binomial test and Fisher's test to test whether the number of correct neighbours is statistically significantly higher than expected by chance.  
+-unless they wrote a script it seems very manual and time intensive.  
 
 #Data/downloads
 _Pleurobachia genome_:  https://www.ncbi.nlm.nih.gov/assembly/GCA_000695325.1  
