@@ -144,7 +144,7 @@ Bottom line:
 **Scaffold N50s of my genomes**  
 Mnemiopsis (from orig @Ryan2013): 187 kb  
 Pleurobachia (Suppl Table 5S from @Moroz2014): 20.607 kb  
-Amphimedon orig, Ensembl (https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Annotation/): 120 kb >> likely improved, looking for Aqu2.1 (or is this only a re-annotation not reassembly?)  
+Amphimedon orig, [Ensembl (https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Annotation/): 120 kb >> likely improved, looking for Aqu2.1 (or is this only a re-annotation not reassembly?)  
   - Slightly confused with scaffold N50 stats in @Srivastava2010 suppl Table S2.3.2  
 Oscarella carmela (Suppl from @Nichols2012): 5.897 kb!! :O  
 
@@ -159,11 +159,13 @@ Examine Cteno and Por genomes.
 -Aqu with Aqu: A vs B    
 .gbff from Genbank = ".dat" for Synchro   
 f.dat lat file from embl = ".embl" for Synchro    
-Found .dat aka .embl here: https://www.ebi.ac.uk/ena/data/view/GCA_000090795.1  
-Found .gbff aka genbank .dat here: ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/090/795/GCA_000090795.1_v1.0  
+Found .dat aka .embl [here] (https://www.ebi.ac.uk/ena/data/view/GCA_000090795.1)  
+Found .gbff aka genbank .dat [here] (ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/090/795/GCA_000090795.1_v1.0)    
 
-genbank: it's possible .dat is outdated. .gbff has replaced .gbk and Synchro. Yeah, C. elegans gbff doesn't work.  
-*Big wall: Can't get file types to work.*  
+genbank: it's possible .dat is outdated. .gbff has replaced .gbk and Synchro. Yeah, C. elegans gbff doesn't work. 
+Archived [genbank] (ftp://ftp.ncbi.nlm.nih.gov/genomes/archive/old_genbank) and [refseq files] (ftp://ftp.ncbi.nlm.nih.gov/genomes/archive/old_refseq/) scaffolds only, no annotation files - before annotation done?  
+
+**Big wall: Can't get file types to work.**  
 
 #ALTERNATE  
 Ramos method:  
@@ -172,6 +174,7 @@ Classify as belonging to chromosome in comparison animal where gene of interest 
 If many paralogues, two tests: single location of each of teh human orthologues, or collapsed location of human paralogues if all located at same locus  
 Do a bunch of stuff to calculate probabilities.  
 Do Exact binomial test and Fisher's test to test whether the number of correct neighbours is statistically significantly higher than expected by chance.  
+**So....does order not matter?!!**    
 -unless they wrote a script it seems very manual and time intensive.  
 
 #Data/downloads
