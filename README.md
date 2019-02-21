@@ -36,6 +36,8 @@ I am particularly interested in identifying loci that are under selection and ex
 In the future, I am also interested in examining hybridization between bluefin trevallies and a close relative, the Giant Trevally. We are also sequencing a Giant Trevally genome.
 I would like to learn the basic skills and understanding of genome annotation so that I can apply the same methods to the Giant Trevally.
 
+Challenges as of 2/20/2019: 
+I would like to explore heterozygosity in this dataset but am unsure how to start doing that.
 
 
 ## Methods
