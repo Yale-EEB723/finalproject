@@ -17,22 +17,27 @@ This is a final project for the [Comparative Genomics](https://github.com/Yale-E
 
 ## The goal
 
-The specific problem I/we sought to explore was ... Our goal was...
+The specific problem I seek to explore was annotating a genome of the Bluefin Trevally (Caranx melampygus).
 
 ## The data
 
-Description of data...
-
-- Data source (simulated/ published/ unpublished?)
-- Data structure
+The data are unpublished and are the result of a collaboration between myself and Dr. John Kauwe and his PhD candidate, Brandon Hassett, at Brigham Young University.
+The method used to sequence the genome was PacBio, using a Sequel machine. It generated 52.7 gigabases of sequence data across 10 SMRT cells.
+The raw PacBio reads assembled using the "self-correction" procedure in Canu.
+The estimated genome size was 782.4 Mb and the assembly size is 711 Mb.
+The N50 value is 1.4 Mb, and the NG50 value is 1.18 Mb.
+I have received the output of the Canu assembly in the form of a fastq file.
 
 ## Background
 
-Motivation for the project....
+The motivation behind this project is to use the bluefin genome as a reference upon which to map ddRAD data. 
+I have ddRAD data for Bluefins across their Indo-Pacific range, and have been using de novo assembly methods to examine population structure.
+I am particularly interested in identifying loci that are under selection and examining their function.
+In the future, I am also interested in examining hybridization between bluefin trevallies and a close relative, the Giant Trevally. We are also sequencing a Giant Trevally genome.
+I would like to learn the basic skills and understanding of genome annotation so that I can apply the same methods to the Giant Trevally.
 
-How it fits in with other work...
-
-What the reader needs to know to understand the project
+Challenges as of 2/20/2019: 
+I would like to explore heterozygosity in this dataset but am unsure how to start doing that.
 
 
 ## Methods
