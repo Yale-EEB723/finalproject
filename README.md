@@ -23,7 +23,7 @@ are from public sources, or track them with [git-lfs](https://git-lfs.github.com
 
 This is a final project for the [Comparative Genomics](https://github.com/Yale-EEB723/syllabus) seminar in the spring of 2019.
 
-## This project aims to study the evolution of immune, olfactory and echolocation genes in bats. Further, I will perform a trait analysis to understand the evolution of foraging types and migratory behavior across the bat clade.
+#### This project aims to study the evolution of immune, olfactory and echolocation genes in bats. Further, I will perform a trait analysis to understand the evolution of foraging types and migratory behavior across the bat clade.
 
  This project (a very brief, ie 1-2 sentence, overview of the project)...
 ## The goal
@@ -64,7 +64,7 @@ Description of data...
 Most human emerging infectious diseases across the world are zoonotic. Especially Viruses ocurring in mammals are of major concern. Examples include Anthrax, Birdflu and Ebola (Anthrax paper XXX, Karesh et al. 2012 The Lancet, Nature Olival et al. 2018). Thus, it is of primary concern to understand the drivers and patterns of viral biodiversity in wild animals (Oliver et al. 2018, 5-6). This is especially relevant for migratory animals as they cross continents and political boundaries (Harisson et al. 2018 Nature Eco Evo, 2018 Science paper zoonosis migration ). Animal migrations across the world are dissapearing (Wilcove, Wikelski 2008) and anthropogenic pressures are reducing animal movement (Tucker 2018) with
 important implication for human well-being.
 It is important to understand how vectors of zoonosis have evolved their immune genes for defence against virulence, and key ecomorpholocial traits crucial for their survival. Bats have been identified as the most virulent mammalian group (Olival et al. 2018), are distributed across all continents except for Antartica with aproximately 1300 species (over 10 percent of all mammals) (Bat diversity world paper). The niche specialization certain bat species might have been driven by the diversity of their innate immune genes, olfactory receptors (Hayden et al. 2014) and echo location genes (XXX).
-In this project, we investigated gene evolution of XLY immune genes and echolocation genes XXX in a group of XYZ bat species. We further mapped the global biodiversity of bats (using IUCN rangemaps) and investited whether bat species richness (and diversification) and environmental conditions are related with diversification rates and mutiple origin of gene evolution in immune genes in bat.
+In this project, we investigated gene evolution of XLY immune genes and echolocation genes XXX in a group of XYZ bat species. We further studied which set of genes are subject to positive selection in bats dN/dS). We further mapped the global biodiversity of bats (using IUCN rangemaps) and investited whether bat species richness (and diversification) and environmental conditions are related with diversification rates and multiple origin of gene evolution in immune genes in bat.
 
 Motivation for the project....
 
@@ -105,15 +105,27 @@ Bats are also exceptionally long lived given their small size and high metabolic
 
 ## References
 Shen et al. 2012 Plos genetics
+
 Li et al. 2010 Current Biology
+
 Upham and Jetz bioRchiv
+
 Elton Traits
+
 Pantheria data
+
 Olival et al. 2018 Nature
+
 Karesh et al. 2012
+
 Anthrax Paper
-Harisson t al. 2018 Nat Eco Evo
+
+Harisson et al. 2018 Nat Eco Evo
+
 Wikelski 2008
+
 Tucker 2018
+
 Hayden et al. 2014
+
 IUCN 2018
