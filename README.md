@@ -40,7 +40,7 @@ In addition, most bat genomes will be obtained from the Bat1K genome sequencing 
 ### Phylogenetic tree:
 We will make use of Mammal phylogenetic tree (Upham and Jetz 2019) for phylogenetic comparative methods and trait evolution analysis.
 ### Immune genes
-#### Innative imune genes:
+#### Innate immune genes:
 We will look at the Toll Like Immune Receptors (TLR) genes
 #### Adaptive immune genes:
 We will look at the Immunoglobulin E (IgE) genes across bat species.
@@ -52,13 +52,15 @@ Take from Mol. Bio. Evo 2014 paper A cluster of olfactory receptor genes linked 
 We compiled migratory behavior based on the  Global Register of Migratory Species (GRMS) for all bat species using the taxonomy of Upham & Jetz 2019.
 Further, we compiled foraging trait data based on the Pantheria data (XXX) and Elton trait (XXX) databases.
 
+### Distribution data of Bats
+We will download expert range maps of all bat species from the IUCN database in order to map current bat distribution.
+
 Description of data...
 
 - Data source (simulated/ published/ unpublished?)
 - Data structure
 
 ## Background
-
 Most human emerging infectious diseases across the world are zoonotic. Especially Viruses ocurring in mammals are of major concern. Examples include Anthrax, Birdflu and Ebola (Anthrax paper XXX, Karesh et al. 2012 The Lancet, Nature Olival et al. 2018). Thus, it is of primary concern to understand the drivers and patterns of viral biodiversity in wild animals (Oliver et al. 2018, 5-6). This is especially relevant for migratory animals as they cross continents and political boundaries (Harisson et al. 2018 Nature Eco Evo, 2018 Science paper zoonosis migration ). Animal migrations across the world are dissapearing (Wilcove, Wikelski 2008) and anthropogenic pressures are reducing animal movement (Tucker 2018) with
 important implication for human well-being.
 It is important to understand how vectors of zoonosis have evolved their immune genes for defence against virulence, and key ecomorpholocial traits crucial for their survival. Bats have been identified as the most virulent mammalian group (Olival et al. 2018), are distributed across all continents except for Antartica with aproximately 1300 species (over 10 percent of all mammals) (Bat diversity world paper). The niche specialization certain bat species might have been driven by the diversity of their innate immune genes, olfactory receptors (Hayden et al. 2014) and echo location genes (XXX).
@@ -102,3 +104,16 @@ Quote:
 Bats are also exceptionally long lived given their small size and high metabolic rate. In fact, in relation to body size, only 19 species of mammal are longer lived than humans,18 of these species are bats, living up to 10 times longer than expected given their small size and high metabolic rate.
 
 ## References
+Shen et al. 2012 Plos genetics
+Li et al. 2010 Current Biology
+Upham and Jetz bioRchiv
+Elton Traits
+Pantheria data
+Olival et al. 2018 Nature
+Karesh et al. 2012
+Anthrax Paper
+Harisson t al. 2018 Nat Eco Evo
+Wikelski 2008
+Tucker 2018
+Hayden et al. 2014
+IUCN 2018
