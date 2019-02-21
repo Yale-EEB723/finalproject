@@ -1,30 +1,28 @@
 # _Portulaca amilis_ genome annotation: genomic architecture of carbon concentrating mechanisms
 
-## Instructions
-
-This repository is a stub for your final project. Fork it as a template for your project, and develop your code in the forked repository. After you fork the repository, please enable the issue tracker in the repository settings so that others in the class (including the professor) can provide feedback. To submit the project, send a pull request to the original repository.
-
-Expand on the readme questions below to provide an overview of the goals, background, and challenges for the final project. You can delete the questions as you write text that answers them, or leave the prompts in place. You can also delete this instruction section of you like.
-
-Add all code to your project repository, including shell scripts, R analyses, python, etc.
-
-Do not commit large data files to the repository. Provide paths to where they can be downloaded if they
-are from public sources, or track them with [git-lfs](https://git-lfs.github.com).
-
 ## Introduction
 
-This is a final project for the [Comparative Genomics](https://github.com/Yale-EEB723/syllabus) seminar in the spring of 2019. This project (a very brief, ie 1-2 sentence, overview of the project)...
+This is a final project for the [Comparative Genomics](https://github.com/Yale-EEB723/syllabus) seminar in the spring of 2019. This main goal of this project is production of a high quality annotation of the recently sequenced [_Portulaca amilis_](https://en.wikipedia.org/wiki/Portulaca_amilis) genome. Secondary goals include characterizing gene family expansion of key photosynthetic genes (e.g. [PEPC](http://pfam.xfam.org/family/PEPcase#wpContent0)) and comparing these gene families to other $C_3$, $C_4$, and CAM genomes.
 
-## The goal
+## Goals
 
-The specific problem I/we sought to explore was ... Our goal was...
+1. Annoting the _P. amilis_ genome
+2. Characterizing PEPC gene family expansion
+3. Comparing PEPC gene family expansion to publicly available $C_3$, $C_4$, and CAM genomes
 
 ## The data
 
-Description of data...
-
-- Data source (simulated/ published/ unpublished?)
-- Data structure
+1. _P. amilis_ genome sequenced and assembled by Dovetail Genomics
+    * `.fasta`
+2. _P. amilis_ transcriptome (1kP)
+3. PEPC alignments
+4. Genomes for
+    * Orchid
+    * Kalanchoe
+    * Pineapple
+    * Maize
+    * Beta
+    * Saguero?
 
 ## Background
 
@@ -37,17 +35,14 @@ What the reader needs to know to understand the project
 
 ## Methods
 
+While methodology is in flux refer to [my notes](https://github.com/isgilman/finalproject/blob/master/Genome_annotation_notes.md).
+
 ## Results
 
 
 ## Assessment
 
+Use MAKER quality assessment tools (AED, specificity, accuracy, etc.).
 Was it successful in achieving the initial goal?
-
-What are the main obstacles encountered?
-
-What would you have done differently?
-
-What are future directions this could go in?
 
 ## References

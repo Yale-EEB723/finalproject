@@ -115,14 +115,21 @@ I've found that patching together all of the genomics tools can mess with my sta
 ```bash
 [isg4@farnam2 ~]$ conda create --name genome
 ```
-I'll be following [Daren Card's MAKER annotation pipeline](https://gist.github.com/darencard/bb1001ac1532dd4225b030cf0cd61ce2). Here are the software prerequisites with the versions he used with my notes on installation:
+I'll be following [Daren Card's MAKER annotation pipeline](https://gist.github.com/darencard/bb1001ac1532dd4225b030cf0cd61ce2) and the [MAKER Tutorial for WGS Assembly and Annotation](http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_Tutorial_for_WGS_Assembly_and_Annotation_Winter_School_2018#About_MAKER). Here are the software prerequisites with the versions he used with my notes on installation.
 
+## Software prerequisites
+* MAKER []()
+  * Install: `conda install -c bioconda maker`
+  * Version: 2.31.10
+  * Build: pl526_11
 * [RepeatModeler](http://www.repeatmasker.org/RepeatModeler/)
   * Install: `conda install -c bioconda repeatmodeler`
-  * Version:
+  * Version: 1.0.11
+  * Build: pl526_1
 * [RepeatMasker](http://www.repeatmasker.org/RMDownload.html) with all dependencies
   * Install: `conda install -c bioconda repeatmasker`
-  * Version:
+  * Version: 4.0.7
+  * Build: pl526_13
 * [RepBase](http://www.girinst.org/repbase/) (Card version: 20150807).
   * Install:
   * Version:
@@ -130,17 +137,18 @@ I'll be following [Daren Card's MAKER annotation pipeline](https://gist.github.c
   * Install:
   * Version:
 * [Augustus](http://bioinf.uni-greifswald.de/augustus/) Card version: 3.2.3)
-  * Install:
-  * Version:
+  * Install: `conda install -c bioconda augustus`
+  * Version: 3.3
+  * Build: pl526hcfae127_4
 * [BUSCO](http://busco.ezlab.org/) (Card version: 2.0.1)
-  * Install:
-  * Version:
+  * Install: `conda install -c bioconda busco`
+  * Version: 3.0.2        
+  * Build: py27_8
 * [SNAP](http://korflab.ucdavis.edu/software.html) (Card version: 2006-07-28)
-  * Install:
-  * Version:
+  * Install: `conda install -c bioconda snap`
+  * Version: 2013_11_29
+  * Build: h470a237_1
 * [BEDtools](https://bedtools.readthedocs.io/en/latest/) (Card version: 2.17.0)
-  * Install:
-  * Version:
-
-### Maker
-After previous manual installation headaches, `conda install -c bioconda maker` did the trick.
+  * Install: `conda install -c bioconda bedtools`
+  * Version: 2013_11_29
+  * Build: h470a237_1
