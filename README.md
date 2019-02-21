@@ -34,7 +34,7 @@ The specific problem I/we sought to explore was ... Our goal was...
 
 ## The data
 ### Reference genome:
-For reference genomes we will use high-quality assembly of Myotis lucifugus.
+For reference genomes we will use high-quality assembly of Myotis lucifugus. Use 11 published bat genomes, especially Myotis lucifugus as reference genome.
 ### Available bat genomes:
 In addition, most bat genomes will be obtained from the Bat1K genome sequencing initiative. Currently, there a 14 species of bat with genome assemblies in NCBI. The quality and completeness of all genome varies greatly.
 ### Phylogenetic tree:
@@ -76,12 +76,8 @@ How it fits in with other work...
 
 What the reader needs to know to understand the project
 ## Methods
-
 I will work with published data, mostly located in the 1K Bat genome project and NCBI.
-
-
-### Reference genome
-Use 11 published bat genomes, especially Myotis lucifugus as reference genome.
+Casey: I have some troubled identifying which methods to use to answer my questions at the moment.
 
 ### Comparative analysis:
 
