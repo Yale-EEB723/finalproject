@@ -35,10 +35,16 @@ The specific problem I/we sought to explore was ... Our goal was...
 ## The data
 ### Reference genome:
 For reference genomes we will use high-quality assembly of Myotis lucifugus.
-### Available bat genomes: 
+### Available bat genomes:
 In addition, most bat genomes will be obtained from the Bat1K genome sequencing initiative. Currently, there a 14 species of bat with genome assemblies in NCBI. The quality and completeness of all genome varies greatly.
 ### Phylogenetic tree:
 We will make use of Mammal phylogenetic tree (Upham and Jetz 2019) for phylogenetic comparative methods and trait evolution analysis.
+### Immune genes
+#### Innative imune genes:
+We will look at the Toll Like Immune Receptors (TLR) genes
+#### Adaptive immune genes:
+We will look at the Immunoglobulin E (IgE) genes across bat species. 
+
 
 
 Description of data...
