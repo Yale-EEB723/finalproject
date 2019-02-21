@@ -21,7 +21,7 @@ are from public sources, or track them with [git-lfs](https://git-lfs.github.com
 
 ## Introduction
 
-This is a final project for the [Comparative Genomics](https://github.com/Yale-EEB723/syllabus) seminar in the spring of 2019. 
+This is a final project for the [Comparative Genomics](https://github.com/Yale-EEB723/syllabus) seminar in the spring of 2019.
 
 ## This project aims to study the evolution of immune, olfactory and echolocation genes in bats. Further, I will perform a trait analysis to understand the evolution of foraging types and migratory behavior across the bat clade.
 
@@ -33,10 +33,11 @@ We assessed the comparative genomics of immune, olfactory and echolocation genes
 The specific problem I/we sought to explore was ... Our goal was...
 
 ## The data
-
-
-Most bat genomes will be obtained from the Bat1K genome sequencing initiative. Currently, there a 14 species of bat with genome assemblies in NCBI. The quality and completeness of all genome varies greatly except for Myotis lucifugus.
-  
+### Reference genome:
+For reference genomes we will use high-quality assembly of Myotis lucifugus.
+### Available bat genomes: 
+In addition, most bat genomes will be obtained from the Bat1K genome sequencing initiative. Currently, there a 14 species of bat with genome assemblies in NCBI. The quality and completeness of all genome varies greatly.
+### Phylogenetic tree:
 We will make use of Mammal phylogenetic tree (Upham and Jetz 2019) for phylogenetic comparative methods and trait evolution analysis.
 
 
@@ -47,7 +48,7 @@ Description of data...
 
 ## Background
 
-Most human emerging infectious diseases across the world are zoonotic. Especially Viruses ocurring in mammals are of major concern. Examples include Anthrax, Birdflu and Ebola (Anthrax paper XXX, Karesh et al. 2012 The Lancet, Nature Olival et al. 2018). Thus, it is of primary concern to understand the drivers and patterns of viral biodiversity in wild animals (Oliver et al. 2018, 5-6). This is especially relevant for migratory animals as they cross continents and political boundaries (Harisson et al. 2018 Nature Eco Evo, 2018 Science paper zoonosis migration ). Animal migrations across the world are dissapearing (Wilcove, Wikelski 2008) and anthropogenic pressures are reducing animal movement (Tucker 2018) with 
+Most human emerging infectious diseases across the world are zoonotic. Especially Viruses ocurring in mammals are of major concern. Examples include Anthrax, Birdflu and Ebola (Anthrax paper XXX, Karesh et al. 2012 The Lancet, Nature Olival et al. 2018). Thus, it is of primary concern to understand the drivers and patterns of viral biodiversity in wild animals (Oliver et al. 2018, 5-6). This is especially relevant for migratory animals as they cross continents and political boundaries (Harisson et al. 2018 Nature Eco Evo, 2018 Science paper zoonosis migration ). Animal migrations across the world are dissapearing (Wilcove, Wikelski 2008) and anthropogenic pressures are reducing animal movement (Tucker 2018) with
 important implication for human well-being.
 It is important to understand how vectors of zoonosis have evolved their immune genes for defence against virulence, and key ecomorpholocial traits crucial for their survival. Bats have been identified as the most virulent mammalian group (Olival et al. 2018), are distributed across all continents except for Antartica with aproximately 1300 species (over 10 percent of all mammals) (Bat diversity world paper).
 In this project, we investigated gene evolution of XLY immune genes and echolocation genes XXX in a group of XYZ bat species. We further mapped the global biodiversity of bats (using IUCN rangemaps) and investited whether bat species richness (and diversification) and environmental conditions are related with diversification rates and mutiple origin of gene evolution in immune genes in bat.
@@ -59,7 +60,13 @@ How it fits in with other work...
 What the reader needs to know to understand the project
 ## Methods
 
+### Reference genome
 Use 11 published bat genomes, especially Myotis lucifugus as reference genome.
+
+### Comparative analysis:
+
+
+
 Use XXX algotithm for alignment
 Use XXX algotithm for annotation
 Mr Base and R (e.g. picante,ape) for phylogenetic analysis
