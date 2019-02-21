@@ -79,6 +79,9 @@ What the reader needs to know to understand the project
 I will work with published data, mostly located in the 1K Bat genome project and NCBI.
 Casey: I have some troubled identifying which methods to use to answer my questions at the moment.
 
+### Data visualization:
+I will use the UCSC genome browser to visualize genome assembly and structural annotation.
+
 ### Comparative analysis:
 
 ### Genome Annotation
