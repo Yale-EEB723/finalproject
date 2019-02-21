@@ -43,9 +43,14 @@ We will make use of Mammal phylogenetic tree (Upham and Jetz 2019) for phylogene
 #### Innative imune genes:
 We will look at the Toll Like Immune Receptors (TLR) genes
 #### Adaptive immune genes:
-We will look at the Immunoglobulin E (IgE) genes across bat species. 
-
-
+We will look at the Immunoglobulin E (IgE) genes across bat species.
+### Echolocation genes
+The echolocation genes will be obtained from (Shen et al. 2012 Plos genetics, Li et al. 2010 Current Biology)
+### Olfactory genes
+Take from Mol. Bio. Evo 2014 paper A cluster of olfactory receptor genes linked to frugivory in bats.
+### Trait data
+We compiled migratory behavior based on the  Global Register of Migratory Species (GRMS) for all bat species using the taxonomy of Upham & Jetz 2019.
+Further, we compiled foraging trait data based on the Pantheria data (XXX) and Elton trait (XXX) databases.
 
 Description of data...
 
@@ -56,7 +61,7 @@ Description of data...
 
 Most human emerging infectious diseases across the world are zoonotic. Especially Viruses ocurring in mammals are of major concern. Examples include Anthrax, Birdflu and Ebola (Anthrax paper XXX, Karesh et al. 2012 The Lancet, Nature Olival et al. 2018). Thus, it is of primary concern to understand the drivers and patterns of viral biodiversity in wild animals (Oliver et al. 2018, 5-6). This is especially relevant for migratory animals as they cross continents and political boundaries (Harisson et al. 2018 Nature Eco Evo, 2018 Science paper zoonosis migration ). Animal migrations across the world are dissapearing (Wilcove, Wikelski 2008) and anthropogenic pressures are reducing animal movement (Tucker 2018) with
 important implication for human well-being.
-It is important to understand how vectors of zoonosis have evolved their immune genes for defence against virulence, and key ecomorpholocial traits crucial for their survival. Bats have been identified as the most virulent mammalian group (Olival et al. 2018), are distributed across all continents except for Antartica with aproximately 1300 species (over 10 percent of all mammals) (Bat diversity world paper).
+It is important to understand how vectors of zoonosis have evolved their immune genes for defence against virulence, and key ecomorpholocial traits crucial for their survival. Bats have been identified as the most virulent mammalian group (Olival et al. 2018), are distributed across all continents except for Antartica with aproximately 1300 species (over 10 percent of all mammals) (Bat diversity world paper). The niche specialization certain bat species might have been driven by the diversity of their innate immune genes, olfactory receptors (Hayden et al. 2014) and echo location genes (XXX).
 In this project, we investigated gene evolution of XLY immune genes and echolocation genes XXX in a group of XYZ bat species. We further mapped the global biodiversity of bats (using IUCN rangemaps) and investited whether bat species richness (and diversification) and environmental conditions are related with diversification rates and mutiple origin of gene evolution in immune genes in bat.
 
 Motivation for the project....
@@ -71,14 +76,11 @@ Use 11 published bat genomes, especially Myotis lucifugus as reference genome.
 
 ### Comparative analysis:
 
-
-
 Use XXX algotithm for alignment
 Use XXX algotithm for annotation
 Mr Base and R (e.g. picante,ape) for phylogenetic analysis
 
 ## Results
-
 
 ## Assessment
 
