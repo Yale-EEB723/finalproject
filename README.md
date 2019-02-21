@@ -71,13 +71,18 @@ How it fits in with other work...
 What the reader needs to know to understand the project
 ## Methods
 
+I will work with published data, mostly located in the 1K Bat genome project and NCBI.
+
+
 ### Reference genome
 Use 11 published bat genomes, especially Myotis lucifugus as reference genome.
 
 ### Comparative analysis:
 
+### Genome Annotation
+#### The algorithm to be used
 Use XXX algotithm for alignment
-Use XXX algotithm for annotation
+#### Phylogenetic comparative analysis:
 Mr Base and R (e.g. picante,ape) for phylogenetic analysis
 
 ## Results
