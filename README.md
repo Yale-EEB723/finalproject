@@ -8,13 +8,14 @@ This is a final project for the [Comparative Genomics](https://github.com/Yale-E
 
 1. Annoting the _P. amilis_ genome
 2. Characterizing PEPC gene family expansion
-3. Comparing PEPC gene family expansion to publicly available $C_3$, $C_4$, and CAM genomes
+3. Comparing PEPC gene family expansion to publicly available C3, C4, and CAM genomes
 
 ## The data
 
 1. _P. amilis_ genome sequenced and assembled by Dovetail Genomics
     * `.fasta`
-2. _P. amilis_ transcriptome (1kP)
+2. _P. amilis_ transcriptome
+    * reference ID: [ERR2040261](https://www.ncbi.nlm.nih.gov/sra/ERR2040261)
 3. PEPC alignments
 4. Genomes for
     * Orchid

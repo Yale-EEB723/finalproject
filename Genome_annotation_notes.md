@@ -24,25 +24,9 @@ quast was run with: `/ysm-gpfs/home/isg4/anaconda2/bin/quast ../portulaca_26Nov2
 ### b. gVolante: Completeness Assessment of Genome/Transcriptome Sequences
 This also has a webserver. [Here](https://gvolante.riken.jp/script/result.cgi?201812080128-U9FRY4TQPVFK2FAK) is the link to our analysis using BUSCO v2/v3 (JOB ID: 201812080128-U9FRY4TQPVFK2FAK).
 
-### c. MUMmer
-A system for rapidly aligning large DNA sequences to one another. Has a useful function called MUMerplot which allows visualization of our genome in relation to another to detect transocations and inversions. Minimap2 can produce similar plots.
+## 2. Transcriptome analysis
+**Will come back to this later**
 
-Installed with `conda install -c bioconda mummer`
-
-## 2. Repeat masking
-### a. RepeatMasker
-Installed with `conda install -c bioconda repeatmasker`
-
-### b. RepeatModeler
-* Required modules
-Installed with `conda install -c bioconda repeatmodeler`
-
-### c. RedMask
-
-https://github.com/nextgenusfs/redmask
-
-
-## 3. Transcriptome analysis
 Annotation requires a transcriptome, which I snagged from 1kp (reference ID: [ERR2040261](https://www.ncbi.nlm.nih.gov/sra/ERR2040261)) with
 ```bash
 $ fastq-dump.2.8.2 --defline-seq '@$sn[_$rn]/$ri' --split-files ERR2040261
@@ -117,25 +101,39 @@ I've found that patching together all of the genomics tools can mess with my sta
 ```
 I'll be following [Daren Card's MAKER annotation pipeline](https://gist.github.com/darencard/bb1001ac1532dd4225b030cf0cd61ce2) and the [MAKER Tutorial for WGS Assembly and Annotation](http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_Tutorial_for_WGS_Assembly_and_Annotation_Winter_School_2018#About_MAKER). Here are the software prerequisites with the versions he used with my notes on installation.
 
-## Software prerequisites
-* MAKER []()
+### Software prerequisites
+* [MAKER](http://www.yandell-lab.org/software/maker.html)
   * Install: `conda install -c bioconda maker`
   * Version: 2.31.10
   * Build: pl526_11
-* [RepeatModeler](http://www.repeatmasker.org/RepeatModeler/)
-  * Install: `conda install -c bioconda repeatmodeler`
+  * **Note**: `maker -h` behaves as expected but throws the following message "Possible precedence issue with control flow operator at `/gpfs/ysm/home/isg4/anaconda2/lib/site_perl/5.26.2/Bio/DB/IndexedBase.pm` line 845."
+* [RepeatModeler](http://www.repeatmasker.org/RepeatModeler/) | [GitHub](https://github.com/rmhubley/RepeatModeler)
+  * Cloned from GitHub
   * Version: 1.0.11
-  * Build: pl526_1
-* [RepeatMasker](http://www.repeatmasker.org/RMDownload.html) with all dependencies
-  * Install: `conda install -c bioconda repeatmasker`
-  * Version: 4.0.7
-  * Build: pl526_13
-* [RepBase](http://www.girinst.org/repbase/) (Card version: 20150807).
-  * Install:
-  * Version:
-* MAKER MPI (Card version: 2.31.8)
-  * Install:
-  * Version:
+  * Prerequisites
+    * [RepeatMasker](http://www.repeatmasker.org/RMDownload.html) | [GitHub](https://github.com/rmhubley/RepeatMasker)
+      * Prerequisites
+        * [RepBase](http://www.girinst.org/repbase/)
+          * Download:`RepBaseRepeatMaskerEdition-20181026.tar.gz`
+          * Version: `RepBaseRepeatMaskerEdition-20181026.tar.gz`
+        * [Dfam](http://www.dfam.org) **Unfortunately the Dfam database only contains data from human, mouse, zebrafish, fruit fly, and nematode.**
+          * Download: `Dfam.hmm.gz`
+          * Version: 23-Sep-2015 05:23
+        * [Tandem Repeats Finder](http://tandem.bu.edu/trf/trf.html)
+          * Install: `conda install -c bioconda trf`
+          * Version: 4.09
+          * Build: Linux 64-bit
+      * RepeatMasker was installed with a the following repeat libraries:
+        * Dfam database version: Dfam_2.0
+        * RepeatMasker Combined Database: Dfam_Consensus-20181026, RepBase-20181026
+      * RepeatMasker default search engine: RMBlast
+      * Bash alias was created so that `RepeatMasker` can be called with `repeatmasker`
+    * RECON (available at [RepeatModeler](http://www.repeatmasker.org/RepeatModeler/))
+      * Version: 1.08-4 (The Cosmic Cuttlefish)
+    * RepeatScout (available at [RepeatModeler](http://www.repeatmasker.org/RepeatModeler/))
+      * Version: 1.0.5
+  * Bash alias was created so that `RepeatModeler` can be called with `repeatmodeler`
+  * RepeatModeler default search engine: RMBlast
 * [Augustus](http://bioinf.uni-greifswald.de/augustus/) Card version: 3.2.3)
   * Install: `conda install -c bioconda augustus`
   * Version: 3.3
@@ -152,3 +150,8 @@ I'll be following [Daren Card's MAKER annotation pipeline](https://gist.github.c
   * Install: `conda install -c bioconda bedtools`
   * Version: 2013_11_29
   * Build: h470a237_1
+
+## Methods
+
+### Repeat library construction
+The first step in _de novo_ genome annotation is building a species specific repeat library for masking purposes. This is done in the MAKER pipeline with RepeatModeler. RepeatModeler collects sequences based on a threshold copy number and then classifies them based on similarity to known transposable elements (TEs). Note that low copy TEs will not be included by RepeatModeler.
