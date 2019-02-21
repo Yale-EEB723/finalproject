@@ -22,15 +22,20 @@ are from public sources, or track them with [git-lfs](https://git-lfs.github.com
 ## Introduction
 
 This is a final project for the [Comparative Genomics](https://github.com/Yale-EEB723/syllabus) seminar in the spring of 2019. 
-This project aims to study the evolution of immune and echolocation genes in bats. Further, I will perform a trait analysis to understand the evolution of foraging types and migratory behavior across the bat clade.
 
-This project (a very brief, ie 1-2 sentence, overview of the project)...
+This project aims to study the evolution of immune, olfactory and echolocation genes in bats. Further, I will perform a trait analysis to understand the evolution of foraging types and migratory behavior across the bat clade.
 
+# This project (a very brief, ie 1-2 sentence, overview of the project)...
 ## The goal
+
+We assessed the comparative genomics of immune, olfactory and echolocation genes using a total of 8 bat genomes and a completed phylogenetic mammal tree. I performed gene annotation using XXX bat species as reference genome to identify patterns in gene evolution of the above mentioned genes. Another goal was to map foraging mode and migratory behavior across all bat clades using ancient character reconstructions.
 
 The specific problem I/we sought to explore was ... Our goal was...
 
 ## The data
+
+Bat genome (Publised 100 gene project)
+
 
 Description of data...
 
@@ -50,6 +55,11 @@ How it fits in with other work...
 
 What the reader needs to know to understand the project
 ## Methods
+
+Use XXX as reference genome
+Use XXX algotithm for alignment
+Use XXX algotithm for annotation
+
 
 ## Results
 
