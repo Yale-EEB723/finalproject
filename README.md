@@ -2,6 +2,13 @@
 
 Gene evolution in some awesome bats
 
+# Quick github notes:
+ git status
+git save
+git commit -am "first change during class"
+git push
+git add .
+
 
 ## Instructions
 
@@ -16,7 +23,10 @@ are from public sources, or track them with [git-lfs](https://git-lfs.github.com
 
 ## Introduction
 
-This is a final project for the [Comparative Genomics](https://github.com/Yale-EEB723/syllabus) seminar in the spring of 2019. This project (a very brief, ie 1-2 sentence, overview of the project)...
+This is a final project for the [Comparative Genomics](https://github.com/Yale-EEB723/syllabus) seminar in the spring of 2019. 
+This project aims to study the evolution of immune and echolocation genes in bats. Further, I will perform a trait analysis to understand the evolution of foraging types and migratory behavior across the bat clade.
+
+This project (a very brief, ie 1-2 sentence, overview of the project)...
 
 ## The goal
 
@@ -30,6 +40,9 @@ Description of data...
 - Data structure
 
 ## Background
+
+Most human emerging infectious diseases across the world are zoonotic. Especially Viruses ocurring in mammals are of major concern. Examples include Anthrax, Birdflu and Ebola (Anthrax paper XXX, Karesh et al. 2012 The Lancet, Nature Olival et al. 2018). Thus, it is of primary concern to understand the drivers and patterns of viral biodiversity in wild animals (Oliver et al. 2018, 5-6). This is especially relevant for migratory animals as they cross continents and political boundaries (Harisson et al. 2018 Nature Eco Evo, 2018 Science paper zoonosis migration ). 
+Understanding patterns of viral diversity in wildlife and determinants of successful cross- species transmission, or spillover, are therefore key goals for pandemic surveillance programs4. However, few analytical tools exist to identify which host species are likely to harbour the next human virus, or which viruses can cross species boundaries5–7. Here we conduct a comprehensive analysis of mammalian host–virus relationships and show that both the total number of viruses that infect a given species and the proportion likely to be zoonotic are predictable. After controlling for
 
 Motivation for the project....
 
