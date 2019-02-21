@@ -57,7 +57,7 @@ We compiled migratory behavior based on the  Global Register of Migratory Specie
 Further, we compiled foraging trait data based on the Pantheria data (XXX) and Elton trait (XXX) databases.
 
 ### Distribution data of Bats
-We will download expert range maps of all bat species from the IUCN database in order to map current bat distribution.
+We will download expert range maps of all bat species from the IUCN database in order to map current bat (order chyroptera) distribution.
 
 Description of data...
 
@@ -132,3 +132,8 @@ Tucker 2018
 Hayden et al. 2014
 
 IUCN 2018
+
+
+## Notes to self
+Bat species in brasil: https://www.sbeq.net/updatelist
+Ecuador: https://bioweb.bio/faunaweb/mammaliaweb/IndiceTaxonomico
