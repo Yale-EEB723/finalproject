@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This is a final project for the [Comparative Genomics](https://github.com/Yale-EEB723/syllabus) seminar in the spring of 2019. This main goal of this project is production of a high quality annotation of the recently sequenced [_Portulaca amilis_](https://en.wikipedia.org/wiki/Portulaca_amilis) genome. Secondary goals include characterizing gene family expansion of key photosynthetic genes (e.g. [PEPC](http://pfam.xfam.org/family/PEPcase#wpContent0)) and comparing these gene families to other $C_3$, $C_4$, and CAM genomes.
+This is a final project for the [Comparative Genomics](https://github.com/Yale-EEB723/syllabus) seminar in the spring of 2019. This main goal of this project is production of a high quality annotation of the recently sequenced [_Portulaca amilis_](https://en.wikipedia.org/wiki/Portulaca_amilis) genome. Secondary goals include characterizing gene family expansion of key photosynthetic genes (e.g. [PEPC](http://pfam.xfam.org/family/PEPcase#wpContent0)) and comparing these gene families to other C3, C4, and CAM genomes.
 
 ## Goals
 
