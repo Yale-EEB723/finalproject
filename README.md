@@ -137,3 +137,6 @@ IUCN 2018
 ## Notes to self
 Bat species in brasil: https://www.sbeq.net/updatelist
 Ecuador: https://bioweb.bio/faunaweb/mammaliaweb/IndiceTaxonomico
+Go to taxonomy browser of NCBI -> type in a clade ->
+https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=9397
+G10K vertebrate have good curated genomes. 
