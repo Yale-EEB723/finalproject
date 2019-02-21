@@ -23,12 +23,12 @@ are from public sources, or track them with [git-lfs](https://git-lfs.github.com
 
 This is a final project for the [Comparative Genomics](https://github.com/Yale-EEB723/syllabus) seminar in the spring of 2019.
 
-#### This project aims to study the evolution of immune, olfactory and echolocation genes in bats. Further, I will perform a trait analysis to understand the evolution of foraging types and migratory behavior across the bat clade.
+#### This project aims to study the evolution of immune, olfactory and echolocation genes in bats using a published referenced genome and several bat genomes from the 1k Bat project. Further, I will perform a trait analysis to understand the evolution of foraging types and migratory behavior across the bat clade.
 
  This project (a very brief, ie 1-2 sentence, overview of the project)...
 ## The goal
 
-We assessed the comparative genomics of immune, olfactory and echolocation genes using a total of 8 bat genomes and a completed phylogenetic mammal tree. I performed gene annotation using XXX bat species as reference genome to identify patterns in gene evolution of the above mentioned genes. Another goal was to map foraging mode and migratory behavior across all bat clades using ancient character reconstructions.
+We assessed the comparative genomics of immune, olfactory and echolocation genes using a total of XXX bat genomes and a completed phylogenetic mammal tree. I performed gene annotation using Myotis lucifugus as reference genome to identify patterns in gene evolution of the above mentioned genes. I further wanted to identify which set of these genes are under positive selection. Another goal was to map foraging mode and migratory behavior across all bat clades using ancient character reconstructions.
 
 The specific problem I/we sought to explore was ... Our goal was...
 
@@ -48,6 +48,10 @@ We will look at the Immunoglobulin E (IgE) genes across bat species.
 The echolocation genes will be obtained from (Shen et al. 2012 Plos genetics, Li et al. 2010 Current Biology)
 ### Olfactory genes
 Take from Mol. Bio. Evo 2014 paper A cluster of olfactory receptor genes linked to frugivory in bats.
+
+### Testing accuracy of resulting gene predictions:
+Sensitivity, specificity and accuracy of predictions.
+
 ### Trait data
 We compiled migratory behavior based on the  Global Register of Migratory Species (GRMS) for all bat species using the taxonomy of Upham & Jetz 2019.
 Further, we compiled foraging trait data based on the Pantheria data (XXX) and Elton trait (XXX) databases.
