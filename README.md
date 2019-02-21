@@ -12,11 +12,17 @@ This is a final project for the [Comparative Genomics](https://github.com/Yale-E
 
 ## The data
 
-1. _P. amilis_ genome sequenced and assembled by Dovetail Genomics
-    * `.fasta`
+1. _P. amilis_ genome
+    * Source: Edwards Lab, sequenced and assembled by Dovetail Genomics
+    * Format: `.fasta`
+    * Status: ~418Mbp assembled into 11 scaffolds analogous to the 11 _P. amilis_ chromosomes
 2. _P. amilis_ transcriptome
-    * reference ID: [ERR2040261](https://www.ncbi.nlm.nih.gov/sra/ERR2040261)
+    * Source: reference ID [ERR2040261](https://www.ncbi.nlm.nih.gov/sra/ERR2040261)
+    * Format: `.fasta`
+    * Status: raw reads, **need to be assembled**
 3. PEPC alignments
+    * Source: Edwards Lab and [1KP Initiative](https://sites.google.com/a/ualberta.ca/onekp/)
+    * Format: `.fasta`
 4. Genomes for
     * Orchid
     * Kalanchoe
@@ -24,15 +30,6 @@ This is a final project for the [Comparative Genomics](https://github.com/Yale-E
     * Maize
     * Beta
     * Saguero?
-
-## Background
-
-Motivation for the project....
-
-How it fits in with other work...
-
-What the reader needs to know to understand the project
-
 
 ## Methods
 
@@ -44,6 +41,7 @@ While methodology is in flux refer to [my notes](https://github.com/isgilman/fin
 ## Assessment
 
 Use MAKER quality assessment tools (AED, specificity, accuracy, etc.).
-Was it successful in achieving the initial goal?
+
+Need to flesh this out more
 
 ## References

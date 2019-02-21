@@ -1,7 +1,7 @@
 
 # _Portulaca amilis_ genome project
 
-## 1. Quality control
+## 0. Quality control
 ### a. QUAST
 This is useful for comparing new assemblies to old assemblies and looking for improvements. For v0 of the genome we will run without a comparison.
 
@@ -24,7 +24,7 @@ quast was run with: `/ysm-gpfs/home/isg4/anaconda2/bin/quast ../portulaca_26Nov2
 ### b. gVolante: Completeness Assessment of Genome/Transcriptome Sequences
 This also has a webserver. [Here](https://gvolante.riken.jp/script/result.cgi?201812080128-U9FRY4TQPVFK2FAK) is the link to our analysis using BUSCO v2/v3 (JOB ID: 201812080128-U9FRY4TQPVFK2FAK).
 
-## 2. Transcriptome analysis
+## 1. Transcriptome analysis
 **Will come back to this later**
 
 Annotation requires a transcriptome, which I snagged from 1kp (reference ID: [ERR2040261](https://www.ncbi.nlm.nih.gov/sra/ERR2040261)) with
@@ -35,7 +35,7 @@ The `--defline-seq` flag is needed to reformat the headers of the forward and re
 
 I will be following [Ya Yang's pipeline](https://bitbucket.org/yangya/phylogenomic_dataset_construction).
 
-#### 3.0 Mapping reads to genome
+#### 1.1 Mapping reads to genome
 Ben wrote a [`HISAT2`](https://ccb.jhu.edu/software/hisat2/manual.shtml#what-is-hisat2) command for mapping raw reads then piping the output to `samtools` for sorting and indexing. This will yield and overall alignment rate and a `.bam` file that we can spot check in a genome browser like `IGV`. Here is a sample command from Zack:
 
 ```bash
@@ -90,10 +90,10 @@ samtools index ERR2040261.bam
 ```
 
 
-#### 3.1 *De novo* assembly with Trinity
+#### 1.2 *De novo* assembly with Trinity
 
 
-## 4. Annotation
+## 2. Annotation
 I've found that patching together all of the genomics tools can mess with my standard conda environment. To separate my genome analysis tools from my general conda packages I created a new environment called `genome`.
 
 ```bash
