@@ -14,11 +14,11 @@ are from public sources, or track them with [git-lfs](https://git-lfs.github.com
 ## Introduction
 
 This is a final project for the [Comparative Genomics](https://github.com/Yale-EEB723/syllabus) seminar in the spring of 2019. 
-My project is to sequence and assemble the first two darter genomes. We will use an Oxford Nanopore platform to collect long-read data. 
+My project is to sequence and assemble the first two darter genomes using an Oxford Nanopore platform to collect long-read sequence data. 
 
 ## The goal
 
-The long-term goals are to provide the genomic resources for many futures darter projects, including phylogenomic inference, functional genomics studies, and reference mapping. I will sequence a genome for Etheostoma perlongum, a species restricted to single lake in NC, and Etheostoma maculaticeps, the "sister" species of E. perlongum found in the river drainage adjacent to the lake. My specific goals are to use the genomes to help assemble a large amount of ddRAD data that I have collected along a transect spanning the lake and river. Our preliminary de novo assemblies and analyses of the ddRAD data indicate a steep cline between the lake and river, with some loci exhibiting particularly sharp breaks. My secondary goal is to map these outlier loci to the genomes to identify candidate regions that are maintaining the species boundary between the lake and river.
+The long-term goals are to provide genomic resources for many future darter projects, including phylogenomic inference, functional genomics studies, and reference mapping. I will sequence a genome for Etheostoma perlongum, a species restricted to single lake in NC, and Etheostoma maculaticeps, the "sister" species of E. perlongum found in the river drainage adjacent to the lake. My specific goals are to use the genomes to help assemble a large amount of ddRAD data that I have collected along a transect spanning the lake and river. Our preliminary de novo assemblies and analyses of the ddRAD data indicate a steep cline between the lake and river, with some loci exhibiting particularly sharp breaks. My secondary goal is to map these outlier loci to the genomes to identify candidate regions that are maintaining the species boundary between the lake and river.
 
 ## The data
 
