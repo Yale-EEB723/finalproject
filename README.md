@@ -25,7 +25,7 @@ What the reader needs to know to understand the project
 
 ## Methods
 
-Immune-related genes will be identified from the notothenioid transcripts using a combination of BLAST and HMMER searches. We will then infer the hylogenetic relationships of the sequences identified as MHC genes and we will estimate relative rates of evolution for sequences that are highly conserved or diverged between notothenioid species. We will pay special attention to comparisons between genes in Antarctic notothenioids and genes in non-Antarctic notothenioids to determine genes that may be unique to Anatarctic notothenioids. 
+Immune-related genes will be identified from the notothenioid transcripts using a combination of BLAST and HMMER searches. We will then infer the phylogenetic relationships of the sequences identified as MHC genes and we will estimate relative rates of evolution for sequences that are highly conserved or diverged between notothenioid species. We will pay special attention to comparisons between genes in Antarctic notothenioids and genes in non-Antarctic notothenioids to determine genes that may be unique to Anatarctic notothenioids. 
 
 ## Results
 
