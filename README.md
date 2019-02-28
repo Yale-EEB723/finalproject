@@ -28,20 +28,21 @@ This is a final project for the [Comparative Genomics](https://github.com/Yale-E
  This project (a very brief, ie 1-2 sentence, overview of the project)...
 ## The goal
 
-We assessed the comparative genomics of immune, olfactory and echolocation genes using a total of XXX bat genomes and a completed phylogenetic mammal tree. I performed gene annotation using Myotis lucifugus as reference genome to identify patterns in gene evolution of the above mentioned genes. I further wanted to identify which set of these genes are under positive selection. Another goal was to map foraging mode and migratory behavior across all bat clades using ancient character reconstructions.
+I plan to perform a comparative analisis of bat genomes to study the evolution of immune-, echo location-, olfactory- and XXX genes. I will further search for signs of positive selection or contraction in these genes by performing genes trees including other mammal genomes (mouse, human, pig, cow, horse).
+Another goal was to map foraging mode and migratory behavior across all bat clades using ancient character reconstructions using a complete mammal phylogenetic tree.
 
 The specific problem I/we sought to explore was ... Our goal was...
 
 ## The data
 ### Reference genome:
-For reference genomes we will use high-quality assembly of Myotis lucifugus. Use 11 published bat genomes, especially Myotis lucifugus as reference genome.
+For reference genomes we will use high-quality assembly of Myotis lucifugus.
 ### Available bat genomes:
-In addition, most bat genomes will be obtained from the Bat1K genome sequencing initiative. Currently, there a 14 species of bat with genome assemblies in NCBI. The quality and completeness of all genome varies greatly.
+In addition, most bat genomes will be obtained from the Bat1K genome sequencing initiative. Currently, there a 14 species of bat with genome assemblies in NCBI. The quality and completeness of all genome varies greatly. I will utilize these bat genomes and available mammal genomes such as pig, mouse, human, horse and cattle.
 ### Phylogenetic tree:
 We will make use of Mammal phylogenetic tree (Upham and Jetz 2019) for phylogenetic comparative methods and trait evolution analysis.
 ### Immune genes
 #### Innate immune genes:
-We will look at the Toll Like Immune Receptors (TLR) genes
+We will look at the Toll Like Immune Receptors (TLR) genes. I will look at genes identified in (Zhang et al. 2011 Science). My class project is strongly influenced by this paper.
 #### Adaptive immune genes:
 We will look at the Immunoglobulin E (IgE) genes across bat species.
 ### Echolocation genes
@@ -65,10 +66,14 @@ Description of data...
 - Data structure
 
 ## Background
+###Zoonosis
 Most human emerging infectious diseases across the world are zoonotic. Especially Viruses ocurring in mammals are of major concern. Examples include Anthrax, Birdflu and Ebola (Anthrax paper XXX, Karesh et al. 2012 The Lancet, Nature Olival et al. 2018). Thus, it is of primary concern to understand the drivers and patterns of viral biodiversity in wild animals (Oliver et al. 2018, 5-6). This is especially relevant for migratory animals as they cross continents and political boundaries (Harisson et al. 2018 Nature Eco Evo, 2018 Science paper zoonosis migration ). Animal migrations across the world are dissapearing (Wilcove, Wikelski 2008) and anthropogenic pressures are reducing animal movement (Tucker 2018) with
 important implication for human well-being.
+###Bats as vectors of disease
 It is important to understand how vectors of zoonosis have evolved their immune genes for defence against virulence, and key ecomorpholocial traits crucial for their survival. Bats have been identified as the most virulent mammalian group (Olival et al. 2018), are distributed across all continents except for Antartica with aproximately 1300 species (over 10 percent of all mammals) (Bat diversity world paper). The niche specialization certain bat species might have been driven by the diversity of their innate immune genes, olfactory receptors (Hayden et al. 2014) and echo location genes (XXX).
-In this project, we investigated gene evolution of XLY immune genes and echolocation genes XXX in a group of XYZ bat species. We further studied which set of genes are subject to positive selection in bats dN/dS). We further mapped the global biodiversity of bats (using IUCN rangemaps) and investited whether bat species richness (and diversification) and environmental conditions are related with diversification rates and multiple origin of gene evolution in immune genes in bat.
+In this project, we investigated gene evolution of XLY immune genes and echolocation genes XXX in a group of XYZ bat species. We further studied which set of genes are subject to positive selection in bats dN/dS).
+###Bats unique biodiversity
+ We further mapped the global biodiversity of bats (using IUCN rangemaps) and investited whether bat species richness (and diversification) and environmental conditions are related with diversification rates and multiple origin of gene evolution in immune genes in bat.
 
 Motivation for the project....
 
@@ -76,7 +81,7 @@ How it fits in with other work...
 
 What the reader needs to know to understand the project
 ## Methods
-I will work with published data, mostly located in the 1K Bat genome project and NCBI.
+I will work with published data, mostly located in the 1K Bat genome project and NCBI. I plan on doing a compatisson of bat genomes with other mammal species (utilize published genomes) to study the evolution of key genes.  Following Zheng et al. (2011), I also expect that bat and viruses coexistance across llong timescales to have influenced selective pressure on bat genomes. Especially on immune genes.
 Casey: I have some troubled identifying which methods to use to answer my questions at the moment.
 
 ### Data visualization:
@@ -87,10 +92,21 @@ I will use the UCSC genome browser to visualize genome assembly and structural a
 ### Genome Annotation
 #### The algorithm to be used
 Use XXX algotithm for alignment
+#### Phylogenomic analysis:
+Either maximum likelihood or bayesian gene trees and estimate divergence times and speciation rates and identify most recent common ancestor.
+
 #### Phylogenetic comparative analysis:
 Mr Base and R (e.g. picante,ape) for phylogenetic analysis
+#### Bat Trait data:
+Elton Traits, Pantheria, Map of Life, Upham and Jetz will be used to obtain foraging, echo location, diet, migration, biome thpe of each bat species.
+## Expected Results
 
-## Results
+I hope that this comparative analysis allows me to better understand the eovlution of key genes across several bat species.
+
+
+### Size of all bat genomes assessed.
+
+
 
 ## Assessment
 
@@ -139,4 +155,6 @@ Bat species in brasil: https://www.sbeq.net/updatelist
 Ecuador: https://bioweb.bio/faunaweb/mammaliaweb/IndiceTaxonomico
 Go to taxonomy browser of NCBI -> type in a clade ->
 https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=9397
-G10K vertebrate have good curated genomes. 
+G10K vertebrate have good curated genomes.
+### Idea:
+Galapagos torotises nature eco evo paper identified sites of longevity in animals. Could it be the same zones as in bats (also super longevity species).
