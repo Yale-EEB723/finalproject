@@ -34,6 +34,8 @@ Another goal was to map foraging mode and migratory behavior across all bat clad
 The specific problem I/we sought to explore was ... Our goal was...
 
 ## The data
+### Bat species:
+Full list obtained from https://bat1k.ucd.ie/species-database/
 ### Reference genome:
 For reference genomes we will use high-quality assembly of Myotis lucifugus.
 ### Available bat genomes:
