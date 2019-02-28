@@ -1,0 +1,21 @@
+# Local alignment tool. Can be subfragment of the query. How do we match types?
+
+
+
+Similarity of diferent aminoacids and nucleotides: Matrices called PAM 250 and Blosum-62 (aminoacid on y and x axis)
+BLAST: Find homologous sequences in NCBI ->
+Find homologous molecules that are more dissimilar is hard
+
+
+BLAST good on reference genome ->
+EST = expressed sequence tag: When ppl did shotgun seq of transcriptome -> make cDNA, then put in plasmid, clone it and put it out in pret dish -> get a tag for each of those transcript -> very early form of shotgun sequencing using sanger sequence.
+EMBI database of protein families: PFAM.
+Interpro is a search engine analogous to blast.
+
+
+Annotation is hard for one species. So for an entire clade (10 species) is really hard ->
+BUT can borrow information across species and co-anothate.
+Maker: Is a portable genome assembly.
+
+Mapping: Have query sequences and have a reference genome -> mapping is when i expect the sequences to be nearly identical.
+# 

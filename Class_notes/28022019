@@ -1,0 +1,68 @@
+# --- --- --- --- --- --- --- --- --- ---
+# Casey Dunn 28.02.2019
+# --- --- --- --- --- --- --- --- --- ---
+Genomic technologies: Genome is 3D dynamic structure, has a shape in time and space.
+Progress understanding genome shape at multiple lvl (not just syntony, order) but also what parts of chromosome are next to other parts.
+# --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+Predecessors of RNA-seq: Know your genome before hand -> put probes of genome on wells ->
+microArray: often identify dieseases -> compare normal condition with cancer -> Isolate RNA -> generate cDNA -> Look at sequence ends -> get your reads -> Map to genome -> identify the transcriptome and other downstream analysis.
+RNA seq: What genes are being experssed and map it to the genome -> Trapnell et al. 2012 Nature Protocols. -> Need reference genome.
+When you dont have an annotated genome -> sequence transcriptome with long reads -> Assemble transcriptome and use that as reference genome where you map your RNA back.- >You dont use tophat for that, you use straight bowtie
+
+You have reads, map them with tophat, assemble and merge with cuffmerge, then get a transcriptome and then ....XXXX
+
+
+# --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+List of bat genomes:
+Myotis yumanensis
+Myotis volans
+Myotis thysanodes
+Myotis ruber
+Myotis riparius
+Myotis petax
+Myotis oxyotus
+Myotis nigricans
+Myotis myotis
+Myotis muricola
+Myotis melanorhinus
+Myotis martiniquensis
+Myotis macrodactylus
+Myotis lucifugus
+Myotis leibii
+Myotis keaysi
+Myotis ikonnikovi
+Myotis horsfieldii
+Myotis formosus
+Myotis evotis
+Myotis davidii
+Myotis dominicensis
+
+
+
+
+
+
+Add adapters to CDNA: and add adapters and directionality. Happens debofre amplification process. So you ligate to adapters and then amplify using PCR.
+
+# Make some directories:
+cd project/
+mkdir Classes
+Classes/
+mkdir Comparative_genomics
+cd Comparative_genomics/
+mkdir Bat_project
+cd Bat_project/
+ mkdir Code
+
+
+
+ssh -X -Y de293@farnam.hpc.yale.edu
+newgrp eeb723
+# interactive session with 2 cores and default 10GiB of RAM
+srun -A eeb723 --pty -p interactive -c 2 bash
+mkdir -p /gpfs/ysm/project/eeb723/${USER}/eeb723-seqaln
+singularity shell --shell /bin/bash -B /gpfs/ysm/project/eeb723/${USER}/eeb723-seqaln:/data/eeb723-seqaln docker://eeb723/course_docker
+# Mak a copy of your github alignment:
+https://github.com/diego-ellis-soto/container-based-alignment.git
+cd container-based-alignment
+open . # On macOS, this command opens the current folder in the Finder
