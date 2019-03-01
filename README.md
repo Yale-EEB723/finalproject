@@ -23,6 +23,7 @@ This is a final project for the [Comparative Genomics](https://github.com/Yale-E
 3. PEPC alignments
     * Source: Edwards Lab and [1KP Initiative](https://sites.google.com/a/ualberta.ca/onekp/)
     * Format: `.fasta`
+    * Status: 
 4. Genomes for
     * Orchid
     * Kalanchoe

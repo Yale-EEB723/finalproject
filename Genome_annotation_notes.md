@@ -33,7 +33,7 @@ $ fastq-dump.2.8.2 --defline-seq '@$sn[_$rn]/$ri' --split-files ERR2040261
 ```
 The `--defline-seq` flag is needed to reformat the headers of the forward and reverse files so that downstream programs recognize them.
 
-I will be following [Ya Yang's pipeline](https://bitbucket.org/yangya/phylogenomic_dataset_construction).
+I will be following [Ya Yang's pipeline](https://bitbucket.org/yanglab/phylogenomic_dataset_construction/).
 
 #### 1.1 Mapping reads to genome
 Ben wrote a [`HISAT2`](https://ccb.jhu.edu/software/hisat2/manual.shtml#what-is-hisat2) command for mapping raw reads then piping the output to `samtools` for sorting and indexing. This will yield and overall alignment rate and a `.bam` file that we can spot check in a genome browser like `IGV`. Here is a sample command from Zack:
@@ -153,5 +153,28 @@ I'll be following [Daren Card's MAKER annotation pipeline](https://gist.github.c
 
 ## Methods
 
-### Repeat library construction
+### Repeat library construction with RepeatModeler
 The first step in _de novo_ genome annotation is building a species specific repeat library for masking purposes. This is done in the MAKER pipeline with RepeatModeler. RepeatModeler collects sequences based on a threshold copy number and then classifies them based on similarity to known transposable elements (TEs). Note that low copy TEs will not be included by RepeatModeler.
+
+First a repeat database using the _P. amilis_ genome
+```bash
+[isg4@c14n07 RepeatModeler]$ BuildDatabase -name Portulaca_amilis -engine ncbi ../Data/portulaca_26Nov2018_oK3Ko.fasta
+
+>>> Building database Portulaca_amilis:
+>>>  Adding ../Data/portulaca_26Nov2018_oK3Ko.fasta to database
+>>> Number of sequences (bp) added to database: 4053 ( 403885173 bp )
+```
+
+Next, as a batch job, run RepeatModeler using the `Portulaca_amilis` database.
+```bash
+#!/bin/bash
+#SBATCH --job-name=repeat_modeler
+#SBATCH --time=720:00:00
+#SBATCH -c 20
+#SBATCH --mem=36G
+#SBATCH --output=repeatmodeler-%A-%a.out
+#SBATCH --error=repeatmodeler-%A-%a.err
+#SBATCH --ntasks-per-node=1
+
+repeatmodeler -pa 36 -engine ncbi -database Portulaca_amilis
+```
