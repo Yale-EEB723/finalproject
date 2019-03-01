@@ -1,6 +1,12 @@
 
 # _Portulaca amilis_ genome project
 
+I've found that patching together all of the genomics tools can mess with my standard conda environment. To separate my genome analysis tools from my general conda packages I created a new environment called `genome`.
+
+```bash
+[isg4@farnam2 ~]$ conda create --name genome
+[isg4@farnam2 ~]$ source activate genome
+```
 ## 0. Quality control
 ### a. QUAST
 This is useful for comparing new assemblies to old assemblies and looking for improvements. For v0 of the genome we will run without a comparison.
@@ -25,15 +31,76 @@ quast was run with: `/ysm-gpfs/home/isg4/anaconda2/bin/quast ../portulaca_26Nov2
 This also has a webserver. [Here](https://gvolante.riken.jp/script/result.cgi?201812080128-U9FRY4TQPVFK2FAK) is the link to our analysis using BUSCO v2/v3 (JOB ID: 201812080128-U9FRY4TQPVFK2FAK).
 
 ## 1. Transcriptome analysis
-**Will come back to this later**
-
+For functional annotation of the
 Annotation requires a transcriptome, which I snagged from 1kp (reference ID: [ERR2040261](https://www.ncbi.nlm.nih.gov/sra/ERR2040261)) with
 ```bash
 $ fastq-dump.2.8.2 --defline-seq '@$sn[_$rn]/$ri' --split-files ERR2040261
 ```
 The `--defline-seq` flag is needed to reformat the headers of the forward and reverse files so that downstream programs recognize them.
 
-I will be following [Ya Yang's pipeline](https://bitbucket.org/yanglab/phylogenomic_dataset_construction/).
+I will be following [Ya Yang's pipeline](https://bitbucket.org/yanglab/phylogenomic_dataset_construction/), which can be accessed with `git`.
+```bash
+[isg4@c14n07 apps]$ git clone https://bitbucket.org/yanglab/phylogenomic_dataset_construction.git
+```
+
+### Software prerequisites
+- [Rcorrector](https://github.com/mourisl/Rcorrector)
+  - Install: `git clone https://github.com/mourisl/Rcorrector.git`
+  - Version:
+- [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
+  - Install: previously installed
+  - Version: 0.038
+- Bowtie2 Version
+  - Install:
+  - Version: 2.3.4.3
+- FastQC Version
+  - Install: `conda install -c bioconda fastqc`
+  - Version:
+- Trinity
+  - Install: previously installed
+  -Version:
+  - Notes
+    - From Ya Yang: "newer versions [than 2.5.1] may have a conflict with version of Salmon"
+- [Transrate](http://hibberdlab.com/transrate/)
+  - Install:
+  - Version 1.0.3
+  - Notes
+    - From Ya Yang: "Problems have been reported with some libraries of Salmon 0.6.2, please check that Salmon works properly. If you have problems with Salmon 0.6.0 you can install - Transrate from here, this will work with Salmon 0.8.2, which needs to be in the path as salmon"
+- Corset
+- Salmon Version v.0.9.1 (This is used for Corset and have not been tested with newer versions). You need to name this version salmon-0.9.1.
+- TransDecoder Version 5.3.0 (older or newer versions probably will affect when shortening the names of translated transcripts)
+- BLAST
+  - Install: `conda install -c bioconda blast`
+- cd-hit
+  - Install: `conda install -c bioconda cd-hit`
+  - Version: 4.8.1
+- MCL
+  - Install: `conda install -c bioconda mcl`
+  - Version: 14.137
+- TreeShrink
+  - Install: `conda install -c smirarab treeshrink`
+  - Version: 1.3.1
+- RAxML
+  - Install:
+  - Version 8.2.11
+- Phyx
+  - Install:
+  - Version:
+- mafft Version
+  - Install:
+  - Version: 7.307 (newer versions should work)
+- Gblocks
+  - Install:
+  - Version: 0.91b
+- FastTree
+  - Install:
+  - Version: 2.1.10 (newer versions should work)
+- Pasta
+  - Install:
+  - Version v1.8.2 (newer versions should work)
+- Prank
+  - Install:
+  - Version v.170427
 
 #### 1.1 Mapping reads to genome
 Ben wrote a [`HISAT2`](https://ccb.jhu.edu/software/hisat2/manual.shtml#what-is-hisat2) command for mapping raw reads then piping the output to `samtools` for sorting and indexing. This will yield and overall alignment rate and a `.bam` file that we can spot check in a genome browser like `IGV`. Here is a sample command from Zack:
@@ -94,11 +161,6 @@ samtools index ERR2040261.bam
 
 
 ## 2. Annotation
-I've found that patching together all of the genomics tools can mess with my standard conda environment. To separate my genome analysis tools from my general conda packages I created a new environment called `genome`.
-
-```bash
-[isg4@farnam2 ~]$ conda create --name genome
-```
 I'll be following [Daren Card's MAKER annotation pipeline](https://gist.github.com/darencard/bb1001ac1532dd4225b030cf0cd61ce2) and the [MAKER Tutorial for WGS Assembly and Annotation](http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_Tutorial_for_WGS_Assembly_and_Annotation_Winter_School_2018#About_MAKER). Here are the software prerequisites with the versions he used with my notes on installation.
 
 ### Software prerequisites
@@ -171,6 +233,7 @@ Next, as a batch job, run RepeatModeler using the `Portulaca_amilis` database.
 #SBATCH --job-name=repeat_modeler
 #SBATCH --time=720:00:00
 #SBATCH -c 20
+#SBATCH -p general
 #SBATCH --mem=36G
 #SBATCH --output=repeatmodeler-%A-%a.out
 #SBATCH --error=repeatmodeler-%A-%a.err
