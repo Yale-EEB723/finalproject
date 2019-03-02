@@ -182,6 +182,35 @@ compilation terminated.
 make: *** [dagchainer.] Error 1  
 ``  
 
+
+
+
+Current gcc version 4.8.5 20150623 (Red Hat 4.8.5-16) (GCC)
+Initially tried installing older GCC version (try GCC 4.2.3	February 1, 2008, since program last updated 2008) but requires sudo. Don't have permission.
+
+Instead rename deprecated libraries to their new versions
+iostream.h -> iostream
+iomanip.h -> iomanip
+fstream.h -> fstream - pre-standard, fstream exists but not comparable?
+
+[jlm329@farnam2 DAGCHAINER]$ make
+g++ -o dagchainer. dagchainer.cpp -Wno-deprecated
+
+Try example:
+
+bash: ../accessory_scripts/filter_repetitive_matches.pl: /usr/local/bin/perl: bad interpreter: No such file or directory
+Script not pointing to correct perl location.
+Change ``#!/usr/local/bin/perl`` to ``/usr/bin/perl`` in filter_repetitive_matches.pl
+
+Output files already given for examples. Running examples myself seemed to match original output files EXCEPT Tbrucei_vs_Lmajor.match_file.filtered.aligncoords ...
+
+Couldn't figure out how to produce this file: Tbrucei_vs_Lmajor.match_file.filtered.only_with_synteny or Arabidopsis.Release5.matchList.filtered.aligncoords.2 and unsure whether other files other than ...filtered or ..filtered.aligncoords were also supposed to be output files.
+
+
+
+
+
+
 #ALTERNATE  
 Ramos method:  
 Identify all orthologous genes on scaffold = curated list of homologous genes (eg. 27 in Ramos)  
