@@ -1,10 +1,13 @@
 ---
+title: "neurogenes2"
+output: html_document
+---
+
+---
 title: "neurogenes synteny project"
 csl: plos.csl
 output:
-  pdf_document: default
   github_document: default
-  html_document: default
 bibliography: Bib.bib
 ---
 ```{r setup, include=FALSE}
@@ -22,8 +25,10 @@ knitr::opts_chunk$set(
 ```
 
 
-1. 
-#Paper notes - neural genes presence/absences  
+#1.  
+#Readings
+
+##Neural gene presence/absence data sources   
 
 ###Moroz et al., 2014 [@Moroz2014]  
 -Table 34S:
@@ -32,7 +37,7 @@ knitr::opts_chunk$set(
 -no examples where ctenophores or sponges don't have something present in fungi, capsaspora, monosiga  
 -Suppl Table 12as - it's possible didn't use Amphimedon genome, but Amphimedon was covered by the other papers and I crossreferenced them.  
 
-Mentioned in text:  
+*Mentioned in text*:  
 Not in ctenophores:   
 neurogenin  
 NeuroD  
@@ -64,6 +69,159 @@ PKC alpha-beta-gamma = PKC on table
 
 ###Srivastava et al, 2010 [@Srivastava2010]  
 -has extensive tables of presence/absence neural genes (neurogenesis S.8.9.1, presynaptic S.8.9.2, postsynaptic S8.9.3, neurosecretory S. 8.9.4 and see Fig. 2.8.9.1 for "synapse diagram"). BUT classifies by Holozoa, Metazoa, Eumetazoa, Bilateria. Can figure out in sponges if Metazoa (?) but too vague? Need specific genomes?   
+
+###Quick Links to neural genes papers   
+Riesgo et al., 2014  
+https://academic.oup.com/mbe/article/31/5/1102/993377  
+Neural genes Fig  
+https://academic.oup.com/view-large/figure/74385341/msu057f3p.jpeg  
+
+Moroz et al., 2014  
+https://www.nature.com/articles/nature13400  
+Table 34S: neural genes  
+https://media.nature.com/original/nature-assets/nature/journal/v510/n7503/extref/nature13400-s1.pdf  
+
+Ryan et al, 2013  
+http://science.sciencemag.org/content/342/6164/1242592  
+Suppl Mat:  
+http://science.sciencemag.org/content/sci/suppl/2013/12/11/342.6164.1242592.DC1/Ryan.SM.pdf  
+
+Alie and Manuel, 2010  
+https://bmcevolbiol.biomedcentral.com/articles/10.1186/1471-2148-10-34  
+
+Srivastava et al., 2010  
+Suppl.S8.9 - neural genes
+https://media.nature.com/original/nature-assets/nature/journal/v466/n7307/extref/nature09201-s1.pdf
+
+Nichols et al., 2012  
+https://www.pnas.org/content/109/32/13046  
+Suppl  
+https://www.pnas.org/content/pnas/suppl/2012/07/25/1120685109.DCSupplemental/sapp.pdf  
+
+
+##Synteny papers
+
+*ghost locus hypothesis*:  
+Ramos et al., 2012 [@Ramos2012]  
+https://www.sciencedirect.com/science/article/pii/S0960982212009888  
+-first ghost locus paper - parahox, Amphimedon + Trichoplax  
+
+*Fortunato et al, 2014 [@Fortunato2014] - sycon Parahox*  
+https://www.nature.com/articles/nature13881  
+-second ghost locus paper?  
+
+*Ferrier 2015 [@Ferrier2015] (review)* 
+https://academic.oup.com/bfg/article/15/5/333/1741867  
+
+
+_Reviews_:  
+*Liu et al 2018 [@Liu2018]*  
+https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2026-4  
+ 
+Liu Results:  
+-Pos control (default params): comparison of genome with itself: SynChro (most synteny), DAGchainer/i-ADHoRe, MCScanX 
+-Fragmentation: break 2 species genomes [C. elegans, C. briggsae, S. rattis, S. stercoralis] (diff gene density) into diff fragment lengths. pos corr between error rate and level of fragmentation except for Satsuma. For anchor-based programs, fragmentation has biggest effect on MCScanX and lowest on SynChro.  
+-Find synteny between sister species: Satsuma worst (diff with alignments/nt homology), Anchor-based programs found much higher synteny - can't access Add. file 2 Table S1 that describes this.  
+-Fragmented species and compared to its own genome: MCScanX worst. The rest of anchor-based progs performed similarly.k SyncChro often better or second best.Degree of error differed per species.  
+-high gene density, less error (more anchors)  
+-fragmented assemblies lead to erroneous GO terms.  
+-reference-guided assembly methods rely on assumption of synteny = synteny errors.  
+
+Bottom line:  
+-most synteny programs designed with assumption working on complete high quality genomes. 
+-SynChro best for fragmented assemblies in general, imo.  
+-Satsuma does not have a positive correlation with error rate and level of fragmentation, but performed poorly comparing two closely related species due to failure of alignment - go with anchor-based.   
+-need N50 of at least 200 kb and gene density 290 genes/Mb, or N50 1 Mb and gene density 200 genes/Mb for error rate < 5%. Higher N50 for genomes with less gene density or many paralogues/expansion of gene families.   
+-annotation qualityt really doesn't matter just need high genome assembly contiguity.  
+-more paralogues less synteny finding?? may have misunderstood.  
+
+
+#SYNTENY ANALYSIS PLAN  
+Test programs against the same genome - concentrate on the four cteno and por genomes (?).  
+Use a normal synteny program to identify genes surrounding gene of interset.  
+Then follow Ramos procedure.  
+
+
+##Running Programs  
+According to Liu et al 2018 [@Liu2018] Synchro is the ideal program to run on fragmented genomes BUT it runs on outdated file types that do not seem to exist for my genomes.  
+DAGchainer is the most populat synteny analysis program and performs decently.  
+Another very popular synteny program, MCScanx, performs poorly with fragmented genomes [@Liu2013]  
+
+###Synchro  
+-Do synteny analysis of one genome vs itself as positive control: Aqu A vs Aqu     
+.gbff from Genbank = ".dat" for Synchro   
+f.dat lat file from embl = ".embl" for Synchro    
+Found .dat aka .embl [here] (https://www.ebi.ac.uk/ena/data/view/GCA_000090795.1)  
+Found .gbff aka genbank .dat [here] (ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/090/795/GCA_000090795.1_v1.0)    
+
+genbank: it's possible .dat is outdated. .gbff has replaced .gbk and Synchro. Yeah, C. elegans gbff doesn't work. 
+Archived [genbank] (ftp://ftp.ncbi.nlm.nih.gov/genomes/archive/old_genbank) and [refseq files] (ftp://ftp.ncbi.nlm.nih.gov/genomes/archive/old_refseq/) scaffolds only, no annotation files - before annotation done?  
+
+**Big wall: Can't get file types to work.**  
+
+
+###DAGchainer (http://dagchainer.sourceforge.net/)  
+Very popular synteny analysis program.     
+**make is not working. Get error:**    
+``  
+g++ -o dagchainer. dagchainer.cpp -Wno-deprecated  
+dagchainer.cpp:10:20: fatal error: stdio.h: No such file or directory  
+ #include  <stdio.h>  
+                    ^  
+compilation terminated.  
+make: *** [dagchainer.] Error 1  
+``  
+
+Current gcc version 4.8.5 20150623 (Red Hat 4.8.5-16) (GCC)
+Initially tried installing older GCC version (try GCC 4.2.3	February 1, 2008, since program last updated 2008) but requires sudo. Don't have permission.
+
+Instead rename deprecated libraries to their new versions
+iostream.h -> iostream
+iomanip.h -> iomanip
+fstream.h -> fstream - pre-standard, fstream exists but not comparable?
+
+[jlm329@farnam2 DAGCHAINER]$ make
+g++ -o dagchainer. dagchainer.cpp -Wno-deprecated
+
+Try example:
+
+bash: ../accessory_scripts/filter_repetitive_matches.pl: /usr/local/bin/perl: bad interpreter: No such file or directory
+Script not pointing to correct perl location.
+Change ``#!/usr/local/bin/perl`` to ``/usr/bin/perl`` in filter_repetitive_matches.pl
+
+Output files already given for examples. Running examples myself seemed to match original output files EXCEPT Tbrucei_vs_Lmajor.match_file.filtered.aligncoords ...
+
+Couldn't figure out how to produce this file: Tbrucei_vs_Lmajor.match_file.filtered.only_with_synteny or Arabidopsis.Release5.matchList.filtered.aligncoords.2 and unsure whether other files other than ...filtered or ..filtered.aligncoords were also supposed to be output files.
+
+###Synima  
+Synteny analysis viewer/figure maker. Works on DAGchainer output files.  
+
+*Install of Farnam*: Problem with setting up env var, need to `export PATH=$PATH:/home/jlm329/eeb723/jlm329/programs/R-3.5.2/bin:/home/jlm329/eeb723/jlm329/programs/blast-2.2.9-amd64-linux` for now. Something with my .bashrc file. Sad.  
+*Programs*:  
+- Bio/SeqIO.pm via BioPerl-1.7.5 https://metacpan.org/pod/Bio::SeqIO  
+- Math/Round.pm via Math-Round-0.07 https://metacpan.org/pod/Math::Round  
+- R-3.5.2 - install doesn't work unless:  
+  ./configure  
+  make  
+  make install
+- Java error: Could not allocate metaspace: 1073741824 bytes - Rerun in interactive with 5G memory -&gt; works, but with message: `configure: WARNING: neither inconsolata.sty nor zi4.sty found: PDF vignettes and package manuals will not be rendered optimally`  
+- legacy BLAST: blast-2.2.9-amd64-linux ftp://ftp.ncbi.nlm.nih.gov/blast/executables/legacy.NOTSUPPORTED/2.2.9/  
+
+1st example ran successfully Pipeline: problem with BLAST with second command: [blastall] WARNING: [000.000] 7000010424373976: SetUpBlastSearch failed.  
+Must set env var `export BLASTMAT=/home/jlm329/eeb723/jlm329/programs/blast-2.2.9-amd64-linux/data`  
+
+
+#ALTERNATE  
+Ramos method:  
+Identify all orthologous genes on scaffold = curated list of homologous genes (eg. 27 in Ramos)  
+Classify as belonging to chromosome in comparison animal where gene of interest is found or somewhere else.  
+If many paralogues, two tests: single location of each of the human orthologues, or collapsed location of human paralogues if all located at same locus  
+Do a bunch of stuff to calculate probabilities.  
+Do Exact binomial test and Fisher's test to test whether the number of correct neighbours is statistically significantly higher than expected by chance.    
+**So....does order not matter?!!**    
+-unless they wrote a script it seems very manual and time intensive.  
+
+#Data
 
 #[Table](https://github.com/jasminelmah/compgen/blob/master/neurogenes_table.numbers)  
 _Table abbreviations_  
@@ -105,123 +263,20 @@ Second Iteration:
 Via R
 Create a new table where species for Ctenophora, Porifera combined: https://stackoverflow.com/questions/14563531/combine-column-to-remove-nas  
 
-#Synteny programs/papers  
-ghost locus hypothesis:  
-Ramos et al., 2012 [@Ramos2012]  
-https://www.sciencedirect.com/science/article/pii/S0960982212009888  
--first ghost locus paper - parahox, Amphimedon + Trichoplax  
-
-Fortunato et al, 2014 [@Fortunato2014] - sycon Parahox  
-https://www.nature.com/articles/nature13881  
--second ghost locus paper?  
-
-Ferrier 2015 [@Ferrier2015] (review)  
-https://academic.oup.com/bfg/article/15/5/333/1741867  
-
-
-Reviews:  
-Liu et al 2018 [@Liu2018]  
-https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2026-4  
- 
-Liu Results:  
--Pos control (default params): comparison of genome with itself: SynChro (most synteny), DAGchainer/i-ADHoRe, MCScanX 
--Fragmentation: break 2 species genomes [C. elegans, C. briggsae, S. rattis, S. stercoralis] (diff gene density) into diff fragment lengths. pos corr between error rate and level of fragmentation except for Satsuma. For anchor-based programs, fragmentation has biggest effect on MCScanX and lowest on SynChro.  
--Find synteny between sister species: Satsuma worst (diff with alignments/nt homology), Anchor-based programs found much higher synteny - can't access Add. file 2 Table S1 that describes this.  
--Fragmented species and compared to its own genome: MCScanX worst. The rest of anchor-based progs performed similarly.k SyncChro often better or second best.Degree of error differed per species.  
--high gene density, less error (more anchors)  
--fragmented assemblies lead to erroneous GO terms.  
--reference-guided assembly methods rely on assumption of synteny = synteny errors.  
-
-Bottom line:  
--most synteny programs designed with assumption working on complete high quality genomes. 
--SynChro best for fragmented assemblies in general, imo.  
--Satsuma does not have a positive correlation with error rate and level of fragmentation, but performed poorly comparing two closely related species due to failure of alignment - go with anchor-based.   
--need N50 of at least 200 kb and gene density 290 genes/Mb, or N50 1 Mb and gene density 200 genes/Mb for error rate < 5%. Higher N50 for genomes with less gene density or many paralogues/expansion of gene families.   
--annotation qualityt really doesn't matter just need high genome assembly contiguity.  
--more paralogues less synteny finding?? may have misunderstood.  
 
 ##To do:
 -Check to see whether genomes assembled via ref to related species -> leads to false synteny due to assumption of shared synteny  
--Check N50s of my genomes  
 
 **Scaffold N50s of my genomes**  
+Liu et al. 2018 [Liu@2018] says that need N50 of at least 200 kb (w/ gene density 290genes/Mb) or 1Mb (gene densit 200 genes/Mb) for error rate < 5%.  
+
 Mnemiopsis (from orig @Ryan2013): 187 kb  
 Pleurobachia (Suppl Table 5S from @Moroz2014): 20.607 kb  
 Amphimedon orig, [Ensembl (https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Annotation/): 120 kb >> likely improved, looking for Aqu2.1 (or is this only a re-annotation not reassembly?)  
   - Slightly confused with scaffold N50 stats in @Srivastava2010 suppl Table S2.3.2  
 Oscarella carmela (Suppl from @Nichols2012): 5.897 kb!! :O  
 
-#SYNTENY ANALYSIS PLAN  
-Test programs against the same genome - concentrate on the four cteno and por genomes (?).  
-Use a normal synteny program to identify genes surrounding gene of interset.  
-Then follow Ramos procedure.  
-
-
-
-#First run attempt with Synchro  
--Aqu with Aqu: A vs B    
-.gbff from Genbank = ".dat" for Synchro   
-f.dat lat file from embl = ".embl" for Synchro    
-Found .dat aka .embl [here] (https://www.ebi.ac.uk/ena/data/view/GCA_000090795.1)  
-Found .gbff aka genbank .dat [here] (ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/090/795/GCA_000090795.1_v1.0)    
-
-genbank: it's possible .dat is outdated. .gbff has replaced .gbk and Synchro. Yeah, C. elegans gbff doesn't work. 
-Archived [genbank] (ftp://ftp.ncbi.nlm.nih.gov/genomes/archive/old_genbank) and [refseq files] (ftp://ftp.ncbi.nlm.nih.gov/genomes/archive/old_refseq/) scaffolds only, no annotation files - before annotation done?  
-
-**Big wall: Can't get file types to work.**  
-
-#First run attempt with DAGchainer (http://dagchainer.sourceforge.net/)  
-Popular. MCScan is popular too but performed worse.    
-**make is not working. Get error:**    
-``  
-g++ -o dagchainer. dagchainer.cpp -Wno-deprecated  
-dagchainer.cpp:10:20: fatal error: stdio.h: No such file or directory  
- #include  <stdio.h>  
-                    ^  
-compilation terminated.  
-make: *** [dagchainer.] Error 1  
-``  
-
-
-
-
-Current gcc version 4.8.5 20150623 (Red Hat 4.8.5-16) (GCC)
-Initially tried installing older GCC version (try GCC 4.2.3	February 1, 2008, since program last updated 2008) but requires sudo. Don't have permission.
-
-Instead rename deprecated libraries to their new versions
-iostream.h -> iostream
-iomanip.h -> iomanip
-fstream.h -> fstream - pre-standard, fstream exists but not comparable?
-
-[jlm329@farnam2 DAGCHAINER]$ make
-g++ -o dagchainer. dagchainer.cpp -Wno-deprecated
-
-Try example:
-
-bash: ../accessory_scripts/filter_repetitive_matches.pl: /usr/local/bin/perl: bad interpreter: No such file or directory
-Script not pointing to correct perl location.
-Change ``#!/usr/local/bin/perl`` to ``/usr/bin/perl`` in filter_repetitive_matches.pl
-
-Output files already given for examples. Running examples myself seemed to match original output files EXCEPT Tbrucei_vs_Lmajor.match_file.filtered.aligncoords ...
-
-Couldn't figure out how to produce this file: Tbrucei_vs_Lmajor.match_file.filtered.only_with_synteny or Arabidopsis.Release5.matchList.filtered.aligncoords.2 and unsure whether other files other than ...filtered or ..filtered.aligncoords were also supposed to be output files.
-
-
-
-
-
-
-#ALTERNATE  
-Ramos method:  
-Identify all orthologous genes on scaffold = curated list of homologous genes (eg. 27 in Ramos)  
-Classify as belonging to chromosome in comparison animal where gene of interest is found or somewhere else.  
-If many paralogues, two tests: single location of each of the human orthologues, or collapsed location of human paralogues if all located at same locus  
-Do a bunch of stuff to calculate probabilities.  
-Do Exact binomial test and Fisher's test to test whether the number of correct neighbours is statistically significantly higher than expected by chance.    
-**So....does order not matter?!!**    
--unless they wrote a script it seems very manual and time intensive.  
-
-#Data/downloads
+##Genomes
 _Pleurobachia genome_:  https://www.ncbi.nlm.nih.gov/assembly/GCA_000695325.1  
 P.bachei_draft_genome_v.1.1  
 Organism: Pleurobrachia bachei (ctenophores)  
@@ -268,35 +323,6 @@ _Oscarella carmela_: http://www.compagen.org/datasets.html  OCAR not Oscarella s
 -Oscarella carmela (this assembly) renamed Oscarella pearsei; Oscarella sp. in Compgen redescribed Oscarella carmela. See 
 https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0183002 - old O. carmela papers based on two species (carmela + pearsei). Both in compagen, but although there is  press release compagen didn't change their names in db. *Can't find annotation file*.  
 
-
-
-#Papers+Links  
-Riesgo et al., 2014  
-https://academic.oup.com/mbe/article/31/5/1102/993377  
-Neural genes Fig  
-https://academic.oup.com/view-large/figure/74385341/msu057f3p.jpeg  
-
-Moroz et al., 2014  
-https://www.nature.com/articles/nature13400  
-Table 34S: neural genes  
-https://media.nature.com/original/nature-assets/nature/journal/v510/n7503/extref/nature13400-s1.pdf  
-
-Ryan et al, 2013  
-http://science.sciencemag.org/content/342/6164/1242592  
-Suppl Mat:  
-http://science.sciencemag.org/content/sci/suppl/2013/12/11/342.6164.1242592.DC1/Ryan.SM.pdf  
-
-Alie and Manuel, 2010  
-https://bmcevolbiol.biomedcentral.com/articles/10.1186/1471-2148-10-34  
-
-Srivastava et al., 2010  
-Suppl.S8.9 - neural genes
-https://media.nature.com/original/nature-assets/nature/journal/v466/n7307/extref/nature09201-s1.pdf
-
-Nichols et al., 2012  
-https://www.pnas.org/content/109/32/13046  
-Suppl  
-https://www.pnas.org/content/pnas/suppl/2012/07/25/1120685109.DCSupplemental/sapp.pdf  
 
 
 
