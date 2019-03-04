@@ -189,7 +189,7 @@ bash: ../accessory_scripts/filter_repetitive_matches.pl: /usr/local/bin/perl: ba
 Script not pointing to correct perl location.
 Change ``#!/usr/local/bin/perl`` to ``/usr/bin/perl`` in filter_repetitive_matches.pl
 
-Output files already given for examples. Running examples myself seemed to match original output files EXCEPT Tbrucei_vs_Lmajor.match_file.filtered.aligncoords ...
+Output files already given for examples. Running examples myself seemed to match original output files EXCEPT Tbrucei_vs_Lmajor.match_file.filtered.aligncoords ... Problem?
 
 Couldn't figure out how to produce this file: Tbrucei_vs_Lmajor.match_file.filtered.only_with_synteny or Arabidopsis.Release5.matchList.filtered.aligncoords.2 and unsure whether other files other than ...filtered or ..filtered.aligncoords were also supposed to be output files.
 
@@ -207,8 +207,12 @@ Synteny analysis viewer/figure maker. Works on DAGchainer output files.
 - Java error: Could not allocate metaspace: 1073741824 bytes - Rerun in interactive with 5G memory -&gt; works, but with message: `configure: WARNING: neither inconsolata.sty nor zi4.sty found: PDF vignettes and package manuals will not be rendered optimally`  
 - legacy BLAST: blast-2.2.9-amd64-linux ftp://ftp.ncbi.nlm.nih.gov/blast/executables/legacy.NOTSUPPORTED/2.2.9/  
 
-1st example ran successfully Pipeline: problem with BLAST with second command: [blastall] WARNING: [000.000] 7000010424373976: SetUpBlastSearch failed.  
+See exampls on [Synima Readme] (https://github.com/rhysf/Synima)  
+1st example ran successfully  
+Pipeline: 
+2nd command:  problem with BLAST with second command: [blastall] WARNING: [000.000] 7000010424373976: SetUpBlastSearch failed.
 Must set env var `export BLASTMAT=/home/jlm329/eeb723/jlm329/programs/blast-2.2.9-amd64-linux/data`  
+
 
 
 #ALTERNATE  
