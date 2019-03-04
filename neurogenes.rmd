@@ -1,5 +1,5 @@
 ---
-title: "neurogenes2"
+title: "neurogenes"
 output: html_document
 ---
 
@@ -21,16 +21,18 @@ knitr::opts_chunk$set(
 ```
 
 ```{r preliminaries}
-#library( tidyverse )
+library( tidyverse )
+library(ggplot2)
+library(seqinr)
 ```
 
 
-#1.  
-#Readings
+1.  
+#Readings  
 
 ##Neural gene presence/absence data sources   
 
-###Moroz et al., 2014 [@Moroz2014]  
+**Moroz et al., 2014** [@Moroz2014]
 -Table 34S:
 -structure of figure shows that it is from bilaterian perspective (closer to bilateria more rectangles filled in)  
 -remember there are also random absences in cnidaria; the mirror of bilateria, but all the proteins are characterized from bilateria  
@@ -48,7 +50,7 @@ Otx
 
 -not that much overlap in genes looked at by Riesgo vs Moroz  
 
-###Ryan et al., 2013 [@Ryan2013]  
+**Ryan et al., 2013** [@Ryan2013]  
 *netrin, slit, unc-5 (axon guidance) not in Mnemiopsis or Amphimedon*  
 -used genomes, since based on Alie and Manuel 2010  
 Supplementary Table S17: Presence and absence of post-synaptic genes  - pretty much Alie and Manuel 2010
@@ -57,7 +59,7 @@ Supplementary Table S19: Presence and absence of Dopamine / Norepinephrine /Epin
 -are seqs of the animals in S17 genomes? Unsure, but all animals in table have genomes (and the Mle seqs are from the genome)  
 -AMPA iGluR and NMDA iGluR included as iGluR  
 
-###Alie and Manuel, 2010 [@Alie2010]  
+**Alie and Manuel, 2010** [@Alie2010]  
 -used genomes  
 -Ryan built on Fig. 1. Cross ref with current data to make sure have everything.  
 -Only use Monosiga, Trichoplax, Amphimedon, Nematostella, Hydra, Homo  
@@ -67,7 +69,7 @@ B-cat and PMCA are ancient - interesting?
 AMPAR and NMDAR collapsed into iGluR in table; presence of one of these trumped absence of the other  
 PKC alpha-beta-gamma = PKC on table  
 
-###Srivastava et al, 2010 [@Srivastava2010]  
+**Srivastava et al, 2010** [@Srivastava2010]  
 -has extensive tables of presence/absence neural genes (neurogenesis S.8.9.1, presynaptic S.8.9.2, postsynaptic S8.9.3, neurosecretory S. 8.9.4 and see Fig. 2.8.9.1 for "synapse diagram"). BUT classifies by Holozoa, Metazoa, Eumetazoa, Bilateria. Can figure out in sponges if Metazoa (?) but too vague? Need specific genomes?   
 
 ###Quick Links to neural genes papers   
@@ -101,21 +103,20 @@ https://www.pnas.org/content/pnas/suppl/2012/07/25/1120685109.DCSupplemental/sap
 
 ##Synteny papers
 
-*ghost locus hypothesis*:  
+**ghost locus hypothesis**:  
 Ramos et al., 2012 [@Ramos2012]  
 https://www.sciencedirect.com/science/article/pii/S0960982212009888  
 -first ghost locus paper - parahox, Amphimedon + Trichoplax  
 
-*Fortunato et al, 2014 [@Fortunato2014] - sycon Parahox*  
+**Fortunato et al, 2014 [@Fortunato2014] - sycon Parahox**  
 https://www.nature.com/articles/nature13881  
 -second ghost locus paper?  
 
-*Ferrier 2015 [@Ferrier2015] (review)* 
+**Ferrier 2015 [@Ferrier2015] (review)** 
 https://academic.oup.com/bfg/article/15/5/333/1741867  
 
-
-_Reviews_:  
-*Liu et al 2018 [@Liu2018]*  
+**_Reviews_**:  
+**Liu et al 2018 [@Liu2018]**   
 https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2026-4  
  
 Liu Results:  
@@ -162,7 +163,7 @@ Archived [genbank] (ftp://ftp.ncbi.nlm.nih.gov/genomes/archive/old_genbank) and 
 
 ###DAGchainer (http://dagchainer.sourceforge.net/)  
 Very popular synteny analysis program.     
-**make is not working. Get error:**    
+**make error:**    
 ``  
 g++ -o dagchainer. dagchainer.cpp -Wno-deprecated  
 dagchainer.cpp:10:20: fatal error: stdio.h: No such file or directory  
@@ -196,7 +197,8 @@ Couldn't figure out how to produce this file: Tbrucei_vs_Lmajor.match_file.filte
 ###Synima  
 Synteny analysis viewer/figure maker. Works on DAGchainer output files.  
 
-*Install of Farnam*: Problem with setting up env var, need to `export PATH=$PATH:/home/jlm329/eeb723/jlm329/programs/R-3.5.2/bin:/home/jlm329/eeb723/jlm329/programs/blast-2.2.9-amd64-linux` for now. Something with my .bashrc file. Sad.  
+**Installs on Farnam**: Problem with setting up env var, need to `export PATH=$PATH:/home/jlm329/eeb723/jlm329/programs/R-3.5.2/bin:/home/jlm329/eeb723/jlm329/programs/blast-2.2.9-amd64-linux` for now. Something with my .bashrc file. Sad.  
+
 *Programs*:  
 - Bio/SeqIO.pm via BioPerl-1.7.5 https://metacpan.org/pod/Bio::SeqIO  
 - Math/Round.pm via Math-Round-0.07 https://metacpan.org/pod/Math::Round  
@@ -227,7 +229,7 @@ Do Exact binomial test and Fisher's test to test whether the number of correct n
 
 #Data
 
-#[Table](https://github.com/jasminelmah/compgen/blob/master/neurogenes_table.numbers)  
+##[Table](https://github.com/jasminelmah/compgen/blob/master/neurogenes_table.numbers)  
 _Table abbreviations_  
 DBH - dopamine-B-hydroxylase  
 DDC - DOPA decarboxylase  
@@ -271,7 +273,7 @@ Create a new table where species for Ctenophora, Porifera combined: https://stac
 ##To do:
 -Check to see whether genomes assembled via ref to related species -> leads to false synteny due to assumption of shared synteny  
 
-**Scaffold N50s of my genomes**  
+##Scaffold N50s of genomes    
 Liu et al. 2018 [Liu@2018] says that need N50 of at least 200 kb (w/ gene density 290genes/Mb) or 1Mb (gene densit 200 genes/Mb) for error rate < 5%.  
 
 Mnemiopsis (from orig @Ryan2013): 187 kb  
@@ -279,6 +281,19 @@ Pleurobachia (Suppl Table 5S from @Moroz2014): 20.607 kb
 Amphimedon orig, [Ensembl (https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Annotation/): 120 kb >> likely improved, looking for Aqu2.1 (or is this only a re-annotation not reassembly?)  
   - Slightly confused with scaffold N50 stats in @Srivastava2010 suppl Table S2.3.2  
 Oscarella carmela (Suppl from @Nichols2012): 5.897 kb!! :O  
+
+##Distribution of scaffold lengths  
+Q: Just how badly are my genomes fragmented??  
+Use seqinr R package.  
+
+```{r distr scaffold length}
+#names=c()
+fasta=read.fasta(file="mGluR.fasta")
+getLength(fasta)%>%as.data.frame()%>%ggplot()+geom_histogram(aes(x=.), fill="darkgreen", color="black",binwidth=100)
+
+
+```
+
 
 ##Genomes
 _Pleurobachia genome_:  https://www.ncbi.nlm.nih.gov/assembly/GCA_000695325.1  
