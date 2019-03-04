@@ -288,8 +288,14 @@ Use seqinr R package.
 
 ```{r distr scaffold length}
 #names=c()
-fasta=read.fasta(file="mGluR.fasta")
-getLength(fasta)%>%as.data.frame()%>%ggplot()+geom_histogram(aes(x=.), fill="darkgreen", color="black",binwidth=100)
+#fasta=read.fasta(file="~/Desktop/compgen/repo/genome_fasta/GCA_000090795.1_v1.0_genomic.fna")
+genome<-c("test.fasta", "test1.fasta")
+for (org in genome){
+fasta<-read.fasta(org)
+getLength(fasta)%>%as.data.frame()%>%filter(.<10000)%>%ggplot()+geom_histogram(aes(x=.), fill="darkgreen", color="black",binwidth=100)+xlab("Scaffold Length")
+print("Median scaffold length:") 
+getLength(fasta)%>%median()
+}
 
 
 ```
