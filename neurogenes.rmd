@@ -145,7 +145,7 @@ Then follow Ramos procedure.
 
 ##Running Programs  
 According to Liu et al 2018 [@Liu2018] Synchro is the ideal program to run on fragmented genomes BUT it runs on outdated file types that do not seem to exist for my genomes.  
-DAGchainer is the most populat synteny analysis program and performs decently.  
+DAGchainer is the most popular synteny analysis program and performs decently.  
 Another very popular synteny program, MCScanx, performs poorly with fragmented genomes [@Liu2013]  
 
 ###Synchro  
@@ -155,10 +155,10 @@ f.dat lat file from embl = ".embl" for Synchro
 Found .dat aka .embl [here] (https://www.ebi.ac.uk/ena/data/view/GCA_000090795.1)  
 Found .gbff aka genbank .dat [here] (ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/090/795/GCA_000090795.1_v1.0)    
 
-genbank: it's possible .dat is outdated. .gbff has replaced .gbk and Synchro. Yeah, C. elegans gbff doesn't work. 
+genbank: it's possible .dat is outdated. .gbff has replaced .gbk and Synchro. Yeah, even C. elegans gbff doesn't work. 
 Archived [genbank] (ftp://ftp.ncbi.nlm.nih.gov/genomes/archive/old_genbank) and [refseq files] (ftp://ftp.ncbi.nlm.nih.gov/genomes/archive/old_refseq/) scaffolds only, no annotation files - before annotation done?  
 
-**Big wall: Can't get file types to work.**  
+**Big wall: Can't find the correct file types**  
 
 
 ###DAGchainer (http://dagchainer.sourceforge.net/)  
@@ -291,9 +291,8 @@ Use seqinr R package.
 #fasta=read.fasta(file="~/Desktop/compgen/repo/genome_fasta/GCA_000090795.1_v1.0_genomic.fna")
 genome<-c("test.fasta", "test1.fasta")
 for (org in genome){
-fasta<-read.fasta(org)
-getLength(fasta)%>%as.data.frame()%>%filter(.<10000)%>%ggplot()+geom_histogram(aes(x=.), fill="darkgreen", color="black",binwidth=100)+xlab("Scaffold Length")
-print("Median scaffold length:") 
+read.fasta(org)%>%getLength(fasta)%>%as.data.frame()%>%filter(.<10000)%>%ggplot()+geom_histogram(aes(x=.), fill="darkgreen", color="black",binwidth=100)+xlab("Scaffold Length")
+print("Median scaffold length (bp):") 
 getLength(fasta)%>%median()
 }
 
