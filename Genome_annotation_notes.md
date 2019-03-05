@@ -142,12 +142,13 @@ source activate genome
 python ~/project/apps/phylogenomic_dataset_construction/scripts/filter_fq.py ../Data/1kp_transcriptome/ERR2040261_1.fq ../Data/1kp_transcriptome/ERR2040261_2.fq Caryophyllales both 20 /home/isg4/scratch60/P_amilis_genome/Transcriptomics clean > filter_fq.log
 ```
 The above command will
-1. Random sequencing error correction with Rcorrector
-2. Removes read pairs that cannot be corrected
-3. Remove sequencing adapters and low quality sequences with Trimmomatic
+1. Correct random sequencing error with `Rcorrector`
+2. Remove read pairs that cannot be corrected
+3. Remove sequencing adapters and low quality sequences with `Trimmomatic`
 4. Filter organelle reads (cpDNA, mtDNA or both) with Bowtie2. Files containing only organelle reads will be produced which can be use to assemble for example the plastomes with [Fast-Plast](https://github.com/mrmckain/Fast-Plast)
-5. Runs FastQC to check read quality and detect over-represented reads
+5. Run FastQC to check read quality and detect over-represented reads
 6. Remove Over-represented sequences
+
 Checking the file sizes
 ```bash
 5.9M Mar  4 19:19 Caryophyllales_cp.fa
@@ -182,7 +183,7 @@ source activate genome
 
 python /gpfs/ysm/home/isg4/project/apps/phylogenomic_dataset_construction/scripts/trinity_wrapper.py ERR2040261_1.overep_filtered.fq ERR2040261_2.overep_filtered.fq ERR204 20 100 non-stranded /gpfs/ysm/home/isg4/scratch60/P_amilis_genome/Transcriptomics/ clean
 ```
-To get the `trinity_wrapp.py` script to work I had to add parens, `()`, to a few `print` statements.
+To get the `trinity_wrapper.py` script to work I had to add parens, `()`, to a few `print` statements.
 
 ## 2. Annotation
 I'll be following [Daren Card's MAKER annotation pipeline](https://gist.github.com/darencard/bb1001ac1532dd4225b030cf0cd61ce2) and the [MAKER Tutorial for WGS Assembly and Annotation](http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_Tutorial_for_WGS_Assembly_and_Annotation_Winter_School_2018#About_MAKER). Here are the software prerequisites with the versions he used with my notes on installation.
@@ -294,7 +295,7 @@ cd-hit                    4.8.1                hdbcaa40_0    bioconda
 certifi                   2018.11.29            py36_1000    conda-forge
 circos                    0.69.6                        4    bioconda
 corset                    1.07                 he941832_0    bioconda
-curl                      7.64.0               h646f8bb_2    conda-forge
+curl                      7.64.0               h646f8bb_0    conda-forge
 cycler                    0.10.0                     py_1    conda-forge
 dendropy                  4.1.0                    py36_0    bioconda
 expat                     2.2.5             hf484d3e_1002    conda-forge
@@ -322,9 +323,9 @@ jemalloc                  5.1.0             hf484d3e_1000    conda-forge
 joblib                    0.13.2                     py_0    conda-forge
 jpeg                      9c                h14c3975_1001    conda-forge
 kiwisolver                1.0.1           py36h6bb024c_1002    conda-forge
-krb5                      1.16.3            h05b26f9_1001    conda-forge
+krb5                      1.16.3            hc83ff2d_1000    conda-forge
 libboost                  1.67.0               h46d08c1_4
-libcurl                   7.64.0               h541490c_2    conda-forge
+libcurl                   7.64.0               h01ee5af_0    conda-forge
 libdeflate                1.0                  h14c3975_1    bioconda
 libedit                   3.1.20170329      hf8c457e_1001    conda-forge
 libffi                    3.2.1             hf484d3e_1005    conda-forge
@@ -335,7 +336,7 @@ libgfortran               3.0.0                         1    conda-forge
 libgfortran-ng            7.2.0                hdf63c60_3    conda-forge
 libiconv                  1.15              h14c3975_1004    conda-forge
 libpng                    1.6.36            h84994c4_1000    conda-forge
-libssh2                   1.8.0             h90d6eec_1004    conda-forge
+libssh2                   1.8.0             h1ad7b7a_1003    conda-forge
 libstdcxx-ng              7.3.0                hdf63c60_0    conda-forge
 libtiff                   4.0.10            h648cc4a_1001    conda-forge
 libuuid                   2.32.1            h14c3975_1000    conda-forge
@@ -354,7 +355,7 @@ ncurses                   6.1               hf484d3e_1002    conda-forge
 numpy                     1.16.2           py36h7e9f1db_0
 numpy-base                1.16.2           py36hde5b4d6_0
 openjdk                   11.0.1            h14c3975_1014    conda-forge
-openssl                   1.1.1b               h14c3975_0    conda-forge
+openssl                   1.0.2r               h14c3975_0    conda-forge
 pango                     1.40.14           hf0c64fd_1003    conda-forge
 pasta                     1.8.2                    py36_2    genomedk
 pcre                      8.41              hf484d3e_1003    conda-forge
@@ -402,7 +403,7 @@ pthread-stubs             0.4               h14c3975_1001    conda-forge
 pymongo                   3.3.0                    py36_0
 pyparsing                 2.3.1                      py_0    conda-forge
 pyqt                      4.11.4                   py36_3    conda-forge
-python                    3.6.7             h381d211_1004    conda-forge
+python                    3.6.7             hd21baee_1002    conda-forge
 python-dateutil           2.8.0                      py_0    conda-forge
 qt                        4.8.7                         2
 quast                     5.0.2           py36pl526ha92aebf_0    bioconda
@@ -443,7 +444,7 @@ r-withr                   2.1.2           r351h6115d3f_1000    conda-forge
 raxml                     8.2.12               h470a237_0    bioconda
 readline                  7.0               hf8c457e_1001    conda-forge
 salmon                    0.12.0               h86b0361_1    bioconda
-samtools                  1.9                  h91753b0_5    bioconda
+samtools                  1.9                  h57cc563_7    bioconda
 setuptools                40.8.0                   py36_0    conda-forge
 simplejson                3.16.1           py36h470a237_0    conda-forge
 sip                       4.18                     py36_1    conda-forge
