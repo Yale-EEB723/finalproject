@@ -52,6 +52,7 @@ I will be following [Ya Yang's pipeline](https://bitbucket.org/yanglab/phylogeno
 ```bash
 [isg4@c14n07 apps]$ git clone https://bitbucket.org/yanglab/phylogenomic_dataset_construction.git
 ```
+**Remember to compare this transcriptome assembly with that in the 1KP database for [1kp_code QMUN](http://www.onekp.com/public_data.html)**
 
 ### 1.0 Software prerequisites
 - [Rcorrector](https://github.com/mourisl/Rcorrector)
@@ -117,6 +118,10 @@ I will be following [Ya Yang's pipeline](https://bitbucket.org/yanglab/phylogeno
 - Prank
   - Install: `conda install -c bioconda prank`
   - Version: 170427
+- samtools
+  - Install: `conda install -c bioconda samtools openssl=1.0`
+  - Version: 1.9
+  - Notes: See [issue 12100](https://github.com/bioconda/bioconda-recipes/issues/12100) about why `samtools` was installed this way.
 
 ### 1.1 Read processing
 **The Yang pipeline specifies that read files needs to be in the format "taxonID_1.fq" and "taxonID_2.fq". I renamed my files `ERR2040261_1.fq` and `ERR2040261_2.fq`**.
@@ -143,6 +148,41 @@ The above command will
 4. Filter organelle reads (cpDNA, mtDNA or both) with Bowtie2. Files containing only organelle reads will be produced which can be use to assemble for example the plastomes with [Fast-Plast](https://github.com/mrmckain/Fast-Plast)
 5. Runs FastQC to check read quality and detect over-represented reads
 6. Remove Over-represented sequences
+Checking the file sizes
+```bash
+5.9M Mar  4 19:19 Caryophyllales_cp.fa
+1.7M Mar  4 19:19 Caryophyllales_mt.fa
+162M Mar  4 19:23 ERR2040261_1.org_reads.fq
+1.8G Mar  4 19:25 ERR2040261_1.overep_filtered.fq
+156M Mar  4 19:23 ERR2040261_2.org_reads.fq
+1.7G Mar  4 19:25 ERR2040261_2.overep_filtered.fq
+7.8K Mar  4 19:24 filter_fq.30263881-4294967294.err
+   0 Mar  4 19:11 filter_fq.30263881-4294967294.out
+6.6K Mar  4 19:25 filter_fq.log
+ 508 Mar  4 16:44 filter_fq.slurm
+```
+shows that the majority of our raw reads passed filtering for oraganellar origin (`*.org_reads.fq`).
+
+
+### 1.2 _De novo_ assembly with `trinity`
+```bash
+#!/bin/bash
+#SBATCH --job-name=trinity_wrapper
+#SBATCH -p scavenge
+#SBATCH -N 1
+#SBATCH -n 20
+#SBATCH --mem-per-cpu=64G
+#SBATCH -t 120:00:00
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=ian.gilman@yale.edu
+#SBATCH -o trinity_wrapper.%A-%a.out
+#SBATCH -e trinity_wrapper.%A-%a.err
+
+source activate genome
+
+python /gpfs/ysm/home/isg4/project/apps/phylogenomic_dataset_construction/scripts/trinity_wrapper.py ERR2040261_1.overep_filtered.fq ERR2040261_2.overep_filtered.fq ERR204 20 100 non-stranded /gpfs/ysm/home/isg4/scratch60/P_amilis_genome/Transcriptomics/ clean
+```
+To get the `trinity_wrapp.py` script to work I had to add parens, `()`, to a few `print` statements.
 
 ## 2. Annotation
 I'll be following [Daren Card's MAKER annotation pipeline](https://gist.github.com/darencard/bb1001ac1532dd4225b030cf0cd61ce2) and the [MAKER Tutorial for WGS Assembly and Annotation](http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_Tutorial_for_WGS_Assembly_and_Annotation_Winter_School_2018#About_MAKER). Here are the software prerequisites with the versions he used with my notes on installation.
@@ -218,7 +258,7 @@ Next, as a batch job, run RepeatModeler using the `Portulaca_amilis` database.
 #SBATCH --time=144:00:00
 #SBATCH -c 20
 #SBATCH -p general
-#SBATCH --mem=36Ga
+#SBATCH --mem=36G
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=ian.gilman@yale.edu
 #SBATCH --output=repeatmodeler-%A-%a.out
