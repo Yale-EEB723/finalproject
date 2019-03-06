@@ -34,7 +34,7 @@ This is a final project for the [Comparative Genomics](https://github.com/Yale-E
 
 ## Methods
 
-While methodology is in flux refer to [my notes](https://github.com/isgilman/finalproject/blob/master/Genome_annotation_notes.md).
+While methodology is in flux refer to [the wikie](https://github.com/isgilman/finalproject/wiki).
 
 ## Results
 
