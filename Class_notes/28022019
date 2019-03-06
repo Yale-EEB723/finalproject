@@ -10,36 +10,54 @@ RNA seq: What genes are being experssed and map it to the genome -> Trapnell et 
 When you dont have an annotated genome -> sequence transcriptome with long reads -> Assemble transcriptome and use that as reference genome where you map your RNA back.- >You dont use tophat for that, you use straight bowtie
 
 You have reads, map them with tophat, assemble and merge with cuffmerge, then get a transcriptome and then ....XXXX
+RNA often first normalized: Control for different sequencing effort in different sequence samples.
+RNA normalization, statistical analysis of ratio of expression between those libraries, we dont look at abolsute expression, its neither expression lvl of diferent genes, its expresion lvl of diferent genes at diferent samples.
+
+
+RNAseq: big interest in expression -> assess between diferent treatments cancers -> what are different genes doing.
+Is RNA telling you the absolute abundance of molecules in a cell? -> NO.
+Is gene A more active than  gene B? -> Count the transcripts.
+
+Gene A Count 1000 basepair 1500
+Gene B Count 2000 basepair 4500
+
+Library prep bias and amplification: Many library prep protocol biased towards certain sequences
+Sequencing effort is also important
+e
+Count = f(n, length of transcript, S, Effort, e)
+# RNA seq is not expression its transcript abundance!!! ->
+Function = series of knobs that are in serie (is that gene present YES/NO) ->
+is it in genome -> gene gain/loss is 1 level of activity.
+
+Gene gain/loss
+chromatin access
+transcribed
+transcript deg
+translational rate
+prot degreed
+prot modification # kinase activity on sets of genes and how it changes the activity of genes -> protein abundance -> i dont know what fraction of protein is active.
+# the abundance of mRNA doesnt tell you exactly about function
+-> Activity
+# --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+# Question: I have genbank accession number: How do I align the reference genome?
+# How do I download NCBI data based on alignments?
+# Email Ben Evans and ask. For conceptual advise.
+
+
+
 
 
 # --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
-List of bat genomes:
-Myotis yumanensis
-Myotis volans
-Myotis thysanodes
-Myotis ruber
-Myotis riparius
-Myotis petax
-Myotis oxyotus
-Myotis nigricans
-Myotis myotis
-Myotis muricola
-Myotis melanorhinus
-Myotis martiniquensis
-Myotis macrodactylus
-Myotis lucifugus
-Myotis leibii
-Myotis keaysi
-Myotis ikonnikovi
-Myotis horsfieldii
-Myotis formosus
-Myotis evotis
-Myotis davidii
-Myotis dominicensis
+List of bat genomes: Myotis yumanensis,Myotis volans,Myotis thysanodes,Myotis ruber,Myotis riparius,Myotis petax,Myotis oxyotus,Myotis nigricans,Myotis myotis,Myotis muricola,Myotis melanorhinus,Myotis martiniquensis,Myotis macrodactylus,Myotis lucifugus,Myotis leibii,Myotis keaysi,Myotis ikonnikovi,Myotis horsfieldii,Myotis formosus,Myotis evotis,Myotis davidii,Myotis dominicensis,Myotis brandtii,Myotis bombinus,Myotis bechsteinii,Myotis auriculus,Myotis atacamensis,Myotis albescens
+Download
+# wget ftp://ftp.ncbi.nih.gov/genomes/Myotis_lucifugus/ARCHIVE/*
+# wget ftp://ftp.ncbi.nih.gov/genomes//Myotis_lucifugus/*
 
-
-
-
+mkdir Genomes/Myotis_lucifugus
+cd Genomes/Myotis_lucifugus/
+# wget ftp://ftp.ncbi.nih.gov/genomes/Myotis_lucifugus/ARCHIVE/*
+Download a reference genome from Ensembl:
+wget ftp://ftp.ensembl.org/pub/release-95/fasta/myotis_lucifugus/dna/*
 
 
 Add adapters to CDNA: and add adapters and directionality. Happens debofre amplification process. So you ligate to adapters and then amplify using PCR.
