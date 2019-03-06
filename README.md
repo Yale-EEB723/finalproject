@@ -114,10 +114,6 @@ Li et al. 2010 Current Biology
 
 Upham and Jetz bioRchiv
 
-Elton Traits
-
-Pantheria data
-
 Olival et al. 2018 Nature
 
 Karesh et al. 2012
@@ -126,14 +122,7 @@ Anthrax Paper
 
 Harisson et al. 2018 Nat Eco Evo
 
-Wikelski 2008
-
-Tucker 2018
-
 Hayden et al. 2014
-
-IUCN 2018
-
 
 ## Notes to self
 Bat species in brasil: https://www.sbeq.net/updatelist
