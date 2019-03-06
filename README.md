@@ -54,7 +54,9 @@ Sensitivity, specificity and accuracy of predictions.
 - Data structure
 
 ## Background
+
 ###Zoonosis
+
 Most human emerging infectious diseases across the world are zoonotic. Especially Viruses ocurring in mammals are of major concern. Examples include Anthrax, Birdflu and Ebola (Anthrax paper XXX, Karesh et al. 2012 The Lancet, Nature Olival et al. 2018). Thus, it is of primary concern to understand the drivers and patterns of viral biodiversity in wild animals (Oliver et al. 2018, 5-6) and the evolution . 
 ###Bats as vectors of disease
 It is important to understand how vectors of zoonosis have evolved their immune genes for difference against virulence, and key ecomorpholocial traits crucial for their survival. Bats are unique among mammals; their ability to fly, longevity, echolocation abilities and immunity systems set them apart from all other mammals (XXX, XXX, XXX). Bats have been identified as the most virulent mammalian group (Olival et al. 2018), are distributed across all continents except for Antartica with aproximately 1300 species (over 10 percent of all mammals) (Bat diversity world paper). The niche specialization certain bat species might have been driven by the diversity of their innate immune genes, olfactory receptors (Hayden et al. 2014) and echo location genes (XXX).
