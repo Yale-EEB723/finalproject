@@ -1,34 +1,35 @@
 # Final Project
-
-## Instructions
-
-This repository is a stub for your final project. Fork it as a template for your project, and develop your code in the forked repository. After you fork the repository, please enable the issue tracker in the repository settings so that others in the class (including the professor) can provide feedback. To submit the project, send a pull request to the original repository.
-
-Expand on the readme questions below to provide an overview of the goals, background, and challenges for the final project. You can delete the questions as you write text that answers them, or leave the prompts in place. You can also delete this instruction section of you like.
-
-Add all code to your project repository, including shell scripts, R analyses, python, etc.
-
-Do not commit large data files to the repository. Provide paths to where they can be downloaded if they
-are from public sources, or track them with [git-lfs](https://git-lfs.github.com).
-
 ## Introduction
 
-This is a final project for the [Comparative Genomics](https://github.com/Yale-EEB723/syllabus) seminar in the spring of 2019. This project will attempt to identify differences between different Salmonella species and serovars by comparing host-specific and broad host range genomes of Salmonella.
+This is the final project for Andrew Verdegaal in [Comparative Genomics](https://github.com/Yale-EEB723/syllabus), seminar in the spring of 2019. This project will attempt to identify genetic/ genomic differences between different Salmonella species and serovars by comparing host-specific and broad host range genomes of Salmonella.
 
 ## The goal
 
-Specifically, I will try and find similarities and differences between Salmonella that are host-specific (eg: Salmonella gallinarium [Chickens]/ S. enterica serovar typhi [Humans]), either for pathogenicity islands, other genes, or even structure and evolution of the genomes. The goal is to see if there are any readily identifiable differences in gene content between these pathogens which target either specific hosts or a wide range of hosts. This problem has not been attempted to any great depth in Salmonella, although there have been increased efforts to compare Salmonella genomes in general.
+Specifically, I will try and find similarities and differences between Salmonella that are host-specific (eg: Salmonella gallinarium [Chickens]/ S. enterica serovar typhi [Humans]), either for pathogenicity islands, other genes, or even structure and evolution of the genomes. The goal is to see if there are any readily identifiable differences in gene content between these pathogens which target either specific hosts or a wide range of hosts. This problem has not been attempted to any great depth in Salmonella, although there have been increased efforts to compare Salmonella genomes in general. In the case there are no readily identifiable differences (or similarities in relation to host range), I will attempt to re-annotate current Salmonella genomic data using newly developed programs and data pipelines. I can additionally see if there are newer data sets that have not been integrated in relation to Salmonella pathogenicity, eg: newer transcriptome data.
 
 ## The data
 
-Description of data...
+Description of data:
 
 - Data source
  - Data will be from a combination of published and simulated data. Simulated data will be derived from attempting novel annotations of previously published Salmonella genomes.
+
 - Data structure
     1) Assembled genomes, in order to make potentially new annotations of these genomes
       Genomes include: Pan-Salmonella enterica genome; Salmonella gallinarium; Salmonella enterica typhimurium; Salmonella enterica typhi; perhaps others.
     2) Previously annotated genomes, which will be used in a comparative analysis of functioning genes in pathogenic pathways
+
+    Database sources
+      https://salmonella.biocyc.org/ -> online set of tools/database capable of multiple genome comparisons, metabolic pathway comparisons, multiple sequence alignment with over 250 Salmonella species/ sub subspecies
+      http://xbase.warwick.ac.uk/taxon/Salmonella -> another online toolset/database allowing for comparison between multiple species of Salmonella/ subspecies
+      https://www.ncbi.nlm.nih.gov/genome/genomes/152 -> Salmonella enterica database on NCBI
+      https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=590 -> NCBI Full genome set of all Salmonella sp. (that were submitted to this database)
+
+    Specific sources of Genomic Data
+      https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4832160/ -> Complete Genome Sequence of Salmonella enterica Serovar Typhimurium Strain YU15 (Sequence Type 19)
+      https://www.nature.com/articles/35101614 -> Complete genome sequence of Salmonella enterica serovar Typhimurium LT2
+
+
 
 ## Background
 
