@@ -26,7 +26,7 @@ This is a final project for the [Comparative Genomics](https://github.com/Yale-E
     * Status:
 4. Genomes for
     * Orchid
-    * Kalanchoe
+    * Kalanchoewiki
     * Pineapple
     * Maize
     * Beta
@@ -34,7 +34,7 @@ This is a final project for the [Comparative Genomics](https://github.com/Yale-E
 
 ## Methods
 
-While methodology is in flux refer to [the wiki](https://github.com/isgilman/finalproject/wiki).
+While methodology is in flux refer to [the wiki](https://github.com/isgilman/finalproject/wiki/Step-by-step-genome-annotation-for-Portulaca-amilis).
 
 ## Results
 
