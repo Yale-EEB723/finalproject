@@ -22,7 +22,7 @@ and the two hagfish species (Eptatretus burgeri and Eptatretus cirrhatus).
 
 I have yet to determine which tunicate and lancelet representatives would be best (or possible) to include in this study, as well as which and how many representatives of the jawed vertebrates would be most useful to include. 
 
-###Reference Genomes:
+### Reference Genomes:
 
 Petromyzon marinus:
 First assembly of Petromyzon germline genome (highly contiguous) (Smith et al. 2018):
@@ -34,7 +34,7 @@ Simth et al. (2013)
 
 
 
-####Things to consider:
+### Things to consider:
 1.) During early embryogenesis, the lamprey genome undergoes dramatic programmed genome rearrangements (Smith et al. 2018; Smith et al. 2009). Specifically, somatic cell lineages lose hundreds of millions of base pairs (and one ore more transcribed loci), resulting in somatic (blood) cells being 20% smaller than germline (sperm) cells (Smith et. al 2009). The lamprey genome is therefore highly dynamic. I'll have to think more about a.) at what stage in development were the samples from which the DNA was extracted b.) what type of cells were the DNA extracted from, and c.) does it even matter (i.e. since this effect wasn't found in germline cells, are there any potential phylogenetic/evolutionary consequences of this, in particular as they relate to methods for this study). As a result of all of this, I should just use the more recently published germline sea lamprey genome as a reference, and ignore the previous Sanger-based somatic assembly, which was relatively fragmentary anyway (Smith et al. 2013)
 
 2.) The lamprey genome is known to have a high GC content, as well as to be highly repetitive and heterozygous.
