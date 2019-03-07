@@ -41,3 +41,9 @@ What would you have done differently?
 What are future directions this could go in?
 
 ## References
+
+Chen, Zuozhou, C-H. Christina Cheng, Junfang Zhang, Lixue Cao, Lei Chen, Longhai Zhou, Yudong Jin et al. "Transcriptomic and genomic evolution under constant cold in Antarctic notothenioid fish." Proceedings of the National Academy of Sciences 105, no. 35 (2008): 12944-12949.
+
+Kim, Bo-Mi, Angel Amores, Seunghyun Kang, Do-Hwan Ahn, Jin-Hyoung Kim, Il-Chan Kim, Jun Hyuck Lee et al. "Antarctic blackfin icefish genome reveals adaptations to extreme environments." Nature ecology & evolution 3, no. 3 (2019): 469.
+
+Malmstrøm, Martin, Michael Matschiner, Ole K. Tørresen, Bastiaan Star, Lars G. Snipen, Thomas F. Hansen, Helle T. Baalsrud et al. "Evolution of the immune system influences speciation rates in teleost fishes." Nature Genetics 48, no. 10 (2016): 1204.
