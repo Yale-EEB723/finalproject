@@ -18,6 +18,7 @@ My project is to sequence and assemble the first darter genome using an Oxford N
 
 ## The goal
 
+<<<<<<< HEAD
 The long-term goals are to provide genomic resources for many future darter projects, including phylogenomic inference, functional genomics studies, and reference mapping. I will sequence a genome for *Etheostoma perlongum*, a species restricted to single lake in NC. The "sister species" of *E. perlongum* is *Etheostoma maculaticeps*, which can be found in the Waccamaw River that drains the lake. My specific goals are to use the genome to help assemble a large amount of ddRAD data that I have collected along a transect spanning the lake and the river. Our preliminary de novo assemblies and analyses of the ddRAD data indicate a steep cline between the lake and river, with some loci exhibiting particularly sharp breaks. My secondary goal is to map these outlier loci to the genomes to identify candidate regions that are maintaining the species boundary between the lake and river.
 
 ## The data
