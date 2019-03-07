@@ -10,17 +10,13 @@ The goal of this work is to characterize the presence and diversity of immune-re
 
 ## The data
 
-Previously-sequenced and publicly-available notothenioid transcriptomes will be downloaded from the NCBI Sequence Read Archive. We will obtain transcriptomes for all Antarctic and non-Antartic species represented in the database. 
+Previously-sequenced and publicly-available transcriptomes representing 13 Antarctic and non-Antarctic notothenioid species were obtained from the NCBI Sequence Read Archive. 
 
 This project will also require a reference genome. For this, we will use the genome of the Antarctic bullhead notothen (Notothenia coriiceps), which will be obtained from BioProject. 
 
 ## Background
 
-Motivation for the project....
-
-How it fits in with other work...
-
-What the reader needs to know to understand the project
+The major histocompatibility complex (MHC) represents a fundamental component of the vertebrate adaptive immune system, and its functionailites and pathways have long been thought to be highly conserved across species. However, significant modifications of the adaptive immune system have been noted, and in some cases have been associated with shifts in speciation rate in those lineages. 
 
 
 ## Methods
