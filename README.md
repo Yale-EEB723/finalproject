@@ -19,28 +19,28 @@ Description of data:
       Genomes include: Pan-Salmonella enterica genome; Salmonella gallinarium; Salmonella enterica typhimurium; Salmonella enterica typhi; perhaps others.
     2) Previously annotated genomes, which will be used in a comparative analysis of functioning genes in pathogenic pathways
 
-    Database sources
-      https://salmonella.biocyc.org/ -> online set of tools/database capable of multiple genome comparisons, metabolic pathway comparisons, multiple sequence alignment with over 250 Salmonella species/ sub subspecies
-      http://xbase.warwick.ac.uk/taxon/Salmonella -> another online toolset/database allowing for comparison between multiple species of Salmonella/ subspecies
-      https://www.ncbi.nlm.nih.gov/genome/genomes/152 -> Salmonella enterica database on NCBI
-      https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=590 -> NCBI Full genome set of all Salmonella sp. (that were submitted to this database)
+- Database sources
+ - https://salmonella.biocyc.org/ -> online set of tools/database capable of multiple genome comparisons, metabolic pathway comparisons, multiple sequence alignment with over 250 Salmonella species/ sub subspecies
+ - http://xbase.warwick.ac.uk/taxon/Salmonella -> another online toolset/database allowing for comparison between multiple species of Salmonella/ subspecies
+ - https://www.ncbi.nlm.nih.gov/genome/genomes/152 -> Salmonella enterica database on NCBI
+ - https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=590 -> NCBI Full genome set of all Salmonella sp. (that were submitted to this database)
 
-    Specific sources of Genomic Data
-      https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4832160/ -> Complete Genome Sequence of Salmonella enterica Serovar Typhimurium Strain YU15 (Sequence Type 19)
-      https://www.nature.com/articles/35101614 -> Complete genome sequence of Salmonella enterica serovar Typhimurium LT2
+- Specific sources of Genomic Data
+ - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4832160/ -> Complete Genome Sequence of Salmonella enterica Serovar Typhimurium Strain YU15 (Sequence Type 19)
+ - https://www.nature.com/articles/35101614 -> Complete genome sequence of Salmonella enterica serovar Typhimurium LT2
 
 
 
 ## Background
 
-Motivation for Project
-  Salmonella still causes illnesses even in developed nations due to tainted food sources or unsanitary conditions. Stated by the CDC, "approximately 1.2 million illnesses and 450 deaths occur due to non-typhoidal Salmonella annually in the United States". Not only could we tackle the issue of Salmonella through understanding its biology and evolution, but we can use this knowledge to catapult efforts to tackle other intracellular pathogens that are either already a threat (eg: Campylobacter jejuni) or emerging intracellular pathogens with similar biology.
+- Motivation for Project
+    Salmonella still causes illnesses even in developed nations due to tainted food sources or unsanitary conditions. Stated by the CDC, "approximately 1.2 million illnesses and 450 deaths occur due to non-typhoidal Salmonella annually in the United States". Not only could we tackle the issue of Salmonella through understanding its biology and evolution, but we can use this knowledge to catapult efforts to tackle other intracellular pathogens that are either already a threat (eg: Campylobacter jejuni) or emerging intracellular pathogens with similar biology.
 
-How it fits in with other work...
-  Salmonella has been well studied and characterized experimentally, but we still have holes in our knowledge that can be filled using bioinformatics and comparative functional genomics. Previous work has been focused on similar topics, with groups diving into the evolution of Salmonella enterica subspecies and relevant clinical serovars, as well as more cursory looks at how host specificity has evolved in the context of comparing genomes.
+- How it fits in with other work...
+    Salmonella has been well studied and characterized experimentally, but we still have holes in our knowledge that can be filled using bioinformatics and comparative functional genomics. Previous work has been focused on similar topics, with groups diving into the evolution of Salmonella enterica subspecies and relevant clinical serovars, as well as more cursory looks at how host specificity has evolved in the context of comparing genomes.
 
-What the reader needs to know to understand the project
-  The reader must have some knowledge of microbial genetics, as well as some understanding in how Salmonella and other intracellular pathogens infect/survive/replicate in host cells. Additionally, I believe a large part of this host specificity will coincide with differences in metabolic pathways and effectors of Type III secretion machinery, either gained or lost between species/ strains, so having a basic understanding of how these are involved in pathogenicity of Salmonell would be useful.
+- What the reader needs to know to understand the project
+    The reader must have some knowledge of microbial genetics, as well as some understanding in how Salmonella and other intracellular pathogens infect/survive/replicate in host cells. Additionally, I believe a large part of this host specificity will coincide with differences in metabolic pathways and effectors of Type III secretion machinery, either gained or lost between species/ strains, so having a basic understanding of how these are involved in pathogenicity of Salmonell would be useful.
 
 
 ## Methods
@@ -48,8 +48,8 @@ What the reader needs to know to understand the project
 
     General software packages
       - Anaconda/ Bioconda
-      SPIFinder > Salmonella Pathogenicity Island finder, useful for IDing where to look for comparing genomes potentially
-      SRST2 > Short Read Sequence Typing for Bacterial Pathogens, don't think I'll need this but works with Illumina sequences to ID genes of interest within the sequences
+      - SPIFinder > Salmonella Pathogenicity Island finder, useful for IDing where to look for comparing genomes potentially
+      - SRST2 > Short Read Sequence Typing for Bacterial Pathogens, don't think I'll need this but works with Illumina sequences to ID genes of interest within the sequences
 
     Annotation Tools (for potentially reannotating previously assembled Genomes)
       - Prokka > Standalone command line tool for rapidly annotating prokaryotic Genomes
