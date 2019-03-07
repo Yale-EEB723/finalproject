@@ -1,4 +1,4 @@
-# _Portulaca amilis_ genome annotation: genomic architecture of carbon concentrating mechanisms
+# _Portulaca amilis_ genome annotation: genomics of carbon concentrating mechanisms
 
 ## Introduction
 
@@ -23,7 +23,7 @@ This is a final project for the [Comparative Genomics](https://github.com/Yale-E
 3. PEPC alignments
     * Source: Edwards Lab and [1KP Initiative](https://sites.google.com/a/ualberta.ca/onekp/)
     * Format: `.fasta`
-    * Status: 
+    * Status:
 4. Genomes for
     * Orchid
     * Kalanchoe

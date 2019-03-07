@@ -8,34 +8,28 @@ I've found that patching together all of the genomics tools can mess with my sta
 [isg4@farnam2 ~]$ source activate genome
 ```
 ## 0. Quality control
-### 0.1 QUAST
-This is useful for comparing new assemblies to old assemblies and looking for improvements. For v0 of the genome we will run without a comparison.
-
-### Software prerequisites
+### 0.0 Software prerequisites
 - QUAST
   - Install: `conda install -c bioconda quast`
   - Version:
+  - Notes: The license is expired for genemarker-es. Here are the current quast_lib locations. From the developers:
+
+  >Note 2: the fail of gene prediction module is not a critical error, so it is reported as a "non-fatal error" in the log and does not cause a crash of the entire pipeline. I suppose that the local GeneMark license file provided in the Quast package may be out of date already and that caused the crash of the MetaGeneMark prediction tool. You can update either solely the license file (~/.gm_key -- you can obtain the new file at http://exon.gatech.edu/GeneMark/license_download.cgi after filling the license form; download the gzipped archive, unpack it and move to your ~/.gm_key file) or by updating Quast to the latest version (includes a new license file)."
+
 - GRIDSS
   - Install: `conda install -c bioconda gridss`
   - Version: 2.1.0
 - BUSCO
   - Install: `conda install -c bioconda busco`
   - Version: 3.0.2
-  -
 
-QUAST isn't recognizing matplotlib and saying that the license is expired for genemarker-es. Here are the current quast_lib locations
+### 0.1 QUAST
+QUAST is useful for comparing new assemblies to old assemblies and looking for improvements. For v0 of the genome we will run without a comparison.
 
-* ~/.linuxbrew/lib/python2.7/site-packages/quast-5.0.2-py2.7.egg/quast_libs
-* ~/anaconda2/pkgs/quast-5.0.2-py27pl526ha92aebf_0/opt/quast-5.0.2/quast_libs
-* ~/anaconda2/pkgs/quast-5.0.2-py27pl526ha92aebf_0/lib/python2.7/site-packages/quast_libs
-* ~/anaconda2/opt/quast-5.0.2/quast_libs
-* ~/anaconda2/lib/python2.7/site-packages/quast_libs
-
-Note from developers:
-
-Note 2: the fail of gene prediction module is not a critical error, so it is reported as a "non-fatal error" in the log and does not cause a crash of the entire pipeline. I suppose that the local GeneMark license file provided in the Quast package may be out of date already and that caused the crash of the MetaGeneMark prediction tool. You can update either solely the license file (~/.gm_key -- you can obtain the new file at http://exon.gatech.edu/GeneMark/license_download.cgi after filling the license form; download the gzipped archive, unpack it and move to your ~/.gm_key file) or by updating Quast to the latest version (includes a new license file).
-
-quast was run with: `/ysm-gpfs/home/isg4/anaconda2/bin/quast ../portulaca_26Nov2018_oK3Ko.fasta.gz -o . --split-scaffolds --eukaryote --k-mer-stats --circos --gene-finding` but the gene finding and circos plot didn't work because of the issues above.
+```bash
+/ysm-gpfs/home/isg4/anaconda2/bin/quast ../portulaca_26Nov2018_oK3Ko.fasta.gz -o . --split-scaffolds --eukaryote --k-mer-stats --circos --gene-finding
+```
+The gene finding and `circos` plot didn't work because of the issues above.
 
 ### 0.2 gVolante: Completeness Assessment of Genome/Transcriptome Sequences
 This also has a webserver. [Here](https://gvolante.riken.jp/script/result.cgi?201812080128-U9FRY4TQPVFK2FAK) is the link to our analysis using BUSCO v2/v3 (JOB ID: 201812080128-U9FRY4TQPVFK2FAK).
@@ -162,7 +156,7 @@ Checking the file sizes
 6.6K Mar  4 19:25 filter_fq.log
  508 Mar  4 16:44 filter_fq.slurm
 ```
-shows that the majority of our raw reads passed filtering for oraganellar origin (`*.org_reads.fq`).
+shows that the majority of our raw reads passed filtering for organellar origin (`*.org_reads.fq`).
 
 
 ### 1.2 _De novo_ assembly with `trinity`
@@ -185,10 +179,10 @@ python /gpfs/ysm/home/isg4/project/apps/phylogenomic_dataset_construction/script
 ```
 To get the `trinity_wrapper.py` script to work I had to add parens, `()`, to a few `print` statements.
 
-## 2. Annotation
+## 2. Genome annotation
 I'll be following [Daren Card's MAKER annotation pipeline](https://gist.github.com/darencard/bb1001ac1532dd4225b030cf0cd61ce2) and the [MAKER Tutorial for WGS Assembly and Annotation](http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_Tutorial_for_WGS_Assembly_and_Annotation_Winter_School_2018#About_MAKER). Here are the software prerequisites with the versions he used with my notes on installation.
 
-### Software prerequisites
+### 2.0 Software prerequisites
 * [MAKER](http://www.yandell-lab.org/software/maker.html)
   * Install: `conda install -c bioconda maker`
   * Version: 2.31.10
@@ -238,9 +232,7 @@ I'll be following [Daren Card's MAKER annotation pipeline](https://gist.github.c
   * Version: 2013_11_29
   * Build: h470a237_1
 
-## Methods
-
-### Repeat library construction with RepeatModeler
+### 2.1 Repeat library construction with RepeatModeler
 The first step in _de novo_ genome annotation is building a species specific repeat library for masking purposes. This is done in the MAKER pipeline with RepeatModeler. RepeatModeler collects sequences based on a threshold copy number and then classifies them based on similarity to known transposable elements (TEs). Note that low copy TEs will not be included by RepeatModeler.
 
 First a repeat database using the _P. amilis_ genome
@@ -267,9 +259,39 @@ Next, as a batch job, run RepeatModeler using the `Portulaca_amilis` database.
 #SBATCH --ntasks-per-node=1
 
 /home/isg4/project/apps/RepeatModeler/RepeatModeler -pa 36 -engine ncbi -database Portulaca_amilis
-
-repeatmodeler -pa 36 -engine ncbi -database Portulaca_amilis
 ```
+
+Here is the tail end of the resulting output:
+```BashDiscovery complete: 2130 families found
+Classifying Repeats...
+RepeatClassifier Version open-1.0.11
+===============================
+Search Engine = ncbi
+  - Looking for Simple and Low Complexity sequences..
+  - Looking for similarity to known repeat proteins..
+  - Looking for similarity to known repeat consensi..
+Classification Time: 01:49:18 (hh:mm:ss) Elapsed Time
+Program Time: 18:00:32 (hh:mm:ss) Elapsed Time
+Working directory:  /gpfs/ysm/scratch60/isg4/P_amilis_genome/RepeatModeler/RM_28676.MonMar41925222019
+may be deleted unless there were problems with the run.
+
+The results have been saved to:
+  Portulaca_amilis-families.fa  - Consensus sequences for each family identified.
+  Portulaca_amilis-families.stk - Seed alignments for each family identified.
+
+This version of RepeatModeler can upload families directly to the
+open repeat database - Dfam_consensus.  Please consider uploading your final
+curated library using the RepeatModeler "util/dfamConsensusTool.pl" script
+( details at http://www.repeatmasker.org/RepeatModeler/dfamConsensusTool ) or
+posting your raw (uncurated) RepeatModeler results to the TE Raw Dataset
+Repository ( http://www.repeatmasker.org/Dfam_consensus/#/public/repository ).
+```
+**Make sure to add data to above libraries when done**
+
+### 2.2 Classify unknown TEs with `TEclass`
+`TEclass` was run via the [online tool](http://www.compgen.uni-muenster.de/tools/teclass/generate/index.pl?lang=en).
+
+
 ## Supplementary information
 
 ```bash
