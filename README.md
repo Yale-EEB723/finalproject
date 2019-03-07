@@ -26,6 +26,8 @@ I have not collected the data yet, but plan to use an Oxford Nanopore PromethION
 
 ## Background
 
+![](figures/Fig1.png)
+
 Motivation for the project....
 
 How it fits in with other work...
