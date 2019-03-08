@@ -17,10 +17,10 @@ This is the final project for Andrew Verdegaal in [Comparative Genomics](https:/
  - Data will be from a combination of published and simulated data. Simulated data will be derived from attempting novel annotations of previously published Salmonella genomes.
 
 #### Data structure
-    1) Assembled genomes, in order to make potentially new annotations of these genomes
+ 1) Assembled genomes, in order to make potentially new annotations of these genomes
       Genomes include: Pan-Salmonella enterica genome; Salmonella gallinarium; Salmonella enterica typhimurium; Salmonella enterica typhi; perhaps others.
 
-    2) Previously annotated genomes, which will be used in a comparative analysis of functioning genes in pathogenic pathways
+ 2) Previously annotated genomes, which will be used in a comparative analysis of functioning genes in pathogenic pathways
 #### Database sources
  - https://salmonella.biocyc.org/ -> online set of tools/database capable of multiple genome comparisons, metabolic pathway comparisons, multiple sequence alignment with over 250 Salmonella species/ sub subspecies
 
@@ -42,48 +42,48 @@ This is the final project for Andrew Verdegaal in [Comparative Genomics](https:/
 ## Background
 
 ### Motivation for Project
-    Salmonella still causes illnesses even in developed nations due to tainted food sources or unsanitary conditions. Stated by the CDC, "approximately 1.2 million illnesses and 450 deaths occur due to non-typhoidal Salmonella annually in the United States". Not only could we tackle the issue of Salmonella through understanding its biology and evolution, but we can use this knowledge to catapult efforts to tackle other intracellular pathogens that are either already a threat (eg: Campylobacter jejuni) or emerging intracellular pathogens with similar biology.
+Salmonella still causes illnesses even in developed nations due to tainted food sources or unsanitary conditions. Stated by the CDC, "approximately 1.2 million illnesses and 450 deaths occur due to non-typhoidal Salmonella annually in the United States". Not only could we tackle the issue of Salmonella through understanding its biology and evolution, but we can use this knowledge to catapult efforts to tackle other intracellular pathogens that are either already a threat (eg: Campylobacter jejuni) or emerging intracellular pathogens with similar biology.
 
 ### How it fits in with other work...
-    Salmonella has been well studied and characterized experimentally, but we still have holes in our knowledge that can be filled using bioinformatics and comparative functional genomics. Previous work has been focused on similar topics, with groups diving into the evolution of Salmonella enterica subspecies and relevant clinical serovars, as well as more cursory looks at how host specificity has evolved in the context of comparing genomes.
+Salmonella has been well studied and characterized experimentally, but we still have holes in our knowledge that can be filled using bioinformatics and comparative functional genomics. Previous work has been focused on similar topics, with groups diving into the evolution of Salmonella enterica subspecies and relevant clinical serovars, as well as more cursory looks at how host specificity has evolved in the context of comparing genomes.
 
 ### What the reader needs to know to understand the project
-    The reader must have some knowledge of microbial genetics, as well as some understanding in how Salmonella and other intracellular pathogens infect/survive/replicate in host cells. Additionally, I believe a large part of this host specificity will coincide with differences in metabolic pathways and effectors of Type III secretion machinery, either gained or lost between species/ strains, so having a basic understanding of how these are involved in pathogenicity of Salmonell would be useful.
+The reader must have some knowledge of microbial genetics, as well as some understanding in how Salmonella and other intracellular pathogens infect/survive/replicate in host cells. Additionally, I believe a large part of this host specificity will coincide with differences in metabolic pathways and effectors of Type III secretion machinery, either gained or lost between species/ strains, so having a basic understanding of how these are involved in pathogenicity of Salmonell would be useful.
 
 
 ## Methods
   As of right now, I have a general understanding of what tools are available to complete this project, with more perhaps coming into my view as I read more literature on comparative genomics in Salmonella/ pathogens.
 
 ### General software packages
-      - Anaconda/ Bioconda
-      
-      - SPIFinder > Salmonella Pathogenicity Island finder, useful for IDing where to look for comparing genomes potentially
+- Anaconda/ Bioconda
 
-      - SRST2 > Short Read Sequence Typing for Bacterial Pathogens, don't think I'll need this but works with Illumina sequences to ID genes of interest within the sequences
+- SPIFinder > Salmonella Pathogenicity Island finder, useful for IDing where to look for comparing genomes potentially
+
+- SRST2 > Short Read Sequence Typing for Bacterial Pathogens, don't think I'll need this but works with Illumina sequences to ID genes of interest within the sequences
 
 ### Annotation Tools (for potentially reannotating previously assembled Genomes)
-      - Prokka > Standalone command line tool for rapidly annotating prokaryotic Genomes
+- Prokka > Standalone command line tool for rapidly annotating prokaryotic Genomes
 
-      - RAST > Takes ~a day to annotate a single genome, may be too slow
+- RAST > Takes ~a day to annotate a single genome, may be too slow
     Virulence gene annotation software
 
-      - PATRIC > have to check if this will work for Salmonella; Online/ browser based annotation tools available
+- PATRIC > have to check if this will work for Salmonella; Online/ browser based annotation tools available
 
-      - VFDB > Virulence factor database that contains pathogenic serotypes of multiple Salmonella species/ strains, also plasmids found in Salmonella
+- VFDB > Virulence factor database that contains pathogenic serotypes of multiple Salmonella species/ strains, also plasmids found in Salmonella
 
 ### Genome Viewing tools
-      - Artemis > Genome Browser to look at annotated genes, either published or newly annotated through this Project; Runs either on Windows or through Bioconda on UNIX; Java based
+- Artemis > Genome Browser to look at annotated genes, either published or newly annotated through this Project; Runs either on Windows or through Bioconda on UNIX; Java based
 
-      - Artemis Comparison Tool > Similar software to above, but can compare multiple genomes concurrently to find similarities and differences
+- Artemis Comparison Tool > Similar software to above, but can compare multiple genomes concurrently to find similarities and differences
 
 ### Genome Comparisons
-      - Mauve > Multiple genome aligner, able to show large scale evolutionary events; Java based
+- Mauve > Multiple genome aligner, able to show large scale evolutionary events; Java based
 
-      - ACT (above)
+- ACT (above)
 
-      - MuTect2 > Detect SNPs in bacterial genomes, based on GATK software (like HaploCaller); https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_cancer_m2_MuTect2.php
+- MuTect2 > Detect SNPs in bacterial genomes, based on GATK software (like HaploCaller); https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_cancer_m2_MuTect2.php
 
-      -  breseq > "algorithm for identifying structural variation from DNA resequencing data as part of the breseq computational pipeline for predicting mutations in haploid microbial genomes" https://bmcgenomics.biomedcentral.com/articles/10.1186/1471-2164-15-1039
+- breseq > "algorithm for identifying structural variation from DNA resequencing data as part of the breseq computational pipeline for predicting mutations in haploid microbial genomes" https://bmcgenomics.biomedcentral.com/articles/10.1186/1471-2164-15-1039
 
 Will add more as more come into view
 ## Results
