@@ -59,6 +59,12 @@ The reader must have some knowledge of microbial genetics, as well as some under
 ## Methods
   As of right now, I have a general understanding of what tools are available to complete this project, with more perhaps coming into my view as I read more literature on comparative genomics in Salmonella/ pathogens.
 
+### Approaches
+- Compare Salmonella serovar Pullorum to serovar Gallinarum; See similarities/ any insights into how they are similar in terms of genetic make-up of pathogenicity traits. These strains are host-adapted to chickens.
+- Then, take either these individually or together and compare against a Generalist (Salmonella serovar Enteritidis)
+- If this is working/ going well, use Salmonella serovar Typhimurium and/or Typhi to see how these differences come about in mammals.
+      "Salmonellae are important pathogenic bacteria infecting humans or animals. Salmonella enterica serovar Pullorum, a strictly chicken-adapted pullorum agent, is one of the more than 2,500 documented Salmonella lineages (4). It is very closely related to another chicken pathogen, Salmonella enterica serovar Gallinarum, and, to a lesser degree, to a host generalist, Salmonella enterica serovar Enteritidis.""
+
 ### General software packages
 - Anaconda/ Bioconda
 
@@ -66,8 +72,13 @@ The reader must have some knowledge of microbial genetics, as well as some under
 
 - SRST2 > Short Read Sequence Typing for Bacterial Pathogens, don't think I'll need this but works with Illumina sequences to ID genes of interest within the sequences
 
+### Genome Assembly
+- Roary > Pipeline to create a "pan-genome" of a species using .gff3 output files from Prokka
+
 ### Annotation Tools (for potentially reannotating previously assembled Genomes)
 - Prokka > Standalone command line tool for rapidly annotating prokaryotic Genomes
+
+- Wombac > Find core genome SNPS and aligns SNPs to form a phylogenetic tree; http://www.vicbioinformatics.com/software.wombac.shtml
 
 - RAST > Takes ~a day to annotate a single genome, may be too slow
     Virulence gene annotation software
@@ -75,6 +86,12 @@ The reader must have some knowledge of microbial genetics, as well as some under
 - PATRIC > have to check if this will work for Salmonella; Online/ browser based annotation tools available
 
 - VFDB > Virulence factor database that contains pathogenic serotypes of multiple Salmonella species/ strains, also plasmids found in Salmonella
+
+- Glimmer > http://ccb.jhu.edu/software/glimmer/index.shtml
+
+- BAsys > Web based bacterial genome annotator; https://www.basys.ca/server3/basys/cgi/submit.pl
+
+
 
 ### Genome Viewing tools
 - Artemis > Genome Browser to look at annotated genes, either published or newly annotated through this Project; Runs either on Windows or through Bioconda on UNIX; Java based
