@@ -287,6 +287,7 @@ Q: Just how badly are my genomes fragmented??
 Use seqinr R package.  
 
 ```{r distr scaffold length}
+#NOTE: due to lfs not working for public forks I am unable to host genome fastas in repo. Links to data provided in readme.  
 #names=c()
 #fasta=read.fasta(file="~/Desktop/compgen/repo/genome_fasta/GCA_000090795.1_v1.0_genomic.fna")
 genome<-c("test.fasta", "test1.fasta")
