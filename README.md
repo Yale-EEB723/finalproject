@@ -8,8 +8,7 @@ csl: plos.csl
 
 # Final Project
 
-Hi C! (Get it?!!)     
-
+Hi C!  
 
 
 ## Introduction
@@ -26,10 +25,10 @@ I must first determine whether my genes of interest are found within conserved b
 
 - Data source: Published, and unpublished but publically available    
 So far have:  [NOTE: couldn't add to public fork via git lfs]  
--Mnemiopsis leidyi genome [@Ryan2013]  
--Pleurobrachia bachei genome [@Moroz2014]  
--Amphimedon queenslandica genome [@Srivastava2010]  
--Oscarella carmela [@Nichols2012]. See presence/absence of 'neural' gene table in Riesgo et al., 2014 [@Riesgo2014]  
+-Mnemiopsis leidyi genome [@Ryan2013](https://www.ncbi.nlm.nih.gov/assembly/GCA_000226015.1/)  
+-Pleurobrachia bachei genome [@Moroz2014](https://www.ncbi.nlm.nih.gov/assembly/GCA_000695325.1)  
+-Amphimedon queenslandica genome [@Srivastava2010](https://www.ncbi.nlm.nih.gov/assembly/GCF_000090795.1)   
+-Oscarella carmela [@Nichols2012](http://www.compagen.org/datasets.html) - choose "OCAR" not "Oscarella sp.". See presence/absence of 'neural' gene table (Fig. 3) in Riesgo et al., 2014 [@Riesgo2014](https://doi.org/10.1093/molbev/msu057)   
 
 These genomes were selected because there are presence/absence lists of 'neural' genes readily available for them.  
 
@@ -46,7 +45,11 @@ Synteny analysis provides one method of determining loss. In particular, the gho
 
 
 ## Methods
-Synteny analysis to search for ghost loci of absent 'neural' genes in sponges and ctenophores. I don't know how to do this yet...but I will learn!! 
+There are very few papers that look into synteny of non-bilaterians. The ones that have take a manual approach to synteny analysis, looking only at one or two 'targets' at a time. The paper I am modelling my approach off of is (Ramos et al. 2012)[https://doi.org/10.1016/j.cub.2012.08.023], the original 'ghost locus' paper that examined sponges and placozoans for synteny.  
+
+The paper starts with a list of neighbour genes known to be syntenic with their gene of interest (GOI) in humans. They then classified all genes in their genomes of interest as being orthologous to neighbour genes, orthologous to non-neighbour genes, or species-specific. Then, to identify significant clustering they used the exact binomial test to test whether the observed number of neighbour gene orthologues co-localizing to a scaffold is significantly higher than the expected number.  
+
+However for Amphimedon they also (or instead?) did a Monte Carlo simulation, where they simulated the null distribution of neighbour genes in the absence of synteny. I'm not completely sure why they also did this MC, but perhaps because the Amphimedon scaffolds are sub-chromosomal? The p-value for a test of clustering is calculated as the proportion of simulations in which the number of scaffolds occupied by neighbour genes is less than or equal to the actual number observed. This was described in the Ramos supplement, and most of it seems to make sense to me, but not everything. For instance they say that the results are stored in an "amphisimulation" relational database, but what is that?! Google only brings up that paper and 3 random websites.  
 
 
 ## Results
