@@ -17,9 +17,12 @@ This is a final project for the [Comparative Genomics](https://github.com/Yale-E
 
 ## The goal
 
-Our goal is to classify whether absences for particular 'neural' genes in sponges and ctenophores are ancestral (i.e. gene was never there) or secondary.  
+Ultimately, our goal is to classify whether absences for particular 'neural' genes in sponges and ctenophores are ancestral (i.e. gene was never there) or secondary. I must first determine whether my genes of interest are found within conserved blocks of synteny in other animals. If absence in a particular taxon is ancestral, I would expect that the genes defining the synteny block not to be co-localized. If absence is secondary, I expect to find conservation of the synteny block in the absence of the gene of interest.  
 
-I must first determine whether my genes of interest are found within conserved blocks of synteny in other animals. If absence in a particular taxon is ancestral, I would expect that the genes defining the synteny block not to be co-localized. If absence is secondary, I expect to find conservation of the synteny block in the absence of the gene of interest.  
+**However, BEFORE I can answer this I must answer:**    
+Are genomes contiguous enough to identify synteny?    
+Is synteny preserved across non-bilaterian genomes?  
+_These are the new goals of my project_  
 
 ## The data
 
@@ -43,14 +46,13 @@ One timely discussion is whether sponges have lost a nervous system. The flip si
 
 Synteny analysis provides one method of determining loss. In particular, the ghost locus hypothesis suggests that in the case of gene loss, the synteny surrounding the locus of the gene may be preserved even in the absence of the gene itself @Ramos2012. I will look for the ghost loci of absent 'neural' genes in sponges and ctenophores using synteny analysis.  
 
+However before we can establish loss by synteny analysis, we must first establish that non-bilaterian genomes are contiguous enough to perform synteny analysis, and whether syntenic blocks exist.  
+
 
 ## Methods
-There are very few papers that look into synteny of non-bilaterians. The ones that have take a manual approach to synteny analysis, looking only at one or two 'targets' at a time. The paper I am modelling my approach off of is (Ramos et al. 2012)[https://doi.org/10.1016/j.cub.2012.08.023], the original 'ghost locus' paper that examined sponges and placozoans for synteny.  
-
-The paper starts with a list of neighbour genes known to be syntenic with their gene of interest (GOI) in humans. They then classified all genes in their genomes of interest as being orthologous to neighbour genes, orthologous to non-neighbour genes, or species-specific. Then, to identify significant clustering they used the exact binomial test to test whether the observed number of neighbour gene orthologues co-localizing to a scaffold is significantly higher than the expected number.  
-
-However for Amphimedon they also (or instead?) did a Monte Carlo simulation, where they simulated the null distribution of neighbour genes in the absence of synteny. I'm not completely sure why they also did this MC, but perhaps because the Amphimedon scaffolds are sub-chromosomal? The p-value for a test of clustering is calculated as the proportion of simulations in which the number of scaffolds occupied by neighbour genes is less than or equal to the actual number observed. This was described in the Ramos supplement, and most of it seems to make sense to me, but not everything. For instance they say that the results are stored in an "amphisimulation" relational database, but what is that?! Google only brings up that paper and 3 random websites.  
-
+1. Need at least 3 genes to identify a ghost locus (two bounding to anchor, centre one is gene of interest). Determine within species distribution: histogram of no. genes per contig per species  
+2. identify homologous genes across genomes - if annotation is the same as cell type data import cell tyeps results; if not import gene models as proteins and run agalma.  
+3. ID syntenic blocks in the genome. Use available programs: possibly DAGchainer or Warren Francis' microsynteny script  
 
 ## Results
 

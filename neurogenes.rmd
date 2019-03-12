@@ -1,6 +1,6 @@
 ---
 title: "neurogenes"
-output: html_document
+output: md_document
 ---
 
 ---
@@ -217,15 +217,17 @@ Must set env var `export BLASTMAT=/home/jlm329/eeb723/jlm329/programs/blast-2.2.
 
 
 
-#ALTERNATE  
-Ramos method:  
-Identify all orthologous genes on scaffold = curated list of homologous genes (eg. 27 in Ramos)  
-Classify as belonging to chromosome in comparison animal where gene of interest is found or somewhere else.  
-If many paralogues, two tests: single location of each of the human orthologues, or collapsed location of human paralogues if all located at same locus  
-Do a bunch of stuff to calculate probabilities.  
-Do Exact binomial test and Fisher's test to test whether the number of correct neighbours is statistically significantly higher than expected by chance.    
-**So....does order not matter?!!**    
--unless they wrote a script it seems very manual and time intensive.  
+#RAMOS et al. 2012 Approach:  
+There are very few papers that look into synteny of non-bilaterians. The ones that have take a manual approach to synteny analysis, looking only at one or two 'targets' at a time. The paper I am modelling my approach off of is (Ramos et al. 2012)[https://doi.org/10.1016/j.cub.2012.08.023], the original 'ghost locus' paper that examined sponges and placozoans for synteny.  
+
+The paper starts with a list of neighbour genes known to be syntenic with their gene of interest (GOI) in humans. They then classified all genes in their genomes of interest as being orthologous to neighbour genes, orthologous to non-neighbour genes, or species-specific. Then, to identify significant clustering they used the exact binomial test to test whether the observed number of neighbour gene orthologues co-localizing to a scaffold is significantly higher than the expected number. There are additional steps to deal with situations where orthologues are more than just 1:1.  
+
+However for Amphimedon they also (or instead?) did a Monte Carlo simulation, where they simulated the null distribution of neighbour genes in the absence of synteny. I'm not completely sure why they also did this MC, but perhaps because the Amphimedon scaffolds are sub-chromosomal? The p-value for a test of clustering is calculated as the proportion of simulations in which the number of scaffolds occupied by neighbour genes is less than or equal to the actual number observed. This was described in the Ramos supplement, and most of it seems to make sense to me, but not everything. For instance they say that the results are stored in an "amphisimulation" relational database, but what is that?! Google only brings up that paper and 3 random websites.  
+
+There is a link to the scripts but the link is broken...  
+
+Ramos started with a list of neighbour genes; I would need to produce this myself. Can use DAGchainer to define and identify neighbour genes in eg. humans.  
+
 
 #Data
 
@@ -288,14 +290,14 @@ Use seqinr R package.
 
 ```{r distr scaffold length}
 #NOTE: due to lfs not working for public forks I am unable to host genome fastas in repo. Links to data provided in readme.  
-#names=c()
+#Also note: Looping is currently not working. Code is broken.  
 #fasta=read.fasta(file="~/Desktop/compgen/repo/genome_fasta/GCA_000090795.1_v1.0_genomic.fna")
-genome<-c("test.fasta", "test1.fasta")
-for (org in genome){
-read.fasta(org)%>%getLength(fasta)%>%as.data.frame()%>%filter(.<10000)%>%ggplot()+geom_histogram(aes(x=.), fill="darkgreen", color="black",binwidth=100)+xlab("Scaffold Length")
-print("Median scaffold length (bp):") 
-getLength(fasta)%>%median()
-}
+#genome<-c("test.fasta", "test1.fasta")
+#for (org in genome){
+#read.fasta(org)%>%getLength(fasta)%>%as.data.frame()%>%filter(.<10000)%>%ggplot()+geom_histogram(aes(x=.), fill="darkgreen", color="black",binwidth=100)+xlab("Scaffold Length")
+#print("Median scaffold length (bp):") 
+#getLength(fasta)%>%median()
+#}
 
 
 ```
