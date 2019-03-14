@@ -24,6 +24,7 @@ knitr::opts_chunk$set(
 library( tidyverse )
 library(ggplot2)
 library(seqinr)
+library(ape)
 ```
 
 
@@ -137,13 +138,9 @@ Bottom line:
 -more paralogues less synteny finding?? may have misunderstood.  
 
 
-#SYNTENY ANALYSIS PLAN  
-Test programs against the same genome - concentrate on the four cteno and por genomes (?).  
-Use a normal synteny program to identify genes surrounding gene of interset.  
-Then follow Ramos procedure.  
+#ANALYSIS  
 
-
-##Running Programs  
+##Running Synteny Programs  
 According to Liu et al 2018 [@Liu2018] Synchro is the ideal program to run on fragmented genomes BUT it runs on outdated file types that do not seem to exist for my genomes.  
 DAGchainer is the most popular synteny analysis program and performs decently.  
 Another very popular synteny program, MCScanx, performs poorly with fragmented genomes [@Liu2013]  
@@ -194,6 +191,9 @@ Output files already given for examples. Running examples myself seemed to match
 
 Couldn't figure out how to produce this file: Tbrucei_vs_Lmajor.match_file.filtered.only_with_synteny or Arabidopsis.Release5.matchList.filtered.aligncoords.2 and unsure whether other files other than ...filtered or ..filtered.aligncoords were also supposed to be output files.
 
+##To do:
+**-Check to see whether genomes assembled via ref to related species -> leads to false synteny due to assumption of shared synteny**  
+
 ###Synima  
 Synteny analysis viewer/figure maker. Works on DAGchainer output files.  
 
@@ -228,6 +228,83 @@ There is a link to the scripts but the link is broken...
 
 Ramos started with a list of neighbour genes; I would need to produce this myself. Can use DAGchainer to define and identify neighbour genes in eg. humans.  
 
+
+
+##Scaffold N50s of genomes    
+Liu et al. 2018 [Liu@2018] says that need N50 of at least 200 kb (w/ gene density 290genes/Mb) or 1Mb (gene densit 200 genes/Mb) for error rate < 5%.  
+
+Mnemiopsis (from orig @Ryan2013): 187 kb  
+Pleurobachia (Suppl Table 5S from @Moroz2014): 20.607 kb  
+Amphimedon orig, [Ensembl (https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Annotation/): 120 kb >> likely improved, looking for Aqu2.1 (or is this only a re-annotation not reassembly?)  
+  - Slightly confused with scaffold N50 stats in @Srivastava2010 suppl Table S2.3.2  
+Oscarella carmela (Suppl from @Nichols2012): 5.897 kb!! :O  
+
+##Distribution of scaffold lengths  
+Q: Just how badly are my genomes fragmented??  
+A: quite badly.  
+Use seqinr R package.  
+
+```{r distr scaffold length}
+
+#NOTE: due to lfs not working for public forks I am unable to host genome fastas in repo. Links to data provided in readme. For convenience I've included sample data.
+#Ideally I would loop through all my fastas but for some reason I can't get looping to work...
+
+fasta="data/sample_data/fasta_sample.fasta"
+
+#histogram of contig lengths
+read.fasta(fasta)%>%getLength(fasta)%>%as.data.frame()%>%filter(.<10000)%>%ggplot()+geom_histogram(aes(x=.), fill="darkgreen", color="black",binwidth=100)+xlab("Scaffold Length")
+
+#stats
+print(paste("Median scaffold/contig length (bp):",getLength(fasta)%>%median()))
+
+
+
+
+```
+
+#Parse GFF3 files:  
+[How to read a GFF3 file:](https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md)  
+
+R parser:  
+https://www.rdocumentation.org/packages/ape/versions/5.2/topics/read.gff  
+
+Aqu GFF3:
+-'supercontigs' indicated in gff3 but all seem to be supercontig 1 and actual seq chunks are called contigs.    
+
+```{r count no genes per contig/scaffold}
+#install.packages("ape")
+
+gff3="data/sample_data/gff3_sample.gff3"
+#parse gff3 and create new df with only seqid, type, start and end. Keep start and end for later analyses.
+contig.gene.df <- ape::read.gff(file=gff3, GFF3=TRUE) %>% select(.,"seqid","type","start","end") %>% filter(.,type == "gene")
+
+#for histogram, take just the contig names and gene counts
+gene.count<- as.data.frame(table(contig.gene.df$seqid))
+
+#plot frequency of frequencies
+ggplot(data = gene.count, aes(x=gene.count$Freq)) + geom_histogram(binwidth=1) + geom_vline(xintercept = 3)
+
+#stats
+print(paste("proportion contigs with gene count >= 3:",nrow(subset(gene.count, gene.count$Freq >= 3))/nrow(gene.count)*100))
+
+print(paste("Median no. genes/contig:",median(gene.count$Freq)))
+
+print(paste("Max no. genes/contig:",max(gene.count$Freq)))
+
+
+
+
+
+
+
+
+
+
+```
+
+#Find homologous genes between genomes
+Cannot use previous agalma runs for single cell seq analysis because those did not include all genes in genome (only marker genes)  
+Run agalma:  
 
 #Data
 
@@ -272,83 +349,50 @@ Via R
 Create a new table where species for Ctenophora, Porifera combined: https://stackoverflow.com/questions/14563531/combine-column-to-remove-nas  
 
 
-##To do:
--Check to see whether genomes assembled via ref to related species -> leads to false synteny due to assumption of shared synteny  
-
-##Scaffold N50s of genomes    
-Liu et al. 2018 [Liu@2018] says that need N50 of at least 200 kb (w/ gene density 290genes/Mb) or 1Mb (gene densit 200 genes/Mb) for error rate < 5%.  
-
-Mnemiopsis (from orig @Ryan2013): 187 kb  
-Pleurobachia (Suppl Table 5S from @Moroz2014): 20.607 kb  
-Amphimedon orig, [Ensembl (https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Annotation/): 120 kb >> likely improved, looking for Aqu2.1 (or is this only a re-annotation not reassembly?)  
-  - Slightly confused with scaffold N50 stats in @Srivastava2010 suppl Table S2.3.2  
-Oscarella carmela (Suppl from @Nichols2012): 5.897 kb!! :O  
-
-##Distribution of scaffold lengths  
-Q: Just how badly are my genomes fragmented??  
-Use seqinr R package.  
-
-```{r distr scaffold length}
-#NOTE: due to lfs not working for public forks I am unable to host genome fastas in repo. Links to data provided in readme.  
-#Also note: Looping is currently not working. Code is broken.  
-#fasta=read.fasta(file="~/Desktop/compgen/repo/genome_fasta/GCA_000090795.1_v1.0_genomic.fna")
-#genome<-c("test.fasta", "test1.fasta")
-#for (org in genome){
-#read.fasta(org)%>%getLength(fasta)%>%as.data.frame()%>%filter(.<10000)%>%ggplot()+geom_histogram(aes(x=.), fill="darkgreen", color="black",binwidth=100)+xlab("Scaffold Length")
-#print("Median scaffold length (bp):") 
-#getLength(fasta)%>%median()
-#}
 
 
-```
 
+##Genomes 
+###Genbank:  
+_Decided to go with Ensemblgenome version because Ensembl provides GFF3 files; Genbank only GFF._   
 
-##Genomes
 _Pleurobachia genome_:  https://www.ncbi.nlm.nih.gov/assembly/GCA_000695325.1  
 P.bachei_draft_genome_v.1.1  
-Organism: Pleurobrachia bachei (ctenophores)  
-Submitter: University of Florida  
-Date: 2014/05/21  
-Assembly level: Scaffold  
-Genome representation: full  
-RefSeq category: representative genome  
-GenBank assembly accession: GCA_000695325.1 (latest)  
-RefSeq assembly accession: n/a  
-IDs: 180401 [UID] 1073948 [GenBank]  
--paper said deposited at Moroz's website; links don't work on website.  
 
 _Mnemiopsis leidyi_: https://www.ncbi.nlm.nih.gov/assembly/GCA_000226015.1/    
 MneLei_Aug2011  
-Organism name: Mnemiopsis leidyi (sea walnut)  
-BioSample: SAMN02953801BioProject: PRJNA64405  
-Submitter: National Human Genome Research Institute, National Institutes of Health  
-Date: 2011/09/19  
-Assembly level: Scaffold  
-Genome representation: full  
-RefSeq category: representative genome  
-GenBank assembly accession: GCA_000226015.1 (latest)  
-RefSeq assembly accession: n/a  
-RefSeq assembly and GenBank assembly identical: n/a  
-WGS Project: AGCP01  
-Assembly method: Phusion v. 1.02  
-Genome coverage: 12xSequencing technology: 454 GS-FLX Titanium; Illumina GA IIX  
-IDs: 304208 [UID] 304208 [GenBank]  
 
 _Amphimedon queenslandica: v1.0_: https://www.ncbi.nlm.nih.gov/assembly/GCF_000090795.1  
-Organism: Amphimedon queenslandica (sponges)  
-Submitter: US DOE Joint Genome Institute (JGI-PGF)   
-Date: 2010/05/28  
-Assembly level: Scaffold   
-Genome representation: full  
-RefSeq category: representative genome  
-GenBank assembly accession: GCA_000090795.1 (latest)  
-RefSeq assembly accession: GCF_000090795.1 (latest)  
-IDs: 293608 [UID] 111438 [GenBank] 293608 [RefSeq]  
 
 _Oscarella carmela_: http://www.compagen.org/datasets.html  OCAR not Oscarella sp.  
 -added .fna and gzipped  
 -Oscarella carmela (this assembly) renamed Oscarella pearsei; Oscarella sp. in Compgen redescribed Oscarella carmela. See 
 https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0183002 - old O. carmela papers based on two species (carmela + pearsei). Both in compagen, but although there is  press release compagen didn't change their names in db. *Can't find annotation file*.  
+
+###Ensembl:  
+File types:   
+-toplevel: includes chromosomes, regions not assembled into chromosomes, N padded haplotype/patch regions.  
+-nonchromosomal
+rm: masked  
+sm: soft-masked  
+-chose toplevel, not masked  
+
+Amphimedon  
+[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/amphimedon_queenslandica)  
+[Ensembl genome FASTA](https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Index)  
+-note: clicking "Aqu1" leads to an assembly with names that do not match GFF3. Instead click "Download DNA sequence"  
+
+Mnemiopsis  
+[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/mnemiopsis_leidyi)
+[Ensembl genome FASTA](http://metazoa.ensembl.org/Mnemiopsis_leidyi/Info/Index)
+
+Pleurobrachia ???  
+
+Trichoplax  
+[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/trichoplax_adhaerens)
+[Ensembl genome FASTA](https://metazoa.ensembl.org/Trichoplax_adhaerens/Info/Index)  
+
+Warren has a good list of data sources [here](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5534336/)  
 
 
 

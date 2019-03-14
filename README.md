@@ -51,8 +51,10 @@ However before we can establish loss by synteny analysis, we must first establis
 
 ## Methods
 1. Need at least 3 genes to identify a ghost locus (two bounding to anchor, centre one is gene of interest). Determine within species distribution: histogram of no. genes per contig per species  
-2. identify homologous genes across genomes - if annotation is the same as cell type data import cell tyeps results; if not import gene models as proteins and run agalma.  
-3. ID syntenic blocks in the genome. Use available programs: possibly DAGchainer or Warren Francis' microsynteny script  
+2. identify homologous genes across genomes - if annotation is the same as cell type data import cell tyeps results; if not import gene models as proteins and run agalma. 
+3. Layer ortholog IDs over the GFF3 file.   
+3. ID scaffolds that do not possess all orthologs another animal's scaffolds have.  
+
 
 ## Results
 
