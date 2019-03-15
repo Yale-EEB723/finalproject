@@ -27,13 +27,20 @@ _These are the new goals of my project_
 ## The data
 
 - Data source: Published, and unpublished but publically available    
-So far have:  [NOTE: couldn't add to public fork via git lfs]  
--Mnemiopsis leidyi genome [@Ryan2013](https://www.ncbi.nlm.nih.gov/assembly/GCA_000226015.1/)  
--Pleurobrachia bachei genome [@Moroz2014](https://www.ncbi.nlm.nih.gov/assembly/GCA_000695325.1)  
--Amphimedon queenslandica genome [@Srivastava2010](https://www.ncbi.nlm.nih.gov/assembly/GCF_000090795.1)   
--Oscarella carmela [@Nichols2012](http://www.compagen.org/datasets.html) - choose "OCAR" not "Oscarella sp.". See presence/absence of 'neural' gene table (Fig. 3) in Riesgo et al., 2014 [@Riesgo2014](https://doi.org/10.1093/molbev/msu057)   
 
-These genomes were selected because there are presence/absence lists of 'neural' genes readily available for them.  
+*Genomes*  
+[NOTE: couldn't add to repo (too big). Unfortunately git lfs doesn't work with public forks]  
+_Select "Download DNA sequence under "Genome assembly" (not eg. "MneLei_Aug2011" link)_  
+
+-Mnemiopsis leidyi genome [@Ryan2013](http://metazoa.ensembl.org/Mnemiopsis_leidyi/Info/Index)    
+-Amphimedon queenslandica genome [@Srivastava2010](https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Index)   
+-Trichoplax adhaerens genome[@Srivastava2008](https://metazoa.ensembl.org/Trichoplax_adhaerens/Info/Index) 
+
+*GFF3s*
+-Mnemiopsis leidyi genome [@Ryan2013](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/mnemiopsis_leidyi)    
+-Amphimedon queenslandica genome [@Srivastava2010](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/amphimedon_queenslandica)   
+-Trichoplax adhaerens genome[@Srivastava2008](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/trichoplax_adhaerens) 
+
 
 Other genomes to use (probably): Salpingoeca rosetta, Monosiga brevicollis, Trichoplax (can use as positive control?), Nematostella vectensis, Hydra magnipapillata, Homo sapiens.  
 

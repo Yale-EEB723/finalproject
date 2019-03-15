@@ -233,11 +233,12 @@ Ramos started with a list of neighbour genes; I would need to produce this mysel
 ##Scaffold N50s of genomes    
 Liu et al. 2018 [Liu@2018] says that need N50 of at least 200 kb (w/ gene density 290genes/Mb) or 1Mb (gene densit 200 genes/Mb) for error rate < 5%.  
 
-Mnemiopsis (from orig @Ryan2013): 187 kb  
-Pleurobachia (Suppl Table 5S from @Moroz2014): 20.607 kb  
-Amphimedon orig, [Ensembl (https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Annotation/): 120 kb >> likely improved, looking for Aqu2.1 (or is this only a re-annotation not reassembly?)  
+Listed Scaffold N50s:  
+-Mnemiopsis (from orig @Ryan2013): 187 kb  
+-Pleurobachia (Suppl Table 5S from @Moroz2014): 20.607 kb  
+-Amphimedon orig, [Ensembl (https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Annotation/): 120 kb >> likely improved, looking for Aqu2.1 (or is this only a re-annotation not reassembly?)  
   - Slightly confused with scaffold N50 stats in @Srivastava2010 suppl Table S2.3.2  
-Oscarella carmela (Suppl from @Nichols2012): 5.897 kb!! :O  
+(Oscarella carmela (Suppl from @Nichols2012): 5.897 kb!!) --> not using, no GFF3 file anyways.  
 
 ##Distribution of scaffold lengths  
 Q: Just how badly are my genomes fragmented??  
@@ -252,7 +253,7 @@ Use seqinr R package.
 fasta="data/sample_data/fasta_sample.fasta"
 
 #histogram of contig lengths
-read.fasta(fasta)%>%getLength(fasta)%>%as.data.frame()%>%filter(.<10000)%>%ggplot()+geom_histogram(aes(x=.), fill="darkgreen", color="black",binwidth=100)+xlab("Scaffold Length")
+read.fasta(fasta)%>%getLength(fasta)%>%as.data.frame()%>%filter(.<10000)%>%ggplot()+geom_histogram(aes(x=.), fill="skyblue3", color="black",binwidth=100)+xlab("Scaffold Length")
 
 #stats
 print(paste("Median scaffold/contig length (bp):",getLength(fasta)%>%median()))
@@ -268,10 +269,11 @@ print(paste("Median scaffold/contig length (bp):",getLength(fasta)%>%median()))
 R parser:  
 https://www.rdocumentation.org/packages/ape/versions/5.2/topics/read.gff  
 
-Aqu GFF3:
--'supercontigs' indicated in gff3 but all seem to be supercontig 1 and actual seq chunks are called contigs.    
+-'supercontigs' indicated in gff3 but all seem to be supercontig 1 and actual seq chunks are called contigs. Probably because they needed to enter some kind of value for supercontig. My analyses are at 'contig' level.    
 
 ```{r count no genes per contig/scaffold}
+#Please replace gff3_sample.gff3 with path to desired gff3 file. GFF3 files can be found in data/genomes/annot
+
 #install.packages("ape")
 
 gff3="data/sample_data/gff3_sample.gff3"
@@ -291,15 +293,6 @@ print(paste("Median no. genes/contig:",median(gene.count$Freq)))
 
 print(paste("Max no. genes/contig:",max(gene.count$Freq)))
 
-
-
-
-
-
-
-
-
-
 ```
 
 #Find homologous genes between genomes
@@ -308,7 +301,38 @@ Run agalma:
 
 #Data
 
-##[Table](https://github.com/jasminelmah/compgen/blob/master/neurogenes_table.numbers)  
+
+##Genomes 
+###~~Genbank:~~  
+_Decided to go with Ensemblgenome version because Ensembl provides GFF3 files; Genbank only GFF._   
+
+###Ensembl:  
+File types:   
+-toplevel: includes chromosomes, regions not assembled into chromosomes, N padded haplotype/patch regions.  
+-nonchromosomal
+rm: masked  
+sm: soft-masked  
+-chose toplevel, not masked  
+
+Amphimedon  
+[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/amphimedon_queenslandica)  
+[Ensembl genome FASTA](https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Index)  
+-note: clicking "Aqu1" leads to an assembly with names that do not match GFF3. Instead click "Download DNA sequence"  
+
+Mnemiopsis  
+[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/mnemiopsis_leidyi)
+[Ensembl genome FASTA](http://metazoa.ensembl.org/Mnemiopsis_leidyi/Info/Index)
+
+Pleurobrachia ???  
+
+Trichoplax  
+[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/trichoplax_adhaerens)
+[Ensembl genome FASTA](https://metazoa.ensembl.org/Trichoplax_adhaerens/Info/Index)  
+
+Warren has a good list of data sources [here](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5534336/)  
+
+##For future analyses (might not get to this for this course)  
+###Neurogenes Table  
 _Table abbreviations_  
 DBH - dopamine-B-hydroxylase  
 DDC - DOPA decarboxylase  
@@ -347,53 +371,6 @@ Second Iteration:
 
 Via R
 Create a new table where species for Ctenophora, Porifera combined: https://stackoverflow.com/questions/14563531/combine-column-to-remove-nas  
-
-
-
-
-
-##Genomes 
-###Genbank:  
-_Decided to go with Ensemblgenome version because Ensembl provides GFF3 files; Genbank only GFF._   
-
-_Pleurobachia genome_:  https://www.ncbi.nlm.nih.gov/assembly/GCA_000695325.1  
-P.bachei_draft_genome_v.1.1  
-
-_Mnemiopsis leidyi_: https://www.ncbi.nlm.nih.gov/assembly/GCA_000226015.1/    
-MneLei_Aug2011  
-
-_Amphimedon queenslandica: v1.0_: https://www.ncbi.nlm.nih.gov/assembly/GCF_000090795.1  
-
-_Oscarella carmela_: http://www.compagen.org/datasets.html  OCAR not Oscarella sp.  
--added .fna and gzipped  
--Oscarella carmela (this assembly) renamed Oscarella pearsei; Oscarella sp. in Compgen redescribed Oscarella carmela. See 
-https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0183002 - old O. carmela papers based on two species (carmela + pearsei). Both in compagen, but although there is  press release compagen didn't change their names in db. *Can't find annotation file*.  
-
-###Ensembl:  
-File types:   
--toplevel: includes chromosomes, regions not assembled into chromosomes, N padded haplotype/patch regions.  
--nonchromosomal
-rm: masked  
-sm: soft-masked  
--chose toplevel, not masked  
-
-Amphimedon  
-[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/amphimedon_queenslandica)  
-[Ensembl genome FASTA](https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Index)  
--note: clicking "Aqu1" leads to an assembly with names that do not match GFF3. Instead click "Download DNA sequence"  
-
-Mnemiopsis  
-[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/mnemiopsis_leidyi)
-[Ensembl genome FASTA](http://metazoa.ensembl.org/Mnemiopsis_leidyi/Info/Index)
-
-Pleurobrachia ???  
-
-Trichoplax  
-[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/trichoplax_adhaerens)
-[Ensembl genome FASTA](https://metazoa.ensembl.org/Trichoplax_adhaerens/Info/Index)  
-
-Warren has a good list of data sources [here](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5534336/)  
-
 
 
 
