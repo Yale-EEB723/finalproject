@@ -317,17 +317,18 @@ sm: soft-masked
 Amphimedon  
 [GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/amphimedon_queenslandica)  
 [Ensembl genome FASTA](https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Index)  
+[genome prot seqs](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/amphimedon_queenslandica/pep/)  
 -note: clicking "Aqu1" leads to an assembly with names that do not match GFF3. Instead click "Download DNA sequence"  
 
 Mnemiopsis  
-[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/mnemiopsis_leidyi)
-[Ensembl genome FASTA](http://metazoa.ensembl.org/Mnemiopsis_leidyi/Info/Index)
-
-Pleurobrachia ???  
+[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/mnemiopsis_leidyi)  
+[Ensembl genome FASTA](http://metazoa.ensembl.org/Mnemiopsis_leidyi/Info/Index)  
+[genome prot seqs](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/mnemiopsis_leidyi/pep/)  
 
 Trichoplax  
-[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/trichoplax_adhaerens)
-[Ensembl genome FASTA](https://metazoa.ensembl.org/Trichoplax_adhaerens/Info/Index)  
+[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/trichoplax_adhaerens)  
+[Ensembl genome FASTA](https://metazoa.ensembl.org/Trichoplax_adhaerens/Info/Index)   
+[genome prot seqs](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/trichoplax_adhaerens/pep/)  
 
 Warren has a good list of data sources [here](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5534336/)  
 

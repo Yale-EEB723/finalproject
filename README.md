@@ -26,20 +26,26 @@ _These are the new goals of my project_
 
 ## The data
 
-- Data source: Published, and unpublished but publically available    
+- Data source: Published and publicly available  
 
-*Genomes*  
+**Ensembl Genomes**  
 [NOTE: couldn't add to repo (too big). Unfortunately git lfs doesn't work with public forks]  
 _Select "Download DNA sequence under "Genome assembly" (not eg. "MneLei_Aug2011" link)_  
 
--Mnemiopsis leidyi genome [@Ryan2013](http://metazoa.ensembl.org/Mnemiopsis_leidyi/Info/Index)    
--Amphimedon queenslandica genome [@Srivastava2010](https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Index)   
--Trichoplax adhaerens genome[@Srivastava2008](https://metazoa.ensembl.org/Trichoplax_adhaerens/Info/Index) 
+-Mnemiopsis leidyi genome [@Ryan2013]:   
+[genome](http://metazoa.ensembl.org/Mnemiopsis_leidyi/Info/Index)     
+[gff3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/mnemiopsis_leidyi)     
+[prot](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/mnemiopsis_leidyi/pep/)  
 
-*GFF3s*
--Mnemiopsis leidyi genome [@Ryan2013](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/mnemiopsis_leidyi)    
--Amphimedon queenslandica genome [@Srivastava2010](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/amphimedon_queenslandica)   
--Trichoplax adhaerens genome[@Srivastava2008](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/trichoplax_adhaerens) 
+-Amphimedon queenslandica genome [@Srivastava2010]  
+[genome](https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Index)   
+[gff3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/amphimedon_queenslandica)   
+[prot](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/amphimedon_queenslandica/pep/)  
+
+-Trichoplax adhaerens genome[@Srivastava2008]  
+[genome](https://metazoa.ensembl.org/Trichoplax_adhaerens/Info/Index)   
+[gff3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/trichoplax_adhaerens)   
+[prot](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/trichoplax_adhaerens/pep/)  
 
 
 Other genomes to use (probably): Salpingoeca rosetta, Monosiga brevicollis, Trichoplax (can use as positive control?), Nematostella vectensis, Hydra magnipapillata, Homo sapiens.  
