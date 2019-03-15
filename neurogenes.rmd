@@ -296,8 +296,14 @@ print(paste("Max no. genes/contig:",max(gene.count$Freq)))
 ```
 
 #Find homologous genes between genomes
-Cannot use previous agalma runs for single cell seq analysis because those did not include all genes in genome (only marker genes)  
+Cannot use previous agalma runs for single cell seq analysis because those were custom fasta files from papers - ie have genes not in genome annotation.  
 Run agalma:  
+
+#FIGURES TO MAKE...soonish hmm   
+Comparison across clades of:   
+-median scaffold lengths  
+-median no. genes/contig or proportion of contigs with gene count >= 3  
+
 
 #Data
 
@@ -314,6 +320,14 @@ rm: masked
 sm: soft-masked  
 -chose toplevel, not masked  
 
+Choanos:
+Monosiga
+https://protists.ensembl.org/Monosiga_brevicollis_mx1/Info/Index
+Salpingoeca
+http://protists.ensembl.org/Salpingoeca_rosetta/Info/Index
+
+
+Non-bilaterians:  
 Amphimedon  
 [GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/amphimedon_queenslandica)  
 [Ensembl genome FASTA](https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Index)  
@@ -329,6 +343,33 @@ Trichoplax
 [GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/trichoplax_adhaerens)  
 [Ensembl genome FASTA](https://metazoa.ensembl.org/Trichoplax_adhaerens/Info/Index)   
 [genome prot seqs](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/trichoplax_adhaerens/pep/)  
+
+Hydra  
+https://research.nhgri.nih.gov/hydra/download/?dl=asl  
+Nemtostella   
+https://metazoa.ensembl.org/Nematostella_vectensis/Info/Index    
+
+Zebrafinch  
+https://useast.ensembl.org/Taeniopygia_guttata/Info/Index  
+
+Strongylo  
+https://metazoa.ensembl.org/Strongylocentrotus_purpuratus/Info/Index  
+-according to this (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4489978/) strongylo has most mature draft genome of the echinoderms  
+
+Danio rerio (non-euteleost fish) - But isn't this teleost??? Clarify with Ava  
+http://useast.ensembl.org/Danio_rerio/Info/Index
+
+Ecdysozoa:  
+-Gonzalo's take on current state of Ecdysozoan genomes: https://academic.oup.com/icb/article/57/3/455/4093795#96942899
+Drosophila  
+https://useast.ensembl.org/Drosophila_melanogaster/Info/Index   
+
+2nd Ecdy?  
+
+2 Spiralians:  Lottia gigantea and Capitella telata?  see https://www.nature.com/articles/nature11696 sounds like there is comparatively good conservation with some deuterostomes  
+
+
+
 
 Warren has a good list of data sources [here](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5534336/)  
 

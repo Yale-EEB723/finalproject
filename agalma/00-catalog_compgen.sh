@@ -1,12 +1,12 @@
 #!/bin/bash
 #SBATCH --partition=day
-#SBATCH --job-name=agalma_job
+#SBATCH --job-name=agalma_compgen
 #SBATCH -c 1
 #SBATCH --mem-per-cpu=6G
 #SBATCH --time=0-02:00:00
 #SBATCH --mail-type=ALL
 
-export AGALMA_DB="./homologs.sqlite"
+export AGALMA_DB="./compgen_homologs.sqlite"
 
 source activate agalma
 
