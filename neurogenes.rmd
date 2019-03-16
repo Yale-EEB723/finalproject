@@ -297,6 +297,13 @@ print(paste("Max no. genes/contig:",max(gene.count$Freq)))
 
 #Find homologous genes between genomes
 Cannot use previous agalma runs for single cell seq analysis because those were custom fasta files from papers - ie have genes not in genome annotation.  
+
+_Data massaging for agalma:_
+Downloaded all the pep files, preferably from Ensembl.  
+Rename .fa to .fasta (I think agalma had a problem with fa?)  
+Agalma cuts off contig names after first space. But contig names from Ensembl are very informative (eg gene, transcript name, location on chromosome). Replace all spaces with _.  
+- regex: find: ; replace: * (don't symbols in headers : _- / ;)  
+
 Run agalma:  
 
 #FIGURES TO MAKE...soonish hmm   
@@ -330,44 +337,87 @@ http://protists.ensembl.org/Salpingoeca_rosetta/Info/Index
 Non-bilaterians:  
 Amphimedon  
 [GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/amphimedon_queenslandica)  
-[Ensembl genome FASTA](https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Index)  
-[genome prot seqs](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/amphimedon_queenslandica/pep/)  
+[genome:Aqu1](https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Index)  
+[genome prots](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/amphimedon_queenslandica/pep/)  
 -note: clicking "Aqu1" leads to an assembly with names that do not match GFF3. Instead click "Download DNA sequence"  
 
 Mnemiopsis  
 [GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/mnemiopsis_leidyi)  
-[Ensembl genome FASTA](http://metazoa.ensembl.org/Mnemiopsis_leidyi/Info/Index)  
-[genome prot seqs](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/mnemiopsis_leidyi/pep/)  
+[MneLei_Aug2011 genome FASTA](http://metazoa.ensembl.org/Mnemiopsis_leidyi/Info/Index)  
+[genome prots](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/mnemiopsis_leidyi/pep/)  
 
-Trichoplax  
+Trichoplax adhaerens  
 [GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/trichoplax_adhaerens)  
-[Ensembl genome FASTA](https://metazoa.ensembl.org/Trichoplax_adhaerens/Info/Index)   
-[genome prot seqs](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/trichoplax_adhaerens/pep/)  
+[ASM15027v1 genome FASTA](https://metazoa.ensembl.org/Trichoplax_adhaerens/Info/Index)   
+[genome prot:](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/trichoplax_adhaerens/pep/)    
 
-Hydra  
-https://research.nhgri.nih.gov/hydra/download/?dl=asl  
-Nemtostella   
-https://metazoa.ensembl.org/Nematostella_vectensis/Info/Index    
 
-Zebrafinch  
-https://useast.ensembl.org/Taeniopygia_guttata/Info/Index  
+Hydra vulgaris  
+[GFF3:](https://research.nhgri.nih.gov/hydra/download/?dl=nt)  
+**- gene models separated into separate gff3s for each scaffold (thousands...) >> see how R parses a catted file.**    
+[genome FASTA: Hydra 2.0](https://research.nhgri.nih.gov/hydra/download/?dl=asl)  
+[genome prot](https://research.nhgri.nih.gov/hydra/download/?dl=aa)
 
-Strongylo  
-https://metazoa.ensembl.org/Strongylocentrotus_purpuratus/Info/Index  
+Nemtostella  
+[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/nematostella_vectensis)  
+[genome FASTA:](https://metazoa.ensembl.org/Nematostella_vectensis/Info/Index)   
+[genome prot:]  
+   
+
+Deuteros
+Strongylocentrotus purpuratus  
+[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/strongylocentrotus_purpuratus)  
+[genome FASTA: Spur 3.1](https://metazoa.ensembl.org/Strongylocentrotus_purpuratus/Info/Index)  
+[genome pep](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/strongylocentrotus_purpuratus)   
 -according to this (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4489978/) strongylo has most mature draft genome of the echinoderms  
 
-Danio rerio (non-euteleost fish) - But isn't this teleost??? Clarify with Ava  
-http://useast.ensembl.org/Danio_rerio/Info/Index
+Vertebrates
+Zebrafinch  
+[GFF3](ftp://ftp.ensembl.org/pub/release-95/gff3/taeniopygia_guttata/)  
+[genome FAST:taeGUT3.2.4](https://useast.ensembl.org/Taeniopygia_guttata/Info/Index)   
+[genome pep](ftp://ftp.ensembl.org/pub/release-95/fasta/taeniopygia_guttata/pep/)  
+ 
+
+Homo sapiens
+[GFF3](ftp://ftp.ensembl.org/pub/release-95/gff3/homo_sapiens/)  
+[genome FASTA:GRCh38.p12](https://useast.ensembl.org/Homo_sapiens/Info/Index)  
+[genome pep](ftp://ftp.ensembl.org/pub/release-95/fasta/homo_sapiens/pep/)  
+
+
+Danio rerio (non-euteleost fish)   
+[GFF3](ftp://ftp.ensembl.org/pub/release-95/gff3/danio_rerio/)  
+[genome FASTA:GRCz11 (GCA_000002035.4)](http://useast.ensembl.org/Danio_rerio/Info/Index)  
+[genome pep](ftp://ftp.ensembl.org/pub/release-95/fasta/danio_rerio/pep/)  
+
 
 Ecdysozoa:  
 -Gonzalo's take on current state of Ecdysozoan genomes: https://academic.oup.com/icb/article/57/3/455/4093795#96942899
-Drosophila  
-https://useast.ensembl.org/Drosophila_melanogaster/Info/Index   
+Helobdella
+[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/helobdella_robusta)  
+[genome FASTA:Helro1](http://metazoa.ensembl.org/Helobdella_robusta/Info/Index)  
+[genome pep](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/helobdella_robusta/pep/)  
+  
 
-2nd Ecdy?  
+Drosophila
+[GFF3](ftp://ftp.ensembl.org/pub/release-95/gff3/drosophila_melanogaster/)  
+[genome FASTA:BDGP6 (GCA_000001215.4)](https://useast.ensembl.org/Drosophila_melanogaster/Info/Index)  
+[genome pep](ftp://ftp.ensembl.org/pub/release-95/fasta/drosophila_melanogaster/pep/)  
 
-2 Spiralians:  Lottia gigantea and Capitella telata?  see https://www.nature.com/articles/nature11696 sounds like there is comparatively good conservation with some deuterostomes  
 
+
+2 Spiralians:  
+Lottia gigantea and Capitella telata?  see https://www.nature.com/articles/nature11696 sounds like there is comparatively good conservation with some deuterostomes  
+
+Lottia
+http://metazoa.ensembl.org/Capitella_teleta/Info/Index
+[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/lottia_gigantea)  
+[genome FASTA:LotG1](https://metazoa.ensembl.org/Lottia_gigantea/Info/Index)  
+[genome pep](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/lottia_gigantea/pep/)  
+
+Capitella  
+[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/capitella_teleta)    
+[genome FASTA:Capitella_teleta_v1.0](http://metazoa.ensembl.org/Capitella_teleta/Info/Index)   
+[genome pep](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/capitella_teleta/pep/)  
 
 
 
