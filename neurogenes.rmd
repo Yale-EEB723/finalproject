@@ -304,7 +304,25 @@ Rename .fa to .fasta (I think agalma had a problem with fa?)
 Agalma cuts off contig names after first space. But contig names from Ensembl are very informative (eg gene, transcript name, location on chromosome). Replace all spaces with _.  
 - regex: find: ; replace: * (don't symbols in headers : _- / ;)  
 
-Run agalma:  
+pep file MD5s  on farnam:  
+bc4fe9bd13468ce315a92b355770f51d  Amphimedon_queenslandica.Aqu1.pep.all.fasta  
+fa7f034a560b8d006f6bbedf9e6e47d4  Capitella_teleta.Capitella_teleta_v1.0.pep.all.fasta  
+0e97e42a12fe491675a7d5969dfaf36e  Danio_rerio.GRCz11.pep.all.fasta  
+2efa5d8510a3f3ee85742568a8eaefa4  Drosophila_melanogaster.BDGP6.pep.all.fasta  
+630d31e402bbc853aa6df1cf47bd6ab6  Helobdella_robusta.Helro1.pep.all.fasta  
+d6b56e455745b1f9025cd8b96e8af2ac  Homo_sapiens.GRCh38.pep.all.fasta  
+f68d59385701997e7fef4c6b74d20b2a  hydra2.0_genemodels.aa.fasta  
+e6e5bd7f636b897780addb0295fc06ae  Lottia_gigantea.Lotgi1.pep.all.fasta  
+53a6be259502ccd3350c5440cd65b1a5  Mnemiopsis_leidyi.MneLei_Aug2011.pep.all.fasta  
+e281b4e654059be06810404e9372099d  Nematostella_vectensis.ASM20922v1.pep.all.fasta  
+3bf67e6dc2fec0849a973182825ae861  Strongylocentrotus_purpuratus.Spur_3.1.pep.all.fasta  
+58d926ffcb37932fc3a0a6203264f96e  Taeniopygia_guttata.taeGut3.2.4.pep.all.fasta  
+cc34c2c0b4eccd6769ceb46d4eca1c9b  Trichoplax_adhaerens.ASM15027v1.pep.all.fasta  
+
+
+Run agalma:   
+modified 00-catalog.sh  
+chose partition general on farnam, job 30509923  >> error. Is agalma even installed on farnam?!!
 
 #FIGURES TO MAKE...soonish hmm   
 Comparison across clades of:   
