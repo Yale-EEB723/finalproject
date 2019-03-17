@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --partition=week
+#SBATCH --partition=general
 #SBATCH --job-name=agalma_genetrees_compgen
 #SBATCH -c 16
 #SBATCH --mem-per-cpu=6G
@@ -9,7 +9,7 @@
 # Script must be run from same directory as existing sqlite database
 export AGALMA_DB=$(pwd)"/compgen_homologs.sqlite"
 
-source activate agalma
+source activate /gpfs/ysm/project/jlm329/conda_envs/agalma
 
 set -e
 

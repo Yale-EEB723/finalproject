@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --partition=week
+#SBATCH --partition=general
 #SBATCH --job-name=agalma_job
 #SBATCH -c 16
 #SBATCH --mem-per-cpu=6G
@@ -8,7 +8,7 @@
 
 export AGALMA_DB="./compgen_homologs.sqlite"
 
-source activate agalma
+source activate /gpfs/ysm/project/jlm329/conda_envs/agalma
 
 
 set -e
