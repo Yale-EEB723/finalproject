@@ -25,6 +25,7 @@ library( tidyverse )
 library(ggplot2)
 library(seqinr)
 library(ape)
+library(Biostrings)
 ```
 
 
@@ -277,7 +278,7 @@ https://www.rdocumentation.org/packages/ape/versions/5.2/topics/read.gff
 #install.packages("ape")
 
 gff3="data/sample_data/gff3_sample.gff3"
-#parse gff3 and create new df with only seqid, type, start and end. Keep start and end for later analyses.
+#parse gff3 and create new df with only seqid, type, start and end. Keep start and end coords for later analyses.
 contig.gene.df <- ape::read.gff(file=gff3, GFF3=TRUE) %>% select(.,"seqid","type","start","end") %>% filter(.,type == "gene")
 
 #for histogram, take just the contig names and gene counts
@@ -301,8 +302,8 @@ Cannot use previous agalma runs for single cell seq analysis because those were 
 _Data massaging for agalma:_
 Downloaded all the pep files, preferably from Ensembl.  
 Rename .fa to .fasta (I think agalma had a problem with fa?)  
-Agalma cuts off contig names after first space. But contig names from Ensembl are very informative (eg gene, transcript name, location on chromosome). Replace all spaces with _.  
-- regex: find: ; replace: * (don't symbols in headers : _- / ;)  
+Agalma cuts off contig names after first space. But contig names from Ensembl are very informative (eg gene, transcript name, location on chromosome). Replace all spaces with @  (don't use symbols in headers : _- / ; or * which is interpreted by grep...).  
+- regex: find: ; replace: *   
 
 pep file MD5s  on farnam:  
 bc4fe9bd13468ce315a92b355770f51d  Amphimedon_queenslandica.Aqu1.pep.all.fasta  
@@ -320,12 +321,88 @@ e281b4e654059be06810404e9372099d  Nematostella_vectensis.ASM20922v1.pep.all.fast
 cc34c2c0b4eccd6769ceb46d4eca1c9b  Trichoplax_adhaerens.ASM15027v1.pep.all.fasta  
 
 
-Run agalma:   
+_Run agalma_:   
+Install agalma 2.0 onto farnam. Farnam currently has 1.0.1.  
+Installed Miniconda on Farnam  
+00-catalog script does not like having 'NA' entries - get rid of all flags with NA.   
+Error: ``ImportError: No module named agalma`` - use full path: ``source activate /gpfs/ysm/project/jlm329/conda_envs/agalma``  
+
+Install test ran succssfully.  
+
 modified 00-catalog.sh  
-chose partition general on farnam, job 30509923  >> error. Is agalma even installed on farnam?!!
+chose partition 'general' on farnam  
+full path to environment  
+
+#Connect protein IDs from agalma to gene ids  
+Is there only 1 protein per gene? No.  
+``grep "gene:" gff3.gff3|wc -l`` vs. ``grep ">" pep file|wc -l``
+eg. Aqu: 87,490 (gff3) vs 43,615 (pep) = some genes have > 1 protein...
+Is there only 1 protein per transcript? In every file there is the same no. proteins vs transcripts.  
+``grep "transcript:" file.gff|cut -d "@" -f 5|sort|uniq|wc -l`` vs. ``grep ">" file.gff|wc -l`` - tested on sample  
+eg. Aqu: 43,615 vs 43,615
+BUT in Danio, Drosophila, Homo, Taenia peps - transcript and gene ids do not match pep ids in any systematic fashion  
+
+Make names simpler with regex. Format all so that >p:protID:s:scaffoldID:g:geneID:t:transID = delimit by : but also human readable   
+Aqu:
+>(.*)@pep@scaffold:Aqu1:(Contig\d+):\d+:\d+:+.*@gene:(.*)@transcript:(.*)@.*@.*
+>p:$1:s:$2:g:$3:t:$4  
+
+
+
+Filter pep files to include only the longest protein per gene.   
+Transdecoder works (only?) on nt files?  
+
+Below code modified from: 
+- user story Jan'9'17 on [Stack Overflow](https://bioinformatics.stackexchange.com/questions/595/how-can-longest-isoforms-per-gene-be-extracted-from-a-fasta-file)   
+-  user nassimhddd (Jul 18 '16) on [Stackoverflow](https://stackoverflow.com/questions/24237399/how-to-select-the-rows-with-maximum-values-in-each-group-with-dplyr)  
+
+
+```{r longest pep only}
+#install bioconductor 3.8 https://www.bioconductor.org/install/  
+#install Biostrings: BiocManager::install("Biostrings", version = "3.8") ; do not update mclust because it will have a warning and then biostrings module not installed.  
+
+#~~~~~ Beginning of 'story''s code.~~~~~
+
+## read your fasta in as Biostrings object
+fasta.s <- readDNAStringSet("sample.fasta")
+
+## get the read names (in your case it has the isoform info)
+names.fasta <- names(fasta.s)
+
+## extract only the relevant gene and isoform id (split name by the period symbol)
+#JM: modify line to fit my name format
+gene.iso <- sapply(names.fasta,function(j) cbind(unlist(strsplit(j,'\\:'))[1:8]))
+
+## convert to good data.frame = transpose result from previous step and add relevant column names
+gene.iso.df <- data.frame(t(gene.iso))
+#JM: alter to put your own column names in:
+colnames(gene.iso.df) <- c('p','pepID','s','scaffID','g','geneID','t','transID')
+gene.iso.df<-select(gene.iso.df, geneID, pepID)
+
+## and length of isoforms
+gene.iso.df$width <- width(fasta.s)
+
+#Did not use rest of code.
+
+#~~~~~ End of 'story''s code.~~~~~
+
+#JM:
+gene.iso.df<-rownames_to_column(gene.iso.df)
+
+#~~~~~beginning of code by nassimhddd (Jul 18 '16) Stackoverflow~~~~~
+longest.pep.df <-gene.iso.df%>%group_by(geneID)%>%mutate(the_rank = rank(-width,ties.method="random")) %>%filter(the_rank==1)%>%select(-the_rank)
+#~~~~~End of nassimhddd's code.~~~~~
+
+
+```
+
+
+#Make a master table  
+scaffold  gene  protein genestart geneend 
 
 #FIGURES TO MAKE...soonish hmm   
-Comparison across clades of:   
+Comparison across clades of:  
+-how many genes total? the more the more likely to find syntney
 -median scaffold lengths  
 -median no. genes/contig or proportion of contigs with gene count >= 3  
 
