@@ -343,11 +343,21 @@ eg. Aqu: 43,615 vs 43,615
 BUT in Danio, Drosophila, Homo, Taenia peps - transcript and gene ids do not match pep ids in any systematic fashion  
 
 Make names simpler with regex. Format all so that >p:protID:s:scaffoldID:g:geneID:t:transID = delimit by : but also human readable   
-Aqu:
->(.*)@pep@scaffold:Aqu1:(Contig\d+):\d+:\d+:+.*@gene:(.*)@transcript:(.*)@.*@.*
->p:$1:s:$2:g:$3:t:$4  
+**Be careful of spaces after simplified name!!**
+Amphimedon:
+
+find: 
+replace 
+Capitella: 
+find; 
+>(.*?)@pep@supercontig:Capitella_teleta_v1.0:(CAPTEscaffold_\w+?):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*?)@.*?$
+>p:\1:s:\2:g:\3:t:\4
+
+Danio:
 
 
+Downloading genomes:  
+Aqu, Capitella: there is no primary assembly. chose dna.toplevel.fa
 
 Filter pep files to include only the longest protein per gene.   
 Transdecoder works (only?) on nt files?  
@@ -393,7 +403,9 @@ gene.iso.df<-rownames_to_column(gene.iso.df)
 longest.pep.df <-gene.iso.df%>%group_by(geneID)%>%mutate(the_rank = rank(-width,ties.method="random")) %>%filter(the_rank==1)%>%select(-the_rank)
 #~~~~~End of nassimhddd's code.~~~~~
 
-
+list<-longest.pep.df[,1,drop=FALSE]
+#wait why doesn't col.names=FALSE remove the column name?? Oh well.
+write.csv(list,"list.txt",quote=FALSE,row.names=FALSE)
 ```
 
 
