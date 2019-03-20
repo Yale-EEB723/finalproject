@@ -17,43 +17,43 @@ set -e
 export BIOLITE_RESOURCES="threads=16,memory=6G"
 
 
-agalma import --id Aqu_bc4fe9b --seq_type aa
-agalma annotate --id Aqu_bc4fe9b
+agalma import --id Aqu_7c2ad7b --seq_type aa
+agalma annotate --id Aqu_7c2ad7b
 
-agalma import --id Cte_fa7f034 --seq_type aa
-agalma annotate --id Cte_fa7f034
+agalma import --id Cte_aef8c97 --seq_type aa
+agalma annotate --id Cte_aef8c97
 
-agalma import --id Dre_0e97e42 --seq_type aa
-agalma annotate --id Dre_0e97e42
+agalma import --id Dre_61f1491 --seq_type aa
+agalma annotate --id Dre_61f1491
 
-agalma import --id Dme_2efa5d8 --seq_type aa
-agalma annotate --id Dme_2efa5d8
+agalma import --id Dme_3502b87 --seq_type aa
+agalma annotate --id Dme_3502b87
 
-agalma import --id Hro_630d31e --seq_type aa
-agalma annotate --id Hro_630d31e
+agalma import --id Hro_793004c --seq_type aa
+agalma annotate --id Hro_793004c
 
-agalma import --id Hsa_d6b56e4 --seq_type aa
-agalma annotate --id Hsa_d6b56e4
+agalma import --id Hsa_ad50889 --seq_type aa
+agalma annotate --id Hsa_ad50889
 
-agalma import --id Hvu_f68d593 --seq_type aa
-agalma annotate --id Hvu_f68d593
+agalma import --id Hvu_ad74d42 --seq_type aa
+agalma annotate --id Hvu_ad74d42
 
-agalma import --id Lgi_e6e5bd7 --seq_type aa
-agalma annotate --id Lgi_e6e5bd7
+agalma import --id Lgi_e03f004 --seq_type aa
+agalma annotate --id Lgi_e03f004
 
-agalma import --id Mle_53a6be2 --seq_type aa
-agalma annotate --id Mle_53a6be2
+agalma import --id Mle_309f7a5 --seq_type aa
+agalma annotate --id Mle_309f7a5
 
-agalma import --id Nve_e281b4e --seq_type aa
-agalma annotate --id Nve_e281b4e
+agalma import --id Nve_207e102 --seq_type aa
+agalma annotate --id Nve_207e102
 
-agalma import --id Spu_3bf67e6 --seq_type aa
-agalma annotate --id Spu_3bf67e6
+agalma import --id Spu_4d09ab1 --seq_type aa
+agalma annotate --id Spu_4d09ab1
 
-agalma import --id Tgu_58d926f --seq_type aa
-agalma annotate --id Tgu_58d926f
+agalma import --id Tgu_f1d28ce --seq_type aa
+agalma annotate --id Tgu_f1d28ce
 
-agalma import --id Tad_cc34c2c --seq_type aa
-agalma annotate --id Tad_cc34c2c
+agalma import --id Tad_bdc7fb0 --seq_type aa
+agalma annotate --id Tad_bdc7fb0
 
 

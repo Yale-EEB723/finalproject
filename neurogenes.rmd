@@ -345,52 +345,52 @@ BUT in Danio, Drosophila, Homo, Taenia peps - transcript and gene ids do not mat
 Make names simpler with regex. Format all so that >p:protID:s:scaffoldID:g:geneID:t:transID = delimit by : but also human readable   
 **Be careful of spaces after simplified name!!**
 for ensembl genomes, gene_biotype is in every seq name. But some names have more after, some not, hence "gene_biotyp.*" haha  
-Amphimedon:
->(.*?)@pep@scaffold:Aqu1:(Contig\w+):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*  
-Capitella:  
->(.*?)@pep@supercontig:Capitella_teleta_v1.0:(CAPTEscaffold_\w+?):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*?)@.*?$
-Danio: PROBLEM
->(.*?)@pep@chromosome:GRCz11:(\w+):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotype.*
-Drosophila:
->(.*?)@pep@chromosome:BDGP6:(\w+):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.* 
+Amphimedon:  
+```>(.*?)@pep@scaffold:Aqu1:(Contig\w+):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+Capitella:   
+```>(.*?)@pep@supercontig:Capitella_teleta_v1.0:(CAPTEscaffold_\w+?):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*?)@.*?$```  
+Danio:   
+```>(.*?)@pep@chromosome:GRCz11:(\w+):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotype.*```  
+Drosophila:  
+```>(.*?)@pep@chromosome:BDGP6:(\w+):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.* ```  
 -_corrected the ~5 that didn't work by hand_  
-Helobdella: 
->(.*?)@pep@supercontig:Helro1:(\w+):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*
-Homo: 
+Helobdella:   
+```>(.*?)@pep@supercontig:Helro1:(\w+):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+Homo:   
 -need chromosome version AND scaffold version
->(.*?)@pep@scaffold:GRCh38:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*
->(.*?)@pep@chromosome:GRCh38:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*
-Danio:
->(.*?)@pep@chromosome:GRCz11:(\w+):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*
->(.*?)@pep@scaffold:GRCz11:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*
+```>(.*?)@pep@scaffold:GRCh38:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+```>(.*?)@pep@chromosome:GRCh38:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+Danio:  
+```>(.*?)@pep@chromosome:GRCz11:(\w+):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+```>(.*?)@pep@scaffold:GRCz11:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
 Lottia:
->(.*?)@pep@supercontig:Lotgi1:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*
-Mnemiopsis:
->(.*?)@pep@supercontig:MneLei_Aug2011:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*
->(.*?)@pep@chromosome:MneLei_Aug2011:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*
-Nvec:
->(.*?)@pep@supercontig:ASM20922v1:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*
-Strongylocentrotus:
->(.*?)@pep@supercontig:Spur_3.1:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*
-Tae:
->(.*?)@pep@chromosome:taeGut3.2.4:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*
-Tricho:
->(.*?)@pep@scaffold:ASM15027v1:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*
-Hydra names:
+```>(.*?)@pep@supercontig:Lotgi1:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+Mnemiopsis:   
+```>(.*?)@pep@supercontig:MneLei_Aug2011:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+```>(.*?)@pep@chromosome:MneLei_Aug2011:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+Nvec:  
+```>(.*?)@pep@supercontig:ASM20922v1:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+Strongylocentrotus:  
+```>(.*?)@pep@supercontig:Spur_3.1:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+Tae:    
+```>(.*?)@pep@chromosome:taeGut3.2.4:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+Tricho:  
+```>(.*?)@pep@scaffold:ASM15027v1:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+Hydra names:  
 
-Sc4wPfr_97.g13.t1
-Sc4wPfr_97 = scaffold
-g13 = gene
-t1 = transcript
+Sc4wPfr_97.g13.t1  
+Sc4wPfr_97 = scaffold  
+g13 = gene  
+t1 = transcript  
 
->(Sc4wPfr_\d+).(g\d+).(t\d+)
-made up protein name as Sc4wPfrg13t1.
+```>(Sc4wPfr_\d+).(g\d+).(t\d+)```  
+made up protein name as Sc4wPfrg13t1.  
 
-Renamed all fastas Genus_simple.fasta
+For all, replace with: >p:\1:s:\2:g:\3:t:\4  
+
+Renamed all fastas Genus_simple.fasta  
 
 
-
-For all, replace with: >p:\1:s:\2:g:\3:t:\4
 
 Downloading genomes:  
 Aqu, Capitella: there is no primary assembly. chose dna.toplevel.fa
@@ -444,7 +444,10 @@ list<-longest.pep.df[,1,drop=FALSE]
 write.csv(list,"list.txt",quote=FALSE,row.names=FALSE)
 ```
 
-Use the list generated from the above chunk with fasta_puller.py to create fastas with only longest pep.
+Use the list generated from the above chunk with fasta_puller.py to create fastas with only longest pep.  
+There are some bugs to smooth out:  
+-must remove rowname from fasta name list by hand  
+-must add '>' to beginning of every fasta name in list  
 
 #Make a master table  
 scaffold  gene  protein genestart geneend 
