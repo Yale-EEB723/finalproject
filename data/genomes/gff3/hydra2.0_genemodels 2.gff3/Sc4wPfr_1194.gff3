@@ -1,0 +1,9 @@
+##gff-version 3
+##Note: See http://song.sourceforge.net
+
+Sc4wPfr_1194	example	contig	1	13368	.	.	.	Name=Sc4wPfr_1194
+
+
+Sc4wPfr_1194	AUGUSTUS	gene	2922	3368	1	-	.	ID=Sc4wPfr_1194.g1429;Name=Sc4wPfr_1194.g1429
+Sc4wPfr_1194	AUGUSTUS	mRNA	2922	3368	1	-	.	ID=Sc4wPfr_1194.g1429.t1;Parent=Sc4wPfr_1194.g1429;Name=Sc4wPfr_1194.g1429.t1
+Sc4wPfr_1194	AUGUSTUS	CDS	2922	3368	1	-	0	Parent=Sc4wPfr_1194.g1429.t1

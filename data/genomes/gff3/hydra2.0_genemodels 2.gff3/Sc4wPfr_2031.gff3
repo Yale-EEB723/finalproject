@@ -1,0 +1,10 @@
+##gff-version 3
+##Note: See http://song.sourceforge.net
+
+Sc4wPfr_2031	example	contig	1	15197	.	.	.	Name=Sc4wPfr_2031
+
+
+Sc4wPfr_2031	AUGUSTUS	gene	3432	5197	0.8	-	.	ID=Sc4wPfr_2031.g11482;Name=Sc4wPfr_2031.g11482
+Sc4wPfr_2031	AUGUSTUS	mRNA	3432	5197	0.8	-	.	ID=Sc4wPfr_2031.g11482.t1;Parent=Sc4wPfr_2031.g11482;Name=Sc4wPfr_2031.g11482.t1
+Sc4wPfr_2031	AUGUSTUS	CDS	3432	4853	1	-	0	Parent=Sc4wPfr_2031.g11482.t1
+Sc4wPfr_2031	AUGUSTUS	CDS	5036	5197	0.8	-	0	Parent=Sc4wPfr_2031.g11482.t1

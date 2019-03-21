@@ -1,0 +1,17 @@
+##gff-version 3
+##Note: See http://song.sourceforge.net
+
+Sc4wPfr_249	example	contig	1	69233	.	.	.	Name=Sc4wPfr_249
+
+
+Sc4wPfr_249	AUGUSTUS	gene	28588	29019	0.66	-	.	ID=Sc4wPfr_249.g826;Name=Sc4wPfr_249.g826
+Sc4wPfr_249	AUGUSTUS	mRNA	28588	29019	0.66	-	.	ID=Sc4wPfr_249.g826.t1;Parent=Sc4wPfr_249.g826;Name=Sc4wPfr_249.g826.t1
+Sc4wPfr_249	AUGUSTUS	CDS	28588	29019	0.66	-	0	Parent=Sc4wPfr_249.g826.t1
+
+Sc4wPfr_249	AUGUSTUS	gene	57045	57323	0.47	-	.	ID=Sc4wPfr_249.g827;Name=Sc4wPfr_249.g827
+Sc4wPfr_249	AUGUSTUS	mRNA	57045	57323	0.47	-	.	ID=Sc4wPfr_249.g827.t1;Parent=Sc4wPfr_249.g827;Name=Sc4wPfr_249.g827.t1
+Sc4wPfr_249	AUGUSTUS	CDS	57045	57323	0.47	-	0	Parent=Sc4wPfr_249.g827.t1
+
+Sc4wPfr_249	AUGUSTUS	gene	57350	59233	0.98	-	.	ID=Sc4wPfr_249.g828;Name=Sc4wPfr_249.g828
+Sc4wPfr_249	AUGUSTUS	mRNA	57350	59233	0.98	-	.	ID=Sc4wPfr_249.g828.t1;Parent=Sc4wPfr_249.g828;Name=Sc4wPfr_249.g828.t1
+Sc4wPfr_249	AUGUSTUS	CDS	57350	59233	0.98	-	0	Parent=Sc4wPfr_249.g828.t1

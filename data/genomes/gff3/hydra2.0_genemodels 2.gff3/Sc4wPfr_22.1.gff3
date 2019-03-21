@@ -1,0 +1,21 @@
+##gff-version 3
+##Note: See http://song.sourceforge.net
+
+Sc4wPfr_22.1	example	contig	1	43217	.	.	.	Name=Sc4wPfr_22.1
+
+
+Sc4wPfr_22.1	AUGUSTUS	gene	27392	29249	0.33	-	.	ID=Sc4wPfr_22.1.g6581;Name=Sc4wPfr_22.1.g6581
+Sc4wPfr_22.1	AUGUSTUS	mRNA	27392	29249	0.33	-	.	ID=Sc4wPfr_22.1.g6581.t1;Parent=Sc4wPfr_22.1.g6581;Name=Sc4wPfr_22.1.g6581.t1
+Sc4wPfr_22.1	AUGUSTUS	CDS	27392	27561	0.58	-	2	Parent=Sc4wPfr_22.1.g6581.t1
+Sc4wPfr_22.1	AUGUSTUS	CDS	28208	28281	0.6	-	1	Parent=Sc4wPfr_22.1.g6581.t1
+Sc4wPfr_22.1	AUGUSTUS	CDS	28678	28685	0.55	-	0	Parent=Sc4wPfr_22.1.g6581.t1
+Sc4wPfr_22.1	AUGUSTUS	CDS	28831	28988	0.88	-	2	Parent=Sc4wPfr_22.1.g6581.t1
+Sc4wPfr_22.1	AUGUSTUS	CDS	29081	29249	0.86	-	0	Parent=Sc4wPfr_22.1.g6581.t1
+
+Sc4wPfr_22.1	AUGUSTUS	gene	29355	29903	0.9	-	.	ID=Sc4wPfr_22.1.g6582;Name=Sc4wPfr_22.1.g6582
+Sc4wPfr_22.1	AUGUSTUS	mRNA	29355	29903	0.9	-	.	ID=Sc4wPfr_22.1.g6582.t1;Parent=Sc4wPfr_22.1.g6582;Name=Sc4wPfr_22.1.g6582.t1
+Sc4wPfr_22.1	AUGUSTUS	CDS	29355	29903	0.9	-	0	Parent=Sc4wPfr_22.1.g6582.t1
+
+Sc4wPfr_22.1	AUGUSTUS	gene	32663	33217	0.52	+	.	ID=Sc4wPfr_22.1.g6583;Name=Sc4wPfr_22.1.g6583
+Sc4wPfr_22.1	AUGUSTUS	mRNA	32663	33217	0.52	+	.	ID=Sc4wPfr_22.1.g6583.t1;Parent=Sc4wPfr_22.1.g6583;Name=Sc4wPfr_22.1.g6583.t1
+Sc4wPfr_22.1	AUGUSTUS	CDS	32663	33217	0.52	+	0	Parent=Sc4wPfr_22.1.g6583.t1

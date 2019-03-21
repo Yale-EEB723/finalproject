@@ -1,0 +1,9 @@
+##gff-version 3
+##Note: See http://song.sourceforge.net
+
+Sc4wPfr_775	example	contig	1	25800	.	.	.	Name=Sc4wPfr_775
+
+
+Sc4wPfr_775	AUGUSTUS	gene	15279	15800	1	+	.	ID=Sc4wPfr_775.g26043;Name=Sc4wPfr_775.g26043
+Sc4wPfr_775	AUGUSTUS	mRNA	15279	15800	1	+	.	ID=Sc4wPfr_775.g26043.t1;Parent=Sc4wPfr_775.g26043;Name=Sc4wPfr_775.g26043.t1
+Sc4wPfr_775	AUGUSTUS	CDS	15279	15800	1	+	0	Parent=Sc4wPfr_775.g26043.t1

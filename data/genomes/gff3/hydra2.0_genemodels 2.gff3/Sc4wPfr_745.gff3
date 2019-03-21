@@ -1,0 +1,9 @@
+##gff-version 3
+##Note: See http://song.sourceforge.net
+
+Sc4wPfr_745	example	contig	1	65646	.	.	.	Name=Sc4wPfr_745
+
+
+Sc4wPfr_745	AUGUSTUS	gene	55323	55646	0.74	-	.	ID=Sc4wPfr_745.g11319;Name=Sc4wPfr_745.g11319
+Sc4wPfr_745	AUGUSTUS	mRNA	55323	55646	0.74	-	.	ID=Sc4wPfr_745.g11319.t1;Parent=Sc4wPfr_745.g11319;Name=Sc4wPfr_745.g11319.t1
+Sc4wPfr_745	AUGUSTUS	CDS	55323	55646	0.74	-	0	Parent=Sc4wPfr_745.g11319.t1

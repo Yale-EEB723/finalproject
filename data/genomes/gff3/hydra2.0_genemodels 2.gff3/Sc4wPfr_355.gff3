@@ -1,0 +1,9 @@
+##gff-version 3
+##Note: See http://song.sourceforge.net
+
+Sc4wPfr_355	example	contig	1	11040	.	.	.	Name=Sc4wPfr_355
+
+
+Sc4wPfr_355	AUGUSTUS	gene	615	1040	0.37	+	.	ID=Sc4wPfr_355.g28749;Name=Sc4wPfr_355.g28749
+Sc4wPfr_355	AUGUSTUS	mRNA	615	1040	0.37	+	.	ID=Sc4wPfr_355.g28749.t1;Parent=Sc4wPfr_355.g28749;Name=Sc4wPfr_355.g28749.t1
+Sc4wPfr_355	AUGUSTUS	CDS	615	1040	0.37	+	0	Parent=Sc4wPfr_355.g28749.t1

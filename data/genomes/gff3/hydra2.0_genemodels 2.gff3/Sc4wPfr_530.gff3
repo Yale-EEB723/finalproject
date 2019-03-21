@@ -1,0 +1,13 @@
+##gff-version 3
+##Note: See http://song.sourceforge.net
+
+Sc4wPfr_530	example	contig	1	43887	.	.	.	Name=Sc4wPfr_530
+
+
+Sc4wPfr_530	AUGUSTUS	gene	10241	11389	0.98	+	.	ID=Sc4wPfr_530.g6472;Name=Sc4wPfr_530.g6472
+Sc4wPfr_530	AUGUSTUS	mRNA	10241	11389	0.98	+	.	ID=Sc4wPfr_530.g6472.t1;Parent=Sc4wPfr_530.g6472;Name=Sc4wPfr_530.g6472.t1
+Sc4wPfr_530	AUGUSTUS	CDS	10241	11389	0.98	+	0	Parent=Sc4wPfr_530.g6472.t1
+
+Sc4wPfr_530	AUGUSTUS	gene	33294	33887	0.31	+	.	ID=Sc4wPfr_530.g6473;Name=Sc4wPfr_530.g6473
+Sc4wPfr_530	AUGUSTUS	mRNA	33294	33887	0.31	+	.	ID=Sc4wPfr_530.g6473.t1;Parent=Sc4wPfr_530.g6473;Name=Sc4wPfr_530.g6473.t1
+Sc4wPfr_530	AUGUSTUS	CDS	33294	33887	0.31	+	0	Parent=Sc4wPfr_530.g6473.t1

@@ -1,0 +1,13 @@
+##gff-version 3
+##Note: See http://song.sourceforge.net
+
+Sc4wPfr_571	example	contig	1	57449	.	.	.	Name=Sc4wPfr_571
+
+
+Sc4wPfr_571	AUGUSTUS	gene	9918	47449	0.72	+	.	ID=Sc4wPfr_571.g19370;Name=Sc4wPfr_571.g19370
+Sc4wPfr_571	AUGUSTUS	mRNA	9918	47449	0.72	+	.	ID=Sc4wPfr_571.g19370.t1;Parent=Sc4wPfr_571.g19370;Name=Sc4wPfr_571.g19370.t1
+Sc4wPfr_571	AUGUSTUS	CDS	9918	9938	1	+	0	Parent=Sc4wPfr_571.g19370.t1
+Sc4wPfr_571	AUGUSTUS	CDS	17268	17316	1	+	0	Parent=Sc4wPfr_571.g19370.t1
+Sc4wPfr_571	AUGUSTUS	CDS	29101	29571	1	+	2	Parent=Sc4wPfr_571.g19370.t1
+Sc4wPfr_571	AUGUSTUS	CDS	47071	47128	0.99	+	2	Parent=Sc4wPfr_571.g19370.t1
+Sc4wPfr_571	AUGUSTUS	CDS	47269	47449	0.72	+	1	Parent=Sc4wPfr_571.g19370.t1

@@ -1,0 +1,18 @@
+##gff-version 3
+##Note: See http://song.sourceforge.net
+
+Sc4wPfr_795	example	contig	1	42548	.	.	.	Name=Sc4wPfr_795
+
+
+Sc4wPfr_795	AUGUSTUS	gene	5406	5810	0.36	+	.	ID=Sc4wPfr_795.g8166;Name=Sc4wPfr_795.g8166
+Sc4wPfr_795	AUGUSTUS	mRNA	5406	5810	0.36	+	.	ID=Sc4wPfr_795.g8166.t1;Parent=Sc4wPfr_795.g8166;Name=Sc4wPfr_795.g8166.t1
+Sc4wPfr_795	AUGUSTUS	CDS	5406	5586	0.39	+	0	Parent=Sc4wPfr_795.g8166.t1
+Sc4wPfr_795	AUGUSTUS	CDS	5653	5810	0.56	+	2	Parent=Sc4wPfr_795.g8166.t1
+
+Sc4wPfr_795	AUGUSTUS	gene	7326	7715	0.93	+	.	ID=Sc4wPfr_795.g8167;Name=Sc4wPfr_795.g8167
+Sc4wPfr_795	AUGUSTUS	mRNA	7326	7715	0.93	+	.	ID=Sc4wPfr_795.g8167.t1;Parent=Sc4wPfr_795.g8167;Name=Sc4wPfr_795.g8167.t1
+Sc4wPfr_795	AUGUSTUS	CDS	7326	7715	0.93	+	0	Parent=Sc4wPfr_795.g8167.t1
+
+Sc4wPfr_795	AUGUSTUS	gene	31739	32548	0.99	+	.	ID=Sc4wPfr_795.g8168;Name=Sc4wPfr_795.g8168
+Sc4wPfr_795	AUGUSTUS	mRNA	31739	32548	0.99	+	.	ID=Sc4wPfr_795.g8168.t1;Parent=Sc4wPfr_795.g8168;Name=Sc4wPfr_795.g8168.t1
+Sc4wPfr_795	AUGUSTUS	CDS	31739	32548	0.99	+	0	Parent=Sc4wPfr_795.g8168.t1

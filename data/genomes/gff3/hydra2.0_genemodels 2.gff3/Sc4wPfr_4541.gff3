@@ -1,0 +1,11 @@
+##gff-version 3
+##Note: See http://song.sourceforge.net
+
+Sc4wPfr_4541	example	contig	1	18690	.	.	.	Name=Sc4wPfr_4541
+
+
+Sc4wPfr_4541	AUGUSTUS	gene	7178	8690	0.14	+	.	ID=Sc4wPfr_4541.g15339;Name=Sc4wPfr_4541.g15339
+Sc4wPfr_4541	AUGUSTUS	mRNA	7178	8690	0.14	+	.	ID=Sc4wPfr_4541.g15339.t1;Parent=Sc4wPfr_4541.g15339;Name=Sc4wPfr_4541.g15339.t1
+Sc4wPfr_4541	AUGUSTUS	CDS	7178	7253	0.96	+	0	Parent=Sc4wPfr_4541.g15339.t1
+Sc4wPfr_4541	AUGUSTUS	CDS	7368	8559	0.14	+	2	Parent=Sc4wPfr_4541.g15339.t1
+Sc4wPfr_4541	AUGUSTUS	CDS	8654	8690	0.46	+	1	Parent=Sc4wPfr_4541.g15339.t1

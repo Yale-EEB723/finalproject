@@ -1,0 +1,19 @@
+##gff-version 3
+##Note: See http://song.sourceforge.net
+
+Sc4wPfr_393	example	contig	1	13438	.	.	.	Name=Sc4wPfr_393
+
+
+Sc4wPfr_393	AUGUSTUS	gene	55	2089	0.96	-	.	ID=Sc4wPfr_393.g732;Name=Sc4wPfr_393.g732
+Sc4wPfr_393	AUGUSTUS	mRNA	55	2089	0.96	-	.	ID=Sc4wPfr_393.g732.t1;Parent=Sc4wPfr_393.g732;Name=Sc4wPfr_393.g732.t1
+Sc4wPfr_393	AUGUSTUS	CDS	55	110	1	-	2	Parent=Sc4wPfr_393.g732.t1
+Sc4wPfr_393	AUGUSTUS	CDS	203	392	0.99	-	0	Parent=Sc4wPfr_393.g732.t1
+Sc4wPfr_393	AUGUSTUS	CDS	794	1029	1	-	2	Parent=Sc4wPfr_393.g732.t1
+Sc4wPfr_393	AUGUSTUS	CDS	1206	1298	1	-	2	Parent=Sc4wPfr_393.g732.t1
+Sc4wPfr_393	AUGUSTUS	CDS	1516	1644	1	-	2	Parent=Sc4wPfr_393.g732.t1
+Sc4wPfr_393	AUGUSTUS	CDS	2059	2089	0.97	-	0	Parent=Sc4wPfr_393.g732.t1
+
+Sc4wPfr_393	AUGUSTUS	gene	2647	3438	0.6	-	.	ID=Sc4wPfr_393.g733;Name=Sc4wPfr_393.g733
+Sc4wPfr_393	AUGUSTUS	mRNA	2647	3438	0.6	-	.	ID=Sc4wPfr_393.g733.t1;Parent=Sc4wPfr_393.g733;Name=Sc4wPfr_393.g733.t1
+Sc4wPfr_393	AUGUSTUS	CDS	2647	2906	0.97	-	2	Parent=Sc4wPfr_393.g733.t1
+Sc4wPfr_393	AUGUSTUS	CDS	3228	3438	0.61	-	0	Parent=Sc4wPfr_393.g733.t1
