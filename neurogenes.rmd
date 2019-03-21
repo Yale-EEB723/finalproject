@@ -474,12 +474,10 @@ a9c5697b4a79c7b8a6350090362bc26c  Strongylocentrotus_longestpep.fasta
 290e6b7501f1c322b3b81c6cf0501f53  Taeniopygia_longestpep.fasta
 bdc7fb0a4c85cfa8a1308a62d747f734  Trichoplax_longestpep.fasta
 
-Submitted 00-catalog_compgen on farnam! 30691173. Completed exit 0.  
-Submitted 01-immport_compgen (Mar20): 30691214,
+submit 02 -30750716
 
 Can _really_ see myself having trouble handling Hydra - gff3 file for each scaffold, looks difficult to combine into a gff3. Send in a run with no hydra.  
-  - catalog.sh: 30693402. Good.  
-  - import.sh: 30693473  
+submit 02- 30750718
 
 #Parse agalma output  
 -Need the homology ids connected to *gene* id, but proteins were used for agalma analysis.  
@@ -516,8 +514,11 @@ Should double check, but as far as I can tell GFF3 uses all predefined terms - p
 ```{r}
 #Parse gff file to extract gene names:  
 gff3="data/sample_data/gff3_sample.gff3"
-#parse gff3 and create new df with only seqid, type, start and end. Keep start and end coords for later analyses.
-contig.gene.df <- ape::read.gff(file=gff3, GFF3=TRUE) %>% select(.,"seqid","type","start","end") %>% filter(.,type == "gene")
+
+contig.gene.df <- ape::read.gff(file=gff3, GFF3=TRUE) %>% select(.,"seqid","type","start","end","attributes") %>% filter(.,type == "gene")
+
+#Parse out the gene_id from the attributes 
+contig.gene.df$gene_id<-gsub(".*gene_id=(.*);.*","\\1",contig.gene.df$attributes)
 
 ```
 
