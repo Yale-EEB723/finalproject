@@ -305,21 +305,7 @@ Rename .fa to .fasta (I think agalma had a problem with fa?)
 Agalma cuts off contig names after first space. But contig names from Ensembl are very informative (eg gene, transcript name, location on chromosome). Replace all spaces with @  (don't use symbols in headers : _- / ; or * which is interpreted by grep...).  
 - regex: find: ; replace: *   
 
-pep file MD5s  on farnam:  
-bc4fe9bd13468ce315a92b355770f51d  Amphimedon_queenslandica.Aqu1.pep.all.fasta  
-fa7f034a560b8d006f6bbedf9e6e47d4  Capitella_teleta.Capitella_teleta_v1.0.pep.all.fasta  
-0e97e42a12fe491675a7d5969dfaf36e  Danio_rerio.GRCz11.pep.all.fasta  
-2efa5d8510a3f3ee85742568a8eaefa4  Drosophila_melanogaster.BDGP6.pep.all.fasta  
-630d31e402bbc853aa6df1cf47bd6ab6  Helobdella_robusta.Helro1.pep.all.fasta  
-d6b56e455745b1f9025cd8b96e8af2ac  Homo_sapiens.GRCh38.pep.all.fasta  
-f68d59385701997e7fef4c6b74d20b2a  hydra2.0_genemodels.aa.fasta  
-e6e5bd7f636b897780addb0295fc06ae  Lottia_gigantea.Lotgi1.pep.all.fasta  
-53a6be259502ccd3350c5440cd65b1a5  Mnemiopsis_leidyi.MneLei_Aug2011.pep.all.fasta  
-e281b4e654059be06810404e9372099d  Nematostella_vectensis.ASM20922v1.pep.all.fasta  
-3bf67e6dc2fec0849a973182825ae861  Strongylocentrotus_purpuratus.Spur_3.1.pep.all.fasta  
-58d926ffcb37932fc3a0a6203264f96e  Taeniopygia_guttata.taeGut3.2.4.pep.all.fasta  
-cc34c2c0b4eccd6769ceb46d4eca1c9b  Trichoplax_adhaerens.ASM15027v1.pep.all.fasta  
-
+pep file MD5s  on farnam:  MADE NEW Fastas OF ONLY LONGEST PEPS! See below.  
 
 _Run agalma_:   
 Install agalma 2.0 onto farnam. Farnam currently has 1.0.1.  
@@ -391,7 +377,6 @@ For all, replace with: >p:\1:s:\2:g:\3:t:\4
 Renamed all fastas Genus_simple.fasta  
 
 
-
 Downloading genomes:  
 Aqu, Capitella: there is no primary assembly. chose dna.toplevel.fa
 
@@ -410,12 +395,12 @@ Below code modified from:
 #~~~~~ Beginning of 'story''s code.~~~~~
 
 ## read your fasta in as Biostrings object
-fasta.s <- readDNAStringSet("longest_pep_sample.fasta")
+fasta.s <- readDNAStringSet("./data/genomes/tmp/simplified/Hydra_simple.fasta")
 
 ## get the read names (in your case it has the isoform info)
 names.fasta <- names(fasta.s)
 
-## extract only the relevant gene and isoform id (split name by the period symbol)
+## extract only the relevant gene and isoform (JM: aka pep) id (split name by the period symbol)
 #JM: modify line to fit my name format
 gene.iso <- sapply(names.fasta,function(j) cbind(unlist(strsplit(j,'\\:'))[1:8]))
 
@@ -441,13 +426,58 @@ longest.pep.df <-gene.iso.df%>%group_by(geneID)%>%mutate(the_rank = rank(-width,
 
 list<-longest.pep.df[,1,drop=FALSE]
 #wait why doesn't col.names=FALSE remove the column name?? Oh well.
-write.csv(list,"list.txt",quote=FALSE,row.names=FALSE)
+write.csv(list,"Hydra_longestpep.txt",quote=FALSE,row.names=FALSE)
 ```
+Notes:  
 
-Use the list generated from the above chunk with fasta_puller.py to create fastas with only longest pep.  
-There are some bugs to smooth out:  
--must remove rowname from fasta name list by hand  
+Check the number of proteins in list of longest pep
+Then check that the R chunk extracted exactly 1 pep per gene by finding the number of uniq genes in pep fasta:  
+```grep ">" Amphimedon_simple.fasta |cut -f 6 -d ":"|sort|uniq|wc -l```  
+Compare to original number pep in pep file.
+
+Animals with > pep vs genes:   
+Danio (30,313 genes vs  52,089 pep)    
+Drosophila (13,931 genes, 30,493 pep)    
+Homo (23,358 gene, 109095 pep)  
+Nematostella (24773 gene vs 24780 pep)    
+Strongylocentrotus (28842 genes, 28886 pep)  
+Taeniopygia (17488 genes, 18204 pep)  
+Hydra (33820 genes, 36059 pep)  
+
+*fasta_puller.py*  
+Python script used to pull out particular fasta sequences from a list of fasta header names. I tried really hard to do this in R but, well...... -_-.         
+Use the list generated from the above chunk with fasta_puller.py to create fastas with only longest pep.    
+
+There are some bugs to smooth out:    
+List of sequence names must be in form of a single column, with no column name and names must match fasta exactly.  
+-must remove rowname from longest pep list by hand    
 -must add '>' to beginning of every fasta name in list  
+fasta_puller.py cycles through the list and compares to every sequences so it is admittedly slow.  
+
+usage: fasta_puller.py <listofseqnames> <fastafile.fasta>    
+
+Double check that the number of sequences pulled out matches number of genes/longest pep list.    
+
+Resulting files after fasta puller: Genus_longestpep.fasta  
+md5:
+7c2ad7bbbb5a5574ce5aee5451ec39ae  Amphimedon_longestpep.fasta
+aef8c9746ef4009ea2e01014c3850ef2  Capitella_longestpep.fasta
+a1c97d211f66b7660c2fb917d567fd37  Danio_longestpep.fasta
+05eee073a820c76803bb08e228a43d1a  Drosophila_longestpep.fasta
+793004cad89e0930bf78d2b7786e3312  Helobdella_longestpep.fasta
+f36e9f9cdfa1f74fedde6d9f48547f2d  Homo_longestpep.fasta
+d59303179be7f87143a9385528a940af  Hydra_longestpep.fasta
+e03f004fa79d98c4ec47eea90b2871ea  Lottia_longestpep.fasta
+309f7a59194c715e7f73d9d3ab6f1168  Mnemiopsis_longestpep.fasta
+24272681d1bed44ac70a53e7a614c036  Nematostella_longestpep.fasta
+a9c5697b4a79c7b8a6350090362bc26c  Strongylocentrotus_longestpep.fasta
+290e6b7501f1c322b3b81c6cf0501f53  Taeniopygia_longestpep.fasta
+bdc7fb0a4c85cfa8a1308a62d747f734  Trichoplax_longestpep.fasta
+
+Submitted 00-catalog_compgen on farnam! 30691173. Completed exit 0.  
+Submitted 01-immport_compgen (Mar20): 30691214,
+
+
 
 #Make a master table  
 scaffold  gene  protein genestart geneend 
