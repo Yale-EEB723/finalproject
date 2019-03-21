@@ -1,9 +1,0 @@
-##gff-version 3
-##Note: See http://song.sourceforge.net
-
-Sc4wPfr_785	example	contig	1	12000	.	.	.	Name=Sc4wPfr_785
-
-
-Sc4wPfr_785	AUGUSTUS	gene	1476	2000	0.87	-	.	ID=Sc4wPfr_785.g16496;Name=Sc4wPfr_785.g16496
-Sc4wPfr_785	AUGUSTUS	mRNA	1476	2000	0.87	-	.	ID=Sc4wPfr_785.g16496.t1;Parent=Sc4wPfr_785.g16496;Name=Sc4wPfr_785.g16496.t1
-Sc4wPfr_785	AUGUSTUS	CDS	1476	2000	0.87	-	0	Parent=Sc4wPfr_785.g16496.t1

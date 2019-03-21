@@ -1,9 +1,0 @@
-##gff-version 3
-##Note: See http://song.sourceforge.net
-
-Sc4wPfr_3290	example	contig	1	12304	.	.	.	Name=Sc4wPfr_3290
-
-
-Sc4wPfr_3290	AUGUSTUS	gene	1996	2304	0.92	-	.	ID=Sc4wPfr_3290.g15184;Name=Sc4wPfr_3290.g15184
-Sc4wPfr_3290	AUGUSTUS	mRNA	1996	2304	0.92	-	.	ID=Sc4wPfr_3290.g15184.t1;Parent=Sc4wPfr_3290.g15184;Name=Sc4wPfr_3290.g15184.t1
-Sc4wPfr_3290	AUGUSTUS	CDS	1996	2304	0.92	-	0	Parent=Sc4wPfr_3290.g15184.t1
