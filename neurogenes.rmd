@@ -509,10 +509,51 @@ To run the database query:
 
 
 #Make a master table  
-Should double check, but as far as I can tell GFF3 uses all predefined terms - probably can't add anything like a homology_id column without breaking the format.  
+GFF3 seems to be a flat file designed to have very defined vocabulary, so should make a master table instead of adding to GFF3.
+
+Turns out I am an idiot and the p:blah:s:blah:g:blah:t:blah I came up with for the agalma protein names - really needed the gene names so that I can join them into the Master table. So just regexed out the gene names. Happily easy to parse because of my naming pattern = compagen_homologs_nohydra_geneNames.csv.  
+```(.*,)p:.*?:s:.*?:g:(.*?):t:.*?(,.*)``` and ```$1$2$3```.  
+
 
 ```{r MASTA TABLE}
-#Parse gff file to extract gene names:  
+#set up variables
+contig.gene.df_list<-""
+count<-0
+
+#set up empty df to rbind to
+all.df<-data.frame(matrix(ncol=5,nrow=0))
+names<-c("seqid","type","start","end","attributes")
+colnames(all.df)<-names
+
+#set up file names to loop through
+gff3_dir="data/genomes/gff3/"
+gff3=c("Amphimedon_queenslandica.Aqu1.42.gff3","Capitella_teleta.Capitella_teleta_v1.0.42.gff3","Danio_rerio.GRCz11.95.gff3","Drosophila_melanogaster.BDGP6.95.gff3","Helobdella_robusta.Helro1.42.gff3","Homo_sapiens.GRCh38.95.gff3","Lottia_gigantea.Lotgi1.42.gff3","Mnemiopsis_leidyi.MneLei_Aug2011.42.gff3","Nematostella_vectensis.ASM20922v1.42.gff3","Strongylocentrotus_purpuratus.Spur_3.1.42.gff3","Taeniopygia_guttata.taeGut3.2.4.95.gff3","Trichoplax_adhaerens.ASM15027v1.42.gff3")
+#gff3=c("Amphimedon_queenslandica.Aqu1.42.gff3","Capitella_teleta.Capitella_teleta_v1.0.42.gff3")
+  
+for (blah in gff3)
+{
+count=count+1
+gff3_path<-paste0(gff3_dir,blah)
+contig.gene.df <- ape::read.gff(file=gff3_path, GFF3=TRUE) %>% select(.,"seqid","type","start","end","attributes") %>% filter(.,type == "gene")
+all.df<-bind_rows(all.df,contig.gene.df)
+}
+
+#Parse out the gene_id from the attributes 
+all.df$gene<-gsub(".*gene_id=(.*?);.*","\\1",all.df$attributes)
+
+#Begin contstruction of MASTAAA! table.
+master.table<-select(all.df,"seqid","start","end","gene")
+
+#Read in amalga homologs csv
+agalma.homologs<-read.csv("compgen_homologs_nohydra_geneNames.csv",header=TRUE,sep=",")
+
+#left join because need to know which genes have no homology too.
+final.master.table<-left_join(master.table,agalma.homologs)%>%select(.,"seqid","start","end","gene","homology_id","catalog_id")
+
+
+```
+
+```{r}
 gff3="data/sample_data/gff3_sample.gff3"
 
 contig.gene.df <- ape::read.gff(file=gff3, GFF3=TRUE) %>% select(.,"seqid","type","start","end","attributes") %>% filter(.,type == "gene")
@@ -523,11 +564,11 @@ contig.gene.df$gene_id<-gsub(".*gene_id=(.*);.*","\\1",contig.gene.df$attributes
 #Begin contstruction of MASTAAA table.
 master.table<-select(contig.gene.df,"seqid","start","end","gene_id")
 
-homology_results<-read.csv(file="SQLresults.csv", header=TRUE, sep=",")
+homology_results<-read.csv(file=".csv", header=TRUE, sep=",")
 
 
 
-#LEFT JOOOOOOIN!
+#LEFT JOIN
 
 
 ```
