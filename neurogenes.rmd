@@ -528,10 +528,9 @@ Spu	224933:253919
 Tae	253920:271407  
 Tri	271408:282927  
 
+Note that things like "ncRNA_gene" in gff3 files also have "gene_id=", but in the below R code I filter first by just "gene", which is why grep "gene_id" GFF3.gff3 will bring up more lines than are in my table. Spot checked table - does not appear to have any ncRNA_genes.  
 
 ```{r MASTA TABLE}
-#set up variables
-count<-0
 
 #set up empty df to rbind to
 all.df<-data.frame(matrix(ncol=5,nrow=0))
@@ -541,11 +540,9 @@ colnames(all.df)<-names
 #set up file names to loop through
 gff3_dir="data/genomes/gff3/"
 gff3=c("Amphimedon_queenslandica.Aqu1.42.gff3","Capitella_teleta.Capitella_teleta_v1.0.42.gff3","Danio_rerio.GRCz11.95.gff3","Drosophila_melanogaster.BDGP6.95.gff3","Helobdella_robusta.Helro1.42.gff3","Homo_sapiens.GRCh38.95.gff3","Lottia_gigantea.Lotgi1.42.gff3","Mnemiopsis_leidyi.MneLei_Aug2011.42.gff3","Nematostella_vectensis.ASM20922v1.42.gff3","Strongylocentrotus_purpuratus.Spur_3.1.42.gff3","Taeniopygia_guttata.taeGut3.2.4.95.gff3","Trichoplax_adhaerens.ASM15027v1.42.gff3")
-#gff3=c("Amphimedon_queenslandica.Aqu1.42.gff3","Capitella_teleta.Capitella_teleta_v1.0.42.gff3")
-  
+
 for (blah in gff3)
 {
-count=count+1
 gff3_path<-paste0(gff3_dir,blah)
 contig.gene.df <- ape::read.gff(file=gff3_path, GFF3=TRUE) %>% select(.,"seqid","type","start","end","attributes") %>% filter(.,type == "gene")
 all.df<-bind_rows(all.df,contig.gene.df)
@@ -571,27 +568,10 @@ final.master.table$animal<-c(rep.int("Amphimedon_queenslandica",43615),rep.int("
 
 ```
 
-```{r}
-gff3="data/sample_data/gff3_sample.gff3"
-
-contig.gene.df <- ape::read.gff(file=gff3, GFF3=TRUE) %>% select(.,"seqid","type","start","end","attributes") %>% filter(.,type == "gene")
-
-#Parse out the gene_id from the attributes 
-contig.gene.df$gene_id<-gsub(".*gene_id=(.*);.*","\\1",contig.gene.df$attributes)
-
-#Begin contstruction of MASTAAA table.
-master.table<-select(contig.gene.df,"seqid","start","end","gene_id")
-
-homology_results<-read.csv(file=".csv", header=TRUE, sep=",")
-
-
-
-#LEFT JOIN
-
-
-```
 
 #Do the analysis  
+Order genes on scaffold by start bp and assign number sequentially?
+
 For each gene in the reference determine if it doesn't have a homolog in the comparison genome.
   Search all genes of a reference genome for homology id
 Find the scaffold in the reference genome and create a list of all genes on scaffold ordered by their 5" start bp location.
