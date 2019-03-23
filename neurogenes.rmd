@@ -531,7 +531,6 @@ Tri	271408:282927
 
 ```{r MASTA TABLE}
 #set up variables
-contig.gene.df_list<-""
 count<-0
 
 #set up empty df to rbind to
@@ -565,7 +564,7 @@ agalma.homologs<-read.csv("compgen_homologs_nohydra_geneNames.csv",header=TRUE,s
 final.master.table<-left_join(master.table,agalma.homologs)%>%select(.,"seqid","start","end","gene","homology_id","catalog_id")
 
 #need to add animal ids"
-final.master.table$animal<-c(rep.int("Amphimedon",3),rep.int("Capitella",5))
+final.master.table$animal<-c(rep.int("Amphimedon_queenslandica",43615),rep.int("Capitella_telata",32175),rep.int("Danio_rerio",25606),rep.int("Drosophila_melanogaster",13931),rep.int("Helobdella_robusta",23432),rep.int("Homo_sapiens",21492),rep.int("Lottia_gigantea",23349),rep.int("Mnemiopsis_leidyi",16559),rep.int("Nematostella_vectensis",24773),rep.int("Strongylocentrotus_purpuratus",28987),rep.int("Taeniopygia_guttata",17488),rep.int("Trichoplax_adhaerens",11520))
 ```
 
 ```{r}
