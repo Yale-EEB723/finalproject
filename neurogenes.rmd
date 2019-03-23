@@ -511,7 +511,7 @@ To run the database query:
 #Make a master table  
 Should double check, but as far as I can tell GFF3 uses all predefined terms - probably can't add anything like a homology_id column without breaking the format.  
 
-```{r}
+```{r MASTA TABLE}
 #Parse gff file to extract gene names:  
 gff3="data/sample_data/gff3_sample.gff3"
 
@@ -519,6 +519,16 @@ contig.gene.df <- ape::read.gff(file=gff3, GFF3=TRUE) %>% select(.,"seqid","type
 
 #Parse out the gene_id from the attributes 
 contig.gene.df$gene_id<-gsub(".*gene_id=(.*);.*","\\1",contig.gene.df$attributes)
+
+#Begin contstruction of MASTAAA table.
+master.table<-select(contig.gene.df,"seqid","start","end","gene_id")
+
+homology_results<-read.csv(file="SQLresults.csv", header=TRUE, sep=",")
+
+
+
+#LEFT JOOOOOOIN!
+
 
 ```
 
