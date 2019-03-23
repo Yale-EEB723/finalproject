@@ -514,6 +514,20 @@ GFF3 seems to be a flat file designed to have very defined vocabulary, so should
 Turns out I am an idiot and the p:blah:s:blah:g:blah:t:blah I came up with for the agalma protein names - really needed the gene names so that I can join them into the Master table. So just regexed out the gene names. Happily easy to parse because of my naming pattern = compagen_homologs_nohydra_geneNames.csv.  
 ```(.*,)p:.*?:s:.*?:g:(.*?):t:.*?(,.*)``` and ```$1$2$3```.  
 
+Need to add a column to indicate which animal each gene came from (not all scaffold/gene names consistent). Here are the rownumbers for each animal:  
+Aqu 	1:43615  
+Capt	43616:75790  
+Danio	75791:101396  
+Drosophila	101397:115327  
+Helo	115328:138759  
+Homo	138760:160251  
+Lotgi	160252:183600    
+Mle	183601:200159  
+Nve	200160:224932  
+Spu	224933:253919  
+Tae	253920:271407  
+Tri	271408:282927  
+
 
 ```{r MASTA TABLE}
 #set up variables
@@ -550,7 +564,8 @@ agalma.homologs<-read.csv("compgen_homologs_nohydra_geneNames.csv",header=TRUE,s
 #left join because need to know which genes have no homology too.
 final.master.table<-left_join(master.table,agalma.homologs)%>%select(.,"seqid","start","end","gene","homology_id","catalog_id")
 
-
+#need to add animal ids"
+final.master.table$animal<-c(rep.int("Amphimedon",3),rep.int("Capitella",5))
 ```
 
 ```{r}
