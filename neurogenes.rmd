@@ -613,6 +613,8 @@ dist.matrix<-daisy(contingency,metric="gower",stand=FALSE)
 hac<-agnes(dist.matrix,diss=TRUE)
 plot(hac)
 
+library(CrossClustering)
+cross.clust<-cc_crossclustering(dist.matrix,out=FALSE)
 
 ```
 
