@@ -570,14 +570,14 @@ all.df$gene<-gsub(".*gene_id=(.*?);.*","\\1",all.df$attributes)
 #Begin contstruction of MASTAAA! table.
 master.table<-select(all.df,"seqid","start","end","gene")
 
+#need to add animal ids"
+master.table$animal<-c(rep.int("Amphimedon_queenslandica",43615),rep.int("Capitella_telata",32175),rep.int("Danio_rerio",25606),rep.int("Drosophila_melanogaster",13931),rep.int("Helobdella_robusta",23432),rep.int("Homo_sapiens",21492),rep.int("Lottia_gigantea",23349),rep.int("Mnemiopsis_leidyi",16559),rep.int("Nematostella_vectensis",24773),rep.int("Strongylocentrotus_purpuratus",28987),rep.int("Taeniopygia_guttata",17488),rep.int("Trichoplax_adhaerens",11520))
+
 #Read in amalga homologs csv
 agalma.homologs<-read.csv("compgen_homologs_nohydra_geneNames.csv",header=TRUE,sep=",")
 
 #left join because need to know which genes have no homology too.
-final.master.table<-left_join(master.table,agalma.homologs)%>%select(.,"seqid","start","end","gene","homology_id","catalog_id")
-
-#need to add animal ids"
-final.master.table$animal<-c(rep.int("Amphimedon_queenslandica",43615),rep.int("Capitella_telata",32175),rep.int("Danio_rerio",25606),rep.int("Drosophila_melanogaster",13931),rep.int("Helobdella_robusta",23432),rep.int("Homo_sapiens",21492),rep.int("Lottia_gigantea",23349),rep.int("Mnemiopsis_leidyi",16559),rep.int("Nematostella_vectensis",24773),rep.int("Strongylocentrotus_purpuratus",28987),rep.int("Taeniopygia_guttata",17488),rep.int("Trichoplax_adhaerens",11520))
+final.master.table<-left_join(master.table,agalma.homologs)%>%select(.,"seqid","start","end","gene","homology_id","catalog_id","animal")
 
 write.csv(final.master.table,"final.master.table_absentgenes.csv",quote=FALSE,row.names=FALSE)
 #double check that there are no duplicate genes in final.master.table
@@ -592,26 +592,26 @@ absent_genes.csv: cut -f 1 -d "," final.master.table_absentgenes.csv |grep "NA"
 ```{r cluster}
 #must run previous chunk first
 
+#Take a subset! Otherwise following code will not complete running and freeze everything!!!
+filter_target=c("Homo_sapiens","Danio_rerio","Drosophila_melanogaster")
+master.table<-filter(master.table, animal==filter_target)
+
 #There are human gene names in pep files that are not anywhere in gff3 files = inner_join
 #Scaffold names may not be unique but must be - join seqid and catalog id
-
 final.master.table_cluster<-inner_join(master.table,agalma.homologs)%>%dplyr::select(.,seqid,start,end,gene,homology_id,catalog_id)%>%mutate(species_scaffold=str_c(seqid,catalog_id,sep="_"))%>%dplyr::select(.,species_scaffold,homology_id)
 
 #make contingency table
 contingency<-table(final.master.table_cluster$species_scaffold,final.master.table_cluster$homology_id)%>%as.matrix()
 contingency<-1*(contingency>0)
 
-write.csv(contingency,"contingency.csv",quote=FALSE,row.names=FALSE)
 
 #dissimilarity matrix
 dist.matrix<-daisy(contingency,metric="gower",stand=FALSE)
 
-write.csv(dist.matrix,"dist.matrix_daisy.gower.csv",quote=FALSE,row.names=FALSE)
 
 #cluster
 hac<-agnes(dist.matrix,diss=TRUE)
 plot(hac)
-
 
 
 ```
