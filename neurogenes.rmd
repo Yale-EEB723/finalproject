@@ -26,7 +26,12 @@ library(ggplot2)
 library(seqinr)
 library(ape)
 library(Biostrings)
+library(dplyr)
+
+#clustering
 library(cluster)
+library(CrossClustering)
+library(vegan)
 ```
 
 
@@ -573,6 +578,7 @@ master.table<-select(all.df,"seqid","start","end","gene")
 #need to add animal ids"
 master.table$animal<-c(rep.int("Amphimedon_queenslandica",43615),rep.int("Capitella_telata",32175),rep.int("Danio_rerio",25606),rep.int("Drosophila_melanogaster",13931),rep.int("Helobdella_robusta",23432),rep.int("Homo_sapiens",21492),rep.int("Lottia_gigantea",23349),rep.int("Mnemiopsis_leidyi",16559),rep.int("Nematostella_vectensis",24773),rep.int("Strongylocentrotus_purpuratus",28987),rep.int("Taeniopygia_guttata",17488),rep.int("Trichoplax_adhaerens",11520))
 
+write.csv(master.table,"master.table.csv",quote=FALSE,row.names=FALSE)
 #Read in amalga homologs csv
 agalma.homologs<-read.csv("compgen_homologs_nohydra_geneNames.csv",header=TRUE,sep=",")
 
@@ -593,12 +599,13 @@ absent_genes.csv: cut -f 1 -d "," final.master.table_absentgenes.csv |grep "NA"
 #must run previous chunk first
 
 #Take a subset! Otherwise following code will not complete running and freeze everything!!!
-filter_target=c("Homo_sapiens","Danio_rerio","Drosophila_melanogaster")
+tmp<-master.table
+filter_target=c("Homo_sapiens","Danio_rerio")
 master.table<-filter(master.table, animal==filter_target)
 
 #There are human gene names in pep files that are not anywhere in gff3 files = inner_join
 #Scaffold names may not be unique but must be - join seqid and catalog id
-final.master.table_cluster<-inner_join(master.table,agalma.homologs)%>%dplyr::select(.,seqid,start,end,gene,homology_id,catalog_id)%>%mutate(species_scaffold=str_c(seqid,catalog_id,sep="_"))%>%dplyr::select(.,species_scaffold,homology_id)
+final.master.table_cluster<-inner_join(master.table,agalma.homologs)%>%dplyr::select(.,seqid,start,end,gene,homology_id,catalog_id)%>%mutate(species_scaffold=str_c(seqid,catalog_id,sep="_"))%>%dplyr::select(.,species_scaffold,homology_id,gene)
 
 #make contingency table
 contingency<-table(final.master.table_cluster$species_scaffold,final.master.table_cluster$homology_id)%>%as.matrix()
@@ -610,19 +617,33 @@ dist.matrix<-daisy(contingency,metric="gower",stand=FALSE)
 
 
 #cluster
-hac<-agnes(dist.matrix,diss=TRUE)
-plot(hac)
 
-library(CrossClustering)
+ag<-agnes(dist.matrix,diss=TRUE)
+plot(ag)
+
+
 cross.clust<-cc_crossclustering(dist.matrix,out=FALSE)
+clust<-cc_get_cluster(cross.clust)
+
+
+
+
+```
+```{r}
+
+
+
+
 
 ```
 
+contingency: scaffold_species
+
+CompGen_relaxedbit/multalign-29/alignments/
+grep ">" CompGen_relaxedbit/multalign-29/alignments/9998.fa = list of all sequences in cluster
 
 
-
-
-
+zebrafish and human synteny: https://genome.cshlp.org/content/10/9/1351.full
 
 cwd hint:
 Cluster scaffolds - would have to remove rows with no homology IDs?
@@ -630,6 +651,9 @@ Identify which genes are missing among clustered scaffold per scaffold baesd on 
 >clustering methods: 
 https://stats.stackexchange.com/questions/305179/cross-cluster-analysis-of-categorical-data-in-r/305218
 https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0152333
+
+kmed:
+https://cran.r-project.org/web/packages/kmed/vignettes/kmedoid.html
 
 Print out scaffold (comparison) and missinge gene (ref) -> pull out of fasta
 -possible will run into sparse matrix issue - redo agalma with relaxed e-values
