@@ -643,15 +643,30 @@ cluster.master.table<-final.master.table%>%mutate(species_scaffold=str_c(seqid,a
 reference="Homo_sapiens"
 comparison="Danio_rerio"
 
-analysis.table<-filter(cluster.master.table,animal==reference|animal==comparison)
+analysis.table.reference<-filter(cluster.master.table,animal==reference)
+analysis.table.comparison<-filter(cluster.master.table,animal==comparison)
 
+anti_join(analysis.table.reference,analysis.table.comparison,by="homology_id")
 
 
 
 
 ```
 
-contingency: scaffold_species
+analysis.table.reference<-filter(cluster.master.table,animal==reference|animal==comparison)
+
+-homology_id = genes
+-cluster = scaffolds
+-ref gene scaffold
+  -for each comparison scaffold that shares cluster_id
+    -determine homology_ids present in ref gene scaffold but not comparison scaffold
+    
+
+
+
+
+
+
 
 CompGen_relaxedbit/multalign-29/alignments/
 grep ">" CompGen_relaxedbit/multalign-29/alignments/9998.fa = list of all sequences in cluster
@@ -660,32 +675,19 @@ grep ">" CompGen_relaxedbit/multalign-29/alignments/9998.fa = list of all sequen
 zebrafish and human synteny: https://genome.cshlp.org/content/10/9/1351.full
 
 cwd hint:
-Cluster scaffolds - would have to remove rows with no homology IDs?
 Identify which genes are missing among clustered scaffold per scaffold baesd on a reference scaffold (human?) within the cluster.
 >clustering methods: 
 https://stats.stackexchange.com/questions/305179/cross-cluster-analysis-of-categorical-data-in-r/305218
 https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0152333
-
 kmed:
 https://cran.r-project.org/web/packages/kmed/vignettes/kmedoid.html
+
 
 Print out scaffold (comparison) and missinge gene (ref) -> pull out of fasta
 -possible will run into sparse matrix issue - redo agalma with relaxed e-values
 
 
-Order genes on scaffold by start bp and assign number sequentially?
 
-For each gene in the reference determine if it doesn't have a homolog in the comparison genome.
-  Search all genes of a reference genome for homology id
-Find the scaffold in the reference genome and create a list of all genes on scaffold ordered by their 5" start bp location.
-  gene id, scaffold id
-Create 5" neighbour list (all genes 5" of focal gene) and 3" neighbour list (all genes 3" of focal gene).
-
-Determine whether any scaffolds in the comparison have at least 1 5" and 1 3" neighbour gene. If yes, "ghost locus".
-
-scaffold  gene  protein genestart geneend 
-
-Print out ?
 
 
 
