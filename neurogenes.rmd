@@ -605,7 +605,7 @@ master.table<-filter(master.table, animal==filter_target)
 
 #There are human gene names in pep files that are not anywhere in gff3 files = inner_join
 #Scaffold names may not be unique but must be - join seqid and catalog id
-final.master.table_cluster<-inner_join(master.table,agalma.homologs)%>%dplyr::select(.,seqid,start,end,gene,homology_id,catalog_id)%>%mutate(species_scaffold=str_c(seqid,catalog_id,sep="_"))%>%dplyr::select(.,species_scaffold,homology_id,gene)
+final.master.table_cluster<-inner_join(master.table,agalma.homologs)%>%dplyr::select(.,seqid,start,end,gene,homology_id,catalog_id,animal)%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%dplyr::select(.,species_scaffold,homology_id,gene)
 
 #make contingency table
 contingency<-table(final.master.table_cluster$species_scaffold,final.master.table_cluster$homology_id)%>%as.matrix()
@@ -626,10 +626,24 @@ cross.clust<-cc_crossclustering(dist.matrix,out=FALSE)
 clust<-cc_get_cluster(cross.clust)
 
 
+#put together the scaffold:cluster dataframe
+clust.df<-as.data.frame(clust)
+colnames(clust.df)<-"cluster_id"
+clust.df<-mutate(clust.df,species_scaffold=row.names(contingency))
+
+#final working table
+cluster.master.table<-final.master.table%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%left_join(.,clust.df,by="species_scaffold")%>%select(.,species_scaffold,start,end,gene,homology_id,animal,cluster_id)
+
+
 
 
 ```
-```{r}
+
+```{r final analysis}
+reference="Homo_sapiens"
+comparison="Danio_rerio"
+
+analysis.table<-filter(cluster.master.table,animal==reference|animal==comparison)
 
 
 

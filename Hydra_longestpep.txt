@@ -1,2 +1,0 @@
-rowname
-mGluR5_Homo
