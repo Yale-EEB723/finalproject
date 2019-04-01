@@ -646,14 +646,44 @@ comparison="Danio_rerio"
 analysis.table.reference<-filter(cluster.master.table,animal==reference)
 analysis.table.comparison<-filter(cluster.master.table,animal==comparison)
 
-anti_join(analysis.table.reference,analysis.table.comparison,by="homology_id")
+
+ref.scaffold<-unique(analysis.table.reference$species_scaffold)
+#list of unique scaffold ids in reference
+
+#for each unique scaffold in the reference table
+for (r in ref.scaffold){
+  r="1_Homo_sapiens"
+  #for each unique scaffold in reference
+  reference.table.scaffold<-analysis.table.reference%>%filter(.,species_scaffold==r)
+  #find cluster_id
+  ref.cluster_id<-unique(reference.table.scaffold$cluster_id)
+  ref.cluster_id<-2
+  
+  #find all unique scaffolds in comparison table with that cluster_id
+  comp.scaffold<-analysis.table.comparison%>%filter(.,cluster_id==ref.cluster_id)
+  comp.scaffold<-unique(comp.scaffold$species_scaffold)
+  
+  #for each unique scaffold in comparison table with that cluster_id
+  for (c in comp.scaffold){
+    c="1_Danio_rerio"
+   comp.table.scaffold<-analysis.table.comparison%>%filter(.,species_scaffold==c)
+   comparison_absent<-anti_join(reference.table.scaffold,comp.table.scaffold,by="homology_id")
+  }
+  
+  }
 
 
 
+
+
+
+
+comparison_absent<-anti_join(analysis.table.reference,analysis.table.comparison,by="homology_id")
 
 ```
 
 analysis.table.reference<-filter(cluster.master.table,animal==reference|animal==comparison)
+
 
 -homology_id = genes
 -cluster = scaffolds
@@ -662,7 +692,20 @@ analysis.table.reference<-filter(cluster.master.table,animal==reference|animal==
     -determine homology_ids present in ref gene scaffold but not comparison scaffold
     
 
+species *scaf* ref <-cluster id ref-> <-cluster id comp-> cluster *scaf* comp <-> compare genes
+go to next species scaf.
 
+each ref scaf -> cluster id
+
+subset by cluster id:
+analysis.table.comparison<-filter(cluster.master.table,animal==comparison & cluster_id=="2")
+each comp scaf
+  compare genes
+each comp scaf
+  compare genes
+each comp scaf
+
+next ref scaf....-> cluster id
 
 
 
@@ -690,7 +733,7 @@ Print out scaffold (comparison) and missinge gene (ref) -> pull out of fasta
 
 
 
-
+NOTE: the number of scaffolds in gff3/fasta for Homo does not match the number in my cluster.master.table. Looks like some scaffolds do not have genes, and I only selected scaffolds w/ genes.
 
 #FIGURES TO MAKE...soonish hmm   
 Comparison across clades of:  
