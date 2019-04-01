@@ -652,12 +652,11 @@ ref.scaffold<-unique(analysis.table.reference$species_scaffold)
 
 #for each unique scaffold in the reference table
 for (r in ref.scaffold){
-  r="1_Homo_sapiens"
+  r="5_Homo_sapiens"
   #for each unique scaffold in reference
   reference.table.scaffold<-analysis.table.reference%>%filter(.,species_scaffold==r)
   #find cluster_id
   ref.cluster_id<-unique(reference.table.scaffold$cluster_id)
-  ref.cluster_id<-2
   
   #find all unique scaffolds in comparison table with that cluster_id
   comp.scaffold<-analysis.table.comparison%>%filter(.,cluster_id==ref.cluster_id)
@@ -672,7 +671,7 @@ for (r in ref.scaffold){
   
   }
 
-
+#works line by line but not when looping
 
 
 
