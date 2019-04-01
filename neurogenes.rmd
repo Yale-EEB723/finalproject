@@ -634,6 +634,7 @@ clust.df<-mutate(clust.df,species_scaffold=row.names(contingency))
 #final working table
 cluster.master.table<-final.master.table%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%left_join(.,clust.df,by="species_scaffold")%>%select(.,species_scaffold,start,end,gene,homology_id,animal,cluster_id)
 
+write.csv(cluster.master.table,"cluster.master.table.csv",quote=FALSE,row.names=FALSE)
 
 
 
@@ -642,31 +643,38 @@ cluster.master.table<-final.master.table%>%mutate(species_scaffold=str_c(seqid,a
 ```{r final analysis}
 reference="Homo_sapiens"
 comparison="Danio_rerio"
+result<-data.frame()
 
-analysis.table.reference<-filter(cluster.master.table,animal==reference)
-analysis.table.comparison<-filter(cluster.master.table,animal==comparison)
+#subset cluster.master.table for the reference or comparison animal:
+#analysis.table.reference<-filter(cluster.master.table,animal==reference)
+#analysis.table.comparison<-filter(cluster.master.table,animal==comparison)
+sample.table<-read.table("sample.table.txt",header=TRUE,sep=",")
 
+#remove NAs
+analysis.table.reference<-filter(sample.table,animal==reference & !is.na(homology_id))
+analysis.table.comparison<-filter(sample.table,animal==comparison & !is.na(homology_id))
 
-ref.scaffold<-unique(analysis.table.reference$species_scaffold)
 #list of unique scaffold ids in reference
+ref.scaffold<-unique(analysis.table.reference$species_scaffold)
 
-#for each unique scaffold in the reference table
+#for each unique scaffold in the reference table:
 for (r in ref.scaffold){
-  r="5_Homo_sapiens"
-  #for each unique scaffold in reference
+
+  #find cluster id for each scaffold
   reference.table.scaffold<-analysis.table.reference%>%filter(.,species_scaffold==r)
-  #find cluster_id
   ref.cluster_id<-unique(reference.table.scaffold$cluster_id)
   
   #find all unique scaffolds in comparison table with that cluster_id
   comp.scaffold<-analysis.table.comparison%>%filter(.,cluster_id==ref.cluster_id)
   comp.scaffold<-unique(comp.scaffold$species_scaffold)
   
-  #for each unique scaffold in comparison table with that cluster_id
+  #for each unique scaffold in comparison table w/ cluster_id
   for (c in comp.scaffold){
-    c="1_Danio_rerio"
+    #isolate genes from that scaffold and compare to original ref scaffold
    comp.table.scaffold<-analysis.table.comparison%>%filter(.,species_scaffold==c)
    comparison_absent<-anti_join(reference.table.scaffold,comp.table.scaffold,by="homology_id")
+   comparison_absent<-mutate(comparison_absent,comp_scaff=c)
+   result<-rbind(result,comparison_absent)
   }
   
   }
@@ -683,6 +691,7 @@ comparison_absent<-anti_join(analysis.table.reference,analysis.table.comparison,
 
 analysis.table.reference<-filter(cluster.master.table,animal==reference|animal==comparison)
 
+>throw out genes with homology_id NAs. REASONING???
 
 -homology_id = genes
 -cluster = scaffolds
