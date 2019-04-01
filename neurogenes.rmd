@@ -643,16 +643,18 @@ write.csv(cluster.master.table,"cluster.master.table.csv",quote=FALSE,row.names=
 ```{r final analysis}
 reference="Homo_sapiens"
 comparison="Danio_rerio"
+
 result<-data.frame()
 
-#subset cluster.master.table for the reference or comparison animal:
-#analysis.table.reference<-filter(cluster.master.table,animal==reference)
-#analysis.table.comparison<-filter(cluster.master.table,animal==comparison)
-sample.table<-read.table("sample.table.txt",header=TRUE,sep=",")
+#subset cluster.master.table for the reference or comparison animal; remove NAs
+#analysis.table.reference<-filter(cluster.master.tabl,animal==reference & !is.na(homology_id))
+#analysis.table.comparison<-filter(cluster.master.tabl,animal==comparison & !is.na(homology_id))
 
-#remove NAs
+#for sample run:
+sample.table<-read.table("sample.table.txt",header=TRUE,sep=",")
 analysis.table.reference<-filter(sample.table,animal==reference & !is.na(homology_id))
 analysis.table.comparison<-filter(sample.table,animal==comparison & !is.na(homology_id))
+
 
 #list of unique scaffold ids in reference
 ref.scaffold<-unique(analysis.table.reference$species_scaffold)
