@@ -1,0 +1,60 @@
+# --- --- --- --- --- --- --- --- --- --- --- ---
+Genome architecture:
+# --- --- --- --- --- --- --- --- --- --- --- ---
+
+Pulldown in molecualr ibology -> have pop of moecules and interested in the subset -> in the puldown i have something that binds the molecules that I want -> Can do a pulldown of the anti body that I want (bound to beets isolated with gravity or magnet).
+Chip-seq: Immuno prepitation methods.
+
+
+Chip-seq: Association protein thats sitting on the genome (DNA), thats one aspect of spatial structure -> Which proteins are close to which sequences.
+RNA seq measures transcript abundance -> But often we wanna know how much of a transcript is being produced by a given gene -> GRO-Seq can do this -> Transcript that were recently synthetized.
+GRO-seq is strong in conjunciton with other methods.
+
+A&B: Compartments defined by 2 PCA.
+A is first order effect -> derived as first 2 eigenvectors of Hi-C matrix.
+whenever i get mapping between2  reads i call that association between 2 regions.
+
+Hi-C have multiple cell types but im sampling a sample of organism -> but cells will be in different stages of the cell cycle -> I average out among that -> There is huge value of actually isolating the cells (what happens in RNA-seq).
+Now RNA-seq is single cell -> instead of aagregaitng with instrument over many cells -> I can study single cell .
+
+DNA -> RNA -> Prot
+DNA is upstrean from RNA and upstream from transcriptome
+Maybe transcription as an active process is essentially deforming the genome ->
+Maybe the very active transcriptome makes some areas of the DNA more accesible than others.
+some drugs disrupt transcirption to apply treatments -> Do Hi-C with drug and Hi-C without drug.
+Hi-C there is a single genome in there. when im mapping you observe physical conformation of single molecules.
+Hi-C: To build nice scaffold on the genome ->
+
+Hi-C interaction map:
+Which part of DNA are close to each other.
+
+Soon de novo assemblies people will come up with fasta file that describes sequence of genome AND add genome structure -> genome diagonal of Hi-C helps you build your genome.
+Hi-C: If you tune it, it can be cheap to do ->
+restriction enzyme, labeling things AND needs little DNA.
+High-C is done in the original tissue -> Add formaldehyde to tissue -> then your getting long ranged data.
+
+
+DNA is not linear in nucleus. but its precisely organised because of specific mechansism that put it into certain patterns.
+CTCF is like a stop sign that stops the extrusion process. Its like a large beet.
+
+Hi-C gives you data on all
+4C- focuses on one particular region !
+
+Map the reads to the genome then you take information where your sequencing reeds marks to the genome and use that to gain biological insight.
+Chip-seq: Great to ideintify where my favorite transcirption factor .
+
+We need a good annotated genome ->
+These tools will be deployed at scaled ->
+
+
+Genomes are so much work -> by the time you put it together ->
+you never just wanted a fasta file thats a genome ->
+as method mature -> what will happen -> assembly and annotation becomes more streamlined and ppl go directly to what they wanted to asnwer -> which genes are impacted by XYZ.
+-> becomes more biological.
+
+Being an intron of a gene doesnt mean that you have anything to do with this gene.
+
+Query genome with small set of tissue sample willtell us alot -> For gene speciic experiment.
+Exciting now: We can apply this of the shelf tols to quickly get down to a set of 10 genes that ar emost interested for my phenoype and my organism _> I  can pound or crispr all of these!
+-> Tools give me wider build of platform.
+-> Being able to deplo y these tools depends on high quality genome to map these too.
