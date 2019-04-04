@@ -61,7 +61,7 @@ The reader must have some knowledge of microbial genetics, as well as some under
 
 ### Approaches
 - Compare Salmonella serovar Pullorum to serovar Gallinarum; See similarities/ any insights into how they are similar in terms of genetic make-up of pathogenicity traits. These strains are host-adapted to chickens.
-    - May have to specifically focus on pathogenicity islands OR look at essential/ house-keeping genomes. These have been shown by Martin Wiedmann's group (place specific source paper here).
+    - May have to specifically focus on pathogenicity islands OR look at essential/ house-keeping genomes. These have been shown by Martin Wiedmann's group (place specific source paper here)..
 - Then, take either these individually or together and compare against a Generalist (Salmonella serovar Enteritidis)
 - If this is working/ going well, use Salmonella serovar Typhimurium and/or Typhi to see how these differences come about in mammals.
       "Salmonellae are important pathogenic bacteria infecting humans or animals. Salmonella enterica serovar Pullorum, a strictly chicken-adapted pullorum agent, is one of the more than 2,500 documented Salmonella lineages (4). It is very closely related to another chicken pathogen, Salmonella enterica serovar Gallinarum, and, to a lesser degree, to a host generalist, Salmonella enterica serovar Enteritidis.""
@@ -107,6 +107,9 @@ The reader must have some knowledge of microbial genetics, as well as some under
 - MuTect2 > Detect SNPs in bacterial genomes, based on GATK software (like HaploCaller); https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_cancer_m2_MuTect2.php
 
 - breseq > "algorithm for identifying structural variation from DNA resequencing data as part of the breseq computational pipeline for predicting mutations in haploid microbial genomes" https://bmcgenomics.biomedcentral.com/articles/10.1186/1471-2164-15-1039
+
+### Phylogenetic Methods
+- bcgTree > https://github.com/molbiodiv/bcgTree ; Method created to use own or database genomes of closely related strains of bacteria to determine a phylogenetic tree representation of these relationships. Uses core genes found in nearly all bacteria to do the phylogenetic comparisons.
 
 Will add more as more come into view
 ## Results
