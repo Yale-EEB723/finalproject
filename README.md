@@ -105,6 +105,7 @@ The reader must have some knowledge of microbial genetics, as well as some under
 
 ### Genome Comparisons
 - Mauve > Multiple genome aligner, able to show large scale evolutionary events; Java based
+  - progressiveMauve > Specifically can show gene loss events for our purposes (most likely very important)
 
 - ACT (above)
 
@@ -115,7 +116,8 @@ The reader must have some knowledge of microbial genetics, as well as some under
 ### Phylogenetic Methods
 - bcgTree > https://github.com/molbiodiv/bcgTree ; Method created to use own or database genomes of closely related strains of bacteria to determine a phylogenetic tree representation of these relationships. Uses core genes found in nearly all bacteria to do the phylogenetic comparisons.
 
-Will add more as more come into view
+- SimPhy > https://github.com/adamallo/SimPhy/wiki ; Phylogenetic software for prokaryotic organisms aimed at showing evolutionary relationship of organisms through gene family relationships
+
 ## Results
 
 
