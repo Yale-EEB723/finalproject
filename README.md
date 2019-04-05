@@ -6,13 +6,17 @@ This is the final project for Andrew Verdegaal in [Comparative Genomics](https:/
 ## The goal
 
 ### Big Picture
-  - Differences in genomic makeup of Salmonella species and how this affects pathogenicity and virulence in different hosts.
+  - Differences in genomic makeup of Salmonella species and how this affects pathogenicity and virulence in different hosts. Specifically, I will focus on GENE LOSS between different serovars of Salmonella and see if there can be some relationship found with any genes lost and host range of that serovar.
 
 ### Specific Goals
-  - I will try and find similarities and differences between Salmonella that are host-specific (eg: Salmonella enterica serovar gallinarium [Chickens]/ S. enterica serovar typhi [Humans]) and those with broad host ranges, either for pathogenicity islands, other genes, or even structure and evolution of the genomes.
-  - See if there are any readily identifiable differences in gene content between these pathogens which target either specific hosts or a wide range of hosts. This problem has not been attempted to any great depth in Salmonella, although there have been increased efforts to compare Salmonella genomes in general. In the case there are no readily identifiable differences (or similarities in relation to host range), I will attempt to re-annotate current Salmonella genomic data using newly developed programs and data pipelines. I can additionally see if there are newer data sets that have not been integrated in relation to Salmonella pathogenicity, eg: newer transcriptome data.
+  - I will try and find similarities and differences between Salmonella that are host-specific (eg: Salmonella enterica serovar gallinarium [Chickens]/ S. enterica serovar typhi [Humans]) and those with broad host ranges, focusing on LOSS of genes. This could be a range of different genes, but focus on the following:
+    - Pathogenicity islands
+    - Type III Secretion System effectors
+    - Metabolic House-keeping genes
   - Will also use Salmonella bongori as another source of comparison, as this is the other species in the genus of Salmonella. Other work has looked at how this species can help us understand the evolution of Salmonella, as it also has secretion systems yet different effectors, and has the ability to be pathogenic in humans as well (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3158058/pdf/ppat.1002191.pdf)
-  - Failing ability to compare these attributes with the sequences and tools at hand without experimental assays, I will try and reannotate the S. enterica gallinarum genome.
+  - Failing ability to compare these attributes with the sequences and tools at hand without experimental assays, I will at the very least do the following:
+    - Re-annotate the Salmonella enterica serovar Gallinarum genome
+    - Create a phylogenetic tree describing evolutionary relationships between different Salmonella species and serotypes, and see if there are any correlations that can be seen with relationships and host range.
 
 ## The data
 
