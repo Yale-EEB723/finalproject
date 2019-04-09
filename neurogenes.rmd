@@ -631,14 +631,46 @@ clust.df<-as.data.frame(clust)
 colnames(clust.df)<-"cluster_id"
 clust.df<-mutate(clust.df,species_scaffold=row.names(contingency))
 
-#final working table
+
 cluster.master.table<-final.master.table%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%left_join(.,clust.df,by="species_scaffold")%>%select(.,species_scaffold,start,end,gene,homology_id,animal,cluster_id)
+
+#Add an index to each species
+cluster.master.table<-cluster.master.table%>%mutate(case_when(animal=="Amphimedon_queenslandica"~1,animal=="Mnemiopsis_leidyi"~1,animal=="Trichoplax_adhaerens"~2,animal=="Nematostella_vectensis"~3,animal=="Capitella_telata"~4,animal=="Helobdella_robusta"~4,animal=="Lottia_gigantea"~4,animal=="Drosophila_melanogaster"~4,animal=="Strongylocentrotus_purpuratus"~4,animal=="Danio_rerio"~4,animal=="Taeniopygia_guttata"~5,animal=="Homo_sapiens"~6))
 
 write.csv(cluster.master.table,"cluster.master.table.csv",quote=FALSE,row.names=FALSE)
 
 
 
 ```
+###Other clustering methods:
+https://stats.stackexchange.com/questions/305179/cross-cluster-analysis-of-categorical-data-in-r/305218
+https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0152333
+kmed:
+https://cran.r-project.org/web/packages/kmed/vignettes/kmedoid.html
+
+NOTE: the number of scaffolds in gff3/fasta for Homo does not match the number in my cluster.master.table. Looks like some scaffolds do not have genes, and I only selected scaffolds w/ genes.
+
+
+###Algorithm for finding missing genes between ref vs comparison scaffold:
+
+species *scaf* ref <-cluster id ref-> <-cluster id comp-> cluster *scaf* comp <-> compare genes
+go to next species scaf.
+
+each ref scaf -> cluster id
+
+subset by cluster id:
+analysis.table.comparison<-filter(cluster.master.table,animal==comparison & cluster_id=="2")
+each comp scaf
+  compare genes
+each comp scaf
+  compare genes
+each comp scaf
+
+next ref scaf....-> cluster id
+
+In data matrix:
+-homology_id = genes
+-cluster = scaffolds
 
 ```{r final analysis}
 reference="Homo_sapiens"
@@ -647,8 +679,8 @@ comparison="Danio_rerio"
 result<-data.frame()
 
 #subset cluster.master.table for the reference or comparison animal; remove NAs
-#analysis.table.reference<-filter(cluster.master.tabl,animal==reference & !is.na(homology_id))
-#analysis.table.comparison<-filter(cluster.master.tabl,animal==comparison & !is.na(homology_id))
+#analysis.table.reference<-filter(cluster.master.table,animal==reference & !is.na(homology_id))
+#analysis.table.comparison<-filter(cluster.master.table,animal==comparison & !is.na(homology_id))
 
 #for sample run:
 sample.table<-read.table("sample.table.txt",header=TRUE,sep=",")
@@ -657,10 +689,10 @@ analysis.table.comparison<-filter(sample.table,animal==comparison & !is.na(homol
 
 
 #list of unique scaffold ids in reference
-ref.scaffold<-unique(analysis.table.reference$species_scaffold)
+ref.scaffold.list<-unique(analysis.table.reference$species_scaffold)
 
 #for each unique scaffold in the reference table:
-for (r in ref.scaffold){
+for (r in ref.scaffold.list){
 
   #find cluster id for each scaffold
   reference.table.scaffold<-analysis.table.reference%>%filter(.,species_scaffold==r)
@@ -691,34 +723,12 @@ comparison_absent<-anti_join(analysis.table.reference,analysis.table.comparison,
 
 ```
 
-analysis.table.reference<-filter(cluster.master.table,animal==reference|animal==comparison)
-
 >throw out genes with homology_id NAs. REASONING???
 
--homology_id = genes
--cluster = scaffolds
--ref gene scaffold
-  -for each comparison scaffold that shares cluster_id
-    -determine homology_ids present in ref gene scaffold but not comparison scaffold
-    
 
-species *scaf* ref <-cluster id ref-> <-cluster id comp-> cluster *scaf* comp <-> compare genes
-go to next species scaf.
-
-each ref scaf -> cluster id
-
-subset by cluster id:
-analysis.table.comparison<-filter(cluster.master.table,animal==comparison & cluster_id=="2")
-each comp scaf
-  compare genes
-each comp scaf
-  compare genes
-each comp scaf
-
-next ref scaf....-> cluster id
-
-
-
+To do:
+-sandwiching homologues 
+-sparse homology matrix
 
 
 CompGen_relaxedbit/multalign-29/alignments/
@@ -727,23 +737,6 @@ grep ">" CompGen_relaxedbit/multalign-29/alignments/9998.fa = list of all sequen
 
 zebrafish and human synteny: https://genome.cshlp.org/content/10/9/1351.full
 
-cwd hint:
-Identify which genes are missing among clustered scaffold per scaffold baesd on a reference scaffold (human?) within the cluster.
->clustering methods: 
-https://stats.stackexchange.com/questions/305179/cross-cluster-analysis-of-categorical-data-in-r/305218
-https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0152333
-kmed:
-https://cran.r-project.org/web/packages/kmed/vignettes/kmedoid.html
-
-
-Print out scaffold (comparison) and missinge gene (ref) -> pull out of fasta
--possible will run into sparse matrix issue - redo agalma with relaxed e-values
-
-
-
-
-
-NOTE: the number of scaffolds in gff3/fasta for Homo does not match the number in my cluster.master.table. Looks like some scaffolds do not have genes, and I only selected scaffolds w/ genes.
 
 #FIGURES TO MAKE...soonish hmm   
 Comparison across clades of:  
@@ -910,6 +903,12 @@ Create a new table where species for Ctenophora, Porifera combined: https://stac
 2. Should we be expecting these genes in these animals?  
 Why should they use similar genes?  
 How misguided is this approach? What is the true question implied by this approach?  
+
+
+
+Final notes
+-problem of paralogs: it's possible paralogy will be important in many cases
+  -apr 4 paper never really defined micro vs macro synteny, and the software they used were not designed for microsyteny
 
 
 ##References  
