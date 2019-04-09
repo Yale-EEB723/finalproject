@@ -95,3 +95,38 @@ Ozer EA. ClustAGE: a tool for clustering and distribution analysis of bacterial 
         - perl ClustAGE.pl -f accessory_elements.txt --annot accessory_loci_list.txt
     - Had to add gnuplot to ClustAGE directory bin in order to run the program to produce graphs of accessory accessory_loci
       - Got this to work, by compiling with ./configure > make > make install
+
+
+### Project Notes 4/9/2019
+  - Want to find one or two programs to run phylogenetic analysis on the whole genome as a contrast to the method using Clustage
+  - Found two programs, well actually one, but one is an pipeline and one is just using the program manually
+    - FastTree is the manual program, trying to figure out how to compile and run this on my computer
+      - Attempting to install through a conda package currently
+    - Other is CGE CSI Phylogeny
+      - https://cge.cbs.dtu.dk/services/CSIPhylogeny/
+      - Will use both, both ultimately used FastTree
+        - Supposed to be better than PhyLIP3 (that is usually referred to previously)
+  - Same time, figuring out a way to download ncbi files quickyl
+    - Found a program called
+        - ncbi-acc-download
+          - https://github.com/kblin/ncbi-acc-download
+          - Use command ncbi-acc-download --format fasta <accession number>
+            - to download files
+            - Will do this to get .fasta's of all of my 16 genomes
+          - ALso downloaded concatenated .gbk files to run through progressive mauve as well
+          - Running both mauve on .fasta and progressiveMauve on .gbk
+  - NOTE: Need to include accession numbers ultimately used for Salmonella Sequences
+  - Did progressiveMauve using windows java executable, having issues understanding if I received an xmfa file from it
+    - using xmfa2fasta.pl to try and see if i can convert file salmonella_16_promauve_full into a fasta file or not
+      - perl xmfa2fasta.pl --file salmonella_16_promauve_full > salmonell_16.fasta, after moving the file into the same directory as the alignment
+    - Goal: to run the alignment file using FastTree. I had uploaded the original fasta files of all of the genomes (concatenated with their plasmids if available) to CSI Phylogeny, but still waiting in queue
+      - That will ultimately use FastTree for me, but may have to find alternative route to get phylogenic tree of sequences this way
+        - Found other programs:
+          - ClustalML
+          - ClustalOrigin
+            - Both tackle that fact that bacteria experience recombination events
+            - Would use these to construct trees of samples
+            - If all else fails, revert to using either PhyLIP3 or RaXML
+              - don't understand the difference but I think its just a matter of finding the correct pipeline and if I want to identify phylogenies based on SNPs or recombination events/ backbones / LCBs
+          - FastTree -gtr -nt salmonella_16.fasta > tree_file
+            - Did this on a VERY large file (24gb) and unsure if this is too large
