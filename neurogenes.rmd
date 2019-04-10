@@ -618,12 +618,19 @@ dist.matrix<-daisy(contingency,metric="gower",stand=FALSE)
 
 #cluster
 
-ag<-agnes(dist.matrix,diss=TRUE)
-plot(ag)
-
+#ag<-agnes(dist.matrix,diss=TRUE)
+#plot(ag)
 
 cross.clust<-cc_crossclustering(dist.matrix,out=FALSE)
 clust<-cc_get_cluster(cross.clust)
+
+#plot the clustering
+#see code from http://dpmartin42.github.io/posts/r/cluster-mixed-types
+tsne_obj<-Rtsne(dist.matrix,is_distance=TRUE)
+tsne_data<-tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(cluster=factor(clust))
+ggplot(aes(x = X, y = Y), data = tsne_data) + geom_point(aes(color = cluster))
+
+
 
 
 #put together the scaffold:cluster dataframe
@@ -732,7 +739,6 @@ for (r in ref.scaffold.list){
   }
 
 
-#make sure 
 
 
 
