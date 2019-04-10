@@ -635,7 +635,7 @@ clust.df<-mutate(clust.df,species_scaffold=row.names(contingency))
 cluster.master.table<-final.master.table%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%left_join(.,clust.df,by="species_scaffold")%>%select(.,species_scaffold,start,end,gene,homology_id,animal,cluster_id)
 
 #Add an index to each species
-cluster.master.table<-cluster.master.table%>%mutate(case_when(animal=="Amphimedon_queenslandica"~1,animal=="Mnemiopsis_leidyi"~1,animal=="Trichoplax_adhaerens"~2,animal=="Nematostella_vectensis"~3,animal=="Capitella_telata"~4,animal=="Helobdella_robusta"~4,animal=="Lottia_gigantea"~4,animal=="Drosophila_melanogaster"~4,animal=="Strongylocentrotus_purpuratus"~4,animal=="Danio_rerio"~4,animal=="Taeniopygia_guttata"~5,animal=="Homo_sapiens"~6))
+cluster.master.table<-cluster.master.table%>%mutate(species_index=case_when(animal=="Amphimedon_queenslandica"~1,animal=="Mnemiopsis_leidyi"~1,animal=="Trichoplax_adhaerens"~2,animal=="Nematostella_vectensis"~3,animal=="Capitella_telata"~4,animal=="Helobdella_robusta"~4,animal=="Lottia_gigantea"~4,animal=="Drosophila_melanogaster"~4,animal=="Strongylocentrotus_purpuratus"~4,animal=="Danio_rerio"~4,animal=="Taeniopygia_guttata"~5,animal=="Homo_sapiens"~6))
 
 write.csv(cluster.master.table,"cluster.master.table.csv",quote=FALSE,row.names=FALSE)
 
@@ -688,6 +688,24 @@ analysis.table.reference<-filter(sample.table,animal==reference & !is.na(homolog
 analysis.table.comparison<-filter(sample.table,animal==comparison & !is.na(homology_id))
 
 
+#remove any genes in the analysis.table.reference that are present only in clades that arose after the comparison clade.
+#get a list of all unique homology_ids in the analysis table
+ref.homolog.list<-unique(analysis.table.reference$homology_id)
+#get species_index of comparison animal
+comp.species.index<-analysis.table.comparison$species_index[1]
+
+#for each gene in the ref analysis table
+for (h in ref.homolog.list){
+  #select all the rows of that particular genes for all animals (except your comp animal)
+  check<-filter(sample.table, homology_id==h & animal!=comparison)
+  #check if any of the species indices in the check table have an index <= comparison index
+  if( any(check$species_index<=comp.species.index)==FALSE){
+    #if so, remove all rows with that gene in the analysis.table.reference
+    analysis.table.reference<-filter(analysis.table.reference,homology_id != h)
+  }
+}
+
+
 #list of unique scaffold ids in reference
 ref.scaffold.list<-unique(analysis.table.reference$species_scaffold)
 
@@ -713,14 +731,12 @@ for (r in ref.scaffold.list){
   
   }
 
-#works line by line but not when looping
+
+#make sure 
 
 
 
-
-
-comparison_absent<-anti_join(analysis.table.reference,analysis.table.comparison,by="homology_id")
-
+result
 ```
 
 >throw out genes with homology_id NAs. REASONING???
