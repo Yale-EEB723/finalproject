@@ -39,6 +39,12 @@ I would like to learn the basic skills and understanding of genome annotation so
 Challenges as of 2/20/2019: 
 I would like to explore heterozygosity in this dataset but am unsure how to start doing that.
 
+Challenges as of 4/4/2019
+It seems like transcriptome data are not available, so I will need to assemble the genome ab initio.
+
+Updates:
+4/09/2019: Began mapping ddRAD data to genome in demultiplex stage  using ipyrad
+
 
 ## Methods
 
