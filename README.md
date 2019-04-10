@@ -57,7 +57,7 @@ Sensitivity, specificity and accuracy of predictions.
 
 ###Zoonosis
 
-Most human emerging infectious diseases across the world are zoonotic. Especially Viruses ocurring in mammals are of major concern. Examples include Anthrax, Birdflu and Ebola (Anthrax paper XXX, Karesh et al. 2012 The Lancet, Nature Olival et al. 2018). Thus, it is of primary concern to understand the drivers and patterns of viral biodiversity in wild animals (Oliver et al. 2018, 5-6) and the evolution . 
+Most human emerging infectious diseases across the world are zoonotic. Especially Viruses ocurring in mammals are of major concern. Examples include Anthrax, Birdflu and Ebola (Anthrax paper XXX, Karesh et al. 2012 The Lancet, Nature Olival et al. 2018). Thus, it is of primary concern to understand the drivers and patterns of viral biodiversity in wild animals (Oliver et al. 2018, 5-6) and the evolution .
 ###Bats as vectors of disease
 It is important to understand how vectors of zoonosis have evolved their immune genes for difference against virulence, and key ecomorpholocial traits crucial for their survival. Bats are unique among mammals; their ability to fly, longevity, echolocation abilities and immunity systems set them apart from all other mammals (XXX, XXX, XXX). Bats have been identified as the most virulent mammalian group (Olival et al. 2018), are distributed across all continents except for Antartica with aproximately 1300 species (over 10 percent of all mammals) (Bat diversity world paper). The niche specialization certain bat species might have been driven by the diversity of their innate immune genes, olfactory receptors (Hayden et al. 2014) and echo location genes (XXX).
 In this project, we investigated gene evolution of XLY immune genes in a group of XYZ bat species. We further studied which set of genes are subject to positive selection in bats dN/dS).
@@ -70,6 +70,17 @@ What the reader needs to know to understand the project
 
 ## Methods
 I will work with published data, mostly located in the 1K Bat genome project and NCBI. I plan on doing a compatisson of bat genomes with other mammal species (utilize published genomes) to study the evolution of immune genes genes.  Following Zheng et al. (2011), I also expect that bat and viruses coexistance across long timescales to have influenced selective pressure on bat genomes. Especially on immune genes.
+
+Downloaded bat genome of Myotis lucifugus
+Identified that I need TLR genes 3, 7, 8 and 9
+In NCBI I performed a query of "gene" -> "Toll Like Receptor" AND Myotis lucifugus. Stored locally as gene_results.txt
+
+# In NCBI gene search:
+(Toll Like receptor) AND Myotis lucifugus
+# Look at TLR 3, 7, 8 and 9
+
+
+
 
 ## Casey: I have some troubled identifying which methods to use to answer my questions at the moment.
 
