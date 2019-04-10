@@ -130,3 +130,51 @@ Ozer EA. ClustAGE: a tool for clustering and distribution analysis of bacterial 
               - don't understand the difference but I think its just a matter of finding the correct pipeline and if I want to identify phylogenies based on SNPs or recombination events/ backbones / LCBs
           - FastTree -gtr -nt salmonella_16.fasta > tree_file
             - Did this on a VERY large file (24gb) and unsure if this is too large
+
+
+### Project Notes 4/10/19
+  - Still confused on differences between phylogenetic programs
+  - Helpful website: https://www.ridom.de/u/FAQ%253AHow_to_build_Advanced_Phylogenetic_Trees%253F.html
+    -   Currently looking at using either:
+      -   Core & Accessory Genome Phylogeny comparison
+        - multiple alignment with MAFFT (Mol Biol Evol. 2013, 30:772)
+        - ClonalFrameML (PLoS Comput Biol. 2015, 11:e100404),
+        - ( or ClonalOrigin)
+        - Also believe my analysis using ClustAGE is similar to this approach
+          - Need to review what makes ClustAGE different from ClonalFramML
+      - Whole Genome SNP Phylogeny approach:
+        - multiple alignment of de novo assemblies with progressiveMauve (PLoS One. 2010, 5:e11147)
+        - Gubbins masking of recombinatory sites in multiple alignment
+        - FastTree MP- or ML-trees
+      - Seems from research that MAFFT and MAUVE are similar in terms of algorithm in aligning Genomes
+        - However, I need an output where I can then use this file to analyze downstream with Gubbins and then FastTree
+#### Today, going to attempt two things and research something:
+    - Install Gubbins, see where I can get with making a phylogeny using this method (does it use progressiveMauve alignment as input?)
+      -   Then make tree using FastTree (hopefully)
+    - Install ClonalML pipeline and run that process
+      - I believe it has alignment built in
+    - Research differences between mauve/Gubbins, ClonalFrameML, and ClustAGE
+    - Installing gubbins (http://sanger-pathogens.github.io/gubbins/)
+      sudo apt-get install gubbins
+    - Installing MAFFT
+      - sudo apt-get install MAFFT
+      - using mafft: mafft
+        - use fasta file with all genomes/sequences
+        - cat * .fasta > all_salmonella.fasta
+        - Seems to be stalling, dont know how fast it will go to be honest
+        - Choosing to see if the online tool works any better for the 30 sequences I am uploading (since some of the plasmids are involved)
+    - Using MAUVE to align genomes (instead of ProgressiveMauve)
+      - Still don't understand how to either have or convert alignment files for use in gubbins
+  - IMPORTANT:
+    - Found software to analyze evolution of nucleotide traits/ relationships between related bacteria
+      - BEAST 2 and the Bacter package
+        - Idea: upon identifying a useful gene/ island, use this software to analyze the evolution of that alignment
+    - Found bioarxiv paper talking about how they aligned genomes and analyzed
+      - used REALPHY online tool (or can use command line)
+        - https://github.com/fredeBio/REALPHY
+        - https://realphy.unibas.ch/realphy/
+        - Results: https://realphy.unibas.ch/REALPHY/scratch/data_op230wmv/report/
+
+    - Later
+      - Want to re-download ONLY the chromosomal sequences in FASTA format  
+        - Can do this both as one large file and also individually, depending on what service I am using
