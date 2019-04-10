@@ -28,6 +28,8 @@ The estimated genome size was 782.4 Mb and the assembly size is 711 Mb.
 The N50 value is 1.4 Mb, and the NG50 value is 1.18 Mb.
 I have received the output of the Canu assembly in the form of a fastq file.
 
+I do not have any transcriptome or proteome data for C. melampygus (yet) so I will be trying this assembly 'ab initio' just to get a hang of the program. 
+
 ## Background
 
 The motivation behind this project is to use the bluefin genome as a reference upon which to map ddRAD data. 
@@ -45,9 +47,11 @@ It seems like transcriptome data are not available, so I will need to assemble t
 Updates:
 4/09/2019: Began mapping ddRAD data to genome in demultiplex stage  using ipyrad
 
-4/10/2019: Having issues installing MAKER and all of its dependencies on Farnam. Emailed Ben Evans for help.
+4/10/2019: Having issues installing MAKER and all of its dependencies onto my Farnam account. Emailed Ben Evans for help.
 
 ## Methods
+
+
 
 ## Results
 
@@ -57,9 +61,16 @@ Updates:
 Was it successful in achieving the initial goal?
 
 What are the main obstacles encountered?
+#1. Installing the software and all its dependencies
 
 What would you have done differently?
 
 What are future directions this could go in?
 
 ## References
+Maker Tutorials:
+MAKER GMOD: http://gmod.org/wiki/MAKER_Tutorial
+Deren Card: https://gist.github.com/darencard/bb1001ac1532dd4225b030cf0cd61ce2
+Ian Gilman: https://github.com/isgilman/finalproject/wiki/Step-by-step-genome-annotation-for-Portulaca-amilis
+
+
