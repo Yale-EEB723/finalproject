@@ -13,7 +13,8 @@ are from public sources, or track them with [git-lfs](https://git-lfs.github.com
 
 ## Introduction
 
-This is a final project for the [Comparative Genomics](https://github.com/Yale-EEB723/syllabus) seminar in the spring of 2019. This project (a very brief, ie 1-2 sentence, overview of the project)...
+This is a final project for the [Comparative Genomics](https://github.com/Yale-EEB723/syllabus) seminar in the spring of 2019. 
+The aim of this project is to begin the annotation process of a genome for the marine fish in order to ultimately be able to map ddRAD loci onto the genome to identify loci under selection and determine their position in the genome relative to annotated gene regions. This will hopefully give us a functional genomic perspective on genetic differences between populations of this fish species in the Indo-Pacific.
 
 ## The goal
 
@@ -61,6 +62,7 @@ Updates:
 Was it successful in achieving the initial goal?
 
 What are the main obstacles encountered?
+
 #1. Installing the software and all its dependencies
 
 What would you have done differently?
