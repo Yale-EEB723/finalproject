@@ -45,6 +45,7 @@ It seems like transcriptome data are not available, so I will need to assemble t
 Updates:
 4/09/2019: Began mapping ddRAD data to genome in demultiplex stage  using ipyrad
 
+4/10/2019: Having issues installing MAKER and all of its dependencies on Farnam. Emailed Ben Evans for help.
 
 ## Methods
 
