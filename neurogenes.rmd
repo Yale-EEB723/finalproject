@@ -649,6 +649,14 @@ write.csv(cluster.master.table,"cluster.master.table.csv",quote=FALSE,row.names=
 
 
 ```
+
+for understanding tsne: https://www.youtube.com/watch?v=NEaUSP4YerM
+tsne data = 160 points
+192 unique scaffolds in master.table
+inner join with agalma.homologs may have further reduced this? check further
+
+-
+
 ###Other clustering methods:
 https://stats.stackexchange.com/questions/305179/cross-cluster-analysis-of-categorical-data-in-r/305218
 https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0152333
