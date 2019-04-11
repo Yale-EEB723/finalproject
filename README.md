@@ -6,13 +6,13 @@ This is a final project for the [Comparative Genomics](https://github.com/Yale-E
 
 ## Background
 
-The Major Histocompatibility Complex represents a fundamental component of the adaptive immune response in jawed vertebrates. 
+The Major Histocompatibility Complex represents a fundamental component of the adaptive immune response in jawed vertebrates. [to be continued]
 
-
+The Antarctic notothenioids, a clade of approximately 100 teleost fish species that dominate the Southern Ocean ichthyofauna, present a unique opportunity for investigating MHC gene evolution. The waters surrounding the Antarctic continent are covered with ice for most of the year, and water temperatures reach as low as -1.86 degrees Celsius in the austral winter. In other teleost lineages, it has been hypothesized that low temperatures may result in a weakening of the adaptive immune response and a corresponding strengthening of the innate immune response (Bly and Clem 1992). For example, in the cod-like fishes (Gadiformes) it has been suggested that loss of MHCII functionality was associated with exposure of the lineage to an environment characterized by cold temperatures (Malmstrom et al. 2013, 2016). Previous study of immune gene evolution in notothenioids has revealed duplication and associated up-regulation of genes involved in the innate immune response (Chen et al. 2008), but has also identified two distinct genes associated with MHC class II (Gerdol et al. 2019). [to be continued]
 
 ## The goal
 
-The primary goal of this work is to investigate the evolution of MHCI and MHCII lineages within and among notothenioid species. 
+The primary goal of this work is to investigate the evolution of MHCI and MHCII lineages among notothenioid species. 
 
 ## The data
 
