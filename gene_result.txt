@@ -1,0 +1,5 @@
+tax_id	Org_name	GeneID	CurrentID	Status	Symbol	Aliases	description	other_designations	map_location	chromosome	genomic_nucleotide_accession.version	start_position_on_the_genomic_accession	end_position_on_the_genomic_accession	orientation	exon_count	OMIM	
+59463	Myotis lucifugus	102427949	0	live	TLR8		toll like receptor 8	toll-like receptor 8		Un							
+59463	Myotis lucifugus	102430015	0	live	TLR3		toll like receptor 3	toll-like receptor 3		Un							
+59463	Myotis lucifugus	102428265	0	live	TLR7		toll like receptor 7	toll-like receptor 7		Un							
+59463	Myotis lucifugus	102431868	0	live	TLR9		toll like receptor 9	LOW QUALITY PROTEIN: toll-like receptor 9		Un							
