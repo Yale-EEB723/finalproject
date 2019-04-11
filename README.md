@@ -12,7 +12,7 @@ The Major Histocompatibility Complex represents a fundamental component of the a
 
 ## The goal
 
-The primary goal of this work is to investigate the evolution of MHCI and MHCII lineages within and among notothenioid species. 
+The primary goal of this work is to investigate the evolution of MHCI and MHCII lineages among notothenioid species. 
 
 ## The data
 
