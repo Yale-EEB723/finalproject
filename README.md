@@ -6,7 +6,9 @@ This is a final project for the [Comparative Genomics](https://github.com/Yale-E
 
 ## Background
 
-The major histocompatibility complex (MHC) represents a fundamental component of the vertebrate adaptive immune system, and its functionailites and pathways have long been thought to be highly conserved across species. However, significant modifications of the adaptive immune system have been noted, and in some cases have been associated with shifts in speciation rate in those lineages.
+The Major Histocompatibility Complex represents a fundamental component of the adaptive immune response in jawed vertebrates. 
+
+
 
 ## The goal
 
