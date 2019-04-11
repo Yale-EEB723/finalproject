@@ -1,0 +1,9 @@
+# Assembly stats
+v0.1
+
+contig n50 = 872,654 bps
+median contig length = 314,004 bp
+shortest contig = 4,308 bp
+longest contig = 3,968,385 bp
+number of contigs = 1,416
+total assembly length = 717,512,980 bp
