@@ -32,6 +32,7 @@ library(dplyr)
 library(cluster)
 library(CrossClustering)
 library(vegan)
+library(Rtsne)
 ```
 
 
@@ -433,7 +434,7 @@ longest.pep.df <-gene.iso.df%>%group_by(geneID)%>%mutate(the_rank = rank(-width,
 
 list<-longest.pep.df[,1,drop=FALSE]
 #wait why doesn't col.names=FALSE remove the column name?? Oh well.
-write.csv(list,"Hydra_longestpep.txt",quote=FALSE,row.names=FALSE)
+write.csv(list,"longestpep_list.txt",quote=FALSE,row.names=FALSE)
 ```
 Notes:  
 
@@ -515,8 +516,13 @@ To run the database query:
     sqlite3 -csv -header homologs.sqlite < query_homology.sql > homology_results.csv
 
 
+
 #Make a master table  
+
 GFF3 seems to be a flat file designed to have very defined vocabulary, so should make a master table instead of adding to GFF3.
+
+##Clean agalma csv  
+Add headers to agalma csv:  homology_id,gene,catalog_id,id,homology_id,model_id,model_id,model_id    
 
 Turns out I am an idiot and the p:blah:s:blah:g:blah:t:blah I came up with for the agalma protein names - really needed the gene names so that I can join them into the Master table. So just regexed out the gene names. Happily easy to parse because of my naming pattern = compagen_homologs_nohydra_geneNames.csv.  Must also regex Danio and Homo gene names because have an extra .n after gene name not present in gff3s.
 
@@ -537,6 +543,8 @@ Spu: yes but also present in gff3
 
 
 Need to add a column to indicate which animal each gene came from (not all scaffold/gene names consistent). Here are the rownumbers for each animal:  
+View(master.table) -> filter by each animal and find beginning and end row nums  
+
 Aqu 	1:43615  
 Capt	43616:75790  
 Danio	75791:101396  
@@ -544,15 +552,19 @@ Drosophila	101397:115327
 Helo	115328:138759  
 Homo	138760:160251  
 Lotgi	160252:183600    
-Mle	183601:200159  
+Mle	(ML) 183601:200159  
 Nve	200160:224932  
-Spu	224933:253919  
-Tae	253920:271407  
+Spu	(SPU) 224933:253919  
+Tae (ENTSGU)	253920:271407  
 Tri	271408:282927  
+
+
+
 
 Note that things like "ncRNA_gene" in gff3 files also have "gene_id=", but in the below R code I filter first by just "gene", which is why grep "gene_id" GFF3.gff3 will bring up more lines than are in my table. Spot checked table - does not appear to have any ncRNA_genes.  
 
 ```{r MASTA TABLE}
+###CHANGE AGALMA CSV HERE
 
 #set up empty df to rbind to
 all.df<-data.frame(matrix(ncol=5,nrow=0))
@@ -576,18 +588,19 @@ all.df$gene<-gsub(".*gene_id=(.*?);.*","\\1",all.df$attributes)
 #Begin contstruction of MASTAAA! table.
 master.table<-select(all.df,"seqid","start","end","gene")
 
-#need to add animal ids"
+#need to add animal ids
 master.table$animal<-c(rep.int("Amphimedon_queenslandica",43615),rep.int("Capitella_telata",32175),rep.int("Danio_rerio",25606),rep.int("Drosophila_melanogaster",13931),rep.int("Helobdella_robusta",23432),rep.int("Homo_sapiens",21492),rep.int("Lottia_gigantea",23349),rep.int("Mnemiopsis_leidyi",16559),rep.int("Nematostella_vectensis",24773),rep.int("Strongylocentrotus_purpuratus",28987),rep.int("Taeniopygia_guttata",17488),rep.int("Trichoplax_adhaerens",11520))
 
+
 write.csv(master.table,"master.table.csv",quote=FALSE,row.names=FALSE)
-#Read in amalga homologs csv
-agalma.homologs<-read.csv("compgen_homologs_nohydra_geneNames.csv",header=TRUE,sep=",")
+#Read in agalma homologs csv
+agalma.homologs<-read.csv("relaxedbit_results_alt.csv",header=TRUE,sep=",")
 
 #left join because need to know which genes have no homology too.
 final.master.table<-left_join(master.table,agalma.homologs)%>%select(.,"seqid","start","end","gene","homology_id","catalog_id","animal")
 
 write.csv(final.master.table,"final.master.table_absentgenes.csv",quote=FALSE,row.names=FALSE)
-#double check that there are no duplicate genes in final.master.table
+#to double check that there are no duplicate genes in final.master.table:
 #duplicated(final.master.table$gene)%>%table()
 
 ```
@@ -600,8 +613,7 @@ absent_genes.csv: cut -f 1 -d "," final.master.table_absentgenes.csv |grep "NA"
 #must run previous chunk first
 
 #Take a subset! Otherwise following code will not complete running and freeze everything!!!
-tmp<-master.table
-filter_target=c("Homo_sapiens","Danio_rerio")
+filter_target=c("Homo_sapiens","Danio_rerio","Strongylocentrotus_purpuratus")
 master.table<-filter(master.table, animal==filter_target)
 
 #There are human gene names in pep files that are not anywhere in gff3 files = inner_join
@@ -627,7 +639,8 @@ clust<-cc_get_cluster(cross.clust)
 
 #plot the clustering
 #see code from http://dpmartin42.github.io/posts/r/cluster-mixed-types
-tsne_obj<-Rtsne(dist.matrix,is_distance=TRUE)
+#adjust perplexity if get error "perplexity is too large for the number of samples"
+tsne_obj<-Rtsne(dist.matrix,is_distance=TRUE,perplexity=1)
 tsne_data<-tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(cluster=factor(clust))
 ggplot(aes(x = X, y = Y), data = tsne_data) + geom_point(aes(color = cluster))
 
@@ -651,10 +664,11 @@ write.csv(cluster.master.table,"cluster.master.table.csv",quote=FALSE,row.names=
 
 ```
 
+Note: nrows in contingency table is much smaller than in final.master.table_cluster because the latter lists 1 row for each gene while the former 1 row for each scaffold. Nrow of contingency table will equal number of unique scaffolds among the animals selected.
+
 for understanding tsne: https://www.youtube.com/watch?v=NEaUSP4YerM
 tsne data = 160 points
 192 unique scaffolds in master.table
-inner join with agalma.homologs may have further reduced this? check further
 
 -
 
@@ -694,15 +708,14 @@ comparison="Danio_rerio"
 
 result<-data.frame()
 
-#subset cluster.master.table for the reference or comparison animal; remove NAs
-#analysis.table.reference<-filter(cluster.master.table,animal==reference & !is.na(homology_id))
-#analysis.table.comparison<-filter(cluster.master.table,animal==comparison & !is.na(homology_id))
-
 #for sample run:
-sample.table<-read.table("sample.table.txt",header=TRUE,sep=",")
-analysis.table.reference<-filter(sample.table,animal==reference & !is.na(homology_id))
-analysis.table.comparison<-filter(sample.table,animal==comparison & !is.na(homology_id))
+#sample.table<-read.table("sample.table.txt",header=TRUE,sep=",")
+#analysis.table.reference<-filter(sample.table,animal==reference & !is.na(homology_id))
+#analysis.table.comparison<-filter(sample.table,animal==comparison & !is.na(homology_id))
 
+#subset cluster.master.table for the reference or comparison animal; remove NAs
+analysis.table.reference<-filter(cluster.master.table,animal==reference & !is.na(homology_id))
+analysis.table.comparison<-filter(cluster.master.table,animal==comparison & !is.na(homology_id))
 
 #remove any genes in the analysis.table.reference that are present only in clades that arose after the comparison clade.
 #get a list of all unique homology_ids in the analysis table
@@ -713,7 +726,10 @@ comp.species.index<-analysis.table.comparison$species_index[1]
 #for each gene in the ref analysis table
 for (h in ref.homolog.list){
   #select all the rows of that particular genes for all animals (except your comp animal)
-  check<-filter(sample.table, homology_id==h & animal!=comparison)
+  #for sample data:
+  #check<-filter(sample.table, homology_id==h & animal!=comparison)
+  check<-filter(cluster.master.table, homology_id==h & animal!=comparison)
+  
   #check if any of the species indices in the check table have an index <= comparison index
   if( any(check$species_index<=comp.species.index)==FALSE){
     #if so, remove all rows with that gene in the analysis.table.reference
