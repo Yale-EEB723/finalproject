@@ -542,7 +542,7 @@ Test the rest: blah\d+\.\d+,blah_id
 Spu: yes but also present in gff3
 
 
-Need to add a column to indicate which animal each gene came from (not all scaffold/gene names consistent). Here are the rownumbers for each animal:  
+Need to add a column to master.table indicate which animal each gene came from (not all scaffold/gene names consistent). Here are the rownumbers for each animal:  
 View(master.table) -> filter by each animal and find beginning and end row nums  
 
 Aqu 	1:43615  
@@ -594,7 +594,7 @@ master.table$animal<-c(rep.int("Amphimedon_queenslandica",43615),rep.int("Capite
 
 write.csv(master.table,"master.table.csv",quote=FALSE,row.names=FALSE)
 #Read in agalma homologs csv
-agalma.homologs<-read.csv("relaxedbit_results_alt.csv",header=TRUE,sep=",")
+agalma.homologs<-read.csv("5taxa_results_alt.csv",header=TRUE,sep=",")
 
 #left join because need to know which genes have no homology too.
 final.master.table<-left_join(master.table,agalma.homologs)%>%select(.,"seqid","start","end","gene","homology_id","catalog_id","animal")
@@ -612,6 +612,9 @@ absent_genes.csv: cut -f 1 -d "," final.master.table_absentgenes.csv |grep "NA"
 ```{r cluster}
 #must run previous chunk first
 
+#save a copy of master.table
+save.master.table<-master.table
+
 #Take a subset! Otherwise following code will not complete running and freeze everything!!!
 filter_target=c("Homo_sapiens","Danio_rerio","Strongylocentrotus_purpuratus")
 master.table<-filter(master.table, animal==filter_target)
@@ -625,9 +628,14 @@ contingency<-table(final.master.table_cluster$species_scaffold,final.master.tabl
 contingency<-1*(contingency>0)
 
 
+
 #dissimilarity matrix
+
 dist.matrix<-daisy(contingency,metric="gower",stand=FALSE)
 
+#sparse data troubleshooting
+#sample<-contingency[sample(100),sample(100)]
+#dist.matrix<-dist.matrix(sample,method="manhattan")
 
 #cluster
 
@@ -642,8 +650,8 @@ clust<-cc_get_cluster(cross.clust)
 #adjust perplexity if get error "perplexity is too large for the number of samples"
 tsne_obj<-Rtsne(dist.matrix,is_distance=TRUE,perplexity=1)
 tsne_data<-tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(cluster=factor(clust))
-ggplot(aes(x = X, y = Y), data = tsne_data) + geom_point(aes(color = cluster))
-
+tsn_plot<-ggplot(aes(x = X, y = Y), data = tsne_data) + geom_point(aes(color = cluster))
+tsn_plot
 
 
 
@@ -787,6 +795,7 @@ zebrafish and human synteny: https://genome.cshlp.org/content/10/9/1351.full
 Trying to get around sparse matrix issue:
 -make a smaller matrix of more closely related animals  
   -tried Drosophila, Danio, Human but error at homologize step: "main__.select_clusters: no clusters passed the filtering criteria"
+  -5 taxa: Drosophila, Danio, Strongylo, Taeniopgygia, Human: error at genetrees step. Looks like homologize worked - use.
 
 #FIGURES TO MAKE...soonish hmm   
 Comparison across clades of:  
