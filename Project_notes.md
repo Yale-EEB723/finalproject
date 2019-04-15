@@ -231,4 +231,30 @@ Ozer EA. ClustAGE: a tool for clustering and distribution analysis of bacterial 
     - ClustAGE
     - ClustalML
     - progressiveMauve
-    - CSI Phylogeny 
+    - CSI Phylogeny
+  - Reading papers from xavierdidelot
+    - ClonalFram original paper (Inference of bacterial microevolution using multilocus sequence data) very useful for background on clonal comparison
+    - ClonalFrameML paper good follow up to this, discussing how they used the new frame work in C diff
+      - They discuss that while using ClonalFrameML, in a couple papers and on the website, that they had to use the CORE genome of S aureus else it would upset what they were studying
+  - Ultimately, I think I will most likely try and compare what information progressiveMauve, ClustalFrameML, and ClustAGE can give you (?)
+    - Will have to flesh this out more, however
+
+  - Code:
+    - ClustalML
+      - #Downloaded it using debian
+        - sudo apt-get install clustalml
+      - #Ran program using CSI Phylogeny files as input
+        - ClonalFrameML snp_tree.main_tree.newick snp_tree.aln.fasta salmonella_clustalml_first
+        - Need to install two R packages to visualize Results
+          - conda install -c bioconda r-phangorn
+          - conda install -c r r-ape
+      - Results came out in same folder as CSI_Phylogeny_Results
+        - Results had been run through FastTree in pipeline
+      - Results for RealPHY are being run in FastTree to see if there are differences
+        -  FastTree -nt polymorphisms_move.fas > salmonella_poly_realphy_ft
+        - Created tree successully
+          - salmonella_poly_realphy_ft
+          - Compare with Clustage Tree and CSI Tree
+            - PhyML tree vs FastTree
+      - Now run ClustAGE Pipeline with all genomes, including plasmids
+      - And run ClustalFrameML with Rscript now that they are installed
