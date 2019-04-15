@@ -178,3 +178,57 @@ Ozer EA. ClustAGE: a tool for clustering and distribution analysis of bacterial 
     - Later
       - Want to re-download ONLY the chromosomal sequences in FASTA format  
         - Can do this both as one large file and also individually, depending on what service I am using
+        - Edited .fasta files to only get chromosomes
+          - Uploading to MAFFT online tool, all default except using parameters:
+            - G-INS-1 (Slow; progressive method with an accurate guide tree) to see how it does
+          - Also attempting locally:
+             mafft --localpair --maxiterate 1000 salmonella_chromosomes.fasta
+             - actually realized this method may take forever, going with "fast progressive method" as stated on website
+           mafft --retree 2 --maxiterate 0 salmonella_chromosomes.fasta
+
+
+### April 15, 2019
+  - Running CSIPhylogeny online tool using LT2 as reference genome
+    - Seems like it was successful this time
+    - Forgot to include LT2 in phylogeny, so redoing, and trying do to with full genome fasta files
+  - Will run genomes also through:
+    - ClonalOrigin and/or ClonalFrameML
+    - ClustAGE
+  - Make sure progressiveMauve data is there as well
+    - Identify gene that is different between different species
+      - Compare this gene and create phylogeny based on its evolution
+      - Use MEGA to do this alignment/ phylogeny
+  - Running all genome comparison on RealPHY
+    - Reference is Salmonella_Typhi_Ty2
+    - Used all gbk full files
+  - Running salmonella_chromosomes.txt on MAFFT server, default settings on FS-1
+    - https://www.genome.jp/tools-bin/mafft
+    - Didnt work (txt file too large, too many NTs)
+  - Goal is to get alignment in order to run it on PhyML (phylip file) to get starting tree, and a multiple alignment file (either fasta or XFMA), both needed for ClonalML pipeline
+    - For some reason, have trouble finding a way to use mauve output files
+      - for .alignment (xfma) conversion, found software package in conda (bioconvert)
+        - conda install bioconvert
+        - bioconvert xfma2phylip
+        - https://github.com/bioconvert/bioconvert
+          - numpybase causing issue?
+          - going to update Conda Now
+          - conda update --prefix /home/aaverdegaal/anaconda3 anaconda
+  - Found new software called MUGSY
+    - Getting desperate since online service for MAFFT above said my file was too big (>50kb, mine is 86kb)
+    - Will look at MUGSY now
+      - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3031037/
+      - http://mugsy.sourceforge.net/
+      - Will try Mugsy after MAFFT is done running or cant run on my laptop
+      - May also try MrBayes
+        - Just getting into the idea that there are different methods for Phylogeny
+        - Bayesian inference, Maximum Parsimony, and Maximum Likelihood
+  - Running MAFFT on own computer with FS-1 setting, default everything else
+    - Should output a phylip and fasta file if works
+    - DOing better than Ive seen yet so hopeful
+  - Also want to use Brig to show comparison of Genomes
+    - http://brig.sourceforge.net/
+  - Read about:
+    - ClustAGE
+    - ClustalML
+    - progressiveMauve
+    - CSI Phylogeny 
