@@ -293,7 +293,7 @@ https://www.rdocumentation.org/packages/ape/versions/5.2/topics/read.gff
 
 #install.packages("ape")
 
-gff3="data/genomes/gff3/Nematostella_vectensis.ASM20922v1.42.gff3"
+gff3="data/genomes/gff3/Drosophila_melanogaster.BDGP6.22.96.chr.gff3"
 #parse gff3 and create new df with only seqid, type, start and end. Keep start and end coords for later analyses.
 contig.gene.df <- ape::read.gff(file=gff3, GFF3=TRUE) %>% select(.,"seqid","type","start","end") %>% filter(.,type == "gene")
 
@@ -605,7 +605,7 @@ master.table$animal<-c(rep.int("Amphimedon_queenslandica",43615),rep.int("Capite
 
 write.csv(master.table,"master.table.csv",quote=FALSE,row.names=FALSE)
 #Read in agalma homologs csv
-agalma.homologs<-read.csv("5taxa_results_alt.csv",header=TRUE,sep=",")
+agalma.homologs<-read.csv("relaxedbit_results_alt.csv",header=TRUE,sep=",")
 
 #left join because need to know which genes have no homology too.
 final.master.table<-left_join(master.table,agalma.homologs)%>%select(.,"seqid","start","end","gene","homology_id","catalog_id","animal")
@@ -613,6 +613,7 @@ final.master.table<-left_join(master.table,agalma.homologs)%>%select(.,"seqid","
 write.csv(final.master.table,"final.master.table_absentgenes.csv",quote=FALSE,row.names=FALSE)
 #to double check that there are no duplicate genes in final.master.table:
 #duplicated(final.master.table$gene)%>%table()
+
 
 ```
 
@@ -623,7 +624,7 @@ absent_genes.csv: cut -f 1 -d "," final.master.table_absentgenes.csv |grep "NA"
 ```{r cluster}
 #must run previous chunk first
 
-#save a copy of master.table
+#save master table before continuing
 save.master.table<-master.table
 
 #Take a subset! Otherwise following code will not complete running and freeze everything!!!
@@ -637,7 +638,7 @@ final.master.table_cluster<-inner_join(master.table,agalma.homologs)%>%dplyr::se
 #make contingency table
 contingency<-table(final.master.table_cluster$species_scaffold,final.master.table_cluster$homology_id)%>%as.matrix()
 contingency<-1*(contingency>0)
-
+contingency<-contingency[sample(100),sample(100)]
 
 
 #dissimilarity matrix
@@ -645,13 +646,25 @@ contingency<-1*(contingency>0)
 dist.matrix<-daisy(contingency,metric="gower",stand=FALSE)
 
 #sparse data troubleshooting
-#sample<-contingency[sample(100),sample(100)]
-#dist.matrix<-dist.matrix(sample,method="manhattan")
+
 
 #cluster
 
+#agglomerative
 #ag<-agnes(dist.matrix,diss=TRUE)
-#plot(ag)
+#plot(ag,labels=FALSE)
+
+#divisive
+#di<-diana(dist.matrix)
+#plot(di,labels=FALSE)
+
+#kmeans
+#kmean<-kmeans(dist.matrix,51)
+#kclust<-kmean$cluster
+#tsne_obj<-Rtsne(dist.matrix,is_distance=TRUE,perplexity=1)
+#tsne_data<-tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(cluster=factor(kclust))
+#tsn_plot_k<-ggplot(aes(x = X, y = Y), data = tsne_data) + geom_point(aes(color = cluster))
+#tsn_plot_k
 
 cross.clust<-cc_crossclustering(dist.matrix,out=FALSE)
 clust<-cc_get_cluster(cross.clust)
@@ -659,10 +672,10 @@ clust<-cc_get_cluster(cross.clust)
 #plot the clustering
 #see code from http://dpmartin42.github.io/posts/r/cluster-mixed-types
 #adjust perplexity if get error "perplexity is too large for the number of samples"
-tsne_obj<-Rtsne(dist.matrix,is_distance=TRUE,perplexity=1)
+tsne_obj<-Rtsne(dist.matrix,is_distance=TRUE,perplexity=30)
 tsne_data<-tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(cluster=factor(clust))
-tsn_plot<-ggplot(aes(x = X, y = Y), data = tsne_data) + geom_point(aes(color = cluster))
-tsn_plot
+tsne_plot<-ggplot(aes(x = X, y = Y), data = tsne_data) + geom_point(aes(color = cluster))
+tsne_plot
 
 
 
@@ -787,10 +800,12 @@ for (r in ref.scaffold.list){
 
 
 result
+write.csv(result,"relaxedbit.csv",quote=FALSE,row.names=FALSE)
 ```
 
 >throw out genes with homology_id NAs. REASONING???
 
+QUESTION: Why does some genes show up more than once with different homology ids in the relaxed bit agalma file???
 
 To do:
 -sandwiching homologues 
