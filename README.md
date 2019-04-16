@@ -1,45 +1,49 @@
 # Final Project
 ## Introduction
 
-This is the final project for Andrew Verdegaal in [Comparative Genomics](https://github.com/Yale-EEB723/syllabus), seminar in the spring of 2019. This project will attempt to identify genetic/ genomic differences between different Salmonella species and serovars by comparing host-specific and broad host range genomes of Salmonella.
+This is the final project for Andrew Verdegaal in [Comparative Genomics](https://github.com/Yale-EEB723/syllabus), seminar in the spring of 2019. This project will attempt to identify genetic/ genomic differences between different Salmonella species and serovars by comparing host-specific and broad host range genomes of Salmonella with new, unexplored draft genomes.
 
 ## The goal
 
 ### Big Picture
-  - Differences in genomic makeup of Salmonella species and how this affects pathogenicity and virulence in different hosts. Specifically, I will focus on GENE LOSS between different serovars of Salmonella and see if there can be some relationship found with any genes lost and host range of that serovar.
+  - Differences in genomic makeup of Salmonella species and how this affects pathogenicity and virulence in different hosts. A large portion of pathogenicity tends to stem from an "accessory" genome, where elements are introduced or lost over time, and can help determine the virulence/ pathogenicity/ host adaptation of individual species or serovar strains; whereas the "core" genome is shown to be shared by all closely related strains. By looking at previously studied and annotated genomes, we can potentially identify factors in newly sequenced genomes by understanding differences related to the core and accessory genomes
 
 ### Specific Goals
-  - I will try and find similarities and differences between Salmonella that are host-specific (eg: Salmonella enterica serovar gallinarium [Chickens]/ S. enterica serovar typhi [Humans]) and those with broad host ranges, focusing on LOSS of genes. This could be a range of different genes, but focus on the following:
+  - I will 18 previously studied Salmonella annotated reference genomes to determine the core and accessory genomes most likely to be associated with the strains of interest using the Spine and AGEnt software programs in the ClustAGE pipeline.
+  - I will identify new strains that have been recently sequenced and not experimentally manipulated to the extent of the reference strains
+    - This means I may find draft genomes, assemble, and annotate them in order to curate them for processing them in ClustAGE pipeline.
+  - I will try and find similarities and differences between Salmonella that are host-specific (eg: Salmonella enterica serovar gallinarium [Chickens]/ S. enterica serovar typhi [Humans]) and those with broad host ranges. This could be a range of different genes, but focus on the following:
     - Pathogenicity islands
     - Type III Secretion System effectors
     - Metabolic House-keeping genes
   - Will also use Salmonella bongori as another source of comparison, as this is the other species in the genus of Salmonella. Other work has looked at how this species can help us understand the evolution of Salmonella, as it also has secretion systems yet different effectors, and has the ability to be pathogenic in humans as well (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3158058/pdf/ppat.1002191.pdf)
-  - Failing ability to compare these attributes with the sequences and tools at hand without experimental assays, I will at the very least do the following:
-    - Re-annotate the Salmonella enterica serovar Gallinarum genome
-    - Create a phylogenetic tree describing evolutionary relationships between different Salmonella species and serotypes, and see if there are any correlations that can be seen with relationships and host range.
 
 ## The data
 
 ### Description of data:
 
 #### Data source
- - Data will be from a combination of published and simulated data. Simulated data will be derived from attempting novel annotations of previously published Salmonella genomes.
+ - NCBI Genome database
 
 #### Data structure
- 1) Assembled genomes, in order to make potentially new annotations of these genomes
-      Genomes include: Pan-Salmonella enterica genome; Salmonella gallinarium; Salmonella enterica typhimurium; Salmonella enterica typhi; perhaps others.
+ 1) Assembled/annotated genomes, in order to make potentially new annotations of these genomes
+  - Reference genomes in GenBank format
 
- 2) Previously annotated genomes, which will be used in a comparative analysis of functioning genes in pathogenic pathways
-#### Database sources
- - https://salmonella.biocyc.org/ -> online set of tools/database capable of multiple genome comparisons, metabolic pathway comparisons, multiple sequence alignment with over 250 Salmonella species/ sub subspecies
+ 2) Sequenced draft genomes that have to be processed through assembly and annotation pipelines
+  - This includes:
+    - Draft genome sequence of S. Typhimurium ST313 isolated from an elderly immunosuppressed patient with Non-Hodgkins Lymphoma from India
+    - Salmonella enterica subsp. enterica serovar Abortusovis str. SS44, whole genome shotgun sequencing project
+#### Genomic Data Sources
+  - (Write sources for the accession numbers above)
 
- - http://xbase.warwick.ac.uk/taxon/Salmonella -> another online toolset/database allowing for comparison between multiple species of Salmonella/ subspecies
+  - Draft genome candidates:
+            - Abortus
+              - Sequence https://www.ncbi.nlm.nih.gov/nuccore/AUYQ00000000.2?report=gbwithparts&log$=seqview
+              - Paper https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3974941/pdf/e00261-14.pdf
+            - Typhimurium from India 2018
+              - Sequence https://www.ncbi.nlm.nih.gov/biosample/?term=ERS2592364 (?)
+              - Paper https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6256508/pdf/e00990-18.pdf
 
- - https://www.ncbi.nlm.nih.gov/genome/genomes/152 -> Salmonella enterica database on NCBI
-
- - https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=590 -> NCBI Full genome set of all Salmonella sp. (that were submitted to this database)
-
-#### Specific sources of Genomic Data
  - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4832160/ -> Complete Genome Sequence of Salmonella enterica Serovar Typhimurium Strain YU15 (Sequence Type 19)
 
  - https://www.nature.com/articles/35101614 -> Complete genome sequence of Salmonella enterica serovar Typhimurium LT2
@@ -51,24 +55,17 @@ This is the final project for Andrew Verdegaal in [Comparative Genomics](https:/
 ## Background
 
 ### Motivation for Project
-Salmonella still causes illnesses even in developed nations due to tainted food sources or unsanitary conditions. Stated by the CDC, "approximately 1.2 million illnesses and 450 deaths occur due to non-typhoidal Salmonella annually in the United States". Not only could we tackle the issue of Salmonella through understanding its biology and evolution, but we can use this knowledge to catapult efforts to tackle other intracellular pathogens that are either already a threat (eg: Campylobacter jejuni) or emerging intracellular pathogens with similar biology.
+Salmonella still causes illnesses even in developed nations due to tainted food sources or unsanitary conditions. Stated by the CDC, "approximately 1.2 million illnesses and 450 deaths occur due to non-typhoidal Salmonella annually in the United States". Not only could we tackle the issue of Salmonella through understanding its biology and evolution, but we can use this knowledge to catapult efforts to tackle other intracellular pathogens that are either already a threat (eg: Campylobacter jejuni) or emerging intracellular pathogens with similar biology. Many new strains of Salmonella enterica that are clinically relevant are constantly being isolated, and there is a need to understand similarities and differences that these strains have in comparison to other well-studied serovar strains.
 
 ### How it fits in with other work...
-Salmonella has been well studied and characterized experimentally, but we still have holes in our knowledge that can be filled using bioinformatics and comparative functional genomics. Previous work has been focused on similar topics, with groups diving into the evolution of Salmonella enterica subspecies and relevant clinical serovars, as well as more cursory looks at how host specificity has evolved in the context of comparing genomes.
+Salmonella has been well studied and characterized experimentally, but we still have holes in our knowledge relating to relevant clinical strains that have yet to be isolated or studied. This need can be filled using bioinformatics and comparative functional genomics. Previous work has been focused on similar topics, with groups diving into the evolution of Salmonella enterica subspecies and relevant clinical serovars, as well as more cursory looks at how host specificity has evolved in the context of comparing genomes.
 
 ### What the reader needs to know to understand the project
-The reader must have some knowledge of microbial genetics, as well as some understanding in how Salmonella and other intracellular pathogens infect/survive/replicate in host cells. Additionally, I believe a large part of this host specificity will coincide with differences in metabolic pathways and effectors of Type III secretion machinery, either gained or lost between species/ strains, so having a basic understanding of how these are involved in pathogenicity of Salmonell would be useful.
+The reader must have some knowledge of microbial genetics, as well as some understanding in how Salmonella and other intracellular pathogens infect/survive/replicate in host cells. Additionally, I believe a large part of this host specificity will coincide with differences in metabolic pathways and effectors of Type III secretion machinery, either gained or lost between species/ strains, so having a basic understanding of how these are involved in pathogenicity of Salmonella would be useful.
+
 
 
 ## Methods
-  As of right now, I have a general understanding of what tools are available to complete this project, with more perhaps coming into my view as I read more literature on comparative genomics in Salmonella/ pathogens.
-
-### Approaches
-- Compare Salmonella serovar Pullorum to serovar Gallinarum; See similarities/ any insights into how they are similar in terms of genetic make-up of pathogenicity traits. These strains are host-adapted to chickens.
-    - May have to specifically focus on pathogenicity islands OR look at essential/ house-keeping genomes. These have been shown by Martin Wiedmann's group (place specific source paper here)..
-- Then, take either these individually or together and compare against a Generalist (Salmonella serovar Enteritidis)
-- If this is working/ going well, use Salmonella serovar Typhimurium and/or Typhi to see how these differences come about in mammals.
-      "Salmonellae are important pathogenic bacteria infecting humans or animals. Salmonella enterica serovar Pullorum, a strictly chicken-adapted pullorum agent, is one of the more than 2,500 documented Salmonella lineages (4). It is very closely related to another chicken pathogen, Salmonella enterica serovar Gallinarum, and, to a lesser degree, to a host generalist, Salmonella enterica serovar Enteritidis.""
 
 ### General software packages
 - Anaconda/ Bioconda
@@ -78,12 +75,10 @@ The reader must have some knowledge of microbial genetics, as well as some under
 - SRST2 > Short Read Sequence Typing for Bacterial Pathogens, don't think I'll need this but works with Illumina sequences to ID genes of interest within the sequences
 
 ### Genome Assembly
-- Roary > Pipeline to create a "pan-genome" of a species using .gff3 output files from Prokka
+- Ray > http://denovoassembler.sourceforge.net/, de novo assembler, can assemble single genomes using FastQ files or others as input
 
 ### Annotation Tools (for potentially reannotating previously assembled Genomes)
 - Prokka > Standalone command line tool for rapidly annotating prokaryotic Genomes
-
-- Wombac > Find core genome SNPS and aligns SNPs to form a phylogenetic tree; http://www.vicbioinformatics.com/software.wombac.shtml
 
 - RAST > Takes ~a day to annotate a single genome, may be too slow
     Virulence gene annotation software
@@ -103,20 +98,50 @@ The reader must have some knowledge of microbial genetics, as well as some under
 
 - Artemis Comparison Tool > Similar software to above, but can compare multiple genomes concurrently to find similarities and differences
 
+- progressiveMauve > Multiple genome alignment and graphical viewer of shared regions between different genomes
+
+- ClustAGE > Has own graphs output of accessory element loci regions; also has online tool to create a circular map of these elements compared between the genomes
+
 ### Genome Comparisons
-- Mauve > Multiple genome aligner, able to show large scale evolutionary events; Java based
-  - progressiveMauve > Specifically can show gene loss events for our purposes (most likely very important)
+- progressiveMauve > Multiple genome aligner, able to show large scale evolutionary events; Java based
 
-- ACT (above)
+- MAFFT
 
-- MuTect2 > Detect SNPs in bacterial genomes, based on GATK software (like HaploCaller); https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_cancer_m2_MuTect2.php
+- MEGA
 
-- breseq > "algorithm for identifying structural variation from DNA resequencing data as part of the breseq computational pipeline for predicting mutations in haploid microbial genomes" https://bmcgenomics.biomedcentral.com/articles/10.1186/1471-2164-15-1039
+- CSI Phylogeny
+
+- REALPhy
+
+- ClustAGE Pipeline
 
 ### Phylogenetic Methods
 - bcgTree > https://github.com/molbiodiv/bcgTree ; Method created to use own or database genomes of closely related strains of bacteria to determine a phylogenetic tree representation of these relationships. Uses core genes found in nearly all bacteria to do the phylogenetic comparisons.
 
-- SimPhy > https://github.com/adamallo/SimPhy/wiki ; Phylogenetic software for prokaryotic organisms aimed at showing evolutionary relationship of organisms through gene family relationships
+- FastTree
+
+- PhyML
+
+- iTOL > Online tool for viewing newick tree files, able to format and create publishable images
+
+- CSI Phylogeny > Web based pipeline that will compare whole genomes and use FastTree to determine phylogenetic relationships between SNPs characteristics in the genomes
+
+### Approaches
+- Use Spine/AGEnt pipeline to determine the core and accessory genomes of 18 Salmonella reference Genomes
+  - Use AGEnt to identify these properties in new draft genomes that have previously not been studied
+    - Draft genome will be:
+      - Assembled with Ray
+      - Annotated with Prokka (local) or RAST (online server)
+  - Use the reference genomes as a basis for what to look for in the new genomes
+- Use ClustAGE to compare these and create a phylogenetic relationship showing how these strains may have evolved over time and what their relation to one another is in the context of accessory genomic elements
+- Use iTOL to simulate a tree and heatmap of these relationships from this pipeline
+- Use ClustAGE output of comparing accessory genomic elements in tandem with known research into pathogenicity islands of Salmonella and/or other pathogenic elements to determine loss or conservation of a couple specific ones between these serovars
+- Use progressiveMauve as a supplemental genomic comparison tool
+  - Has its own viewer where one can look at LCBs and determine similarities between genomes
+  - Look for the specific genes in this context as well
+- Other Phylogenetic methods:
+  - Use CGE online tool CSI Phylogeny to characterize these genomes in a different phylogenetic context, this time in terms of SNPs
+  - Use sequences of the one or two specific genetic elements discussed above and compare them using MEGA or another nucleotide sequence comparison tool
 
 ## Results
 

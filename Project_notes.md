@@ -257,4 +257,55 @@ Ozer EA. ClustAGE: a tool for clustering and distribution analysis of bacterial 
           - Compare with Clustage Tree and CSI Tree
             - PhyML tree vs FastTree
       - Now run ClustAGE Pipeline with all genomes, including plasmids
+          - Re running ClustAGE using all 18 genomes
+          - Doing same process as before, as stated above using command line to run Spine then ClustAGE programs
       - And run ClustalFrameML with Rscript now that they are installed
+      - IDEA:
+        - Maybe run the ClustAGE pipeline, get information on core/ accessory elements in reference genomes, then find a draft genome to run through the software
+        - "In this study, we propose a new comparative genomics
+approach to identify accessory genomic elements in draft
+genomes produced by NGS" - (Ozer et al. 2014 BMC Genomics)
+          - Draft genome candidates:
+            - Abortus
+              - Sequence https://www.ncbi.nlm.nih.gov/nuccore/AUYQ00000000.2?report=gbwithparts&log$=seqview
+              - Paper https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3974941/pdf/e00261-14.pdf
+            - Typhimurium from India 2018
+              - Sequence https://www.ncbi.nlm.nih.gov/biosample/?term=ERS2592364 (?)
+              - Paper https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6256508/pdf/e00990-18.pdf
+      - Code for ClustAGE this run:
+        # make list for Spine run for reference genome; creating core genome
+        ls * .gb > salmonella_clustage_list.txt
+          - added path to each file using replace command in atom
+            - /c/users/aaver/documents/_ Yale/Spring_2019/Comparative_Genomics/Final_project/Full_Sequence_Set/gbk_full/
+            - Added title (strain name) and gbk after path
+            - placed list file in Spine folder (same as spine.pl)
+        # run Spine with option to create pan genome of reference genomes, and output files to have prefix salmonella_clustage
+        navigate to Final_project/Programs/Spine
+        perl spine.pl -f genome_files_full.txt --pangenome -o salmonella_clustage
+
+#### Project Notes April 16, 2019
+  - Today going to try and finish the ClustAGE Pipeline
+  - Was reading the Spine/AGEnt Paper and they had to annotate their own Genomes for two of theirs
+    - https://bmcgenomics.biomedcentral.com/articles/10.1186/1471-2164-15-737
+    - They used RAST
+      - If I have to do so, I will use RAST or Prokka, mainly might have to for the draft genome being tested
+  - Read in paper as well, that including outlier strain (soil Pseudomonas aeruginosa PA7) greatly changed what the "core" genome was
+    - Therefore, they used the parameter -a 90 in order to tell the program that core is any segment of the genome in >90% of the reference strains
+      - Doing the same for mine as well
+        $ perl spine.pl -f salmonella_clustage_list.txt -a 90 -o salmonella_clust_90 --pangenome
+        - Can compare the differences later perhaps based on whatever they did
+  - Will have to assemble genome of at least the 313 strain I was looking at
+    - Data is from Illumina NextSeq 500 base paired end reads
+    - Can use Ray software for this (from paper as well)
+      - $ sudo apt-get install ray
+      http://denovoassembler.sourceforge.net/
+    - One set of reads is in SRA format, have to get sra-toolkit
+    $ sudo apt-get install sra-toolkit
+    - Can run to get fastq files from sra files, with accession number
+    $ fastq-dump ERX2691743
+    - Running Ray on own computer to try and assemble reads from this fastq file; paired end so assuming they are interleaved?
+    $ mpiexec -n 2 Ray -k 31 -i ERX2691743
+    - Once this is done, going to run through Prokka using a reference Typhimurium genome gbk file that i have (probably the non LT2 one)
+    - Description I found of Prokka online when looking at differences between RAST and Prokka
+      - "Genome annotation is a two-step process, first you have to predict where the genes are - which tools like Augustus and GeneMark do - then you have to assign function to the predicted genes - usually by means of similarity searches using good quality databases. This is what Prokka and RAST are doing, but integrated in a pipeline. I don't know how RAST works, but prokka uses several programs to predict genes (protein coding, non-coding RNA, tRNA, rRNA, and more) from the genome, then, after having these predictions, it tries to annotated them by searching available databases. Prokka uses Prodigal for protein coding gene prediction, which I don't know if it appropriate for virus gene prediction. But the most important reason your annotation came up mostly as hypothetical proteins probably is you don't have installed an appropriate database to annotate viral genomes - you can pass one at run time with the --proteins option, which will have precedence over other installed databases."
+    - 
