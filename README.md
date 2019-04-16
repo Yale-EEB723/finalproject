@@ -3,22 +3,24 @@
 
 This is the final project for Andrew Verdegaal in [Comparative Genomics](https://github.com/Yale-EEB723/syllabus), seminar in the spring of 2019. This project will attempt to identify genetic/ genomic differences between different Salmonella species and serovars by comparing host-specific and broad host range genomes of Salmonella with new, unexplored draft genomes.
 
-## The goal
+## The Goal
 
 ### Big Picture
   - Differences in genomic makeup of Salmonella species and how this affects pathogenicity and virulence in different hosts. A large portion of pathogenicity tends to stem from an "accessory" genome, where elements are introduced or lost over time, and can help determine the virulence/ pathogenicity/ host adaptation of individual species or serovar strains; whereas the "core" genome is shown to be shared by all closely related strains. By looking at previously studied and annotated genomes, we can potentially identify factors in newly sequenced genomes by understanding differences related to the core and accessory genomes
 
 ### Specific Goals
-  - I will 18 previously studied Salmonella annotated reference genomes to determine the core and accessory genomes most likely to be associated with the strains of interest using the Spine and AGEnt software programs in the ClustAGE pipeline.
-  - I will identify new strains that have been recently sequenced and not experimentally manipulated to the extent of the reference strains
+  - I will use 18 previously studied Salmonella annotated reference genomes to determine the core and accessory genomes associated with them using the Spine and AGEnt software programs in the ClustAGE pipeline.
+  - I will identify new strains that have been recently sequenced and not experimentally manipulated to the extent of the reference strains.
     - This means I may find draft genomes, assemble, and annotate them in order to curate them for processing them in ClustAGE pipeline.
-  - I will try and find similarities and differences between Salmonella that are host-specific (eg: Salmonella enterica serovar gallinarium [Chickens]/ S. enterica serovar typhi [Humans]) and those with broad host ranges. This could be a range of different genes, but focus on the following:
+  - I will look for similarities and differences between Salmonella that are host-specific (eg: Salmonella enterica serovar gallinarium [Chickens]/ S. enterica serovar typhi [Humans]) and those with broad host ranges. This could be a range of different genes, but focus on the following:
     - Pathogenicity islands
     - Type III Secretion System effectors
     - Metabolic House-keeping genes
   - Will also use Salmonella bongori as another source of comparison, as this is the other species in the genus of Salmonella. Other work has looked at how this species can help us understand the evolution of Salmonella, as it also has secretion systems yet different effectors, and has the ability to be pathogenic in humans as well (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3158058/pdf/ppat.1002191.pdf)
+  - Identify specific genes and look at their relationship and evolution in species identified earlier, by use of output files stemming from ClustAGE analysis
+    - Potentially use progressiveMauve multiple genome alignment as a supplemental tool to help ID genes of interest as well.
 
-## The data
+## The Data
 
 ### Description of data:
 
