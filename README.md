@@ -152,7 +152,22 @@ Was it successful in achieving the initial goal?
 
 What are the main obstacles encountered?
 
+  - Main obstacles was trying to use software that was a bit more obscure compared to what other labs probably use at Yale, so didn't try to use Farnam core and did everything locally
+  - This led to issues when I wanted to do a new multiple genome alignment that was very computationally intensive with the genomes I had
+    - ie: MAFFT is a great program people recommend to get a multiple genome alignment in fasta format, and to use to generate phylip files for creating phylogenetic trees, but my computer couldnt handle the load, and the online webbased servers did not want to take that large of a load either
+  - In general, I am on a windows computer so using shell at first was very difficult
+    - Found a GREAT work around through using Windows Subsystem for Linux, where I bought and installed a debian-based release of a program called Pengwin
+      - This allowed me to use unix based command line scripts/ software that would normally not run on Windows or would be extremely difficult. and if I had X Moba Term open as well, this allowed me to load GUIs of unix based programs that would not have run on a Windows only device. I was even able to easiy install many programs that were loaded in the debian database, where all I needed to do was sudo apt-get install <program>
+      - However, I still did run into issues regarding some program installations that required command line install such as using ./configure, make, make install
+      - Somethng about the WSL was very difficult to install some programs at the command line and led to a lot of hair pulling when I needed to install multiple packages of something for a dependency of one program I wanted to try
+        - This especially happened with ClustalFrameML
+  - Another obstacle in the preliminary stages was finding programs with outputs that were in the correct file/ format for other programs as inputs
+    - This happened with progressiveMauve which was very frustrating
+      - By all accounts, this program was highly recommended as a multiple genome sequence alignment tool, but the output file was supposedly in xmfa, not fasta format, and even had a .align file associated with it. I tried many different ways of using this file in downstream analysis such as creating a true phylogenetic tree (since the tree in the Mauve output was just a guide tree) using a program like PhyML or FastTree, but no matter what I did, this file couldn't be used or even converted into a working file from what I saw.
+
 What would you have done differently?
+
+  - I think going into this project I was a bit naive in terms of my expectations on what I could get done. I also really got ahead of myself of trying to use many programs all at once without a SPECIFIC goal in mind every time I started to use one. I would have done a bit more research and spent more time methodically sifting through programs and what the ultimate downstream output of them was and how that could help me determine differences in genomic makeup of Salmonella species. I think I got the hang of using command line programs by the end, but I would have spent more time determining the best path instead of just throwing myself into the deep-end metaphorically speaking.
 
 What are future directions this could go in?
 
