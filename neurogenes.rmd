@@ -259,14 +259,14 @@ Use seqinr R package.
 #Ideally I would loop through all my fastas but for some reason I can't get looping to work...
 
 #fasta="data/sample_data/fasta_sample.fasta"
-fasta="~/Desktop/compgen/repo/ensembl/genome_fasta/Amphimedon_queenslandica.Aqu1.dna.toplevel.fa"
+fasta="~/Desktop/compgen/repo/ensembl/genome_fasta/Trichoplax_adhaerens.ASM15027v1.dna.toplevel.fa"
 
 #histogram of call ontig lengths,
-scaffold.length.plot<-read.fasta(fasta)%>%getLength(.)%>%as.data.frame()%>%ggplot()+geom_histogram(aes(x=.), fill="skyblue3", color="black",binwidth=100)+xlab("Scaffold Length")+labs(title="Danio rerio")
+scaffold.length.plot<-read.fasta(fasta)%>%getLength(.)%>%as.data.frame()%>%ggplot()+geom_histogram(aes(x=.), fill="skyblue3", color="black",binwidth=100)+xlab("Scaffold Length")+labs(title="Strongylocentrotus purpuratus")
 
 
 #histogram of contig lengths, restricted to scaffolds < 10,000 bp
-restricted.plot<-read.fasta(fasta)%>%getLength(.)%>%as.data.frame()%>%filter(.<10000)%>%ggplot()+geom_histogram(aes(x=.), fill="skyblue3", color="black",binwidth=100)+xlab("Scaffold Length")+labs(title="Danio rerio")
+restricted.plot<-read.fasta(fasta)%>%getLength(.)%>%as.data.frame()%>%filter(.<10000)%>%ggplot()+geom_histogram(aes(x=.), fill="skyblue3", color="black",binwidth=100)+xlab("Scaffold Length")+labs(title="Strongylocentrotus purpuratus")
 
 
 
@@ -293,7 +293,7 @@ https://www.rdocumentation.org/packages/ape/versions/5.2/topics/read.gff
 
 #install.packages("ape")
 
-gff3="data/sample_data/gff3_sample.gff3"
+gff3="data/genomes/gff3/Nematostella_vectensis.ASM20922v1.42.gff3"
 #parse gff3 and create new df with only seqid, type, start and end. Keep start and end coords for later analyses.
 contig.gene.df <- ape::read.gff(file=gff3, GFF3=TRUE) %>% select(.,"seqid","type","start","end") %>% filter(.,type == "gene")
 
@@ -301,7 +301,10 @@ contig.gene.df <- ape::read.gff(file=gff3, GFF3=TRUE) %>% select(.,"seqid","type
 gene.count<- as.data.frame(table(contig.gene.df$seqid))
 
 #plot frequency of frequencies
-ggplot(data = gene.count, aes(x=gene.count$Freq)) + geom_histogram(binwidth=1) + geom_vline(xintercept = 3)
+gff3.plot<-ggplot(data = gene.count, aes(x=gene.count$Freq)) + geom_histogram(binwidth=1) + geom_vline(xintercept = 3,color="red")
+
+#use for custom axes
+#gff3.plot<-ggplot(data = gene.count, aes(x=gene.count$Freq)) + geom_histogram(binwidth=1) + geom_vline(xintercept = 3,color="red") +xlim(0,10)+ylim(0,3000)
 
 #stats
 print(paste("proportion contigs with gene count >= 3:",nrow(subset(gene.count, gene.count$Freq >= 3))/nrow(gene.count)*100))
