@@ -182,9 +182,9 @@ Ozer EA. ClustAGE: a tool for clustering and distribution analysis of bacterial 
           - Uploading to MAFFT online tool, all default except using parameters:
             - G-INS-1 (Slow; progressive method with an accurate guide tree) to see how it does
           - Also attempting locally:
-             mafft --localpair --maxiterate 1000 salmonella_chromosomes.fasta
+             $ mafft --localpair --maxiterate 1000 salmonella_chromosomes.fasta
              - actually realized this method may take forever, going with "fast progressive method" as stated on website
-           mafft --retree 2 --maxiterate 0 salmonella_chromosomes.fasta
+           $ mafft --retree 2 --maxiterate 0 salmonella_chromosomes.fasta
 
 
 ### April 15, 2019
@@ -207,12 +207,12 @@ Ozer EA. ClustAGE: a tool for clustering and distribution analysis of bacterial 
   - Goal is to get alignment in order to run it on PhyML (phylip file) to get starting tree, and a multiple alignment file (either fasta or XFMA), both needed for ClonalML pipeline
     - For some reason, have trouble finding a way to use mauve output files
       - for .alignment (xfma) conversion, found software package in conda (bioconvert)
-        - conda install bioconvert
-        - bioconvert xfma2phylip
+        - $ conda install bioconvert
+        - $ bioconvert xfma2phylip
         - https://github.com/bioconvert/bioconvert
           - numpybase causing issue?
           - going to update Conda Now
-          - conda update --prefix /home/aaverdegaal/anaconda3 anaconda
+          - $ conda update --prefix /home/aaverdegaal/anaconda3 anaconda
   - Found new software called MUGSY
     - Getting desperate since online service for MAFFT above said my file was too big (>50kb, mine is 86kb)
     - Will look at MUGSY now
@@ -241,13 +241,13 @@ Ozer EA. ClustAGE: a tool for clustering and distribution analysis of bacterial 
 
   - Code:
     - ClustalML
-      - #Downloaded it using debian
-        - sudo apt-get install clustalml
-      - #Ran program using CSI Phylogeny files as input
-        - ClonalFrameML snp_tree.main_tree.newick snp_tree.aln.fasta salmonella_clustalml_first
+      - Downloaded it using debian
+        - $ sudo apt-get install clustalml
+      - Ran program using CSI Phylogeny files as input
+        - $ ClonalFrameML snp_tree.main_tree.newick snp_tree.aln.fasta salmonella_clustalml_first
         - Need to install two R packages to visualize Results
-          - conda install -c bioconda r-phangorn
-          - conda install -c r r-ape
+          - $ conda install -c bioconda r-phangorn
+          - $ conda install -c r r-ape
       - Results came out in same folder as CSI_Phylogeny_Results
         - Results had been run through FastTree in pipeline
       - Results for RealPHY are being run in FastTree to see if there are differences
@@ -273,15 +273,15 @@ genomes produced by NGS" - (Ozer et al. 2014 BMC Genomics)
               - Sequence https://www.ncbi.nlm.nih.gov/biosample/?term=ERS2592364 (?)
               - Paper https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6256508/pdf/e00990-18.pdf
       - Code for ClustAGE this run:
-        # make list for Spine run for reference genome; creating core genome
-        ls * .gb > salmonella_clustage_list.txt
+       make list for Spine run for reference genome; creating core genome
+        $ ls * .gb > salmonella_clustage_list.txt
           - added path to each file using replace command in atom
             - /c/users/aaver/documents/_ Yale/Spring_2019/Comparative_Genomics/Final_project/Full_Sequence_Set/gbk_full/
             - Added title (strain name) and gbk after path
             - placed list file in Spine folder (same as spine.pl)
-        # run Spine with option to create pan genome of reference genomes, and output files to have prefix salmonella_clustage
+       run Spine with option to create pan genome of reference genomes, and output files to have prefix salmonella_clustage
         navigate to Final_project/Programs/Spine
-        perl spine.pl -f genome_files_full.txt --pangenome -o salmonella_clustage
+        $ perl spine.pl -f genome_files_full.txt --pangenome -o salmonella_clustage
 
 #### Project Notes April 16, 2019
   - Today going to try and finish the ClustAGE Pipeline
@@ -308,4 +308,4 @@ genomes produced by NGS" - (Ozer et al. 2014 BMC Genomics)
     - Once this is done, going to run through Prokka using a reference Typhimurium genome gbk file that i have (probably the non LT2 one)
     - Description I found of Prokka online when looking at differences between RAST and Prokka
       - "Genome annotation is a two-step process, first you have to predict where the genes are - which tools like Augustus and GeneMark do - then you have to assign function to the predicted genes - usually by means of similarity searches using good quality databases. This is what Prokka and RAST are doing, but integrated in a pipeline. I don't know how RAST works, but prokka uses several programs to predict genes (protein coding, non-coding RNA, tRNA, rRNA, and more) from the genome, then, after having these predictions, it tries to annotated them by searching available databases. Prokka uses Prodigal for protein coding gene prediction, which I don't know if it appropriate for virus gene prediction. But the most important reason your annotation came up mostly as hypothetical proteins probably is you don't have installed an appropriate database to annotate viral genomes - you can pass one at run time with the --proteins option, which will have precedence over other installed databases."
-    - 
+    -
