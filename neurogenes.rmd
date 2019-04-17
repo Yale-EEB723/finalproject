@@ -605,7 +605,7 @@ master.table$animal<-c(rep.int("Amphimedon_queenslandica",43615),rep.int("Capite
 
 write.csv(master.table,"master.table.csv",quote=FALSE,row.names=FALSE)
 #Read in agalma homologs csv
-agalma.homologs<-read.csv("relaxedbit_results_alt.csv",header=TRUE,sep=",")
+agalma.homologs<-read.csv("5taxa_results_alt.csv",header=TRUE,sep=",")
 
 #left join because need to know which genes have no homology too.
 final.master.table<-left_join(master.table,agalma.homologs)%>%select(.,"seqid","start","end","gene","homology_id","catalog_id","animal")
@@ -627,6 +627,7 @@ absent_genes.csv: cut -f 1 -d "," final.master.table_absentgenes.csv |grep "NA"
 #save master table before continuing
 save.master.table<-master.table
 
+#***SUBSAMPLE
 #Take a subset! Otherwise following code will not complete running and freeze everything!!!
 filter_target=c("Homo_sapiens","Danio_rerio","Strongylocentrotus_purpuratus")
 master.table<-filter(master.table, animal==filter_target)
@@ -638,6 +639,7 @@ final.master.table_cluster<-inner_join(master.table,agalma.homologs)%>%dplyr::se
 #make contingency table
 contingency<-table(final.master.table_cluster$species_scaffold,final.master.table_cluster$homology_id)%>%as.matrix()
 contingency<-1*(contingency>0)
+#***SUBSAMPLE
 contingency<-contingency[sample(100),sample(100)]
 
 
@@ -672,7 +674,7 @@ clust<-cc_get_cluster(cross.clust)
 #plot the clustering
 #see code from http://dpmartin42.github.io/posts/r/cluster-mixed-types
 #adjust perplexity if get error "perplexity is too large for the number of samples"
-tsne_obj<-Rtsne(dist.matrix,is_distance=TRUE,perplexity=30)
+tsne_obj<-Rtsne(dist.matrix,is_distance=TRUE,perplexity=10)
 tsne_data<-tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(cluster=factor(clust))
 tsne_plot<-ggplot(aes(x = X, y = Y), data = tsne_data) + geom_point(aes(color = cluster))
 tsne_plot
@@ -805,7 +807,8 @@ write.csv(result,"relaxedbit.csv",quote=FALSE,row.names=FALSE)
 
 >throw out genes with homology_id NAs. REASONING???
 
-QUESTION: Why does some genes show up more than once with different homology ids in the relaxed bit agalma file???
+QUESTION: Why does some genes show up more than once with different homology ids in the relaxed bit agalma file?
+  -quick glance: doesn't seem to be a problem in any of the other agalma files.
 
 To do:
 -sandwiching homologues 
