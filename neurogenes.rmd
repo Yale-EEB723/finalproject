@@ -259,7 +259,7 @@ Use seqinr R package.
 #Ideally I would loop through all my fastas but for some reason I can't get looping to work...
 
 #fasta="data/sample_data/fasta_sample.fasta"
-fasta="~/Desktop/compgen/repo/ensembl/genome_fasta/Trichoplax_adhaerens.ASM15027v1.dna.toplevel.fa"
+fasta="~/repo/finalproject/Drosophia_chr.fa"
 
 #histogram of call ontig lengths,
 scaffold.length.plot<-read.fasta(fasta)%>%getLength(.)%>%as.data.frame()%>%ggplot()+geom_histogram(aes(x=.), fill="skyblue3", color="black",binwidth=100)+xlab("Scaffold Length")+labs(title="Strongylocentrotus purpuratus")
