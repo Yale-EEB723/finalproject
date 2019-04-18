@@ -1,1 +1,1 @@
-#notes on sequence data quality control 
+# notes on sequence data quality control 

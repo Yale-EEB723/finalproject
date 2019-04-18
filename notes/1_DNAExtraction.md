@@ -1,2 +1,2 @@
-#notes on how we extracted the DNA
+# notes on how we extracted the DNA
 
