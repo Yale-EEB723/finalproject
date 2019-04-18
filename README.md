@@ -82,7 +82,6 @@ In NCBI I performed a query of "gene" -> "Toll Like Receptor" AND Myotis lucifug
 
 
 
-## Casey: I have some troubled identifying which methods to use to answer my questions at the moment.
 
 ### Data visualization:
 I will use the UCSC genome browser to visualize genome assembly and structural annotation.
