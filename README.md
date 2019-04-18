@@ -31,8 +31,19 @@ This is a final project for the [Comparative Genomics](https://github.com/Yale-E
 
 ## Methods
 
-While methodology is in flux refer to [the wiki](https://github.com/isgilman/finalproject/wiki/Step-by-step-genome-annotation-for-Portulaca-amilis).
+For a step-by-step walkthrough, refer to [the wiki](https://github.com/isgilman/finalproject/wiki/Step-by-step-genome-annotation-for-Portulaca-amilis). 
 
+1. Sequencing and assembly by Dovetail genomics
+2. Quality control using `QUAST`, `gVolante`, and `BUSCO`
+3. Evidence gathering
+    * Transciptome assembled with genome-guided `Trinity`
+    * Proteomes from _Beta vulgaris_ and _Arabidopsis thaliana_
+    * Coding sequences extracted from assembled transcripts using `Transdecoder` with _Beta vulgaris_ and _Arabidopsis thaliana_ proteomes
+    * Repeat libraries extracted using `RepeatModeler` and masked with `RepeatMasker`
+5. Initial genome annotation with `MAKER`
+6. Train _ab initio_ gene predictors `SNAP` and `Augustus`
+7. Genome annotation with `MAKER` and _ab initio_ gene prediction
+ 
 ## Results
 
 
