@@ -16,7 +16,7 @@ The primary goal of this work is to investigate the evolution of MHCI and MHCII 
 
 ## The data
 
-Previously-sequenced and publicly-available transcriptomes representing 13 Antarctic and non-Antarctic notothenioid species were obtained from the NCBI Sequence Read Archive.
+Previously-sequenced and publicly-available transcriptomes representing 17 Antarctic and non-Antarctic notothenioid species were obtained from the NCBI Sequence Read Archive.
 
 This project will also require a reference genome. For this, we will use the genome of the Antarctic bullhead notothen (Notothenia coriiceps), which will be obtained from BioProject. 
 
