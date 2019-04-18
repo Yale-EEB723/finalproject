@@ -345,3 +345,18 @@ genomes produced by NGS" - (Ozer et al. 2014 BMC Genomics)
     - Plotting circular plot to show bin relationships between Genomes
       - http://vfsmspineagent.fsm.northwestern.edu
       - default settings
+
+
+### April 18, 2019 Project Notes
+  - Looking at papers for Spine/AGEnt and ClustAGE before moving forward
+  - Goal today:
+      - To identify specifically why this is a useful pipeline for my work
+      - Nuances in the pipeline that dictate why we did what we Did
+        - ie: Why use the reference genomes to make the core genome and then add two draft genomes in later using AGEnt? Why not do them simultaneously
+      - Try and ID one or two genes or gene islands that were IDed in this screen that are unique or the same between species
+        - ie: Look at the accessory genome of S_Abortusovis_SR44 and determine what the pathogenic islands or genes could be since this genome was just sequenced late last year
+    - From Spine/AGEnt paper:
+      - "Only completed genomic sequences were used to calculate the core genome to minimize the potential for core sequence to be excluded as the result of undersequencing or misassembly in incomplete draft sequences."
+      - States why whole genomes are used as reference and why AGEnt is important to use that core genome to decipher accessory genome of newly assembled, potentially draft genome strains
+    - Also created file of list of chromosome and plasmid accession numbers used in the analysis
+      - Accession_list_chromosomes_plasmids.txt
