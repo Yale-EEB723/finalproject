@@ -325,7 +325,7 @@ genomes produced by NGS" - (Ozer et al. 2014 BMC Genomics)
         - Used Prokka annotated genome .gbk file for this
     - Now for S_Typhimurium_ST313
       - $ perl AGEnt.pl -r salmonella_clustage.backbone.fasta -q S_Typhimurium_ST313.gbk -o S_Typhimurium_ST313_AGEnt
-        - Attempted to use RAST annotated genome file for this, but ran into issue wit CDS region not included (?)
+        - Attempted to use RAST annotated genome file for this, but ran into issue with CDS region not included (?)
         - Just used the Prokka annotated one instead
     - For ClustAGE, wanted to remove a prefix I had added (salmonella_clustage.) so I actually (sadly) found the easiest command to be in powershell for both .fasta and .txt files
       - get-childitem * .txt | foreach { rename-item $_ $_ .Name.Replace("salmonella_clustage.", "") }
@@ -348,15 +348,100 @@ genomes produced by NGS" - (Ozer et al. 2014 BMC Genomics)
 
 
 ### April 18, 2019 Project Notes
-  - Looking at papers for Spine/AGEnt and ClustAGE before moving forward
+-   Looking at papers for Spine/AGEnt and ClustAGE before moving forward
   - Goal today:
       - To identify specifically why this is a useful pipeline for my work
       - Nuances in the pipeline that dictate why we did what we Did
         - ie: Why use the reference genomes to make the core genome and then add two draft genomes in later using AGEnt? Why not do them simultaneously
       - Try and ID one or two genes or gene islands that were IDed in this screen that are unique or the same between species
         - ie: Look at the accessory genome of S_Abortusovis_SR44 and determine what the pathogenic islands or genes could be since this genome was just sequenced late last year
+      - Create a better graph than ClustAGE Plot webtool can
     - From Spine/AGEnt paper:
       - "Only completed genomic sequences were used to calculate the core genome to minimize the potential for core sequence to be excluded as the result of undersequencing or misassembly in incomplete draft sequences."
-      - States why whole genomes are used as reference and why AGEnt is important to use that core genome to decipher accessory genome of newly assembled, potentially draft genome strains
-    - Also created file of list of chromosome and plasmid accession numbers used in the analysis
-      - Accession_list_chromosomes_plasmids.txt
+        - States why whole genomes are used as reference and why AGEnt is important to use that core genome to decipher accessory genome of newly assembled, potentially draft genome strains
+      - "As more completed genomes become available and are added to this analysis, it is anticipated that the size of the core genome will decrease. A curve fit to the data in Figure 2 suggests that the core genome size may plateau at approximately 5.10 Mbp, or 78% of the P. aeruginosa genome.""
+      - "novel accessory genomic sequences will continue to be forthcoming, especially in bacteria such as P. aeruginosa with theoretically open genomes. For this reason, methods for rapidly and accurately identifying accessory genome sequences are needed. To accomplish this, we developed a new software algorithm for identification of both core and accessory genomes from bacterial genome sequences."
+  - Also created file of list of chromosome and plasmid accession numbers used in the analysis
+    - Accession_list_chromosomes_plasmids.txt
+  - In parallel, wanted to see what I would get with using RealPHY as a way to infer phylogenetic relationships between the same two draft genomes and the reference genomes:
+    - https://realphy.unibas.ch/realphy/
+    - Placed the 18 reference Genomes
+    - Used .fa of Abortusovis and the .fastq of S_Typhimurium_ST313
+    - Going to see if this works
+      - Failed
+    - Retrying using contigs.fasta file received from Ray assembly of fastq files
+  - Paper on P. aeruginosa that was a lead-in to creating Spine/AGEnt/ ClustAGE talks about core genome components and reasoning for looking at accessory parts of the genome
+    - https://www.pnas.org/content/pnas/105/8/3100.full.pdf
+    - Paper has nice figures, trying to figure out how to create the circular figure with the pangenome and other accessory elements within it
+    - Also, paper has Supp Table 1, which lists genomes and particular aspects of them that are IMPORTANT
+      - Origin, Size, ORFs, tRNAs, GC content, # of genes, # of essential genes, # of RGPs, References to genomes
+        - Might want to consider doing this for my set of genomes!!
+- Make phylogeny of these serovars and include on the tree if they are host adapted/ specific or generalists
+  - Maybe add this to the table of looking at genome qualities
+- Do I need to worry about prophage sequences? Do I need to annotate these? Looking at paper, they went beyond using RAST to annotate genome, quoted here:
+    - "which were not yet annotated in GenBank, were downloaded and automated annotation performed using the Rapid Annotations using Subsystems Technology (RAST) web service [62]. Functional annotation of genes and transposase identification was accomplished by BLASTp alignment of annotated ORFs against the COG database [46,47] using BLAST + v2.2.24 [92,93]. Prophage sequence was predicted in the reference strains using the web-based service PHAST [94], which detects prophage sequences in bacterial genomes using database comparisons and feature identifications. ICE genes were identified by BLAST homology to proteins in the ICEberg database [95] using homology cutoffs of Evalue ≤1e-6 and percent identity ≥ 85%. To identify integron sequences, the type 1 integron flanking sequences of sul1 and intI1 from NCGM2.S1 were obtained from the Pseudomonas Genome Database [96]. Nucleotide BLAST alignment of these sequences against the reference genomic sequences was used to identify potential type 1 integron structures."
+    - Does prokka take care of this?
+  - See if I can determine the same things that the Spine/AGEnt paper did about the Pseudomonas genomes
+    - Composition of accessory elements
+- Re doing Prokka for S_Typhimurium_ST313
+  - Found out that should have used the scaffolds.fasta not the contigs.fasta, for contiguous sequence
+    - Actually dont think it really matters now
+  - $ prokka --proteins S_Typhimurium_SL1344_FQ.gb --outdir S_Typhimurium_ST313_scaffold --prefix S_Typhimurium_ST313 Contigs.fasta
+    - Taking this .gbk file and running it through webtool ICEfinder
+      - http://202.120.12.136:7913/ICEfinder/ICEfinder.html
+  - Doing same for S_Abortusovis_SR44 to annotate that file in a similar fashion
+  - Once S_Abortusovis_SR44 is done in Prokka, going to run that .gbk file through ICEfinder as well
+  - Running RAST again as well with S_Typhimurium_ST313 scaffolds.fasta file instead this time
+    - Should help with any missing regions, so get those and use both ST313 and SR44 together in the Spine analysis later
+    - ERROR: Got convergent overlap error again, dont know how to fix
+  - Looking at ICEberg since Spine paper used it for its annotations
+    - http://db-mml.sjtu.edu.cn/ICEberg/
+    - But appears to be a blast service to create a blast database, dont know how they then went ahead and use this information to annotate their genome
+
+#### Ideas for Presentation
+  - Talk about these things in this order or similar:
+    - Background on pathogenic bacteria
+    - Background of Salmonella and differences in pathogenicity and host adaptation
+      - What is responsible for this? Accessory parts of genome?
+    - Methods that I had hoped to use and what I ended up doing
+      - Multiple genome alignments and issues with that
+        - file format of Mauve alignment
+        - MAFFT computing power needed, doing locally vs. web based tool, could have utilized Farnam
+      - wanting to make phylogenetic trees based on different ways of intepreting this info
+      - Decided on CLustAGE pipeline due to variation in gene content of pathogens most likely for differences in host specificity (thinking other example of Pseudomonas)
+    - Go over data used how it was isolated
+      - Reference genomes
+      - Draft genomes
+    - GO over Spine/AGEnt tools
+      - Spine to get core genome using reference genomes (whole genomes, gbk (fasta+gff3) files)
+      - AGEnt to determine new draft genomes accessory elements
+        - Take draft genomes
+          - Assemble SR44
+          - Annotate SR44 and ST313 with Prokka
+            - Used S_Typhimurium_SL1344_FQ as the reference for this, along with protein databases
+            - Talk about issues with Prokka, basically just find genes already known but not going to make an ab-initio assumptions of CDS regions
+              - This might be alright, since these genes are so closely related, that most likely genes of interest will be annotated from database having a plethora of Salmonella enterica genes already, so shoud be able to annotate
+              - Interesting part is combination or presence/ lack of genes in reference to other genes that are found in similar serovars
+    - How ClustAGE is used
+    - Data from ClustAGE
+      - SHow graphs, examples of accessory elements
+    - GO over potential genes and look at where these genes are located in the accessory elements and which species share them
+
+
+### Presentation Notes
+- Jasmine's Presentation
+  - Agalma
+    - Identifying homologs, possible with bacterial genes?
+      - Get homoloy ID and gene name from This
+    - GFF3 + Homology info
+      - Can aggregate and ID genes, scaffold, and what genes they are homologous to
+  - Make contingency matrix, then use this to make similarity matrix (Jaccard matching coefficient), Clustering algorithm (Cross clustering) then you get syntenic blocks defined by cluster ID
+  - Use tsne to represent cluster information
+    - Maybe use this for homologs if I do this in Salmonella?
+  - Tinyverse analysis at Amazon Cloud?
+    - Do small data sets
+  - Run R analysis on singularity on the cluster
+  - Running R analyses on different platforms will give different file formats
+
+- ggplot2 to plot data?
+  - Suggested by Casey
