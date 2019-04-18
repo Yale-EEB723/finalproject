@@ -36,7 +36,135 @@ This is the final project for Andrew Verdegaal in [Comparative Genomics](https:/
     - Draft genome sequence of S. Typhimurium ST313 isolated from an elderly immunosuppressed patient with Non-Hodgkins Lymphoma from India
     - Salmonella enterica subsp. enterica serovar Abortusovis str. SS44, whole genome shotgun sequencing project
 #### Genomic Data Sources
-  - (Write sources for the accession numbers above)
+  - Reference genomes (whole genome sequences, either .gbk or .fasta)
+
+      1. Salmonella enterica subsp. enterica serovar Agona str. SL483 plasmid, complete sequence
+      37,978 bp circular DNA
+      CP001137.1 GI:197211002
+
+      2. Salmonella enterica subsp. enterica serovar Agona str. SL483, complete genome
+      4,798,660 bp circular DNA
+      CP001138.1 GI:197211055
+
+      3. Salmonella enterica subsp. enterica serovar Choleraesuis str. SC-B67 plasmid pSCV50, complete sequence
+      49,558 bp circular DNA
+      AY509003.1 GI:45359286
+
+      4. Salmonella enterica subsp. enterica serovar Choleraesuis str. SC-B67 plasmid pSC138, complete sequence
+      138,742 bp circular DNA
+      AY509004.1 GI:45758072
+
+      5. Salmonella enterica subsp. enterica serovar Choleraesuis str. SC-B67, complete genome
+      4,755,700 bp circular DNA
+      AE017220.1 GI:62126203
+
+      6. Salmonella enterica subsp. enterica serovar Dublin str. CT_02021853 plasmid pCT02021853_74, complete sequence
+      74,551 bp circular DNA
+      CP001143.1 GI:197936152
+
+      7. Salmonella enterica subsp. enterica serovar Dublin str. CT_02021853, complete genome
+      4,842,908 bp circular DNA
+      CP001144.1 GI:197936256
+
+      8. Salmonella enterica subsp. enterica serovar Enteritidis str. P125109 complete genome
+      4,685,848 bp circular DNA
+      AM933172.1 GI:206707319
+
+      9. Salmonella enterica subsp. enterica serovar Gallinarum str. 287/91 complete genome
+      4,658,697 bp circular DNA
+      AM933173.1 GI:205271127
+
+      10. Salmonella enterica subsp. enterica serovar Heidelberg str. SL476 plasmid pSL476_3, complete sequence
+      3,373 bp circular DNA
+      CP001119.1 GI:194405605
+
+      11. Salmonella enterica subsp. enterica serovar Heidelberg str. SL476, complete genome
+      4,888,768 bp circular DNA
+      CP001120.1 GI:194405610
+
+      12. Salmonella enterica subsp. enterica serovar Newport str. SL254 plasmid pSN254, complete sequence
+      176,473 bp circular DNA
+      CP000604.1 GI:133905002
+
+      13. Salmonella enterica subsp. enterica serovar Newport str. SL254 plasmid pSL254_3, complete sequence
+      3,605 bp circular DNA
+      CP001112.1 GI:194400862
+
+      14. Salmonella enterica subsp. enterica serovar Newport str. SL254, complete genome
+      4,827,641 bp circular DNA
+      CP001113.1 GI:194400866
+
+      15. Salmonella enterica Paratyphi A IncH1 multiple drug resistance, serovar Paratyphi A
+      212,711 bp circular other
+      AM412236.1 GI:145848882
+
+      16. Salmonella enterica subsp. enterica serovar Paratyphi A str. AKU_12601 complete genome, strain AKU_12601
+      4,581,797 bp circular DNA
+      FM200053.1 GI:197092687
+
+      17. Salmonella enterica subsp. enterica serovar Paratyphi A str. ATCC 9150, complete genome
+      4,585,229 bp circular DNA
+      CP000026.1 GI:56126533
+
+      18. Salmonella enterica subsp. enterica serovar Paratyphi B str. SPB7, complete genome
+      4,858,887 bp circular DNA
+      CP000886.1 GI:161361677
+
+      19. Salmonella enterica subsp. enterica serovar Paratyphi C strain RKS4594, complete genome
+      4,833,080 bp circular DNA
+      CP000857.1 GI:224466365
+
+      20. Salmonella enterica subsp. enterica serovar Paratyphi C strain RKS4594 plasmid pSPCV, complete sequence
+      55,414 bp circular DNA
+      CP000858.1 GI:224470944
+
+      21. Salmonella enterica subsp. enterica serovar Schwarzengrund str. CVM19633 plasmid pCVM19633_110, complete sequence
+      110,227 bp circular DNA
+      CP001125.1 GI:194709275
+
+      22. Salmonella enterica subsp. enterica serovar Schwarzengrund str. CVM19633 plasmid pCVM19633_4, complete sequence
+      4,585 bp circular DNA
+      CP001126.1 GI:194709398
+
+      23. Salmonella enterica subsp. enterica serovar Schwarzengrund str. CVM19633, complete genome
+      4,709,075 bp circular DNA
+      CP001127.1 GI:194709404
+
+      24. Salmonella enterica subsp. enterica serovar Typhi str. CT18 plasmid pHCM1
+      218,160 bp circular DNA
+      AL513383.1 GI:16505740
+
+      25. Salmonella enterica subsp. enterica serovar Typhi str. CT18 plasmid pHCM2
+      106,516 bp linear DNA
+      AL513384.1 GI:16505981
+
+      26. Salmonella enterica subsp. enterica serovar Typhi str. CT18, complete chromosome
+      4,809,037 bp circular DNA
+      AL513382.1 GI:30407157
+
+      27. Salmonella enterica subsp. enterica serovar Typhi Ty2, complete genome
+      4,791,961 bp circular DNA
+      AE014613.1 GI:29140506
+
+      28. Salmonella enterica subsp. enterica serovar Typhimurium str. LT2 plasmid pSLT, complete sequence
+      93,933 bp circular DNA
+      AE006471.2 GI:973795114
+
+      29. Salmonella enterica subsp. enterica serovar Typhimurium str. LT2, complete genome
+      4,857,450 bp circular DNA
+      AE006468.2 GI:973795115
+
+      30. Salmonella enterica subsp. enterica serovar Typhimurium SL1344 complete genome
+      4,878,012 bp circular DNA
+      FQ312003.1 GI:301156631
+
+      31. Salmonella enterica subsp. enterica serovar Virchow str. SL491 plasmid pSL491_5, complete sequence
+      5,880 bp circular DNA
+      CP001148.1 GI:198404301
+
+      32. Salmonella enterica subsp. enterica serovar Virchow str. SL491 plasmid pSL491_3, complete sequence
+      3,176 bp circular DNA
+      CP001149.1 GI:198404307
 
   - Draft genome candidates:
             - Abortus
