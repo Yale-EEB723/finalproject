@@ -36,7 +36,7 @@ This is the final project for Andrew Verdegaal in [Comparative Genomics](https:/
     - Draft genome sequence of S. Typhimurium ST313 isolated from an elderly immunosuppressed patient with Non-Hodgkins Lymphoma from India
     - Salmonella enterica subsp. enterica serovar Abortusovis str. SS44, whole genome shotgun sequencing project
 #### Genomic Data Sources
-  - Reference genomes (whole genome sequences, either .gbk or .fasta)
+  - Reference genomes (whole genome sequences and plasmids separately, used either .gbk or .fasta)
 
       1. Salmonella enterica subsp. enterica serovar Agona str. SL483 plasmid, complete sequence
       37,978 bp circular DNA
@@ -173,8 +173,6 @@ This is the final project for Andrew Verdegaal in [Comparative Genomics](https:/
     - Typhimurium ST313 from India 2018
       - Sequence https://www.ncbi.nlm.nih.gov/biosample/?term=ERS2592364 (?)
       - Paper https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6256508/pdf/e00990-18.pdf
-
- - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4832160/ -> Complete Genome Sequence of Salmonella enterica Serovar Typhimurium Strain YU15 (Sequence Type 19)
 
  - https://www.nature.com/articles/35101614 -> Complete genome sequence of Salmonella enterica serovar Typhimurium LT2
 
