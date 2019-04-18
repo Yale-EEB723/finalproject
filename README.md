@@ -167,12 +167,12 @@ This is the final project for Andrew Verdegaal in [Comparative Genomics](https:/
       CP001149.1 GI:198404307
 
   - Draft genome candidates:
-            - Abortus
-              - Sequence https://www.ncbi.nlm.nih.gov/nuccore/AUYQ00000000.2?report=gbwithparts&log$=seqview
-              - Paper https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3974941/pdf/e00261-14.pdf
-            - Typhimurium from India 2018
-              - Sequence https://www.ncbi.nlm.nih.gov/biosample/?term=ERS2592364 (?)
-              - Paper https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6256508/pdf/e00990-18.pdf
+    - Abortusovis SR44
+      - Sequence https://www.ncbi.nlm.nih.gov/nuccore/AUYQ00000000.2?report=gbwithparts&log$=seqview
+      - Paper https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3974941/pdf/e00261-14.pdf
+    - Typhimurium ST313 from India 2018
+      - Sequence https://www.ncbi.nlm.nih.gov/biosample/?term=ERS2592364 (?)
+      - Paper https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6256508/pdf/e00990-18.pdf
 
  - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4832160/ -> Complete Genome Sequence of Salmonella enterica Serovar Typhimurium Strain YU15 (Sequence Type 19)
 
