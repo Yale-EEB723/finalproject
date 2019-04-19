@@ -1,0 +1,114 @@
+/var/www/quast/source/quast/quast.py /var/www/quast/source/../data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/contigs/Contigs.fasta -R /var/www/quast/source/../data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/data_sets/st313/SL1344_reference.fasta --min-contig 500 -J /var/www/quast/source/../data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808 -o /var/www/quast/source/../data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output --err-fpath /var/www/quast/source/../data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/error.log -t 2
+
+Version: 5.0, 5188887
+
+System information:
+  OS: Linux-3.16.0-4-amd64-x86_64-with-debian-stretch-sid (linux_64)
+  Python version: 2.7.10
+  CPUs number: 8
+
+Started: 2019-04-19 03:29:29
+
+Logging to /var/www/quast/data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/quast.log
+
+CWD: /var/www/quast
+Main parameters: 
+  MODE: default, threads: 2, minimum contig length: 500, minimum alignment length: 65, \
+  ambiguity: one, threshold for extensive misassembly size: 1000
+
+Reference:
+  /var/www/quast/data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/data_sets/st313/SL1344_reference.fasta ==> SL1344_reference
+
+Contigs:
+  Pre-processing...
+  /var/www/quast/source/../data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/contigs/Contigs.fasta ==> Contigs
+
+2019-04-19 03:29:30
+Running Basic statistics processor...
+  Reference genome:
+    SL1344_reference.fasta, length = 4878012, num fragments = 1, GC % = 52.18
+  Contig files: 
+    Contigs
+  Calculating N50 and L50...
+    Contigs, N50 = 8135, L50 = 199, Total length = 4851130, GC % = 52.08, # N's per 100 kbp =  0.00
+  Drawing Nx plot...
+    saved to /var/www/quast/data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/basic_stats/Nx_plot.pdf
+  Drawing NGx plot...
+    saved to /var/www/quast/data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/basic_stats/NGx_plot.pdf
+  Drawing cumulative plot...
+    saved to /var/www/quast/data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/basic_stats/cumulative_plot.pdf
+  Drawing GC content plot...
+    saved to /var/www/quast/data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/basic_stats/GC_content_plot.pdf
+  Drawing Contigs GC content plot...
+    saved to /var/www/quast/data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/basic_stats/Contigs_GC_content_plot.pdf
+Done.
+
+2019-04-19 03:29:34
+Running Contig analyzer...
+  Contigs
+  Logging to files /var/www/quast/data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/contigs_reports/contigs_report_Contigs.stdout and contigs_report_Contigs.stderr...
+  Aligning contigs to the reference
+  source/quast/quast_libs/minimap2/minimap2 -c -x asm5 -B5 -O4,16 --no-long-join -r \
+  85 -N 50 -s 65 -z 200 --mask-level 0.9 --min-occ 200 -g 2500 --score-N 2 --cs -t \
+  2 data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/quast_corrected_input/SL1344_reference.fasta \
+  data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/quast_corrected_input/Contigs.fasta \
+  > data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/contigs_reports/minimap_output/Contigs.coords_tmp \
+  2>> data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/contigs_reports/contigs_report_Contigs.stderr
+  Analysis is finished.
+
+  Creating total report...
+    saved to /var/www/quast/data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/contigs_reports/misassemblies_report.txt, misassemblies_report.tsv, and misassemblies_report.tex
+  Transposed version of total report...
+    saved to /var/www/quast/data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/contigs_reports/transposed_report_misassemblies.txt, transposed_report_misassemblies.tsv, and transposed_report_misassemblies.tex
+  Creating total report...
+    saved to /var/www/quast/data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/contigs_reports/unaligned_report.txt, unaligned_report.tsv, and unaligned_report.tex
+  Drawing misassemblies by types plot...
+    saved to /var/www/quast/data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/contigs_reports/misassemblies_plot.pdf
+  Drawing misassemblies FRCurve plot...
+    saved to /var/www/quast/data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/contigs_reports/misassemblies_frcurve_plot.pdf
+Done.
+
+2019-04-19 03:29:38
+Running NA-NGA calculation...
+  Contigs, Largest alignment = 27789, NA50 = 7639, NGA50 = 7626, LA50 = 207, LGA50 = 208
+  Drawing cumulative plot...
+    saved to /var/www/quast/data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/aligned_stats/cumulative_plot.pdf
+  Drawing NAx plot...
+    saved to /var/www/quast/data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/aligned_stats/NAx_plot.pdf
+  Drawing NGAx plot...
+    saved to /var/www/quast/data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/aligned_stats/NGAx_plot.pdf
+Done.
+
+2019-04-19 03:29:39
+Running Genome analyzer...
+  NOTICE: No file with genomic features were provided. Use the --features option if you want to specify it.
+
+  NOTICE: No file with operons were provided. Use the -O option if you want to specify it.
+  Contigs
+  Analysis is finished.
+  Skipping drawing Genome fraction, % histogram... (less than 2 columns histogram makes no sense)
+Done.
+
+NOTICE: Genes are not predicted by default. Use --gene-finding or --glimmer option to enable it.
+
+2019-04-19 03:29:42
+Creating large visual summaries...
+This may take a while: press Ctrl-C to skip this step..
+  1 of 2: Creating Icarus viewers...
+  2 of 2: Creating PDF with all tables and plots...
+Done
+
+2019-04-19 03:29:45
+RESULTS:
+  Text versions of total report are saved to /var/www/quast/data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/report.txt, report.tsv, and report.tex
+  Text versions of transposed total report are saved to /var/www/quast/data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/transposed_report.txt, transposed_report.tsv, and transposed_report.tex
+  HTML version (interactive tables and plots) is saved to /var/www/quast/data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/report.html
+  PDF version (tables and plots) is saved to /var/www/quast/data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/report.pdf
+  Icarus (contig browser) is saved to /var/www/quast/data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/icarus.html
+  Log is saved to /var/www/quast/data/results/kdchmlmcl32vc5tnla0m85uyxg39mmkq/19_Apr_2019_00_27_51_328808/full_output/quast.log
+
+Finished: 2019-04-19 03:29:45
+Elapsed time: 0:00:15.962343
+NOTICEs: 3; WARNINGs: 0; non-fatal ERRORs: 0
+
+Thank you for using QUAST!

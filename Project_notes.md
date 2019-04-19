@@ -349,13 +349,30 @@ genomes produced by NGS" - (Ozer et al. 2014 BMC Genomics)
 
 ### April 18, 2019 Project Notes
 -   Looking at papers for Spine/AGEnt and ClustAGE before moving forward
-  - Goal today:
+  - Goals today:
       - To identify specifically why this is a useful pipeline for my work
       - Nuances in the pipeline that dictate why we did what we Did
         - ie: Why use the reference genomes to make the core genome and then add two draft genomes in later using AGEnt? Why not do them simultaneously
       - Try and ID one or two genes or gene islands that were IDed in this screen that are unique or the same between species
         - ie: Look at the accessory genome of S_Abortusovis_SR44 and determine what the pathogenic islands or genes could be since this genome was just sequenced late last year
       - Create a better graph than ClustAGE Plot webtool can
+      - ID stats on assembling the reads for S_Typhimurium_ST313 Genome (from Ray software)
+          - Took about 1h 12m Processing gene ontologies	2019-04-16T12:31:33	9 seconds	1 hours, 12 minutes, 32 seconds
+          - Using QUAST online webtool to analyze the assembly of the contigs from S_Typhimurium_ST313
+            - http://quast.bioinf.spbau.ru/
+            - Used S_Typhimurium_SL1344_FQ as the reference (.fasta) and its annotations (.gff3)
+            - Have information on the Ray assembly now
+      - Re run ST313 with velvet
+        - Getting velvet and velvetoptimiser from sudo apt-get install
+        - $ velveth Assem 31 -shortPaired -fastq ERX2691743.fastq
+          - Using this website to help
+          - http://evomics.org/learning/assembly-and-alignment/velvet/
+        - $ velvetg auto_33 -exp_cov auto
+          - Final graph has 1481591 nodes and n50 of 29, max 269, total 20415996, using 99802/591656 reads
+        -
+
+
+
     - From Spine/AGEnt paper:
       - "Only completed genomic sequences were used to calculate the core genome to minimize the potential for core sequence to be excluded as the result of undersequencing or misassembly in incomplete draft sequences."
         - States why whole genomes are used as reference and why AGEnt is important to use that core genome to decipher accessory genome of newly assembled, potentially draft genome strains
@@ -416,7 +433,13 @@ genomes produced by NGS" - (Ozer et al. 2014 BMC Genomics)
       - Spine to get core genome using reference genomes (whole genomes, gbk (fasta+gff3) files)
       - AGEnt to determine new draft genomes accessory elements
         - Take draft genomes
-          - Assemble SR44
+          - Assemble ST313
+            - Ask about best way to pursue This
+            - Talk about issues regarding:
+              - Using velvet
+              - Finding right Kmer length
+              - Doing QC analysis (using Quast) on the data
+              - Dont know how to fix, or work with this, also apparently the draft genome is already available somewhere but I didnt find it
           - Annotate SR44 and ST313 with Prokka
             - Used S_Typhimurium_SL1344_FQ as the reference for this, along with protein databases
             - Talk about issues with Prokka, basically just find genes already known but not going to make an ab-initio assumptions of CDS regions
@@ -445,3 +468,16 @@ genomes produced by NGS" - (Ozer et al. 2014 BMC Genomics)
 
 - ggplot2 to plot data?
   - Suggested by Casey
+
+### April 19, 2019
+
+  - Looking at best way to assemble these reads
+    - Running into issues with finding the actual draft genome from ST313 paper, assumed that the reads were the only thing available, could not find the draft genome, so I had used Ray > Prokka  to assemble/ annotate
+    - ST313 paper states they use CGE Assembler which works off a Velvet core
+      - https://cge.cbs.dtu.dk/services/Assembler/
+    - Just uploaded the .fastq files I had to this service to see if I got the same assemble as they did (79 contig instead of 100+)
+      - Used the "trim reads" option
+    - Error: Needs paired end Illumina reads to be in two files
+    - SPlitting the fastq interleaved file using Galaxy webtool for FastQ Splitter then trying again
+      - https://usegalaxy.org/
+    - Downloading files and going to apply to the CGE Assembly server

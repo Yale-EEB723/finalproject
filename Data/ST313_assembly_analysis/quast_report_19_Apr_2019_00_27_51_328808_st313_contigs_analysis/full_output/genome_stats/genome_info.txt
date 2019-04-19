@@ -1,0 +1,14 @@
+reference chromosomes:
+	FQ312003.1 (total length: 4878012 bp, total length without N's: 4878012 bp, maximal covered length: 4385507 bp)
+
+total genome size: 4878012
+
+gap min size: 50
+partial gene/operon min size: 100
+
+
+
+assembly                 | genome    | duplication | gaps      | genes     | partial   | operons   | partial   |
+                         | fraction  | ratio       | number    |           | genes     |           | operons   |
+========================================================================================================================
+Contigs                  | 89.904    | 1.070       | 336       | -         | -         | -         | -         |
