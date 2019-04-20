@@ -629,7 +629,7 @@ save.master.table<-master.table
 
 #***SUBSAMPLE
 #Take a subset! Otherwise following code will not complete running and freeze everything!!!
-filter_target=c("Homo_sapiens","Danio_rerio","Strongylocentrotus_purpuratus")
+filter_target=c("Taeniopygia guttata","Homo sapiens")
 master.table<-filter(master.table, animal==filter_target)
 
 #There are human gene names in pep files that are not anywhere in gff3 files = inner_join
@@ -870,6 +870,14 @@ rand.tsne_plot
 
 
 ```
+#Cluster troubleshooting
+Data vs Distance matrix vs clustering algorithm
+Data: relaxed bit, 5 taxa
+Clustering algorithm:
+-on 5 taxa, Hsap + Danio
+
+
+
 
 
 
