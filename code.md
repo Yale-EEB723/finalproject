@@ -2,7 +2,7 @@
 All genomes and gff3 files were downloaded from Ensembl. In general, only the toplevel assembly was available, so all synteny analysis was run on either toplevel or primary assemblies. GFF3 statistics were run on chromosomal level assemblies for Drosophila, Danio, Homo and Taeniopygia since the presence of many short scaffolds lacking annotated genes produced misleading results.  
 
 **The genome versions I used:**    
-Amphimedon queenslandica: Aqu1
+Amphimedon queenslandica: Aqu1  
 Capitella telata: Capitella telata v1.0  
 Danio rerio: GRCz11  
 Drosophila melanogaster: BDGP6.22.96   
@@ -19,7 +19,8 @@ Trichoplax adhaerens:  ASM15027v1
 All code was written in R, except where indicated.  
 Load libraries:    
 
-```{r preliminaries}
+```
+{r preliminaries}
 library( tidyverse )
 library(ggplot2)
 library(seqinr)
@@ -41,7 +42,8 @@ How fragmented are the genomes?
 
 The human and zebrafish fastas were too large to run through this code, but median scaffold length was found online. The many small unplaced scaffolds in the Drosophila toplevel assembly reduced median scaffold length, so only chromosomes were used.  
 
-```{r distr scaffold length}
+```
+{r distr scaffold length}
 fasta_dir<-"~/Desktop/compgen/repo/ensembl/genome_fasta/"
 fasta<-c("Amphimedon_queenslandica.Aqu1.dna.toplevel.fa","Capitella_teleta.Capitella_teleta_v1.0.dna.toplevel.fa","Drosophila_chr.fa", "Helobdella_robusta.Helro1.dna.toplevel.fa","Lottia_gigantea.Lotgi1.dna.toplevel.fa","Mnemiopsis_leidyi.MneLei_Aug2011.dna.toplevel.fa","Nematostella_vectensis.ASM20922v1.dna.toplevel.fa","Strongylocentrotus_purpuratus.Spur_3.1.dna.toplevel.fa","Taeniopygia_guttata.taeGut3.2.4.dna.toplevel.fa","Trichoplax_adhaerens.ASM15027v1.dna.toplevel.fa")
 
@@ -71,7 +73,8 @@ To what degree is synteny analysis possible in my genomes?
 
 The minimum number of genes on a scaffold required for synteny analysis is 3 - two on either side of the gene of interest to serve as anchors in identifying the synteny block, and the gene of interest itself.  
 
-```{r count no genes per contig/scaffold}
+```
+{r count no genes per contig/scaffold}
 #install.packages("ape")
 
 gff3_dir<-"data/genomes/gff3/"
@@ -105,14 +108,54 @@ print(paste("Max no. genes/contig:",max(gene.count$Freq)))
 
 ```
 ### Prep sequences for Agalma  
-Download genome protein sequences from Ensembl. Simply sequence headers by regex. To make life easier later on, use this standard format:  
+#### Simplify sequence names  
+Download genome protein sequences from Ensembl. Agalma cuts off sequence names after the first space. Also, for certain genomes, the gene name, peptide name, and transcript do not follow a simple pattern and are not easily derived from each other. Simplify sequence names to this format:  
 `>p:protID:s:scaffoldID:g:geneID:t:transID`  
 
-From comparing the number of gene entries in the gff3 file vs number of peptide sequences, it is clear that many genes have more than one peptide associated with it. Create a fasta where each gene has only 1 peptide sequence. Choose the longest peptide.  
+To simpify, use Regex "Find":  
+Amphimedon:  
+`>(.*?)@pep@scaffold:Aqu1:(Contig\w+):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*`  
+Capitella:  
+`>(.*?)@pep@supercontig:Capitella_teleta_v1.0:(CAPTEscaffold_\w+?):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*?)@.*?$`  
+Danio:    
+`>(.*?)@pep@chromosome:GRCz11:(\w+):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotype.*`  
+Drosophila:    
+`>(.*?)@pep@chromosome:BDGP6:(\w+):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.* `    
+Helobdella:  
+`>(.*?)@pep@supercontig:Helro1:(\w+):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*`  
+Homo:   
+-need chromosome version AND scaffold version    
+`>(.*?)@pep@scaffold:GRCh38:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*`    
+`>(.*?)@pep@chromosome:GRCh38:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*`    
+Danio:    
+`>(.*?)@pep@chromosome:GRCz11:(\w+):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*`    
+`>(.*?)@pep@scaffold:GRCz11:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*`    
+Lottia:  
+`>(.*?)@pep@supercontig:Lotgi1:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*`    
+Mnemiopsis:     
+`>(.*?)@pep@supercontig:MneLei_Aug2011:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*`    
+`>(.*?)@pep@chromosome:MneLei_Aug2011:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*`    
+Nematostella:  
+`>(.*?)@pep@supercontig:ASM20922v1:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*`    
+Strongylocentrotus:    
+`>(.*?)@pep@supercontig:Spur_3.1:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*`    
+Taeniopygia:  
+`>(.*?)@pep@chromosome:taeGut3.2.4:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*`    
+Trichoplax:  
+`>(.*?)@pep@scaffold:ASM15027v1:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*`  
+
+Then, Replace with `>p:\1:s:\2:g:\3:t:\4  `.  
+
+#### Select longest peptide only  
+From comparing the number of gene entries in the gff3 file vs number of peptide sequences, it is clear that many genes have more than one peptide associated with it. 
+no. genes: `grep "gene:" gff3.gff3|wc -l`  
+no. peptides: `grep ">" pepfile.fasta|wc -l`  
+Create a fasta where each gene has only 1 peptide sequence. Choose the longest peptide.  
 
 The below code was modified from code by [story (Jan 9'17')](https://bioinformatics.stackexchange.com/questions/595/how-can-longest-isoforms-per-gene-be-extracted-from-a-fasta-file) and [nassimhddd (Jul 18 '16)](https://stackoverflow.com/questions/24237399/how-to-select-the-rows-with-maximum-values-in-each-group-with-dplyr). 
 
-```{r longest pep only}
+```
+{r longest pep only}
 #install bioconductor 3.8 https://www.bioconductor.org/install/  
 #install Biostrings: BiocManager::install("Biostrings", version = "3.8") ; do not update mclust because it will have a warning and then biostrings module not installed.  
 

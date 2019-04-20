@@ -455,7 +455,7 @@ gene.iso.df$width <- width(fasta.s)
 
 #~~~~~ End of 'story''s code.~~~~~
 
-#JM:
+#JLM:
 gene.iso.df<-rownames_to_column(gene.iso.df)
 
 #~~~~~beginning of code by nassimhddd (Jul 18 '16) Stackoverflow~~~~~
