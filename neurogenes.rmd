@@ -653,20 +653,20 @@ dist.matrix<-daisy(contingency,metric="gower",stand=FALSE)
 #cluster
 
 #agglomerative
-#ag<-agnes(dist.matrix,diss=TRUE)
-#plot(ag,labels=FALSE)
+ag<-agnes(dist.matrix,diss=TRUE)
+plot(ag,labels=FALSE)
 
 #divisive
-#di<-diana(dist.matrix)
-#plot(di,labels=FALSE)
+di<-diana(dist.matrix)
+plot(di,labels=FALSE)
 
 #kmeans
-#kmean<-kmeans(dist.matrix,51)
-#kclust<-kmean$cluster
-#tsne_obj<-Rtsne(dist.matrix,is_distance=TRUE,perplexity=1)
-#tsne_data<-tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(cluster=factor(kclust))
-#tsn_plot_k<-ggplot(aes(x = X, y = Y), data = tsne_data) + geom_point(aes(color = cluster))
-#tsn_plot_k
+kmean<-kmeans(dist.matrix,51)
+kclust<-kmean$cluster
+tsne_obj<-Rtsne(dist.matrix,is_distance=TRUE,perplexity=1)
+tsne_data<-tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(cluster=factor(kclust))
+tsn_plot_k<-ggplot(aes(x = X, y = Y), data = tsne_data) + geom_point(aes(color = cluster))
+tsn_plot_k
 
 cross.clust<-cc_crossclustering(dist.matrix,out=FALSE)
 clust<-cc_get_cluster(cross.clust)
@@ -690,7 +690,7 @@ clust.df<-mutate(clust.df,species_scaffold=row.names(contingency))
 cluster.master.table<-final.master.table%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%left_join(.,clust.df,by="species_scaffold")%>%select(.,species_scaffold,start,end,gene,homology_id,animal,cluster_id)
 
 #Add an index to each species
-cluster.master.table<-cluster.master.table%>%mutate(species_index=case_when(animal=="Amphimedon_queenslandica"~1,animal=="Mnemiopsis_leidyi"~1,animal=="Trichoplax_adhaerens"~2,animal=="Nematostella_vectensis"~3,animal=="Capitella_telata"~4,animal=="Helobdella_robusta"~4,animal=="Lottia_gigantea"~4,animal=="Drosophila_melanogaster"~4,animal=="Strongylocentrotus_purpuratus"~4,animal=="Danio_rerio"~4,animal=="Taeniopygia_guttata"~5,animal=="Homo_sapiens"~6))
+cluster.master.table<-cluster.master.table%>%mutate(species_index=case_when(animal=="Amphimedon_queenslandica"~1,animal=="Mnemiopsis_leidyi"~2,animal=="Trichoplax_adhaerens"~3,animal=="Nematostella_vectensis"~4,animal=="Capitella_telata"~7,animal=="Helobdella_robusta"~7,animal=="Lottia_gigantea"~6,animal=="Drosophila_melanogaster"~5,animal=="Strongylocentrotus_purpuratus"~5,animal=="Danio_rerio"~6,animal=="Taeniopygia_guttata"~7,animal=="Homo_sapiens"~7))
 
 write.csv(cluster.master.table,"cluster.master.table.csv",quote=FALSE,row.names=FALSE)
 
@@ -825,6 +825,53 @@ Trying to get around sparse matrix issue:
 -make a smaller matrix of more closely related animals  
   -tried Drosophila, Danio, Human but error at homologize step: "main__.select_clusters: no clusters passed the filtering criteria"
   -5 taxa: Drosophila, Danio, Strongylo, Taeniopgygia, Human: error at genetrees step. Looks like homologize worked - use.
+
+```{r test null model}
+
+#mixing up the columns or rows will not affect overall clustering pattern (i.e. all clustering)
+#make a data frame with the same proportion of 1's and 0's in random order
+dim(contingency)
+n_entries<-ncol(contingency)*nrow(contingency)
+proportion_1s<-sum(contingency)/n_entries
+proportion_0s<-1-proportion_1s
+
+random.matrix<-c(rep("1",proportion_1s*n_entries),rep("0",proportion_0s*n_entries))%>%sample(.,n_entries)%>%matrix(.,ncol=ncol(contingency),nrow=nrow(contingency))%>%as.data.frame()
+rownames(random.matrix)<-row.names(contingency)
+colnames(random.matrix)<-colnames(contingency)
+
+
+#cluster
+rand.dist.matrix<-daisy(random.matrix,metric="gower",stand=FALSE)
+
+rand.cross.clust<-cc_crossclustering(rand.dist.matrix,out=FALSE)
+rand.clust<-cc_get_cluster(rand.cross.clust)
+
+rand.tsne_obj<-Rtsne(rand.dist.matrix,is_distance=TRUE,perplexity=10)
+rand.tsne_data<-rand.tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(rand.cluster=factor(rand.clust))
+rand.tsne_plot<-ggplot(aes(x = X, y = Y), data = rand.tsne_data) + geom_point(aes(color = rand.cluster))
+rand.tsne_plot
+
+#agglomerative
+rand.ag<-agnes(rand.dist.matrix,diss=TRUE)
+plot(rand.ag,labels=FALSE)
+
+#divisive
+rand.di<-diana(rand.dist.matrix)
+plot(rand.di,labels=FALSE)
+
+#kmeans
+rand.kmean<-kmeans(rand.dist.matrix,51)
+rand.kclust<-rand.kmean$cluster
+rand.tsne_obj<-Rtsne(rand.dist.matrix,is_distance=TRUE,perplexity=10)
+rand.tsne_data<-rand.tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(rand.cluster=factor(rand.kclust))
+rand.tsne_plot<-ggplot(aes(x = X, y = Y), data = rand.tsne_data) + geom_point(aes(color = rand.cluster))
+rand.tsne_plot
+
+
+
+```
+
+
 
 #FIGURES TO MAKE...soonish hmm   
 Comparison across clades of:  
