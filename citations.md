@@ -30,4 +30,20 @@ Ozer EA. ClustAGE: a tool for clustering and distribution analysis of bacterial 
 
 ### Spine/ AGEnt
 
-Ozer EA, Allen JP, and Hauser AR. Characterization of the core and accessory genomes of Pseudomonas aeruginosa using bioinformatic tools Spine and AGEnt. BMC Genomics 2014 15:737 
+Ozer EA, Allen JP, and Hauser AR. Characterization of the core and accessory genomes of Pseudomonas aeruginosa using bioinformatic tools Spine and AGEnt. BMC Genomics 2014 15:737
+
+### Paper for phylogeny of Salmonella
+
+Worley, J., Meng, J., Allard, M.W., Brown, E.W. and Timme, R.E., 2018. Salmonella enterica Phylogeny Based on Whole-Genome Sequencing Reveals Two New Clades and Novel Patterns of Horizontally Acquired Genetic Elements. MBio, 9(6), pp.e02303-18.
+
+### Paper for generalist vs host adapted graphic
+
+Feasey, N.A., Dougan, G., Kingsley, R.A., Heyderman, R.S. and Gordon, M.A., 2012. Invasive non-typhoidal salmonella disease: an emerging and neglected tropical disease in Africa. The Lancet, 379(9835), pp.2489-2499.
+
+### Papers for strain Information
+
+Fookes, M., Schroeder, G.N., Langridge, G.C., Blondel, C.J., Mammina, C., Connor, T.R., Seth-Smith, H., Vernikos, G.S., Robinson, K.S., Sanders, M. and Petty, N.K., 2011. Salmonella bongori provides insights into the evolution of the Salmonellae. PLoS pathogens, 7(8), p.e1002191.
+
+Fricke, W.F., Mammel, M.K., McDermott, P.F., Tartera, C., White, D.G., LeClerc, J.E., Ravel, J. and Cebula, T.A., 2011. Comparative genomics of 28 Salmonella enterica isolates: evidence for CRISPR-mediated adaptive sublineage evolution. Journal of bacteriology, 193(14), pp.3556-3568.
+
+Kingsley, R.A., Kay, S., Connor, T., Barquist, L., Sait, L., Holt, K.E., Sivaraman, K., Wileman, T., Goulding, D., Clare, S. and Hale, C., 2013. Genome and transcriptome adaptation accompanying emergence of the definitive type 2 host-restricted Salmonella enterica serovar Typhimurium pathovar. MBio, 4(5), pp.e00565-13.
