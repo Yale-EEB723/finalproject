@@ -255,26 +255,34 @@ Use seqinr R package.
 
 ```{r distr scaffold length}
 
-#NOTE: due to lfs not working for public forks I am unable to host genome fastas in repo. Links to data provided in readme. For convenience I've included sample data.
-#Ideally I would loop through all my fastas but for some reason I can't get looping to work...
 
-#fasta="data/sample_data/fasta_sample.fasta"
-fasta="~/repo/finalproject/Drosophia_chr.fa"
+
+fasta_dir<-"~/Desktop/compgen/repo/ensembl/genome_fasta/"
+fasta<-c("Amphimedon_queenslandica.Aqu1.dna.toplevel.fa","Capitella_teleta.Capitella_teleta_v1.0.dna.toplevel.fa","Drosophila_chr.fa", "Helobdella_robusta.Helro1.dna.toplevel.fa","Lottia_gigantea.Lotgi1.dna.toplevel.fa","Mnemiopsis_leidyi.MneLei_Aug2011.dna.toplevel.fa","Nematostella_vectensis.ASM20922v1.dna.toplevel.fa","Strongylocentrotus_purpuratus.Spur_3.1.dna.toplevel.fa","Taeniopygia_guttata.taeGut3.2.4.dna.toplevel.fa","Trichoplax_adhaerens.ASM15027v1.dna.toplevel.fa")
+
+for (blah in fasta){
+fasta_path<-paste0(fasta_dir,blah)  
 
 #histogram of call ontig lengths,
-scaffold.length.plot<-read.fasta(fasta)%>%getLength(.)%>%as.data.frame()%>%ggplot()+geom_histogram(aes(x=.), fill="skyblue3", color="black",binwidth=100)+xlab("Scaffold Length")+labs(title="Strongylocentrotus purpuratus")
-
+scaffold.length.plot<-read.fasta(fasta_path)%>%getLength(.)%>%as.data.frame()%>%ggplot()+geom_histogram(aes(x=.), fill="skyblue3", color="black",binwidth=100)+xlab("Scaffold Length")+labs(title=blah)
+scaffold.length.plot
 
 #histogram of contig lengths, restricted to scaffolds < 10,000 bp
-restricted.plot<-read.fasta(fasta)%>%getLength(.)%>%as.data.frame()%>%filter(.<10000)%>%ggplot()+geom_histogram(aes(x=.), fill="skyblue3", color="black",binwidth=100)+xlab("Scaffold Length")+labs(title="Strongylocentrotus purpuratus")
-
-
+restricted.plot<-read.fasta(fasta_path)%>%getLength(.)%>%as.data.frame()%>%filter(.<10000)%>%ggplot()+geom_histogram(aes(x=.), fill="skyblue3", color="black",binwidth=100)+xlab("Scaffold Length")+labs(title=blah)
+restricted.plot
 
 #stats
-fasta.len=read.fasta(fasta)%>%getLength()
+fasta.len=read.fasta(fasta_path)%>%getLength()
 print(paste("Median scaffold/contig length (bp):",median(as.numeric(fasta.len))))
 print(paste("Max scaffold/contig length (bp):",max(as.numeric(fasta.len))))
 print(paste("Minimum scaffold/contig length (bp):",min(as.numeric(fasta.len))))
+  
+}
+
+
+
+
+
 
 
 
@@ -293,25 +301,38 @@ https://www.rdocumentation.org/packages/ape/versions/5.2/topics/read.gff
 
 #install.packages("ape")
 
-gff3="data/genomes/gff3/Drosophila_melanogaster.BDGP6.22.96.chr.gff3"
-#parse gff3 and create new df with only seqid, type, start and end. Keep start and end coords for later analyses.
-contig.gene.df <- ape::read.gff(file=gff3, GFF3=TRUE) %>% select(.,"seqid","type","start","end") %>% filter(.,type == "gene")
+gff3_dir<-"data/genomes/gff3/"
+gff3<-c("Amphimedon_queenslandica.Aqu1.42.gff3","Capitella_teleta.Capitella_teleta_v1.0.42.gff3","Danio_rerio.GRCz11.96.chr.gff3","Drosophila_melanogaster.BDGP6.22.96.chr.gff3","Helobdella_robusta.Helro1.42.gff3","Homo_sapiens.GRCh38.96.chr.gff3","Lottia_gigantea.Lotgi1.42.gff3","Mnemiopsis_leidyi.MneLei_Aug2011.42.gff3","Nematostella_vectensis.ASM20922v1.42.gff3","Strongylocentrotus_purpuratus.Spur_3.1.42.gff3","Taeniopygia_guttata.taeGut3.2.4.96.chr.gff3","Trichoplax_adhaerens.ASM15027v1.42.gff3")
+
+for (blah in gff3){
+  
+gff3_path<-paste0(gff3_dir,blah)
+contig.gene.df <- ape::read.gff(file=gff3_path, GFF3=TRUE) %>% select(.,"seqid","type","start","end") %>% filter(.,type == "gene")
 
 #for histogram, take just the contig names and gene counts
 gene.count<- as.data.frame(table(contig.gene.df$seqid))
 
 #plot frequency of frequencies
 gff3.plot<-ggplot(data = gene.count, aes(x=gene.count$Freq)) + geom_histogram(binwidth=1) + geom_vline(xintercept = 3,color="red")
+gff3.plot
 
 #use for custom axes
 #gff3.plot<-ggplot(data = gene.count, aes(x=gene.count$Freq)) + geom_histogram(binwidth=1) + geom_vline(xintercept = 3,color="red") +xlim(0,10)+ylim(0,3000)
 
 #stats
+
+print(blah)
+
 print(paste("proportion contigs with gene count >= 3:",nrow(subset(gene.count, gene.count$Freq >= 3))/nrow(gene.count)*100))
 
 print(paste("Median no. genes/contig:",median(gene.count$Freq)))
 
-print(paste("Max no. genes/contig:",max(gene.count$Freq)))
+print(paste("Max no. genes/contig:",max(gene.count$Freq))) 
+  
+  
+  
+}
+
 
 ```
 
