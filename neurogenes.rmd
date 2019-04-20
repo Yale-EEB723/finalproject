@@ -297,15 +297,16 @@ https://www.rdocumentation.org/packages/ape/versions/5.2/topics/read.gff
 -'supercontigs' indicated in gff3 but all seem to be supercontig 1 and actual seq chunks are called contigs. Probably because they needed to enter some kind of value for supercontig. My analyses are at 'contig' level.    
 
 ```{r count no genes per contig/scaffold}
-#Please replace gff3_sample.gff3 with path to desired gff3 file. GFF3 files can be found in data/genomes/annot
 
 #install.packages("ape")
+
 
 gff3_dir<-"data/genomes/gff3/"
 gff3<-c("Amphimedon_queenslandica.Aqu1.42.gff3","Capitella_teleta.Capitella_teleta_v1.0.42.gff3","Danio_rerio.GRCz11.96.chr.gff3","Drosophila_melanogaster.BDGP6.22.96.chr.gff3","Helobdella_robusta.Helro1.42.gff3","Homo_sapiens.GRCh38.96.chr.gff3","Lottia_gigantea.Lotgi1.42.gff3","Mnemiopsis_leidyi.MneLei_Aug2011.42.gff3","Nematostella_vectensis.ASM20922v1.42.gff3","Strongylocentrotus_purpuratus.Spur_3.1.42.gff3","Taeniopygia_guttata.taeGut3.2.4.96.chr.gff3","Trichoplax_adhaerens.ASM15027v1.42.gff3")
 
 for (blah in gff3){
-  
+
+
 gff3_path<-paste0(gff3_dir,blah)
 contig.gene.df <- ape::read.gff(file=gff3_path, GFF3=TRUE) %>% select(.,"seqid","type","start","end") %>% filter(.,type == "gene")
 
@@ -313,9 +314,8 @@ contig.gene.df <- ape::read.gff(file=gff3_path, GFF3=TRUE) %>% select(.,"seqid",
 gene.count<- as.data.frame(table(contig.gene.df$seqid))
 
 #plot frequency of frequencies
-gff3.plot<-ggplot(data = gene.count, aes(x=gene.count$Freq)) + geom_histogram(binwidth=1) + geom_vline(xintercept = 3,color="red")
+gff3.plot<-ggplot(data = gene.count, aes(x=gene.count$Freq)) + geom_histogram(binwidth=1) + geom_vline(xintercept = 3,color="red")+ggtitle(blah)
 gff3.plot
-
 #use for custom axes
 #gff3.plot<-ggplot(data = gene.count, aes(x=gene.count$Freq)) + geom_histogram(binwidth=1) + geom_vline(xintercept = 3,color="red") +xlim(0,10)+ylim(0,3000)
 
@@ -328,9 +328,7 @@ print(paste("proportion contigs with gene count >= 3:",nrow(subset(gene.count, g
 print(paste("Median no. genes/contig:",median(gene.count$Freq)))
 
 print(paste("Max no. genes/contig:",max(gene.count$Freq))) 
-  
-  
-  
+
 }
 
 
