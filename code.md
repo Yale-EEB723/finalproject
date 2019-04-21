@@ -109,7 +109,7 @@ print(paste("Max no. genes/contig:",max(gene.count$Freq)))
 ```
 ### Prep sequences for Agalma  
 #### Simplify sequence names  
-Download genome protein sequences from Ensembl. Agalma cuts off sequence names after the first space. Also, for certain genomes, the gene name, peptide name, and transcript do not follow a simple pattern and are not easily derived from each other. Simplify sequence names to this format:  
+Download genome protein sequences from Ensembl. Agalma cuts off sequence names after the first space. Also, for certain genomes, the gene ID, peptide ID, and transcript ID do not follow a simple pattern and are not easily derived from each other, so retain all IDs to facilitate downstream processing. Simplify sequence names to this format:  
 `>p:protID:s:scaffoldID:g:geneID:t:transID`  
 
 To simpify, use Regex "Find":  
@@ -142,8 +142,7 @@ Lottia:
   
 Mnemiopsis:     
 >`>(.*?)@pep@supercontig:MneLei_Aug2011:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*`    
-`>(.*?)@pep@chromosome:MneLei_Aug2011:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*`    
-
+`>(.*?)@pep@chromosome:MneLei_Aug2011:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*`      
 Nematostella:  
 >`>(.*?)@pep@supercontig:ASM20922v1:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*`    
 
@@ -160,7 +159,7 @@ Trichoplax:
 Then, Replace with `>p:\1:s:\2:g:\3:t:\4`.  
 
 #### Select longest peptide only  
-From comparing the number of gene entries in the gff3 file vs number of peptide sequences, it is clear that many genes have more than one peptide associated with it.  
+From comparing the number of gene entries in the gff3 file vs number of peptide sequences, it is clear that many genes have more than one peptide associated with it:    
 no. genes: `grep "gene:" gff3.gff3|wc -l`  
 no. peptides: `grep ">" pepfile.fasta|wc -l`  
 Create a fasta where each gene has only 1 peptide sequence. Choose the longest peptide.  
@@ -172,7 +171,7 @@ The below code was modified from code by [story (Jan 9'17')](https://bioinformat
 #install bioconductor 3.8 https://www.bioconductor.org/install/  
 #install Biostrings: BiocManager::install("Biostrings", version = "3.8") ; do not update mclust because it will have a warning and then biostrings module not installed.  
 
-#~~~~~ Beginning of 'story''s code.~~~~~
+#~~~~~ Beginning of code by story (Jan 9'17')~~~~~
 
 ## read your fasta in as Biostrings object
 fasta.s <- readDNAStringSet("./data/sample_data/fasta_sample.fasta")
@@ -270,8 +269,6 @@ export AGALMA_DB="./compgen_homologs_nohydra.sqlite"
 source activate /gpfs/ysm/project/jlm329/conda_envs/agalma
 
 set -e
-
-
 
 agalma catalog insert -p ../pep/Amphimedon_longestpep.fasta -s 'Amphimedon queenslandica' --id 'Aqu_7c2ad7b'
 agalma catalog insert -p ../pep/Capitella_longestpep.fasta -s 'Capitella telata' --id 'Cte_aef8c97'
@@ -374,6 +371,7 @@ agalma homologize --id $ID
 agalma multalign --id $ID
 agalma genetree --id $ID
 ```
+If Agalma fails at any step, delete all files and start fresh (RE-search!).  
 
 Parse the Agalma output.
 ```
@@ -400,12 +398,39 @@ ORDER BY homology.id ASC;
 To run the database query:
 `sqlite3 -csv -header homologs.sqlite < query_homology.sql > homology_results.csv`
 
+### Agalma Output  
+A few things will make life easier down the road when parsing the Agalma output.  
 
+Although the simplified fasta header names are useful for downstream analyses, when merging tables the gene names must exactly match those in the gff3 files. Use Regex Find: `(.*,)p:.*?:s:.*?:g:(.*?):t:.*?(,.*)` and Replace: `$1$2$3`.  
 
+Some of the gene names in the peptide files do not match the gene names in the gff3 files - they have an extra decimal point at the end of their names (I think indicating assembly version). This only occurred in Danio, Homo and Taeniopygia. Remove the decimal point wiht Regex Find:    
+Danio:    
+>`(\d+,ENSDARG.*).\d+(,Dre_.*)`  
+>`(.*,ENSDARG\d+)\.(,Dre_.*)` -> seemed to do the trick better - needed two rounds  
+Homo:  
+>`(\d+,ENSG.*?)\.\d+(,Hsa_.*)`  
+Taeniopygia:  
+>`(\d+,ENSTGUG.*?).\d+(,Tgu_.*)`  
 
+### Aggregate the GFF3 and Agalma data into a master file
+Create three tables:
+master.table: parsed GFF3 data
+agalma.homologs: parsed Agalma data 
+final.master.table: master.table and agalma.homologs combined.
 
+When clustering, I will 
 
+-be more clear about master vs final master table
+1. For each GFF3 file, filter so that only lines where type=gene are extracted. You cannot more directly filter for gene_id because psuedogenes etc. also have a valid gene_id.  
+2. Parse out the gene_id from each line and add to a new 'gene' column.  
+3. Select 'seqid' (aka scaffold ID), 'start', 'end', and 'gene' and put into the master.table.  
+* I've saved the start and end coordinates of the gene in case I want to analyze collinearity in the future.  
+4. Add a new 'animal' column with the name of the species the gene comes from. Although the Agalma files have a species identifier (via catalog ID), the GFF3 files do not. Unfortunately, I've had to add this manually.  
+5. Left join the agalma output and the master table to create the final master table.  
 
+This results in two tables:  
+**master table**: seqid, start, end, gene, animal.
+**final master table**: seqid,start,end,gene,homology_id,catalog_id,animal
 
 
 
