@@ -271,6 +271,9 @@ The reader must have some knowledge of microbial genetics, as well as some under
   - Using the Spine software, identified core genomes relating to 18 reference Salmonella complete genomes (along with plasmids if present), while also identifying their accessory genomic Elements
   - Used AGEnt software, identified accessory genomic elements of the two draft genome sequences, acting as surrogates for newly discovered Salmonella serovars that are in need of analysis
   - Used ClustAGE to align these accessory regions and create both alignments and graphical representations of absence or presence of annotated CDS between the serovars analyzed
+  - Produced phylogenetic relationship of serovars analyzed in reference to their accessory genomes
+    - Bray- Curtis distances calculated for each pairwise relationship
+    - Neighbor-joining tree generated depicting these relationships
   - Looked through data and identified regions that acted as positive controls that the process worked
     - Type III Secretion System Effectors for S. enterica were identified to be shared between all S. enterica serovars, while being absent from S. bongori, as expected
   - Identified potentially new regions that could aid in understanding of pathogenesis:
@@ -328,6 +331,7 @@ What are future directions this could go in?
 ### ClustAGE
 
   - Ozer EA. ClustAGE: a tool for clustering and distribution analysis of bacterial accessory genomic elements. BMC Bioinformatics 2018 19:150
+  - Saitou, N. and Nei, M., 1987. The neighbor-joining method: a new method for reconstructing phylogenetic trees. Molecular biology and evolution, 4(4), pp.406-425. (Neighbor joining tree)
 
 ### iTOL
 
