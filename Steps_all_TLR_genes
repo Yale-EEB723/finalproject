@@ -80,6 +80,9 @@ iqtree -b 100 -nt AUTO -s trimed_inout_TLR.fasta
 
 [9] The tree is in Newack format; i have to download figtree for this:
 # This takes a few hours
+# ete3 annotated -t tree.nw --ncbi
+ete3 view -t trimed_inout_TLR_tree_newick.nw
+# http://etetoolkit.org/documentation/tools/
  iqtree -nt AUTO -b 100 -s trimmed_al_in_outgroup.fasta  # Make a tree with 100 bootstrap.
 # For command line visualizaiton:
 conda install -c bioconda ete3

@@ -1,0 +1,11 @@
+IQ-TREE multicore version 1.5.5 for Mac OS X 64-bit built Feb  4 2018
+Copyright (c) 2011-2017 by Bui Quang Minh, Nguyen Lam Tung,
+Olga Chernomor, Heiko Schmidt, and Arndt von Haeseler.
+
+Host:    Diegos-MacBook-Pro.local (AVX2, FMA3, 16 GB RAM)
+Command: iqtree -b 100 -nt AUTO -s trimed_inout_TLR.fasta.fasta
+Seed:    702858 (Using SPRNG - Scalable Parallel Random Number Generator)
+Time:    Sat Apr 20 18:14:13 2019
+Kernel:  AVX+FMA - auto-detect threads (8 CPU cores detected)
+
+Reading alignment file trimed_inout_TLR.fasta.fasta ... ERROR: Cannot read file trimed_inout_TLR.fasta.fasta
