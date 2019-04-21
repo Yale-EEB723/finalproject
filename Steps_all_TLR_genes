@@ -1,0 +1,96 @@
+# --- --- --- --- --- --- --- --- --- --- --- ---
+[A] Getting the sequence data
+# --- --- --- --- --- --- --- --- --- --- --- ---
+
+
+# Go to NCBI Protein:
+[1] Type in TLR7,TLR5,TLR3,TLR8,TLR9 Myotis
+Type in NCBI Protein: Toll-like receptor Chiroptera
+Type in NCBI Protein: interleukin 1 receptor Homo sapiens. This will serve as the outgroup
+Download them all together as .FASTA
+
+
+# --- --- --- --- --- --- --- --- --- --- --- ---
+# [B] Combine TLR and outgroup .fasta files into a single one
+# --- --- --- --- --- --- --- --- --- --- --- ---
+
+
+# For alignment we have to put the ingroup (TLR genes) and the outgroup .fasta sequences into a single file.
+INDIR=/Users/diegoellis/projects/development/Comparative_genomics/finalproject/Data/All_TLR
+cat $INDIR/all_TLR_chiroptera.fasta $INDIR/interleukin_1_receptor_Homo_sapiens.fasta >$INDIR/ingr_outgr_TLR.fasta
+
+
+# --- --- --- --- --- --- --- --- --- --- --- ---
+# [C] Blast the downloaded sequences against the entire NCBI databases
+# --- --- --- --- --- --- --- --- --- --- --- ---
+
+
+To confirm the predicted and low quality TLR protein sequences
+BlastP
+I did this for TLR 3,4,5,7
+
+
+# --- --- --- --- --- --- --- --- --- --- --- ---
+# [D] Alignment with mafft
+# --- --- --- --- --- --- --- --- --- --- --- ---
+
+
+# We Download MAFFT on https://anaconda.org/bioconda/mafft
+echo 'Align our TLR genes with the outgroup TIR gene of humans'
+mafft --auto ingr_outgr_TLR.fasta > aligned_ingr_outgr_all_TLR.fasta # input output order
+# During alignment, not everything actually gets aligned.
+Could be due to low quality sequences and this affects further analysis (i.e. phlyogenetics)
+
+
+# --- --- --- --- --- --- --- --- --- --- --- ---
+# [E] Trimming
+# --- --- --- --- --- --- --- --- --- --- --- ---
+
+
+# Now we try to install gBlock, trimmomatic and trimAL for trimming
+# conda install -c bioconda gblocks gblocks and trimmomatic are failing; lets try trimAL
+INDIR=/Users/diegoellis/projects/development/Comparative_genomics/finalproject/Data/All_TLR/
+# trimal -in aligned_ingr_outgr_all_TLR.fasta -out trimmed_al_in_out_all_TLR.fasta  -htmlout trimmed_al_in_out_all_TLR.html -gt 1
+# trimal -in aligned_ingr_outgr_all_TLR.fasta -out output3 -htmlout trimmed_al_in_out_all_TLR.html-gt 0.8 -st 0.001
+# trimal -in example1 -out output2 -htmlout output2.html -gt 0.8 -st 0.001
+trimal -in aligned_ingr_outgr_all_TLR.fasta -out trimed_inout_TLR.fasta -htmlout trimed_inout_TLR.html -gt 0.8 -st 0.01
+# Ask Casey and Ian about gap score
+# will remove all columns with gaps in more than 20% of the sequences or with a similarity score lower than 0.001,
+# unless this removes more than 40% of the columns in the original alignment,
+# we want to conserve at least 60% of them.
+# In such cases trimAl v1.2 will add the necessary number of columns (in decreasing order of scores)
+# so that the minimum coverage is respected.
+
+
+# --- --- --- --- --- --- --- --- --- --- --- ---
+# [F] Building TLR gene tree
+# --- --- --- --- --- --- --- --- --- --- --- ---
+
+
+# Now that we have aligned and trimmed our sequences its time to build our gene tree
+# echo 'Lets try IQtree' | conda install -c bioconda iqtree
+# Say bioconda is super useful instead of going to github pages or such to download
+iqtree -b 100 -nt AUTO -s trimed_inout_TLR.fasta
+
+
+# --- --- --- --- --- --- --- --- --- --- --- ---
+# [G] Visualizing the gene tree
+# --- --- --- --- --- --- --- --- --- --- --- ---
+
+
+[9] The tree is in Newack format; i have to download figtree for this:
+# This takes a few hours
+ iqtree -nt AUTO -b 100 -s trimmed_al_in_outgroup.fasta  # Make a tree with 100 bootstrap.
+# For command line visualizaiton:
+conda install -c bioconda ete3
+ete3 view --text MyTreeFile.nw
+
+[10] Ape? Try this out.
+ete3 view --text MyTreeFile.nw
+Load a tree and link it to the alignment:
+from ete3 import PhyloTree
+# http://etetoolkit.org/docs/latest/tutorial/tutorial_phylogeny.html
+# Make a pipeline for everything else.
+was there diversification of TLR between bats or did it arose efore that?
+# Get the protein name and accesion number -> Show in my presentation for all my TLR genes.
+#
