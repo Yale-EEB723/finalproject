@@ -97,3 +97,5 @@ from ete3 import PhyloTree
 was there diversification of TLR between bats or did it arose efore that?
 # Get the protein name and accesion number -> Show in my presentation for all my TLR genes.
 #
+
+# Next I could try to align all the sequences i got from SUMAC?!
