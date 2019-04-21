@@ -572,8 +572,8 @@ Test the rest: blah\d+\.\d+,blah_id
 Spu: yes but also present in gff3
 
 
-Need to add a column to master.table indicate which animal each gene came from (not all scaffold/gene names consistent). Here are the rownumbers for each animal:  
-View(master.table) -> filter by each animal and find beginning and end row nums  
+Need to add a column to gff3.table indicate which animal each gene came from (not all scaffold/gene names consistent). Here are the rownumbers for each animal:  
+View(gff3.table) -> filter by each animal and find beginning and end row nums  
 
 Aqu 	1:43615  
 Capt	43616:75790  
@@ -593,10 +593,11 @@ Tri	271408:282927
 
 Note that things like "ncRNA_gene" in gff3 files also have "gene_id=", but in the below R code I filter first by just "gene", which is why grep "gene_id" GFF3.gff3 will bring up more lines than are in my table. Spot checked table - does not appear to have any ncRNA_genes.  
 
-```{r MASTA TABLE}
-###CHANGE AGALMA CSV HERE
+```{r Parse GFF3 and Agalma data}
 
-#~~~Create Master Table~~~
+
+#~~~Create GFF3 Table~~~
+
 #set up empty df to rbind to
 all.df<-data.frame(matrix(ncol=5,nrow=0))
 names<-c("seqid","type","start","end","attributes")
@@ -606,6 +607,7 @@ colnames(all.df)<-names
 gff3_dir="data/genomes/gff3/"
 gff3=c("Amphimedon_queenslandica.Aqu1.42.gff3","Capitella_teleta.Capitella_teleta_v1.0.42.gff3","Danio_rerio.GRCz11.95.gff3","Drosophila_melanogaster.BDGP6.95.gff3","Helobdella_robusta.Helro1.42.gff3","Homo_sapiens.GRCh38.95.gff3","Lottia_gigantea.Lotgi1.42.gff3","Mnemiopsis_leidyi.MneLei_Aug2011.42.gff3","Nematostella_vectensis.ASM20922v1.42.gff3","Strongylocentrotus_purpuratus.Spur_3.1.42.gff3","Taeniopygia_guttata.taeGut3.2.4.95.gff3","Trichoplax_adhaerens.ASM15027v1.42.gff3")
 
+#read in each gff3 file and extract seqid, type, start, end, attributes. Filter lines by type = gene.
 for (blah in gff3)
 {
 gff3_path<-paste0(gff3_dir,blah)
@@ -616,20 +618,18 @@ all.df<-bind_rows(all.df,contig.gene.df)
 #Parse out the gene_id from the attributes 
 all.df$gene<-gsub(".*gene_id=(.*?);.*","\\1",all.df$attributes)
 
-#Begin contstruction of MASTAAA! table.
-master.table<-select(all.df,"seqid","start","end","gene")
+#Construct gff3 table
+gff3.table<-select(all.df,"seqid","start","end","gene")
 
-#need to add animal ids
-master.table$animal<-c(rep.int("Amphimedon_queenslandica",43615),rep.int("Capitella_telata",32175),rep.int("Danio_rerio",25606),rep.int("Drosophila_melanogaster",13931),rep.int("Helobdella_robusta",23432),rep.int("Homo_sapiens",21492),rep.int("Lottia_gigantea",23349),rep.int("Mnemiopsis_leidyi",16559),rep.int("Nematostella_vectensis",24773),rep.int("Strongylocentrotus_purpuratus",28987),rep.int("Taeniopygia_guttata",17488),rep.int("Trichoplax_adhaerens",11520))
-#~~~Master table complete~~~
+#add animal IDs to gff3 table
+gff3.table$animal<-c(rep.int("Amphimedon_queenslandica",43615),rep.int("Capitella_telata",32175),rep.int("Danio_rerio",25606),rep.int("Drosophila_melanogaster",13931),rep.int("Helobdella_robusta",23432),rep.int("Homo_sapiens",21492),rep.int("Lottia_gigantea",23349),rep.int("Mnemiopsis_leidyi",16559),rep.int("Nematostella_vectensis",24773),rep.int("Strongylocentrotus_purpuratus",28987),rep.int("Taeniopygia_guttata",17488),rep.int("Trichoplax_adhaerens",11520))
 
-#~~~Create final master table~~~
+#~~~ GFF3 Table Finished ~~~
+
 
 #Read in agalma homologs csv
 agalma.homologs<-read.csv("5taxa_results_alt.csv",header=TRUE,sep=",")
 
-#left join because need to know which genes have no homology too.
-final.master.table<-left_join(master.table,agalma.homologs)%>%select(.,"seqid","start","end","gene","homology_id","catalog_id","animal")
 
 #to double check that there are no duplicate genes in final.master.table:
 #duplicated(final.master.table$gene)%>%table()
@@ -644,61 +644,57 @@ absent_genes.csv: cut -f 1 -d "," final.master.table_absentgenes.csv |grep "NA"
 ```{r cluster}
 #must run previous chunk first
 
-#save master table before continuing
-save.master.table<-master.table
+#save gff3 table before continuing in case you want to rerun this chunk
+save.gff3.table<-gff3.table
 
-#***SUBSAMPLE
-#Take a subset! Otherwise following code will not complete running and freeze everything!!!
-filter_target=c("Taeniopygia guttata","Homo sapiens")
-master.table<-filter(master.table, animal==filter_target)
+#SUBSAMPLE by desired animals 
+filter_target=c("Danior_rerio","Homo_sapiens","Strongylocentrotus_purpuratus")
+gff3.table<-filter(gff3.table, animal==filter_target)
 
-#There are human gene names in pep files that are not anywhere in gff3 files = inner_join
-#Scaffold names may not be unique but must be - join seqid and catalog id
-final.master.table_cluster<-inner_join(master.table,agalma.homologs)%>%dplyr::select(.,seqid,start,end,gene,homology_id,catalog_id,animal)%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%dplyr::select(.,species_scaffold,homology_id,gene)
+#inner join gff3.table x agalma.homologs, by gene to produce the table from which contingency table will be made
+#Make scaffold names unique- join seqid and catalog id
+contingency.table<-inner_join(gff3.table,agalma.homologs)%>%dplyr::select(.,seqid,homology_id,animal)%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%dplyr::select(.,species_scaffold,homology_id)
+
 
 #make contingency table
-contingency<-table(final.master.table_cluster$species_scaffold,final.master.table_cluster$homology_id)%>%as.matrix()
+contingency<-table(contingency.table$species_scaffold,contingency.table$homology_id)%>%as.matrix()
 contingency<-1*(contingency>0)
-#***SUBSAMPLE
+#DOWNSAMPLE contingency table
 contingency<-contingency[sample(100),sample(100)]
 
 
-#dissimilarity matrix
-
+#similarity matrix
 dist.matrix<-daisy(contingency,metric="gower",stand=FALSE)
-
-#sparse data troubleshooting
 
 
 #cluster
+#cross-clustering
+cross.clust<-cc_crossclustering(dist.matrix,out=FALSE)
+clust<-cc_get_cluster(cross.clust)
 
-#agglomerative
+#plot the clustering
+#see tSNE code from http://dpmartin42.github.io/posts/r/cluster-mixed-types
+#adjust perplexity if get error "perplexity is too large for the number of samples"
+tsne_obj<-Rtsne(dist.matrix,is_distance=TRUE,perplexity=1)
+tsne_data<-tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(cluster=factor(clust))
+tsne_plot<-ggplot(aes(x = X, y = Y), data = tsne_data) + geom_point(aes(color = cluster))
+tsne_plot
+
+#agglomerative clustering 
 ag<-agnes(dist.matrix,diss=TRUE)
 plot(ag,labels=FALSE)
 
-#divisive
+#divisive clustering
 di<-diana(dist.matrix)
 plot(di,labels=FALSE)
 
-#kmeans
-kmean<-kmeans(dist.matrix,51)
+#kmeans clustering
+kmean<-kmeans(dist.matrix,25)
 kclust<-kmean$cluster
 tsne_obj<-Rtsne(dist.matrix,is_distance=TRUE,perplexity=1)
 tsne_data<-tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(cluster=factor(kclust))
 tsn_plot_k<-ggplot(aes(x = X, y = Y), data = tsne_data) + geom_point(aes(color = cluster))
 tsn_plot_k
-
-cross.clust<-cc_crossclustering(dist.matrix,out=FALSE)
-clust<-cc_get_cluster(cross.clust)
-
-#plot the clustering
-#see code from http://dpmartin42.github.io/posts/r/cluster-mixed-types
-#adjust perplexity if get error "perplexity is too large for the number of samples"
-tsne_obj<-Rtsne(dist.matrix,is_distance=TRUE,perplexity=10)
-tsne_data<-tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(cluster=factor(clust))
-tsne_plot<-ggplot(aes(x = X, y = Y), data = tsne_data) + geom_point(aes(color = cluster))
-tsne_plot
-
 
 
 #put together the scaffold:cluster dataframe
@@ -707,22 +703,26 @@ colnames(clust.df)<-"cluster_id"
 clust.df<-mutate(clust.df,species_scaffold=row.names(contingency))
 
 
+#Join all data into a master table
+
+#left join  - true master table has everything
+final.master.table<-left_join(gff3.table,agalma.homologs)%>%select(.,"seqid","start","end","gene","homology_id","catalog_id","animal")
+
 cluster.master.table<-final.master.table%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%left_join(.,clust.df,by="species_scaffold")%>%select(.,species_scaffold,start,end,gene,homology_id,animal,cluster_id)
 
 #Add an index to each species
 cluster.master.table<-cluster.master.table%>%mutate(species_index=case_when(animal=="Amphimedon_queenslandica"~1,animal=="Mnemiopsis_leidyi"~2,animal=="Trichoplax_adhaerens"~3,animal=="Nematostella_vectensis"~4,animal=="Capitella_telata"~7,animal=="Helobdella_robusta"~7,animal=="Lottia_gigantea"~6,animal=="Drosophila_melanogaster"~5,animal=="Strongylocentrotus_purpuratus"~5,animal=="Danio_rerio"~6,animal=="Taeniopygia_guttata"~7,animal=="Homo_sapiens"~7))
 
-write.csv(cluster.master.table,"cluster.master.table.csv",quote=FALSE,row.names=FALSE)
-
+#The complete master table has: species_scaffold, start, end, gene, homology_id, catalog_id, animal, cluster_id, species_index
 
 
 ```
 
-Note: nrows in contingency table is much smaller than in final.master.table_cluster because the latter lists 1 row for each gene while the former 1 row for each scaffold. Nrow of contingency table will equal number of unique scaffolds among the animals selected.
+Note: nrows in contingency table is much smaller than in contingency.table because the latter lists 1 row for each gene while the former 1 row for each scaffold. Nrow of contingency table will equal number of unique scaffolds among the animals selected.
 
 for understanding tsne: https://www.youtube.com/watch?v=NEaUSP4YerM
 tsne data = 160 points
-192 unique scaffolds in master.table
+192 unique scaffolds in gff3.table
 
 -
 
@@ -767,26 +767,26 @@ result<-data.frame()
 #analysis.table.reference<-filter(sample.table,animal==reference & !is.na(homology_id))
 #analysis.table.comparison<-filter(sample.table,animal==comparison & !is.na(homology_id))
 
-#subset cluster.master.table for the reference or comparison animal; remove NAs
+#subset cluster.master.table for the reference or comparison animal; remove any homology_id that is NA - these genes likely arose exclusively in that taxon and is not useful for comparison.
 analysis.table.reference<-filter(cluster.master.table,animal==reference & !is.na(homology_id))
 analysis.table.comparison<-filter(cluster.master.table,animal==comparison & !is.na(homology_id))
 
-#remove any genes in the analysis.table.reference that are present only in clades that arose after the comparison clade.
 #get a list of all unique homology_ids in the analysis table
 ref.homolog.list<-unique(analysis.table.reference$homology_id)
 #get species_index of comparison animal
 comp.species.index<-analysis.table.comparison$species_index[1]
 
 #for each gene in the ref analysis table
+#remove any entries with genes that arose after the comparison animal
 for (h in ref.homolog.list){
   #select all the rows of that particular genes for all animals (except your comp animal)
   #for sample data:
   #check<-filter(sample.table, homology_id==h & animal!=comparison)
   check<-filter(cluster.master.table, homology_id==h & animal!=comparison)
   
-  #check if any of the species indices in the check table have an index <= comparison index
+  #check if any of the species indices in the check table have an index >= comparison index
   if( any(check$species_index<=comp.species.index)==FALSE){
-    #if so, remove all rows with that gene in the analysis.table.reference
+    #so, remove all rows with that gene in the analysis.table.reference
     analysis.table.reference<-filter(analysis.table.reference,homology_id != h)
   }
 }

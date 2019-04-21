@@ -109,7 +109,9 @@ print(paste("Max no. genes/contig:",max(gene.count$Freq)))
 ```
 ### Prep sequences for Agalma  
 #### Simplify sequence names  
-Download genome protein sequences from Ensembl. Agalma cuts off sequence names after the first space. Also, for certain genomes, the gene ID, peptide ID, and transcript ID do not follow a simple pattern and are not easily derived from each other, so retain all IDs to facilitate downstream processing. Simplify sequence names to this format:  
+Download genome protein sequences from Ensembl. 
+
+Agalma cuts off sequence names after the first space. Also, for certain genomes, the gene ID, peptide ID, and transcript ID do not follow a simple pattern and are not easily derived from each other, so retain all IDs to facilitate downstream processing. Simplify sequence names to this format:  
 `>p:protID:s:scaffoldID:g:geneID:t:transID`  
 
 To simpify, use Regex "Find":  
@@ -162,6 +164,7 @@ Then, Replace with `>p:\1:s:\2:g:\3:t:\4`.
 From comparing the number of gene entries in the gff3 file vs number of peptide sequences, it is clear that many genes have more than one peptide associated with it:    
 no. genes: `grep "gene:" gff3.gff3|wc -l`  
 no. peptides: `grep ">" pepfile.fasta|wc -l`  
+
 Create a fasta where each gene has only 1 peptide sequence. Choose the longest peptide.  
 
 The below code was modified from code by [story (Jan 9'17')](https://bioinformatics.stackexchange.com/questions/595/how-can-longest-isoforms-per-gene-be-extracted-from-a-fasta-file) and [nassimhddd (Jul 18 '16)](https://stackoverflow.com/questions/24237399/how-to-select-the-rows-with-maximum-values-in-each-group-with-dplyr). 
@@ -412,25 +415,94 @@ Homo:
 Taeniopygia:  
 >`(\d+,ENSTGUG.*?).\d+(,Tgu_.*)`  
 
-### Aggregate the GFF3 and Agalma data into a master file
-Create three tables:
-master.table: parsed GFF3 data
-agalma.homologs: parsed Agalma data 
-final.master.table: master.table and agalma.homologs combined.
+### Parse the GFF3 and Agalma files  
+#### Parse GFF3 files: 
+1. For each GFF3 file, filter so that only lines where type = 'gene' are extracted. It may seem more direct to filter for 'gene_id', but pseudogenes and ncRNA_genes also have a gene_id. For each species, add these lines to a single dataframe.  
+2. Grep out the gene_id and create a new column, 'gene'.  
+3. From this, create **gff3.table**: select only the 'seqid' (aka scaffold ID), 'start', 'end', and 'gene' columns, and add a new column called 'animal' that indicates the species name for each gene.   
 
-When clustering, I will 
+#### Read in Agalma files   
+`agalma.homologs<-read.csv("agalma_results.csv",header=TRUE,sep=",")`.   
+This results in *agalma.homologs*.  
 
--be more clear about master vs final master table
-1. For each GFF3 file, filter so that only lines where type=gene are extracted. You cannot more directly filter for gene_id because psuedogenes etc. also have a valid gene_id.  
-2. Parse out the gene_id from each line and add to a new 'gene' column.  
-3. Select 'seqid' (aka scaffold ID), 'start', 'end', and 'gene' and put into the master.table.  
-* I've saved the start and end coordinates of the gene in case I want to analyze collinearity in the future.  
-4. Add a new 'animal' column with the name of the species the gene comes from. Although the Agalma files have a species identifier (via catalog ID), the GFF3 files do not. Unfortunately, I've had to add this manually.  
-5. Left join the agalma output and the master table to create the final master table.  
+```{r Parse GFF3 and Agalma data}
 
-This results in two tables:  
-**master table**: seqid, start, end, gene, animal.
-**final master table**: seqid,start,end,gene,homology_id,catalog_id,animal
+
+#~~~ Create GFF3 Table ~~~
+
+#set up empty df to rbind to
+all.df<-data.frame(matrix(ncol=5,nrow=0))
+names<-c("seqid","type","start","end","attributes")
+colnames(all.df)<-names
+
+#set up file names to loop through
+gff3_dir="data/genomes/gff3/"
+gff3=c("Amphimedon_queenslandica.Aqu1.42.gff3","Capitella_teleta.Capitella_teleta_v1.0.42.gff3","Danio_rerio.GRCz11.95.gff3","Drosophila_melanogaster.BDGP6.95.gff3","Helobdella_robusta.Helro1.42.gff3","Homo_sapiens.GRCh38.95.gff3","Lottia_gigantea.Lotgi1.42.gff3","Mnemiopsis_leidyi.MneLei_Aug2011.42.gff3","Nematostella_vectensis.ASM20922v1.42.gff3","Strongylocentrotus_purpuratus.Spur_3.1.42.gff3","Taeniopygia_guttata.taeGut3.2.4.95.gff3","Trichoplax_adhaerens.ASM15027v1.42.gff3")
+
+#read in each gff3 file and extract seqid, type, start, end, attributes. Filter lines by type = gene.
+for (blah in gff3)
+{
+gff3_path<-paste0(gff3_dir,blah)
+contig.gene.df <- ape::read.gff(file=gff3_path, GFF3=TRUE) %>% dplyr::select(.,"seqid","type","start","end","attributes") %>% filter(.,type == "gene")
+all.df<-bind_rows(all.df,contig.gene.df)
+}
+
+#Parse out the gene_id from the attributes 
+all.df$gene<-gsub(".*gene_id=(.*?);.*","\\1",all.df$attributes)
+
+#Construct gff3 table
+gff3.table<-select(all.df,"seqid","start","end","gene")
+
+#add animal IDs to gff3 table
+gff3.table$animal<-c(rep.int("Amphimedon_queenslandica",43615),rep.int("Capitella_telata",32175),rep.int("Danio_rerio",25606),rep.int("Drosophila_melanogaster",13931),rep.int("Helobdella_robusta",23432),rep.int("Homo_sapiens",21492),rep.int("Lottia_gigantea",23349),rep.int("Mnemiopsis_leidyi",16559),rep.int("Nematostella_vectensis",24773),rep.int("Strongylocentrotus_purpuratus",28987),rep.int("Taeniopygia_guttata",17488),rep.int("Trichoplax_adhaerens",11520))
+
+#~~~ GFF3 Table Finished ~~~
+
+#Read in agalma homologs csv
+agalma.homologs<-read.csv("5taxa_results_alt.csv",header=TRUE,sep=",")
+
+#to double check that there are no duplicate genes in final.master.table:
+#duplicated(final.master.table$gene)%>%table()
+#~~~Final master table complete~~~
+
+```
+
+### Perform Cluster Analysis and Create Master Table
+In the following analyses, gff3.table and agalma.homologs will be joined in two ways:  
+* **contingency.table**: inner-join (gff3 x agalma homologs) and select only scaffold ID and homology ID for cluster analysis. An inner join is performed for two reasons:   
+1. Remove genes in gff3.table that were not assigned a homology_id by Agalma - these NAs do not add useful information for clustering.   
+2. There are some human genes in the Agalma output that are missing from the filtered and unfiltered GFF3 files. Remove.
+* **master.table**: left-join (gff3 x agalma homologs) to create a master table of all data, keeping all genes in GFF3 files whether or not they have a homology_id. Genes in Agalma output not in GFF3 files are discarded. Subsequent analyses will be performed on this.  
+
+#### Cluster Analysis
+1. Filter gff3.table by animal. It is not possible to run an analysis using data from all species. Here, we subsample whichever set of animals we want to cluster.  
+2. Create **contingency.table**. As written above, inner join gff3.table and agalma.homologs. scaffold IDs are not unique, so concatenate scaffold IDs to animal IDs. Select only species/scaffold ID and homology_ids.  
+3. Create contingency table: column names are homology IDs, row names are species/scaffold IDs. 
+* 1 = homology ID present in scaffold, 0 = homology ID absent in scaffold.  
+Subsample contingency table 100x100 to allow computation on a laptop.  
+4. Create distance matrix using gower. Gower is a widely used algorithm capable of working on a mix of continuous and categorical data. For categorical data, it uses Jaccard Similarty Index.  
+5. Cluster.  
+* cross-clustering: uses principles from Ward's minimum variance and complete-linkage algorithms. Selected because is superior in dealing with outliers, does not require a priori estimate of the number of clusters.  
+* agnes: agglomerative hierarchical clustering.   
+* diana: divisive hierarchical clustering.  
+* kmeans: allocate each scaffold to a centroid. Number of centroids specified a priori. 
+
+#### Create Master Table  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
