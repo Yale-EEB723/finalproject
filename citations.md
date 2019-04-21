@@ -1,7 +1,6 @@
 Citations
 
 ### RAST
-If you use the results of this annotation in your work, please cite:
 The RAST Server: Rapid Annotations using Subsystems Technology.
 Aziz RK, Bartels D, Best AA, DeJongh M, Disz T, Edwards RA, Formsma K, Gerdes S, Glass EM, Kubal M, Meyer F, Olsen GJ, Olson R, Osterman AL, Overbeek RA, McNeil LK, Paarmann D, Paczian T, Parrello B, Pusch GD, Reich C, Stevens R, Vassieva O, Vonstein V, Wilke A, Zagnitko O.
 BMC Genomics, 2008, [ PubMed entry ]
@@ -22,7 +21,7 @@ Seemann T, "Prokka: Rapid Prokaryotic Genome Annotation",
 
 ### Blast
 
-Gene [Internet]. Bethesda (MD): National Library of Medicine (US), National Center for Biotechnology Information; 2004 – [cited YYYY Mmm DD]. Available from: https://www.ncbi.nlm.nih.gov/gen
+Gene [Internet]. Bethesda (MD): National Library of Medicine (US), National Center for Biotechnology Information; 2004 – [cited 2019 April 20]. Available from: https://www.ncbi.nlm.nih.gov/gen
 
 ### ClustAGE
 

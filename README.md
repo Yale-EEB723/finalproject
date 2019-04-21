@@ -305,7 +305,6 @@ What are the main obstacles encountered?
   - Another obstacle in the preliminary stages was finding programs with outputs that were in the correct file/ format for other programs as inputs
     - This happened with progressiveMauve which was very frustrating
       - By all accounts, this program was highly recommended as a multiple genome sequence alignment tool, but the output file was supposedly in xmfa, not fasta format, and even had a .align file associated with it. I tried many different ways of using this file in downstream analysis such as creating a true phylogenetic tree (since the tree in the Mauve output was just a guide tree) using a program like PhyML or FastTree, but no matter what I did, this file couldn't be used or even converted into a working file from what I saw.
-  -
 
 What would you have done differently?
 
@@ -343,6 +342,10 @@ What are future directions this could go in?
 ### MAFFT
 
   - Katoh, K. and Standley, D.M., 2013. MAFFT multiple sequence alignment software version 7: improvements in performance and usability. Molecular biology and evolution, 30(4), pp.772-780.
+
+### Phylip3
+
+  - Felsenstein, J. 2005. PHYLIP (Phylogeny Inference Package) version 3.6. Distributed by the author. Department of Genome Sciences, University of Washington, Seattle.
 
 ### progressiveMauve
 
