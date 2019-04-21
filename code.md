@@ -474,9 +474,10 @@ In the following analyses, gff3.table and agalma.homologs will be joined in two 
 2. There are some human genes in the Agalma output that are missing from the filtered and unfiltered GFF3 files. Remove.
 * **master.table**: left-join (gff3 x agalma homologs) to create a master table of all data, keeping all genes in GFF3 files whether or not they have a homology_id. Genes in Agalma output not in GFF3 files are discarded. Subsequent analyses will be performed on this.  
 
+
 #### Cluster Analysis
 1. Filter gff3.table by animal. It is not possible to run an analysis using data from all species. Here, we subsample whichever set of animals we want to cluster.  
-2. Create **contingency.table**. As written above, inner join gff3.table and agalma.homologs. scaffold IDs are not unique, so concatenate scaffold IDs to animal IDs. Select only species/scaffold ID and homology_ids.  
+2. Create **contingency.table**. As written above, inner join gff3.table x agalma.homologs. scaffold IDs are not unique, so concatenate scaffold IDs to animal IDs. Select only species/scaffold ID and homology_ids.  
 3. Create contingency table: column names are homology IDs, row names are species/scaffold IDs. 
 * 1 = homology ID present in scaffold, 0 = homology ID absent in scaffold.  
 Subsample contingency table 100x100 to allow computation on a laptop.  
@@ -487,7 +488,86 @@ Subsample contingency table 100x100 to allow computation on a laptop.
 * diana: divisive hierarchical clustering.  
 * kmeans: allocate each scaffold to a centroid. Number of centroids specified a priori. 
 
+tSNE code is by [Daniel P. Martin](http://dpmartin42.github.io/posts/r/cluster-mixed-types).  
+
+
 #### Create Master Table  
+1. As written above, left join gff3.table x agalma.homologs. Concatenate scaffold IDs to animal IDs to create unique scaffold names. Add cluster ID.  
+2. Add species index. This is a number meant to reflect the degree to which a taxon is nested within a tree of all taxa. When looking for absent genes, I will first confirm that the gene absent in the comparison animal is also present in an earlier diverging animal.  
+
+```{r cluster}
+#must run previous chunk prior to running this chunk
+
+
+#***SUBSAMPLE: choose from which animals you want to cluster scaffolds. Not doing so makes computation impossible on a local machine.
+filter_target=c("Homo_sapiens","Danio_rerio","Strongylocentrotus_purpuratus")
+gff3.table<-filter(gff3.table, animal==filter_target)
+
+
+#~~~Create contingency.table~~~
+#Make scaffold names unique- join seqid and catalog id
+contingency.table<-inner_join(gff3.table,agalma.homologs)%>%dplyr::select(.,seqid,homology_id,animal)%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%dplyr::select(.,species_scaffold,homology_id)
+#~~~contingency.table compelte~~~
+
+
+#Use contingency.table to make the contingency table
+contingency<-table(contingency.table$species_scaffold,contingency.table$homology_id)%>%as.matrix()
+contingency<-1*(contingency>0)
+#***DOWNSAMPLE contingency table for computation on a local machine.
+contingency<-contingency[sample(100),sample(100)]
+
+
+#distance matrix
+dist.matrix<-daisy(contingency,metric="gower",stand=FALSE)
+
+
+#cluster
+#cross-cluster
+cross.clust<-cc_crossclustering(dist.matrix,out=FALSE)
+clust<-cc_get_cluster(cross.clust)
+#plot w/ tSNE
+#adjust perplexity if get error "perplexity is too large for the number of samples"
+tsne_obj<-Rtsne(dist.matrix,is_distance=TRUE,perplexity=1)
+tsne_data<-tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(cluster=factor(clust))
+tsne_plot<-ggplot(aes(x = X, y = Y), data = tsne_data) + geom_point(aes(color = cluster))
+tsne_plot
+
+#agglomerative
+ag<-agnes(dist.matrix,diss=TRUE)
+plot(ag,labels=FALSE)
+
+#divisive
+di<-diana(dist.matrix)
+plot(di,labels=FALSE)
+
+#kmeans
+kmean<-kmeans(dist.matrix,51)
+kclust<-kmean$cluster
+tsne_obj<-Rtsne(dist.matrix,is_distance=TRUE,perplexity=1)
+tsne_data<-tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(cluster=factor(kclust))
+tsn_plot_k<-ggplot(aes(x = X, y = Y), data = tsne_data) + geom_point(aes(color = cluster))
+tsn_plot_k
+#~~~Clustering complete~~~
+
+
+#~~~Create master.table.~~~
+
+#Put together a scaffold:cluster df
+clust.df<-as.data.frame(clust)
+colnames(clust.df)<-"cluster_id"
+clust.df<-mutate(clust.df,species_scaffold=row.names(contingency))
+
+master.table<-left_join(gff3.table,agalma.homologs)%>%select(.,"seqid","start","end","gene","homology_id","catalog_id","animal")%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%left_join(.,clust.df,by="species_scaffold")%>%select(.,species_scaffold,start,end,gene,homology_id,animal,cluster_id)
+
+#Add an index to each species
+master.table<-master.table%>%mutate(species_index=case_when(animal=="Amphimedon_queenslandica"~1,animal=="Mnemiopsis_leidyi"~1,animal=="Trichoplax_adhaerens"~2,animal=="Nematostella_vectensis"~3,animal=="Capitella_telata"~4,animal=="Helobdella_robusta"~4,animal=="Lottia_gigantea"~4,animal=="Drosophila_melanogaster"~4,animal=="Strongylocentrotus_purpuratus"~4,animal=="Danio_rerio"~4,animal=="Taeniopygia_guttata"~5,animal=="Homo_sapiens"~6))
+write.csv(master.table,"master.table.csv",quote=FALSE,row.names=FALSE)
+#~~~master.table complete~~~
+
+```
+
+
+### Perform Absence Analysis  
 
 
 
@@ -506,6 +586,9 @@ Subsample contingency table 100x100 to allow computation on a laptop.
 
 
 
-
+Compare clustering algorithms:
+Fortunato
+other microsynteny paper (H... 3d chromo)
+Warren francis
 What to do differently:  
 -Top-level assemblies, which can possess many unplaced scaffolds, were used for. Perhaps introducing many low quality scaffolds lead to noise, preventing clustering.  
