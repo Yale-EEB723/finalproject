@@ -495,6 +495,10 @@ tSNE code is by [Daniel P. Martin](http://dpmartin42.github.io/posts/r/cluster-m
 1. As written above, left join gff3.table x agalma.homologs. Concatenate scaffold IDs to animal IDs to create unique scaffold names. Add cluster ID.  
 2. Add species index. This is a number meant to reflect the degree to which a taxon is nested within a tree of all taxa. When looking for absent genes, I will first confirm that the gene absent in the comparison animal is also present in an earlier diverging animal.  
 
+Species index:  
+![Species Index](readme_figs/species_index.png)  
+
+
 ```{r cluster}
 #must run previous chunk prior to running this chunk
 
@@ -693,11 +697,18 @@ rand.tsne_plot
 
 
 
-
+Synteny analysis is generally performed in the context of closely related species.
+Most studies pursuing broad evolutionary comparisons focus on microsynteny.
 
 Compare clustering algorithms:
-Fortunato
-other microsynteny paper (H... 3d chromo)
+few genes, test statistically whether > expected number of neighbour genes:
+Fortunato/Ramos 
+Robertson
+Irimia
 Warren francis
+class paper - microsynteny
+vs. mine - whole scaffold synteny
+-more genes = more chance for similarity, = more chance for difference
+-clustering algorithms not as sensitive as these synteny-specific programs/detecting synteny at micro-level
 What to do differently:  
 -Top-level assemblies, which can possess many unplaced scaffolds, were used for. Perhaps introducing many low quality scaffolds lead to noise, preventing clustering.  

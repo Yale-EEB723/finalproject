@@ -236,6 +236,13 @@ There is a link to the scripts but the link is broken...
 
 Ramos started with a list of neighbour genes; I would need to produce this myself. Can use DAGchainer to define and identify neighbour genes in eg. humans.  
 
+#Robertson et al. 2009  
+https://bmcresnotes.biomedcentral.com/articles/10.1186/1756-0500-2-59  
+-two genes, appear to have been done manually?  
+
+#Irimia et al. 2012 Approach:  
+https://genome.cshlp.org/content/22/12/2356.full  
+"For each pair of neighboring genes in the genome of a given species, we assessed whether the two genes were also tightly genetically linked (with four or fewer intervening genes) in other lineages (see Methods for details). We identified hundreds of pairs in each genome that were conserved across at least four major lineages, ranging from 197 in the tunicate Ciona intestinalis to 842 in the cephalochordate Branchiostoma floridae, and 600 in human (Supplemental Table S1). To test this significance we randomized gene order within each chromosome/scaffold. Across 100 replicates per species, we found an average of 0.015 conserved pairs using the same criteria, a false discovery rate lower than 0.0002 for all species (Supplemental Table S1)."  
 
 
 ##Scaffold N50s of genomes    
