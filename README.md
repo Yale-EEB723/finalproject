@@ -13,9 +13,15 @@ Hi C!
 
 ## Introduction
 
-This is a final project for the [Comparative Genomics](https://github.com/Yale-EEB723/syllabus) seminar in the spring of 2019. I aim to perform synteny analysis to search for 'neural' genes that have been lost in sponge or ctenophore genomes.
+This is a final project for the [Comparative Genomics](https://github.com/Yale-EEB723/syllabus) seminar in the spring of 2019. I aim to establish gene loss across broad evolutionary distances by synteny analysis. I will take a macrosynteny approach, establishing synteny and subsequently searching for gene loss between distantly related taxa at the whole-scaffold level.  
 
 ## The goal
+This project requires several steps.  
+
+First, I must establish whether genomes are contiguous enough to identify synteny. Synteny analysis requires at least 3 genes on a reference scaffold: a gene of interest, and two on either side to act as anchors for the synteny block. Thus, synteny is more likely to be successful on contiguous genomes, where scaffolds possess at least 3 genes. 
+
+Second, I must identify homologous genes on each scaffold of each genome.
+
 
 Ultimately, our goal is to classify whether absences for particular 'neural' genes in sponges and ctenophores are ancestral (i.e. gene was never there) or secondary. I must first determine whether my genes of interest are found within conserved blocks of synteny in other animals. If absence in a particular taxon is ancestral, I would expect that the genes defining the synteny block not to be co-localized. If absence is secondary, I expect to find conservation of the synteny block in the absence of the gene of interest.  
 
@@ -26,31 +32,6 @@ _These are the new goals of my project_
 
 ## The data
 
-- Data source: Published and publicly available  
-
-**Ensembl Genomes**  
-[NOTE: couldn't add to repo (too big). Unfortunately git lfs doesn't work with public forks]  
-_Select "Download DNA sequence under "Genome assembly" (not eg. "MneLei_Aug2011" link)_  
-
--Mnemiopsis leidyi genome [@Ryan2013]:   
-[genome](http://metazoa.ensembl.org/Mnemiopsis_leidyi/Info/Index)     
-[gff3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/mnemiopsis_leidyi)     
-[prot](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/mnemiopsis_leidyi/pep/)  
-
--Amphimedon queenslandica genome [@Srivastava2010]  
-[genome](https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Index)   
-[gff3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/amphimedon_queenslandica)   
-[prot](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/amphimedon_queenslandica/pep/)  
-
--Trichoplax adhaerens genome[@Srivastava2008]  
-[genome](https://metazoa.ensembl.org/Trichoplax_adhaerens/Info/Index)   
-[gff3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/trichoplax_adhaerens)   
-[prot](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/trichoplax_adhaerens/pep/)  
-
-
-Other genomes to use (probably): Salpingoeca rosetta, Monosiga brevicollis, Trichoplax (can use as positive control?), Nematostella vectensis, Hydra magnipapillata, Homo sapiens.  
-
-- Data structure: FASTA files, GFF3 files, contingency table of presence/absence of 'neural' genes. More?  
 
 ## Background
 While biologists characterize most animals by what they have, non-bilaterians are sometimes characterized by what they don't have. In sponges, traditionally these absences have been considered ancestral, an assumption contributing to their primitive image.  
@@ -61,14 +42,16 @@ Synteny analysis provides one method of determining loss. In particular, the gho
 
 However before we can establish loss by synteny analysis, we must first establish that non-bilaterian genomes are contiguous enough to perform synteny analysis, and whether syntenic blocks exist.  
 
-
-## Methods
+##Goals  
 1. Need at least 3 genes to identify a ghost locus (two bounding to anchor, centre one is gene of interest). Determine within species distribution: histogram of no. genes per contig per species  
 2. identify homologous genes across genomes - if annotation is the same as cell type data import cell tyeps results; if not import gene models as proteins and run agalma. 
 3. Layer/combine ortholog IDs over the GFF3 file.   
 3. ID scaffolds that do not possess all orthologs another animal's scaffolds have.  
 
 -use synteny to refine this pic of gene loss -> have region of genome where gene usually is ,and it's missing (vs presene/absence)
+
+## Methods
+
 
 ## Results
 

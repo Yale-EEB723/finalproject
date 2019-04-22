@@ -33,6 +33,10 @@ library(cluster)
 library(CrossClustering)
 library(vegan)
 library(Rtsne)
+
+#tree manipulation
+library(ape)
+library(hutan)
 ```
 
 

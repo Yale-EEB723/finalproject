@@ -1,5 +1,5 @@
 ## The data  
-All genomes and gff3 files were downloaded from Ensembl. In general, only the toplevel assembly was available, so all synteny analysis was run on either toplevel or primary assemblies. GFF3 statistics were run on chromosomal level assemblies for Drosophila, Danio, Homo and Taeniopygia since the presence of many short scaffolds lacking annotated genes produced misleading results.  
+*Data source*: All genomes and gff3 files were downloaded from Ensembl. In general, only the toplevel assembly was available, so all synteny analysis was run on either toplevel or primary assemblies. GFF3 statistics were run on chromosomal level assemblies for Drosophila, Danio, Homo and Taeniopygia since the presence of many short scaffolds lacking annotated genes produced misleading results.    
 
 **The genome versions I used:**    
 Amphimedon queenslandica: Aqu1  
@@ -14,6 +14,11 @@ Nematostella vectensis: ASM20922v1
 Strongylocentrotus pupuratus: Spur_3.1  
 Taeniopygia guttata: taeGut3.2.4  
 Trichoplax adhaerens:  ASM15027v1  
+
+*Data structure*:  
+- genome FASTA files: nt scaffolds, peptide  
+- genome GFF3 files  
+
 
 ## Methods  
 All code was written in R, except where indicated.  
@@ -50,7 +55,7 @@ fasta<-c("Amphimedon_queenslandica.Aqu1.dna.toplevel.fa","Capitella_teleta.Capit
 for (blah in fasta){
 fasta_path<-paste0(fasta_dir,blah)  
 
-#histogram of call ontig lengths,
+#histogram of call contig lengths,
 scaffold.length.plot<-read.fasta(fasta_path)%>%getLength(.)%>%as.data.frame()%>%ggplot()+geom_histogram(aes(x=.), fill="skyblue3", color="black",binwidth=100)+xlab("Scaffold Length")+labs(title=blah)
 scaffold.length.plot
 
@@ -580,12 +585,11 @@ write.csv(master.table,"master.table.csv",quote=FALSE,row.names=FALSE)
 1. Specify a reference animal and comparison animal. This analysis will search for genes in the reference animal that are absent in the comparison animal. Remove any homology_id NAs from the reference table - by default they will be absent in the comparison animal.    
 2. Remove any genes that exclusively arose after the emergence of the comparison animal.    
 * For each gene in the reference, find genes with the matching homology_id in the master.table and check whether any of those genes possess a species_index less than or equal to the species index of the comparison animal. If none do, remove that gene from the reference table.    
-3. Find absent genes.  
+3. Find absent genes and bind the results into a single file.  
 - Find the cluster id for each scaffold in the reference animal.   
 - Select all scaffolds in the comparison animal with that cluster id.   
 - For each unique comparison scaffold, use antijoin to find all genes on the reference scaffold absent in the comparison scaffold.  
 - Loop to the next reference animal scaffold.  
-4. Bind the results into a single file.  
 
 
 ```{r final analysis}
@@ -593,12 +597,12 @@ reference="Homo_sapiens"
 comparison="Danio_rerio"
 result<-data.frame()
 
-#subset master.table for the reference or comparison animal; remove NAs
+#1. Specify reference vs comparison animal. Subset master.table for the reference or comparison animal; remove NAs
 analysis.table.reference<-filter(master.table,animal==reference & !is.na(homology_id))
 analysis.table.comparison<-filter(master.table,animal==comparison & !is.na(homology_id))
 
 
-#remove any genes in the analysis.table.reference that are present only in clades that arose after the comparison clade.
+#2. remove any genes in the analysis.table.reference that are present only in clades that arose after the comparison clade.
 #get a list of all unique homology_ids in the analysis table
 ref.homolog.list<-unique(analysis.table.reference$homology_id)
 #get species_index of comparison animal
@@ -616,6 +620,8 @@ for (h in ref.homolog.list){
     analysis.table.reference<-filter(analysis.table.reference,homology_id != h)
   }
 }
+
+#3. Find absent genes
 #list of unique scaffold ids in reference
 ref.scaffold.list<-unique(analysis.table.reference$species_scaffold)
 #for each unique scaffold in the reference table:
@@ -646,13 +652,12 @@ write.csv(result,"result.csv",quote=FALSE,row.names=FALSE)
 ### Test the Null Hypothesis  
 Currently, every clustering attempt results in a single big cluster plus many small clusters with a membership of 1. Is this global pattern inherent to the structure of my data, or is it due to a sparse contingency matrix?  
 
-While mixing up the columns and rows of the real contingency matrix will change the identity of which scaffolds cluster together, it will not change the overall clustering pattern.  
+While mixing up the columns and rows of the real contingency matrix will change the identity of which scaffolds cluster together, it will not change the global clustering pattern.  
 
 Create a random contingency matrix with the same dimensions and proportion of 1s and 0s as from your real data.   
 
 ```{r test null model}
 
-#mixing up the columns or rows will not affect overall clustering pattern (i.e. all clustering)
 #make a data frame with the same proportion of 1's and 0's in random order
 dim(contingency)
 n_entries<-ncol(contingency)*nrow(contingency)
@@ -695,7 +700,8 @@ rand.tsne_plot
 
 ```
 
-
+## Results
+### Most genomes are  
 
 
 
@@ -717,4 +723,5 @@ vs. mine - whole scaffold synteny
 -more genes = more chance for similarity, = more chance for difference
 -clustering algorithms not as sensitive as these synteny-specific programs/detecting synteny at micro-level
 What to do differently:  
+-outgroups
 -Top-level assemblies, which can possess many unplaced scaffolds, were used for. Perhaps introducing many low quality scaffolds lead to noise, preventing clustering.  
