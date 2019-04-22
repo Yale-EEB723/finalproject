@@ -4,7 +4,7 @@
 #SBATCH -N 1
 #SBATCH -c 16
 #SBATCH --mem-per-cpu 6000
-#SBATCH -t 720:00:00
+#SBATCH -t 50:00:00
 #SBATCH -A near
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=ava.ghezelayagh@yale.edu
@@ -27,3 +27,12 @@ agalma catalog insert -i SRR5124582 -p ~/scratch60/agalma/data/transcriptomes/SR
 agalma catalog insert -i SRR5124576 -p ~/scratch60/agalma/data/transcriptomes/SRR5124576_1.fastq ~/scratch60/agalma/data/transcriptomes/SRR5124576_2.fastq -s "Petromyzon_marinus" -n 7757 -d 159722
 agalma catalog insert -i SRR5124573 -p ~/scratch60/agalma/data/transcriptomes/SRR5124573_1.fastq ~/scratch60/agalma/data/transcriptomes/SRR5124573_2.fastq -s "Petromyzon_marinus" -n 7757 -d 159722
 agalma catalog insert -i SRR5234495 -p ~/scratch60/agalma/data/transcriptomes/SRR5234495_1.fastq ~/scratch60/agalma/data/transcriptomes/SRR5234495_2.fastq -s "Eptatretus_burgeri" -n 1855 -d 159767
+agalma catalog insert -i SRR2146922 -p ~/scratch60/agalma/data/transcriptomes/SRR2146922_1.fastq ~/scratch60/agalma/data/transcriptomes/SRR2146922_2.fastq -s "Mordacia_mordax" -n 7755 -d 159747
+agalma catalog insert -i SRR2146917 -p ~/scratch60/agalma/data/transcriptomes/SRR2146917_1.fastq ~/scratch60/agalma/data/transcriptomes/SRR2146917_2.fastq -s "Geotria_australis" -n 71168 -d 159744
+agalma catalog insert -i SRR2146918 -p ~/scratch60/agalma/data/transcriptomes/SRR2146918_1.fastq ~/scratch60/agalma/data/transcriptomes/SRR2146918_2.fastq -s "Geotria_australis" -n 71168 -d 159744
+agalma catalog insert -i SRR2146919 -p ~/scratch60/agalma/data/transcriptomes/SRR2146919_1.fastq ~/scratch60/agalma/data/transcriptomes/SRR2146919_2.fastq -s "Geotria_australis" -n 71168 -d 159744
+agalma catalog insert -i SRR2146912 -p ~/scratch60/agalma/data/transcriptomes/SRR2146912_1.fastq ~/scratch60/agalma/data/transcriptomes/SRR2146912_2.fastq -s "Eptatretus_cirrhatus" -n 78394 -d 159765
+agalma catalog insert -i SRR2146913 -p ~/scratch60/agalma/data/transcriptomes/SRR2146913_1.fastq ~/scratch60/agalma/data/transcriptomes/SRR2146913_2.fastq -s "Eptatretus_cirrhatus" -n 78394 -d 159765
+agalma catalog insert -i SRR2146914 -p ~/scratch60/agalma/data/transcriptomes/SRR2146914_1.fastq ~/scratch60/agalma/data/transcriptomes/SRR2146914_2.fastq -s "Eptatretus_cirrhatus" -n 78394 -d 159765
+agalma catalog insert -i SRR2146915 -p ~/scratch60/agalma/data/transcriptomes/SRR2146915_1.fastq ~/scratch60/agalma/data/transcriptomes/SRR2146915_2.fastq -s "Eptatretus_cirrhatus" -n 78394 -d 159765
+agalma catalog insert -i SRR2146916 -p ~/scratch60/agalma/data/transcriptomes/SRR2146916_1.fastq ~/scratch60/agalma/data/transcriptomes/SRR2146916_2.fastq -s "Eptatretus_cirrhatus" -n 78394 -d 159765
