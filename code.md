@@ -419,13 +419,10 @@ Taeniopygia:
 #### Parse GFF3 files: 
 1. For each GFF3 file, filter so that only lines where type = 'gene' are extracted. It may seem more direct to filter for 'gene_id', but pseudogenes and ncRNA_genes also have a gene_id. For each species, add these lines to a single dataframe.  
 2. Grep out the gene_id and create a new column, 'gene'.  
-3. From this, create **gff3.table**: select only the 'seqid' (aka scaffold ID), 'start', 'end', and 'gene' columns, and add a new column called 'animal' that indicates the species name for each gene.   
+3. From this, create **gff3.table**: select only the 'seqid' (aka scaffold ID), 'start', 'end', and 'gene' columns, and add a new column called 'animal' that indicates the species name for each gene.    
 
-#### Read in Agalma files   
-`agalma.homologs<-read.csv("agalma_results.csv",header=TRUE,sep=",")`.   
-This results in *agalma.homologs*.  
-
-```{r Parse GFF3 and Agalma data}
+```
+{r Parse GFF3 and Agalma data}
 
 
 #~~~ Create GFF3 Table ~~~
@@ -439,7 +436,7 @@ colnames(all.df)<-names
 gff3_dir="data/genomes/gff3/"
 gff3=c("Amphimedon_queenslandica.Aqu1.42.gff3","Capitella_teleta.Capitella_teleta_v1.0.42.gff3","Danio_rerio.GRCz11.95.gff3","Drosophila_melanogaster.BDGP6.95.gff3","Helobdella_robusta.Helro1.42.gff3","Homo_sapiens.GRCh38.95.gff3","Lottia_gigantea.Lotgi1.42.gff3","Mnemiopsis_leidyi.MneLei_Aug2011.42.gff3","Nematostella_vectensis.ASM20922v1.42.gff3","Strongylocentrotus_purpuratus.Spur_3.1.42.gff3","Taeniopygia_guttata.taeGut3.2.4.95.gff3","Trichoplax_adhaerens.ASM15027v1.42.gff3")
 
-#read in each gff3 file and extract seqid, type, start, end, attributes. Filter lines by type = gene.
+#1. Read in each gff3 file and extract seqid, type, start, end, attributes. Filter lines by type = gene.
 for (blah in gff3)
 {
 gff3_path<-paste0(gff3_dir,blah)
@@ -447,17 +444,23 @@ contig.gene.df <- ape::read.gff(file=gff3_path, GFF3=TRUE) %>% dplyr::select(.,"
 all.df<-bind_rows(all.df,contig.gene.df)
 }
 
-#Parse out the gene_id from the attributes 
+#2. Grep out the gene_id from the attributes 
 all.df$gene<-gsub(".*gene_id=(.*?);.*","\\1",all.df$attributes)
 
-#Construct gff3 table
+#3. Construct gff3 table
 gff3.table<-select(all.df,"seqid","start","end","gene")
 
 #add animal IDs to gff3 table
 gff3.table$animal<-c(rep.int("Amphimedon_queenslandica",43615),rep.int("Capitella_telata",32175),rep.int("Danio_rerio",25606),rep.int("Drosophila_melanogaster",13931),rep.int("Helobdella_robusta",23432),rep.int("Homo_sapiens",21492),rep.int("Lottia_gigantea",23349),rep.int("Mnemiopsis_leidyi",16559),rep.int("Nematostella_vectensis",24773),rep.int("Strongylocentrotus_purpuratus",28987),rep.int("Taeniopygia_guttata",17488),rep.int("Trichoplax_adhaerens",11520))
 
 #~~~ GFF3 Table Finished ~~~
+```
 
+#### Read in Agalma files   
+`agalma.homologs<-read.csv("agalma_results.csv",header=TRUE,sep=",")`.   
+This results in *agalma.homologs*. 
+
+```
 #Read in agalma homologs csv
 agalma.homologs<-read.csv("5taxa_results_alt.csv",header=TRUE,sep=",")
 
@@ -490,42 +493,34 @@ Subsample contingency table 100x100 to allow computation on a laptop.
 
 tSNE code is by [Daniel P. Martin](http://dpmartin42.github.io/posts/r/cluster-mixed-types).  
 
-
-#### Create Master Table  
-1. As written above, left join gff3.table x agalma.homologs. Concatenate scaffold IDs to animal IDs to create unique scaffold names. Add cluster ID.  
-2. Add species index. This is a number meant to reflect the degree to which a taxon is nested within a tree of all taxa. When looking for absent genes, I will first confirm that the gene absent in the comparison animal is also present in an earlier diverging animal.  
-
-Species index:  
-![Species Index](readme_figs/species_index.png)  
-
-
-```{r cluster}
+```
+{r cluster}
 #must run previous chunk prior to running this chunk
 
 
-#***SUBSAMPLE: choose from which animals you want to cluster scaffolds. Not doing so makes computation impossible on a local machine.
+#***1. SUBSAMPLE: choose from which animals you want to cluster scaffolds. Not doing so makes computation impossible on a local machine.
 filter_target=c("Homo_sapiens","Danio_rerio","Strongylocentrotus_purpuratus")
 gff3.table<-filter(gff3.table, animal==filter_target)
 
 
-#~~~Create contingency.table~~~
+#~~~2. Create contingency.table~~~
 #Make scaffold names unique- join seqid and catalog id
 contingency.table<-inner_join(gff3.table,agalma.homologs)%>%dplyr::select(.,seqid,homology_id,animal)%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%dplyr::select(.,species_scaffold,homology_id)
 #~~~contingency.table compelte~~~
 
 
-#Use contingency.table to make the contingency table
+#3. Use contingency.table to make the contingency table
 contingency<-table(contingency.table$species_scaffold,contingency.table$homology_id)%>%as.matrix()
 contingency<-1*(contingency>0)
 #***DOWNSAMPLE contingency table for computation on a local machine.
 contingency<-contingency[sample(100),sample(100)]
 
 
-#distance matrix
+#4. distance matrix
 dist.matrix<-daisy(contingency,metric="gower",stand=FALSE)
 
 
-#cluster
+#5. cluster
 #cross-cluster
 cross.clust<-cc_crossclustering(dist.matrix,out=FALSE)
 clust<-cc_get_cluster(cross.clust)
@@ -553,7 +548,17 @@ tsn_plot_k<-ggplot(aes(x = X, y = Y), data = tsne_data) + geom_point(aes(color =
 tsn_plot_k
 #~~~Clustering complete~~~
 
+```
 
+#### Create Master Table  
+1. As written above, left join gff3.table x agalma.homologs. Concatenate scaffold IDs to animal IDs to create unique scaffold names. Add cluster ID.  
+2. Add species index. This is a number meant to reflect the degree to which a taxon is nested within a tree of all taxa. When looking for absent genes, I will first confirm that the gene absent in the comparison animal is also present in an earlier diverging animal.  
+
+A diagram of the species index approach:    
+![Species Index](readme_figs/species_index.png)  
+
+
+```
 #~~~Create master.table.~~~
 
 #Put together a scaffold:cluster df
@@ -561,9 +566,10 @@ clust.df<-as.data.frame(clust)
 colnames(clust.df)<-"cluster_id"
 clust.df<-mutate(clust.df,species_scaffold=row.names(contingency))
 
+#1.Left join gff3 table x agalma homologs + scaffold ID + cluster ID
 master.table<-left_join(gff3.table,agalma.homologs)%>%select(.,"seqid","start","end","gene","homology_id","catalog_id","animal")%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%left_join(.,clust.df,by="species_scaffold")%>%select(.,species_scaffold,start,end,gene,homology_id,animal,cluster_id)
 
-#Add an index to each species
+#2. Add an index to each species
 master.table<-master.table%>%mutate(species_index=case_when(animal=="Amphimedon_queenslandica"~1,animal=="Mnemiopsis_leidyi"~1,animal=="Trichoplax_adhaerens"~2,animal=="Nematostella_vectensis"~3,animal=="Capitella_telata"~4,animal=="Helobdella_robusta"~4,animal=="Lottia_gigantea"~4,animal=="Drosophila_melanogaster"~4,animal=="Strongylocentrotus_purpuratus"~4,animal=="Danio_rerio"~4,animal=="Taeniopygia_guttata"~5,animal=="Homo_sapiens"~6))
 write.csv(master.table,"master.table.csv",quote=FALSE,row.names=FALSE)
 #~~~master.table complete~~~
