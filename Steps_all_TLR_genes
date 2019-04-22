@@ -77,10 +77,11 @@ iqtree -b 100 -nt AUTO -s trimed_inout_TLR.fasta
 # [G] Visualizing the gene tree
 # --- --- --- --- --- --- --- --- --- --- --- ---
 
-
-[9] The tree is in Newack format; i have to download figtree for this:
+# All PhyloTree instances are, by default, attached to such layout for tree visualization, thus allowing for in-place alignment visualization and evolutionary events labeling.
+[9] The tree is in Newack format; I converted the TREE using ape::write.tree.
 # This takes a few hours
 # ete3 annotated -t tree.nw --ncbi
+cd /Users/diegoellis/projects/development/Comparative_genomics/finalproject/Data/All_TLR/
 ete3 view -t trimed_inout_TLR_tree_newick.nw
 # http://etetoolkit.org/documentation/tools/
  iqtree -nt AUTO -b 100 -s trimmed_al_in_outgroup.fasta  # Make a tree with 100 bootstrap.
@@ -99,3 +100,8 @@ was there diversification of TLR between bats or did it arose efore that?
 #
 
 # Next I could try to align all the sequences i got from SUMAC?!
+
+# Visualize the gene tree of the subset only 4 TLR genes and their alignment:
+# ete annotate: annotate tree nodes with external data or using NCBI taxonomy information.
+ete3 annotated -t tree.nw --ncbi
+ete3 annotated -t trimed_inout_TLR_tree_newick.nw
