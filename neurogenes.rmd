@@ -834,6 +834,47 @@ Trying to get around sparse matrix issue:
 -make a smaller matrix of more closely related animals  
   -tried Drosophila, Danio, Human but error at homologize step: "main__.select_clusters: no clusters passed the filtering criteria"
   -5 taxa: Drosophila, Danio, Strongylo, Taeniopgygia, Human: error at genetrees step. Looks like homologize worked - use.
+  
+```{r tree}
+#initialize
+result<-data.frame()
+
+#having trouble reading in a text file...
+tree_text = "(Mnemiopsis_leidyi,(Amphimedon_queenslandica,(Trichoplax_adhaerens,(Nematostella_vectensis,((Drosophila_melanogaster,(Lottia_gigantea,(Capitella_telata,Helobdella_robusta))),(Strongylocentrotus_purpuratus,(Danio_rerio,(Homo_sapiens,Taeniopygia_guttata))))))));"
+phy = read.tree(text=tree_text)
+
+plot(phy)
+
+tip.label<-phy$tip.label
+
+#create a df of homology_id - animal
+homolog.list<-unique(master.table$homology_id)
+
+for (h in homolog.list){
+homolog.animals<-master.table%>%filter(.,homology_id == h) %>% select(.,animal)%>%unique()
+if (nrow(homolog.animals ==1)){
+  mrca<-which(phy$tip.label == homolog.animals$animal)
+}
+mrca <-getMRCA(phy,as.character(homolog.animals$animal))%>%rep(.,nrow(homolog.animals))
+h.repeat<-rep(h,nrow(homolog.animals))
+homolog.animal.df<-cbind(homolog.animals,h.repeat,mrca)
+result<-rbind(result,homolog.animal.df)
+
+}
+
+#singletons??! - 1 homology_id <-> animal, multiple genes (paralogs)
+  
+
+
+
+
+
+
+
+
+
+
+```
 
 ```{r test null model}
 
