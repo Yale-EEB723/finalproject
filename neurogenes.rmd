@@ -630,7 +630,6 @@ gff3.table$animal<-c(rep.int("Amphimedon_queenslandica",43615),rep.int("Capitell
 #Read in agalma homologs csv
 agalma.homologs<-read.csv("5taxa_results_alt.csv",header=TRUE,sep=",")
 
-#final.master.table<-left_join(gff3.table,agalma.homologs)%>%select(.,"seqid","start","end","gene","homology_id","catalog_id","animal")
 
 
 ```
@@ -702,17 +701,13 @@ clust.df<-as.data.frame(clust)
 colnames(clust.df)<-"cluster_id"
 clust.df<-mutate(clust.df,species_scaffold=row.names(contingency))
 
-cluster.master.table<-left_join(gff3.table.save,agalma.homologs)%>%select(.,"seqid","start","end","gene","homology_id","catalog_id","animal")%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%left_join(.,clust.df,by="species_scaffold")%>%select(.,species_scaffold,start,end,gene,homology_id,animal,cluster_id)
+master.table<-left_join(gff3.table.save,agalma.homologs)%>%select(.,"seqid","start","end","gene","homology_id","catalog_id","animal")%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%left_join(.,clust.df,by="species_scaffold")%>%select(.,species_scaffold,start,end,gene,homology_id,animal,cluster_id)
 
 #Add an index to each species
-cluster.master.table<-cluster.master.table%>%mutate(species_index=case_when(animal=="Amphimedon_queenslandica"~1,animal=="Mnemiopsis_leidyi"~1,animal=="Trichoplax_adhaerens"~2,animal=="Nematostella_vectensis"~3,animal=="Capitella_telata"~4,animal=="Helobdella_robusta"~4,animal=="Lottia_gigantea"~4,animal=="Drosophila_melanogaster"~4,animal=="Strongylocentrotus_purpuratus"~4,animal=="Danio_rerio"~4,animal=="Taeniopygia_guttata"~5,animal=="Homo_sapiens"~6))
+master.table<-master.table%>%mutate(species_index=case_when(animal=="Amphimedon_queenslandica"~1,animal=="Mnemiopsis_leidyi"~1,animal=="Trichoplax_adhaerens"~2,animal=="Nematostella_vectensis"~3,animal=="Capitella_telata"~4,animal=="Helobdella_robusta"~4,animal=="Lottia_gigantea"~4,animal=="Drosophila_melanogaster"~4,animal=="Strongylocentrotus_purpuratus"~4,animal=="Danio_rerio"~4,animal=="Taeniopygia_guttata"~5,animal=="Homo_sapiens"~6))
 
 
-#cluster.master.table<-final.master.table%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%left_join(.,clust.df,by="species_scaffold")%>%select(.,species_scaffold,start,end,gene,homology_id,animal,cluster_id)
-#Add an index to each species
-#cluster.master.table<-cluster.master.table%>%mutate(species_index=case_when(animal=="Amphimedon_queenslandica"~1,animal=="Mnemiopsis_leidyi"~2,animal=="Trichoplax_adhaerens"~3,animal=="Nematostella_vectensis"~4,animal=="Capitella_telata"~7,animal=="Helobdella_robusta"~7,animal=="Lottia_gigantea"~6,animal=="Drosophila_melanogaster"~5,animal=="Strongylocentrotus_purpuratus"~5,animal=="Danio_rerio"~6,animal=="Taeniopygia_guttata"~7,animal=="Homo_sapiens"~7))
 
-#~~~master.table complete~~~
 
 ```
 
@@ -758,13 +753,12 @@ In data matrix:
 reference="Homo_sapiens"
 comparison="Danio_rerio"
 result<-data.frame()
-#for sample run:
-#sample.table<-read.table("sample.table.txt",header=TRUE,sep=",")
-#analysis.table.reference<-filter(sample.table,animal==reference & !is.na(homology_id))
-#analysis.table.comparison<-filter(sample.table,animal==comparison & !is.na(homology_id))
-#subset cluster.master.table for the reference or comparison animal; remove NAs
-analysis.table.reference<-filter(cluster.master.table,animal==reference & !is.na(homology_id))
-analysis.table.comparison<-filter(cluster.master.table,animal==comparison & !is.na(homology_id))
+
+#subset master.table for the reference or comparison animal; remove NAs
+analysis.table.reference<-filter(master.table,animal==reference & !is.na(homology_id))
+analysis.table.comparison<-filter(master.table,animal==comparison & !is.na(homology_id))
+
+
 #remove any genes in the analysis.table.reference that are present only in clades that arose after the comparison clade.
 #get a list of all unique homology_ids in the analysis table
 ref.homolog.list<-unique(analysis.table.reference$homology_id)
@@ -775,7 +769,7 @@ for (h in ref.homolog.list){
   #select all the rows of that particular genes for all animals (except your comp animal)
   #for sample data:
   #check<-filter(sample.table, homology_id==h & animal!=comparison)
-  check<-filter(cluster.master.table, homology_id==h & animal!=comparison)
+  check<-filter(master.table, homology_id==h & animal!=comparison)
   
   #check if any of the species indices in the check table have an index <= comparison index
   if( any(check$species_index<=comp.species.index)==FALSE){
@@ -806,6 +800,7 @@ for (r in ref.scaffold.list){
   
   }
 result
+write.csv(result,"result.csv",quote=FALSE,row.names=FALSE)
 ```
 
 >throw out genes with homology_id NAs. REASONING???

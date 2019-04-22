@@ -566,15 +566,124 @@ write.csv(master.table,"master.table.csv",quote=FALSE,row.names=FALSE)
 
 ```
 
+### Perform Absence Analysis    
+1. Specify a reference animal and comparison animal. This analysis will search for genes in the reference animal that are absent in the comparison animal. Remove any homology_id NAs from the reference table - by default they will be absent in the comparison animal.    
+2. Remove any genes that exclusively arose after the emergence of the comparison animal.    
+* For each gene in the reference, find genes with the matching homology_id in the master.table and check whether any of those genes possess a species_index less than or equal to the species index of the comparison animal. If none do, remove that gene from the reference table.    
+3. Find absent genes.  
+- Find the cluster id for each scaffold in the reference animal.   
+- Select all scaffolds in the comparison animal with that cluster id.   
+- For each unique comparison scaffold, use antijoin to find all genes on the reference scaffold absent in the comparison scaffold.  
+- Loop to the next reference animal scaffold.  
+4. Bind the results into a single file.  
 
-### Perform Absence Analysis  
+
+```{r final analysis}
+reference="Homo_sapiens"
+comparison="Danio_rerio"
+result<-data.frame()
+
+#subset master.table for the reference or comparison animal; remove NAs
+analysis.table.reference<-filter(master.table,animal==reference & !is.na(homology_id))
+analysis.table.comparison<-filter(master.table,animal==comparison & !is.na(homology_id))
+
+
+#remove any genes in the analysis.table.reference that are present only in clades that arose after the comparison clade.
+#get a list of all unique homology_ids in the analysis table
+ref.homolog.list<-unique(analysis.table.reference$homology_id)
+#get species_index of comparison animal
+comp.species.index<-analysis.table.comparison$species_index[1]
+#for each gene in the ref analysis table
+for (h in ref.homolog.list){
+  #select all the rows of that particular genes for all animals (except your comp animal)
+  #for sample data:
+  #check<-filter(sample.table, homology_id==h & animal!=comparison)
+  check<-filter(master.table, homology_id==h & animal!=comparison)
+  
+  #check if any of the species indices in the check table have an index <= comparison index
+  if( any(check$species_index<=comp.species.index)==FALSE){
+    #if so, remove all rows with that gene in the analysis.table.reference
+    analysis.table.reference<-filter(analysis.table.reference,homology_id != h)
+  }
+}
+#list of unique scaffold ids in reference
+ref.scaffold.list<-unique(analysis.table.reference$species_scaffold)
+#for each unique scaffold in the reference table:
+for (r in ref.scaffold.list){
+  #find cluster id for each scaffold
+  reference.table.scaffold<-analysis.table.reference%>%filter(.,species_scaffold==r)
+  ref.cluster_id<-unique(reference.table.scaffold$cluster_id)
+  
+  #find all unique scaffolds in comparison table with that cluster_id
+  comp.scaffold<-analysis.table.comparison%>%filter(.,cluster_id==ref.cluster_id)
+  comp.scaffold<-unique(comp.scaffold$species_scaffold)
+  
+  #for each unique scaffold in comparison table w/ cluster_id
+  for (c in comp.scaffold){
+    #isolate genes from that scaffold and compare to original ref scaffold
+   comp.table.scaffold<-analysis.table.comparison%>%filter(.,species_scaffold==c)
+   comparison_absent<-anti_join(reference.table.scaffold,comp.table.scaffold,by="homology_id")
+   comparison_absent<-mutate(comparison_absent,comp_scaff=c)
+   result<-rbind(result,comparison_absent)
+  }
+  
+  }
+result
+write.csv(result,"result.csv",quote=FALSE,row.names=FALSE)
+```
+
+
+### Test the Null Hypothesis  
+Currently, every clustering attempt results in a single big cluster plus many small clusters with a membership of 1. Is this global pattern inherent to the structure of my data, or is it due to a sparse contingency matrix?  
+
+While mixing up the columns and rows of the real contingency matrix will change the identity of which scaffolds cluster together, it will not change the overall clustering pattern.  
+
+Create a random contingency matrix with the same dimensions and proportion of 1s and 0s as from your real data.   
+
+```{r test null model}
+
+#mixing up the columns or rows will not affect overall clustering pattern (i.e. all clustering)
+#make a data frame with the same proportion of 1's and 0's in random order
+dim(contingency)
+n_entries<-ncol(contingency)*nrow(contingency)
+proportion_1s<-sum(contingency)/n_entries
+proportion_0s<-1-proportion_1s
+
+random.matrix<-c(rep("1",proportion_1s*n_entries),rep("0",proportion_0s*n_entries))%>%sample(.,n_entries)%>%matrix(.,ncol=ncol(contingency),nrow=nrow(contingency))%>%as.data.frame()
+rownames(random.matrix)<-row.names(contingency)
+colnames(random.matrix)<-colnames(contingency)
+
+
+#cluster
+rand.dist.matrix<-daisy(random.matrix,metric="gower",stand=FALSE)
+
+rand.cross.clust<-cc_crossclustering(rand.dist.matrix,out=FALSE)
+rand.clust<-cc_get_cluster(rand.cross.clust)
+
+rand.tsne_obj<-Rtsne(rand.dist.matrix,is_distance=TRUE,perplexity=10)
+rand.tsne_data<-rand.tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(rand.cluster=factor(rand.clust))
+rand.tsne_plot<-ggplot(aes(x = X, y = Y), data = rand.tsne_data) + geom_point(aes(color = rand.cluster))
+rand.tsne_plot
+
+#agglomerative
+rand.ag<-agnes(rand.dist.matrix,diss=TRUE)
+plot(rand.ag,labels=FALSE)
+
+#divisive
+rand.di<-diana(rand.dist.matrix)
+plot(rand.di,labels=FALSE)
+
+#kmeans
+rand.kmean<-kmeans(rand.dist.matrix,51)
+rand.kclust<-rand.kmean$cluster
+rand.tsne_obj<-Rtsne(rand.dist.matrix,is_distance=TRUE,perplexity=10)
+rand.tsne_data<-rand.tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(rand.cluster=factor(rand.kclust))
+rand.tsne_plot<-ggplot(aes(x = X, y = Y), data = rand.tsne_data) + geom_point(aes(color = rand.cluster))
+rand.tsne_plot
 
 
 
-
-
-
-
+```
 
 
 
