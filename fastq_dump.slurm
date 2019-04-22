@@ -10,7 +10,6 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=ava.ghezelayagh@yale.edu
 
-source activate biolite
 source activate agalma
 
 ~/bin/sratoolkit.2.9.6-centos_linux64/bin/fastq-dump --split-3 ~/scratch60/agalma/data/sra_transcriptomes/SRR5226597.sra -O ~/scratch60/agalma/data/transcriptomes/
@@ -24,3 +23,12 @@ source activate agalma
 ~/bin/sratoolkit.2.9.6-centos_linux64/bin/fastq-dump --split-3 ~/scratch60/agalma/data/sra_transcriptomes/SRR5234495.sra -O ~/scratch60/agalma/data/transcriptomes/
 ~/bin/sratoolkit.2.9.6-centos_linux64/bin/fastq-dump --split-3 ~/scratch60/agalma/data/sra_transcriptomes/SRR3213614.sra -O ~/scratch60/agalma/data/transcriptomes/
 ~/bin/sratoolkit.2.9.6-centos_linux64/bin/fastq-dump --split-3 ~/scratch60/agalma/data/sra_transcriptomes/SRR3213612.sra -O ~/scratch60/agalma/data/transcriptomes/
+~/bin/sratoolkit.2.9.6-centos_linux64/bin/fastq-dump --split-3 ~/scratch60/agalma/data/sra_transcriptomes/SRR2146922.sra -O ~/scratch60/agalma/data/transcriptomes/
+~/bin/sratoolkit.2.9.6-centos_linux64/bin/fastq-dump --split-3 ~/scratch60/agalma/data/sra_transcriptomes/SRR2146917.sra -O ~/scratch60/agalma/data/transcriptomes/
+~/bin/sratoolkit.2.9.6-centos_linux64/bin/fastq-dump --split-3 ~/scratch60/agalma/data/sra_transcriptomes/SRR2146918.sra -O ~/scratch60/agalma/data/transcriptomes/
+~/bin/sratoolkit.2.9.6-centos_linux64/bin/fastq-dump --split-3 ~/scratch60/agalma/data/sra_transcriptomes/SRR2146919.sra -O ~/scratch60/agalma/data/transcriptomes/
+~/bin/sratoolkit.2.9.6-centos_linux64/bin/fastq-dump --split-3 ~/scratch60/agalma/data/sra_transcriptomes/SRR2146912.sra -O ~/scratch60/agalma/data/transcriptomes/
+~/bin/sratoolkit.2.9.6-centos_linux64/bin/fastq-dump --split-3 ~/scratch60/agalma/data/sra_transcriptomes/SRR2146913.sra -O ~/scratch60/agalma/data/transcriptomes/
+~/bin/sratoolkit.2.9.6-centos_linux64/bin/fastq-dump --split-3 ~/scratch60/agalma/data/sra_transcriptomes/SRR2146914.sra -O ~/scratch60/agalma/data/transcriptomes/
+~/bin/sratoolkit.2.9.6-centos_linux64/bin/fastq-dump --split-3 ~/scratch60/agalma/data/sra_transcriptomes/SRR2146915.sra -O ~/scratch60/agalma/data/transcriptomes/
+~/bin/sratoolkit.2.9.6-centos_linux64/bin/fastq-dump --split-3 ~/scratch60/agalma/data/sra_transcriptomes/SRR2146916.sra -O ~/scratch60/agalma/data/transcriptomes/
