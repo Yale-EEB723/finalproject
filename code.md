@@ -1,5 +1,35 @@
+---
+title: "compgen final project"
+output: pdf_document
+bibliography: Bib.bib
+csl: plos.csl
+---
+
+
+# Final Project
+
+## Introduction
+
+This is a final project for the [Comparative Genomics](https://github.com/Yale-EEB723/syllabus) seminar in the spring of 2019. I aim to establish gene loss across broad evolutionary distances by synteny analysis. I will take a macrosynteny approach, establishing synteny and subsequently searching for gene loss between distantly related taxa at the whole-scaffold level.  
+
+## Background  
+While biologists characterize most animals by what they have, non-bilaterians are sometimes characterized by what they don't have. In sponges, traditionally these absences have been considered ancestral, an assumption contributing to their primitive image.  
+
+Loss is trivial to establish phylogenetically, but is less so when the phylogeny itself possesses a degree of uncertainty. Synteny analysis provides one method of determining loss. In particular, the ghost locus hypothesis suggests that in the case of gene loss, the synteny surrounding the locus of the gene may be preserved even in the absence of the gene itself @Ramos2012. In this project, I will identify candidate 'ghost loci' across broad evolutionary distances.  
+
+## Goals
+
+This project can be broken up into 3 goals:  
+1. Characterize the genomes. Is synteny analysis possible?  
+*How contiguous are the genomes?  
+*How many scaffolds have at least three genes?  
+2. Identify homologous genes on scaffolds. This requires running Agalma and learning how to parse GFF3 files.  
+3. Combine the data in (2) to identify candidates for gene loss ('ghost loci').  
+
+
 ## The data  
-*Data source*: All genomes and gff3 files were downloaded from Ensembl. In general, only the toplevel assembly was available, so all synteny analysis was run on either toplevel or primary assemblies. GFF3 statistics were run on chromosomal level assemblies for Drosophila, Danio, Homo and Taeniopygia since the presence of many short scaffolds lacking annotated genes produced misleading results.    
+
+**Data source**: All genomes and gff3 files were downloaded from Ensembl. In general, only the toplevel assembly was available, so all synteny analysis was run on either toplevel or primary assemblies. GFF3 statistics were run on chromosomal level assemblies for Drosophila, Danio, Homo and Taeniopygia since the presence of many short scaffolds lacking annotated genes produced misleading results.    
 
 **The genome versions I used:**    
 Amphimedon queenslandica: Aqu1  
@@ -15,12 +45,13 @@ Strongylocentrotus pupuratus: Spur_3.1
 Taeniopygia guttata: taeGut3.2.4  
 Trichoplax adhaerens:  ASM15027v1  
 
-*Data structure*:  
+**Data structure**:  
 - genome FASTA files: nt scaffolds, peptide  
 - genome GFF3 files  
 
 
 ## Methods  
+
 All code was written in R, except where indicated.  
 Load libraries:    
 

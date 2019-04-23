@@ -16,11 +16,7 @@ Hi C!
 This is a final project for the [Comparative Genomics](https://github.com/Yale-EEB723/syllabus) seminar in the spring of 2019. I aim to establish gene loss across broad evolutionary distances by synteny analysis. I will take a macrosynteny approach, establishing synteny and subsequently searching for gene loss between distantly related taxa at the whole-scaffold level.  
 
 ## The goal
-This project requires several steps.  
 
-First, I must establish whether genomes are contiguous enough to identify synteny. Synteny analysis requires at least 3 genes on a reference scaffold: a gene of interest, and two on either side to act as anchors for the synteny block. Thus, synteny is more likely to be successful on contiguous genomes, where scaffolds possess at least 3 genes. 
-
-Second, I must identify homologous genes on each scaffold of each genome.
 
 
 Ultimately, our goal is to classify whether absences for particular 'neural' genes in sponges and ctenophores are ancestral (i.e. gene was never there) or secondary. I must first determine whether my genes of interest are found within conserved blocks of synteny in other animals. If absence in a particular taxon is ancestral, I would expect that the genes defining the synteny block not to be co-localized. If absence is secondary, I expect to find conservation of the synteny block in the absence of the gene of interest.  
