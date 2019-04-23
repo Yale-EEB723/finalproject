@@ -872,28 +872,34 @@ mrca.df<-rbind(mrca.df,bind.df)
 #Add MRCAs to master.table
 new.master.table<-left_join(master.table,mrca.df, by="homology_id")
 
-#For each homology_id, check whether it is not present in any child tip of the MRCA.
+#Find which taxa lack a homology ID with a MRCA encompassing those taxa.
 
 for (h in mrca.df$homology_id){
+#find all tips of the MRCA
 all.tips<-mrca.df$mrca[mrca.df$homology_id==h]%>%descendants(phy,.)
 all.tips<-tips[tips<=length(phy$tip.label)]
   
 taxa<-new.master.table%>%filter(homology_id==h)%>%select(.,animal)%>%unique()
 
+#find all the taxa which possess that homology_id
 for (t in taxa$animal){
   find.taxa<-which(phy$tip.label==t)
   taxa.list<-append(taxa.list,find.taxa)
 }
 
+#find which in all.tips is absent in taxa.list
 absent.in.taxa<-setdiff(all.tips,taxa.list)
 taxa.list<-NULL
+
+#append to table of homology_id + absent.in.taxa
 combine.df<-cbind(h,absent.in.taxa)
 absent.df<-rbind(absent.df,combine.df)
 
 }
 
-names(absent.df)<-c("homology_id","absent.in.taxa")
-
+names(absent.df)<-c("homology_id","absent")
+new.master.table<-left_join(new.master.table,absent.df,by=homology_id)
+absent.master.table<-new.master.table[!is.na(new.master.table$absent),]
 
 
 
