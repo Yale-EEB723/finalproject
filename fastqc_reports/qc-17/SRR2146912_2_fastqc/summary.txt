@@ -1,0 +1,12 @@
+PASS	Basic Statistics	SRR2146912_2.fastq
+PASS	Per base sequence quality	SRR2146912_2.fastq
+PASS	Per tile sequence quality	SRR2146912_2.fastq
+PASS	Per sequence quality scores	SRR2146912_2.fastq
+FAIL	Per base sequence content	SRR2146912_2.fastq
+PASS	Per sequence GC content	SRR2146912_2.fastq
+PASS	Per base N content	SRR2146912_2.fastq
+PASS	Sequence Length Distribution	SRR2146912_2.fastq
+FAIL	Sequence Duplication Levels	SRR2146912_2.fastq
+PASS	Overrepresented sequences	SRR2146912_2.fastq
+PASS	Adapter Content	SRR2146912_2.fastq
+FAIL	Kmer Content	SRR2146912_2.fastq

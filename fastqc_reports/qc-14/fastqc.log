@@ -1,0 +1,10 @@
+[biolite] timestamp=2019-04-22 14:28:12
+Failed to process /home/ag662/scratch60/agalma/data/transcriptomes/GCA_900186335.2_Eburgeri_3.2_genomic.fastq
+uk.ac.babraham.FastQC.Sequence.SequenceFormatException: ID line didn't start with '@'
+	at uk.ac.babraham.FastQC.Sequence.FastQFile.readNext(FastQFile.java:158)
+	at uk.ac.babraham.FastQC.Sequence.FastQFile.<init>(FastQFile.java:89)
+	at uk.ac.babraham.FastQC.Sequence.SequenceFactory.getSequenceFile(SequenceFactory.java:87)
+	at uk.ac.babraham.FastQC.Sequence.SequenceFactory.getSequenceFile(SequenceFactory.java:62)
+	at uk.ac.babraham.FastQC.Analysis.OfflineRunner.processFile(OfflineRunner.java:129)
+	at uk.ac.babraham.FastQC.Analysis.OfflineRunner.<init>(OfflineRunner.java:102)
+	at uk.ac.babraham.FastQC.FastQCApplication.main(FastQCApplication.java:316)
