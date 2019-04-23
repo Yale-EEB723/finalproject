@@ -582,70 +582,81 @@ write.csv(master.table,"master.table.csv",quote=FALSE,row.names=FALSE)
 ```
 
 ### Perform Absence Analysis    
-1. Specify a reference animal and comparison animal. This analysis will search for genes in the reference animal that are absent in the comparison animal. Remove any homology_id NAs from the reference table - by default they will be absent in the comparison animal.    
-2. Remove any genes that exclusively arose after the emergence of the comparison animal.    
-* For each gene in the reference, find genes with the matching homology_id in the master.table and check whether any of those genes possess a species_index less than or equal to the species index of the comparison animal. If none do, remove that gene from the reference table.    
-3. Find absent genes and bind the results into a single file.  
-- Find the cluster id for each scaffold in the reference animal.   
-- Select all scaffolds in the comparison animal with that cluster id.   
-- For each unique comparison scaffold, use antijoin to find all genes on the reference scaffold absent in the comparison scaffold.  
-- Loop to the next reference animal scaffold.  
+Approach:   
+1. Find all taxa that possess a particular homology_id.   
+2. Find the most recent common ancestor of all those taxa.   
+3. Find all the tips of the last common ancestor.  
+4. Compare which tips do not possess the homology_id. These are candidate cases of gene loss.  
+
+```
+{r tree}
+#initialize
+mrca.df<-data.frame()
+absent.df<-data.frame()
+taxa.list<-NULL
+
+#phylogeny
+tree_text = "(Mnemiopsis_leidyi,(Amphimedon_queenslandica,(Trichoplax_adhaerens,(Nematostella_vectensis,((Drosophila_melanogaster,(Lottia_gigantea,(Capitella_telata,Helobdella_robusta))),(Strongylocentrotus_purpuratus,(Danio_rerio,(Homo_sapiens,Taeniopygia_guttata))))))));"
+phy = read.tree(text=tree_text)
+plot(phy)
 
 
-```{r final analysis}
-reference="Homo_sapiens"
-comparison="Danio_rerio"
-result<-data.frame()
-
-#1. Specify reference vs comparison animal. Subset master.table for the reference or comparison animal; remove NAs
-analysis.table.reference<-filter(master.table,animal==reference & !is.na(homology_id))
-analysis.table.comparison<-filter(master.table,animal==comparison & !is.na(homology_id))
+#create a list of unique homology_ids; do not include NAs
+homolog.list<-unique(master.table$homology_id)
+homolog.list<-homolog.list[!is.na(homolog.list)]
 
 
-#2. remove any genes in the analysis.table.reference that are present only in clades that arose after the comparison clade.
-#get a list of all unique homology_ids in the analysis table
-ref.homolog.list<-unique(analysis.table.reference$homology_id)
-#get species_index of comparison animal
-comp.species.index<-analysis.table.comparison$species_index[1]
-#for each gene in the ref analysis table
-for (h in ref.homolog.list){
-  #select all the rows of that particular genes for all animals (except your comp animal)
-  #for sample data:
-  #check<-filter(sample.table, homology_id==h & animal!=comparison)
-  check<-filter(master.table, homology_id==h & animal!=comparison)
-  
-  #check if any of the species indices in the check table have an index <= comparison index
-  if( any(check$species_index<=comp.species.index)==FALSE){
-    #if so, remove all rows with that gene in the analysis.table.reference
-    analysis.table.reference<-filter(analysis.table.reference,homology_id != h)
-  }
+       
+for (h in homolog.list){
+#1.Find all taxa that possess a particular homology_id. 
+homolog.animals<-master.table%>%filter(.,homology_id == h) %>% select(.,animal)%>%unique()
+
+#2. Find the most recent common ancestor of all those taxa. 
+#If homology_id is possessed by only 1 taxon (eg. shared among paralogs), then the MRCA is the tip node.
+if (nrow(homolog.animals) == 1){
+  mrca<-which(phy$tip.label == homolog.animals$animal)
 }
 
-#3. Find absent genes
-#list of unique scaffold ids in reference
-ref.scaffold.list<-unique(analysis.table.reference$species_scaffold)
-#for each unique scaffold in the reference table:
-for (r in ref.scaffold.list){
-  #find cluster id for each scaffold
-  reference.table.scaffold<-analysis.table.reference%>%filter(.,species_scaffold==r)
-  ref.cluster_id<-unique(reference.table.scaffold$cluster_id)
+if (nrow(homolog.animals) > 1){
+  mrca <-getMRCA(phy,as.character(homolog.animals$animal))
+}
+
+bind.df<-cbind(homology_id=h,mrca)
+mrca.df<-rbind(mrca.df,bind.df)
+}
+
+#Add MRCAs to master.table
+new.master.table<-left_join(master.table,mrca.df, by="homology_id")
+
+
+
+for (h in mrca.df$homology_id){
+#3. Find all the tips of the last common ancestor.  
+all.tips<-mrca.df$mrca[mrca.df$homology_id==h]%>%descendants(phy,.)
+all.tips<-tips[tips<=length(phy$tip.label)]
   
-  #find all unique scaffolds in comparison table with that cluster_id
-  comp.scaffold<-analysis.table.comparison%>%filter(.,cluster_id==ref.cluster_id)
-  comp.scaffold<-unique(comp.scaffold$species_scaffold)
-  
-  #for each unique scaffold in comparison table w/ cluster_id
-  for (c in comp.scaffold){
-    #isolate genes from that scaffold and compare to original ref scaffold
-   comp.table.scaffold<-analysis.table.comparison%>%filter(.,species_scaffold==c)
-   comparison_absent<-anti_join(reference.table.scaffold,comp.table.scaffold,by="homology_id")
-   comparison_absent<-mutate(comparison_absent,comp_scaff=c)
-   result<-rbind(result,comparison_absent)
-  }
-  
-  }
-result
-write.csv(result,"result.csv",quote=FALSE,row.names=FALSE)
+taxa<-new.master.table%>%filter(homology_id==h)%>%select(.,animal)%>%unique()
+
+
+#first find the node number of all animals that taxa with that homology_id
+for (t in taxa$animal){
+  find.taxa<-which(phy$tip.label==t)
+  taxa.list<-append(taxa.list,find.taxa)
+}
+#4. Compare which tips do not possess the homology_id. 
+absent.in.taxa<-setdiff(all.tips,taxa.list)
+taxa.list<-NULL
+
+#append to table of homology_id + absent.in.taxa
+combine.df<-cbind(h,absent.in.taxa)
+absent.df<-rbind(absent.df,combine.df)
+
+}
+
+names(absent.df)<-c("homology_id","absent")
+new.master.table<-left_join(new.master.table,absent.df,by=homology_id)
+absent.master.table<-new.master.table[!is.na(new.master.table$absent),]
+
 ```
 
 
@@ -656,7 +667,8 @@ While mixing up the columns and rows of the real contingency matrix will change 
 
 Create a random contingency matrix with the same dimensions and proportion of 1s and 0s as from your real data.   
 
-```{r test null model}
+```
+{r test null model}
 
 #make a data frame with the same proportion of 1's and 0's in random order
 dim(contingency)

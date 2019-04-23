@@ -847,16 +847,18 @@ phy = read.tree(text=tree_text)
 plot(phy)
 
 
-#find MRCA for each homology_id
-
 #create a list of unique homology_ids; do not include NAs
 homolog.list<-unique(master.table$homology_id)
 homolog.list<-homolog.list[!is.na(homolog.list)]
 
-#loop through homology_ids and find MRCA for each             
+
+       
 for (h in homolog.list){
+#1.Find all taxa that possess a particular homology_id. 
 homolog.animals<-master.table%>%filter(.,homology_id == h) %>% select(.,animal)%>%unique()
 
+#2. Find the most recent common ancestor of all those taxa. 
+#If homology_id is possessed by only 1 taxon (eg. shared among paralogs), then the MRCA is the tip node.
 if (nrow(homolog.animals) == 1){
   mrca<-which(phy$tip.label == homolog.animals$animal)
 }
@@ -872,22 +874,22 @@ mrca.df<-rbind(mrca.df,bind.df)
 #Add MRCAs to master.table
 new.master.table<-left_join(master.table,mrca.df, by="homology_id")
 
-#Find which taxa lack a homology ID with a MRCA encompassing those taxa.
+
 
 for (h in mrca.df$homology_id){
-#find all tips of the MRCA
+#3. Find all the tips of the last common ancestor.  
 all.tips<-mrca.df$mrca[mrca.df$homology_id==h]%>%descendants(phy,.)
 all.tips<-tips[tips<=length(phy$tip.label)]
   
 taxa<-new.master.table%>%filter(homology_id==h)%>%select(.,animal)%>%unique()
 
-#find all the taxa which possess that homology_id
+
+#first find the node number of all animals that taxa with that homology_id
 for (t in taxa$animal){
   find.taxa<-which(phy$tip.label==t)
   taxa.list<-append(taxa.list,find.taxa)
 }
-
-#find which in all.tips is absent in taxa.list
+#4. Compare which tips do not possess the homology_id. 
 absent.in.taxa<-setdiff(all.tips,taxa.list)
 taxa.list<-NULL
 
@@ -900,12 +902,6 @@ absent.df<-rbind(absent.df,combine.df)
 names(absent.df)<-c("homology_id","absent")
 new.master.table<-left_join(new.master.table,absent.df,by=homology_id)
 absent.master.table<-new.master.table[!is.na(new.master.table$absent),]
-
-
-
-
-
-
 
 ```
 
