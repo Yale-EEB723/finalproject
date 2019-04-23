@@ -639,7 +639,7 @@ gff3.table$animal<-c(rep.int("Amphimedon_queenslandica",43615),rep.int("Capitell
 
 
 #Read in agalma homologs csv
-agalma.homologs<-read.csv("5taxa_results_alt.csv",header=TRUE,sep=",")
+agalma.homologs<-read.csv("compgen_homologs_nohydra_geneNames.csv",header=TRUE,sep=",")
 
 
 
@@ -714,10 +714,6 @@ clust.df<-mutate(clust.df,species_scaffold=row.names(contingency))
 
 master.table<-left_join(gff3.table.save,agalma.homologs)%>%select(.,"seqid","start","end","gene","homology_id","catalog_id","animal")%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%left_join(.,clust.df,by="species_scaffold")%>%select(.,species_scaffold,start,end,gene,homology_id,animal,cluster_id)
 
-#Add an index to each species
-master.table<-master.table%>%mutate(species_index=case_when(animal=="Amphimedon_queenslandica"~1,animal=="Mnemiopsis_leidyi"~1,animal=="Trichoplax_adhaerens"~2,animal=="Nematostella_vectensis"~3,animal=="Capitella_telata"~4,animal=="Helobdella_robusta"~4,animal=="Lottia_gigantea"~4,animal=="Drosophila_melanogaster"~4,animal=="Strongylocentrotus_purpuratus"~4,animal=="Danio_rerio"~4,animal=="Taeniopygia_guttata"~5,animal=="Homo_sapiens"~6))
-
-
 
 
 ```
@@ -740,6 +736,7 @@ NOTE: the number of scaffolds in gff3/fasta for Homo does not match the number i
 
 
 ###Algorithm for finding missing genes between ref vs comparison scaffold:
+**DEPRECATED. Replaced by Tree Approach (next chunk)**
 
 species *scaf* ref <-cluster id ref-> <-cluster id comp-> cluster *scaf* comp <-> compare genes
 go to next species scaf.
@@ -925,7 +922,7 @@ rand.dist.matrix<-daisy(random.matrix,metric="gower",stand=FALSE)
 rand.cross.clust<-cc_crossclustering(rand.dist.matrix,out=FALSE)
 rand.clust<-cc_get_cluster(rand.cross.clust)
 
-rand.tsne_obj<-Rtsne(rand.dist.matrix,is_distance=TRUE,perplexity=10)
+rand.tsne_obj<-Rtsne(rand.dist.matrix,is_distance=TRUE,perplexity=1)
 rand.tsne_data<-rand.tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(rand.cluster=factor(rand.clust))
 rand.tsne_plot<-ggplot(aes(x = X, y = Y), data = rand.tsne_data) + geom_point(aes(color = rand.cluster))
 rand.tsne_plot
@@ -941,7 +938,7 @@ plot(rand.di,labels=FALSE)
 #kmeans
 rand.kmean<-kmeans(rand.dist.matrix,51)
 rand.kclust<-rand.kmean$cluster
-rand.tsne_obj<-Rtsne(rand.dist.matrix,is_distance=TRUE,perplexity=10)
+rand.tsne_obj<-Rtsne(rand.dist.matrix,is_distance=TRUE,perplexity=1)
 rand.tsne_data<-rand.tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(rand.cluster=factor(rand.kclust))
 rand.tsne_plot<-ggplot(aes(x = X, y = Y), data = rand.tsne_data) + geom_point(aes(color = rand.cluster))
 rand.tsne_plot
