@@ -10,7 +10,7 @@
 #SBATCH --mail-user=ava.ghezelayagh@yale.edu
 
 source activate agalma
-export AGALMA_DB=$PWD/agalma/data/agalma.sqlite
+export AGALMA_DB=$PWD/agalma.sqlite
 
 agalma catalog insert -i GCA000148955.1 -p ~/scratch60/agalma/data/transcriptomes/GCA_00148GCA_000148955.1_Petromyzon_marinus-7.0_genomic.fastq -s "Petromyzon_marinus" -n 7757 -d 159722
 agalma catalog insert -i GCA900186335.2 -p ~/scratch60/agalma/data/transcriptomes/GCA_900186335.2_Eburgeri_3.2_genomic.fastq -s "Eptatretus_burgeri" -n 1855 -d 159767
