@@ -445,9 +445,11 @@ Although the simplified fasta header names are useful for downstream analyses, w
 Some of the gene names in the peptide files do not match the gene names in the gff3 files - they have an extra decimal point at the end of their names (I think indicating assembly version). This only occurred in Danio, Homo and Taeniopygia. Remove the decimal point wiht Regex Find:    
 Danio:    
 >`(\d+,ENSDARG.*).\d+(,Dre_.*)`  
->`(.*,ENSDARG\d+)\.(,Dre_.*)` -> seemed to do the trick better - needed two rounds  
+>`(.*,ENSDARG\d+)\.(,Dre_.*)` -> seemed to do the trick better - needed two rounds
+
 Homo:  
 >`(\d+,ENSG.*?)\.\d+(,Hsa_.*)`  
+
 Taeniopygia:  
 >`(\d+,ENSTGUG.*?).\d+(,Tgu_.*)`  
 
@@ -736,35 +738,54 @@ rand.tsne_plot
 
 ## Results
 
-### Is Synteny Analysis Possible?  
+### Is Synteny Analysis Possible?   
 
+#### Most Genomes Have Short Scaffolds   
+
+#### Most Genomes Are Highly Fragmented   
+
+#### Scaffolds with At Least 3 Genes Per Scaffold  
 Showing only the proportion *or* number of scaffolds alone is misleading. Having substantially more scaffolds will simulataneously decrease the proportion with > 3 genes but increase the number with > 3 genes. For the latter metric, highly contiguous genomes (Homo, Danio, Taeniopygia, Drosophila) will possess much fewer scaffolds > 3 genes. A more ideal metric may be a normalized ratio of the number:proportion of scaffolds with > 3 genes.  
 
 ### Ghost Loci Analysis 
 
-I selected a tSNE plot for a visualization of clustering (not the clustering itself). I did do a correspondence analysis but all points (except for one extreme outlier) were bunched up along the 0 values of the x and y axes, making it completely unreadable.   
+
+Contingency matrix: choice of genes: scaffold.  
+
+Tree approach
+
+
 
 #### Clustering Result
+
 Cross-clustering was mainly selected due to its ability to be robust to outliers and the fact a priori knowledge of k, the 'true' number of clusters, is not required. It achieves this by combining principles from 2 clustering algorithms: Ward's minimum variance and complete linkage. As Ward's builds clusters by minimizing squared distances of points from the cluster centroid, it is good for shaping clusters and estimating the optimal number of clusters. Complete linkage is used to identify outliers based on the fact that it uses the max distance between two points in different clusters as an estimate of the overall proximity between those clusters.
 
 It is possible this pattern arises from the clustering algorithm. Cross-cluster deals with outliers by excluding them from clustering - singleton clusters may represent outliers. Tellaroli et al. (2016) suggest that obtaining a single large cluster from cross-clustering suggests that clustering the data is not appropriate. However, my previous rotation project, where I attempted to cluster different animal cell types, used a different clustering algorithm (DBScan) which produced the same clustering pattern. This is pattern is further repeated using several other clustering algorithms (see Clustering Troubleshooting).  
 
+I selected a tSNE plot for a visualization of clustering (not the clustering itself). The biplot resulting from a correspondence analysis was essentially unreadable, with all points bunching up along the 0-values of the x or y axes.  
+
+-macro vs micro synteny: but interesting that long-range papers start off with a more wholescale macrosynteny approach, then extremely manual microsynteny search - very low throughput.  
+Antonio's approach
+
 #### Absence Analysis Output  
+The final output looks like this:  
+
+
 
 ### Clustering Troubleshooting  
 There are at least three elements to clustering: the data, the algorithm used to create the distance matrix, and the clustering algorithm.  
 
-### Is the contingency matrix underlying the distance matrix too sparse?  
+#### Is the contingency matrix underlying the distance matrix too sparse?  
 Is it possible that all scaffolds appear similar because most scaffolds share few genes? If so, most scaffolds may look similar because they share the absence of many genes (many 0's).  
 
-### Testing different subsets of data   
-#### relaxedbit data set  
+#### Testing different subsets of data   
+##### relaxedbit data set  
 This project compares sequences of very distantly related taxa. As such, lowering the BLAST bit score threshold to 100 for Agalma homologize may increase the number of genes shared by scaffolds. Data from all animal genomes was run through homologize with this relaxed threshold. A contingency matrix of Homo, Danio, and Strongylocentrotus sequences was made and subsequently downsampled into a 100x100 matrix.  
 
 >>>Homology num anomaly???  
 
 
-#### 5taxa dataset:  
+##### 5taxa dataset:  
 Another way to increase the number of 'shared' genes is to limit our comparison to a smaller subset of closely related, high quality genomes. Sequences from Strongylocentrotus, Danio, Homo, Drosophila, and Taeniopygia were run through Agalma homologize (at normal bitscore threshold). Homo, Danio, and Strongylocentrotus were then used to create a contingency matrix, which was ultimately downsampled into a 100x100 matrix.  
 
 
@@ -772,16 +793,24 @@ Agalma won't run on data from only 3 taxa, which is why I tried 5. Strongylocent
 
 
 
-### Testing different clustering algorithms  
+#### Testing different clustering algorithms  
 **Data**: Different clustering algorithms were tested on a 100x100 subset of the "5 taxa" dataset described in the previous section. Only Homo and Danio were selected for clustering, the reasoning being that clustering only two high quality well-annotated genomes would give the highest likelihood of success.  
 
-#### agnes: aggregative hierarchical clustering
+I tested if basic clustering algorithms that lack Cross-clustering's outlier approach produce the same pattern.  
 
-#### diana: divisive hierarchical clustering  
+##### agnes: aggregative hierarchical clustering  
+Initially, each data point is declared a cluster. Each sucessive step, the nearest clusters are combined to form a larger cluster, until all points form a single cluster. [R documentation](https://www.rdocumentation.org/packages/cluster/versions/2.0.7-1/topics/agnes)  
 
-#### k-means: 
+##### diana: divisive hierarchical clustering  
+All data points are initially members of a single large cluster. At each step, diana searches for the two most distant points, then reassigns all other points based on whether they are closer to the "splinter group" than the "old party" (see R documentation). This continues until every point is relegated to its own cluster. [R documentation](https://astrostatistics.psu.edu/su07/R/html/cluster/html/diana.html)      
 
-I set 51 as k (pre-ordained number of clusters) as this equals the total number of human + zebrafish chromosomes. ??? *There are more sequences because of unplaced scaffolds - is this big group unplaced scaffolds? ??
+##### k-means: clustering around centroids  
+Start by choosing k, the number of clusters. K random data points are initally selected to serve as the initial centroids of k clusters, then each observation is grouped into the cluster with the closest centroid. Centroids can be thought of as a cluster's mean, and is computed as the arithmetic mean of the coordinates of each point in a cluster (correct me if I'm wrong?). Centroids are re-calculated based on the new members. Re-arrangment of clusters continue with a goal of minimizing the total within sum of squares until the number of different clusters do not change.  
+
+
+
+I set 51 as k (pre-ordained number of clusters) as this equals the total number of human + zebrafish chromosomes. 
+??? *There are more sequences because of unplaced scaffolds - is this big group unplaced scaffolds? ??
 
 Hierarchical clustering algorithms produce a dendrogram. The general pattern I've received from all other clustering attempts is reiterated in the dendrogram structure. There is one large cluster, following by many little clusters of low membership consecutively splitting off.  
 
@@ -796,15 +825,7 @@ For randomization, a random 100x100 matrix of 1's (gene present) and 0's (gene a
  
 Scaffolds do *not* cluster into a single large cluster! Perhaps  
 
- same subset of data used in the Ghost Loci Analysis section.
 
-Scaffolds do not form one large cluster plus many small single-membered clusters. Instead, 
-
-
-#### Most genomes have many scaffolds of short length.  
-The exception, however, are those of the model genomes:  .
-
-#### Most genomes possess xxfew genes per scaffold.  
 
 
 
