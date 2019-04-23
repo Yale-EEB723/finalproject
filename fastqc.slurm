@@ -3,8 +3,8 @@
 #SBATCH -p general
 #SBATCH -N 1
 #SBATCH -c 16
-#SBATCH --mem-per-cpu 6000
-#SBATCH -t 720:00:00
+#SBATCH --mem-per-cpu 4000
+#SBATCH -t 20:00:00
 #SBATCH -A eeb723
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=ava.ghezelayagh@yale.edu
@@ -22,6 +22,15 @@ agalma qc -i SRR4448928
 agalma qc -i SRR5226597
 agalma qc -i SRR3213614
 agalma qc -i SRR3213612
+agalma qc -i SRR2146922
+agalma qc -i SRR2146912
+agalma qc -i SRR2146913
+agalma qc -i SRR2146914
+agalma qc -i SRR2146915
+agalma qc -i SRR2146916
+agalma qc -i SRR2146917
+agalma qc -i SRR2146918
+agalma qc -i SRR2146919
 agalma qc -i GCA000165045.2
 agalma qc -i GCA004367855.1
 agalma qc -i GCA900186335.2
