@@ -838,7 +838,8 @@ Trying to get around sparse matrix issue:
 ```{r tree}
 #initialize
 mrca.df<-data.frame()
-taxa.list<-null
+absent.df<-data.frame()
+taxa.list<-NULL
 
 #phylogeny
 tree_text = "(Mnemiopsis_leidyi,(Amphimedon_queenslandica,(Trichoplax_adhaerens,(Nematostella_vectensis,((Drosophila_melanogaster,(Lottia_gigantea,(Capitella_telata,Helobdella_robusta))),(Strongylocentrotus_purpuratus,(Danio_rerio,(Homo_sapiens,Taeniopygia_guttata))))))));"
@@ -886,9 +887,12 @@ for (t in taxa$animal){
 
 absent.in.taxa<-setdiff(all.tips,taxa.list)
 taxa.list<-NULL
+combine.df<-cbind(h,absent.in.taxa)
+absent.df<-rbind(absent.df,combine.df)
 
 }
 
+names(absent.df)<-c("homology_id","absent.in.taxa")
 
 
 
