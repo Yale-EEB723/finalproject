@@ -760,7 +760,7 @@ In data matrix:
 -homology_id = genes
 -cluster = scaffolds
 
-```{r final analysis}
+```{r final analysis, eval = FALSE}
 reference="Homo_sapiens"
 comparison="Danio_rerio"
 result<-data.frame()
@@ -838,16 +838,17 @@ Trying to get around sparse matrix issue:
 ```{r tree}
 #initialize
 mrca.df<-data.frame()
+taxa.list<-null
 
-#having trouble reading in a text file...
+#phylogeny
 tree_text = "(Mnemiopsis_leidyi,(Amphimedon_queenslandica,(Trichoplax_adhaerens,(Nematostella_vectensis,((Drosophila_melanogaster,(Lottia_gigantea,(Capitella_telata,Helobdella_robusta))),(Strongylocentrotus_purpuratus,(Danio_rerio,(Homo_sapiens,Taeniopygia_guttata))))))));"
 phy = read.tree(text=tree_text)
-
 plot(phy)
 
-tip.label<-phy$tip.label
 
-#create a list of unique homology_ids
+#find MRCA for each homology_id
+
+#create a list of unique homology_ids; do not include NAs
 homolog.list<-unique(master.table$homology_id)
 homolog.list<-homolog.list[!is.na(homolog.list)]
 
@@ -857,24 +858,36 @@ homolog.animals<-master.table%>%filter(.,homology_id == h) %>% select(.,animal)%
 
 if (nrow(homolog.animals) == 1){
   mrca<-which(phy$tip.label == homolog.animals$animal)
-
 }
 
 if (nrow(homolog.animals) > 1){
   mrca <-getMRCA(phy,as.character(homolog.animals$animal))
-
 }
 
-#h.repeat<-rep(h,nrow(homolog.animals))
-bind.df<-cbind(h,mrca)
+bind.df<-cbind(homology_id=h,mrca)
 mrca.df<-rbind(mrca.df,bind.df)
-
-
 }
 
-#singletons??! - 1 homology_id <-> animal, multiple genes (paralogs)
-  
+#Add MRCAs to master.table
+new.master.table<-left_join(master.table,mrca.df, by="homology_id")
 
+#For each homology_id, check whether it is not present in any child tip of the MRCA.
+
+for (h in mrca.df$homology_id){
+all.tips<-mrca.df$mrca[mrca.df$homology_id==h]%>%descendants(phy,.)
+all.tips<-tips[tips<=length(phy$tip.label)]
+  
+taxa<-new.master.table%>%filter(homology_id==h)%>%select(.,animal)%>%unique()
+
+for (t in taxa$animal){
+  find.taxa<-which(phy$tip.label==t)
+  taxa.list<-append(taxa.list,find.taxa)
+}
+
+absent.in.taxa<-setdiff(all.tips,taxa.list)
+taxa.list<-NULL
+
+}
 
 
 
