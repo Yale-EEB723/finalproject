@@ -31,6 +31,8 @@ Please refer to the Final_samplelist.xlsx file in the repo for further informati
 
 ## Background
 
+
+
 Motivation for the project....
 
 How it fits in with other work...
@@ -58,7 +60,7 @@ To retrieve the SRA accessions, type the following command for whatever SRR numb
 ./prefetch SRR#######
 ```
 
-To convert files from .sra to .fq format, I ran fastq-dump through the SRA toolkit (-O indicates an output directory; the default offset to use for ASCII scores is already set to 33, which is required for Agalma):
+To convert files from .sra to .fq format, I ran fastq-dump through the SRA toolkit (-O indicates an output directory; the default offset to use for ASCII scores is already set to 33, which is required for Agalma). Note that in retrospect, you could've run fastq-dump to begin with when uploading the files on to the server, but I didn't know better and therefore didn't actually do that here. Here's an example for how to dump the fastq file:
 
 ```
 ~/bin/sratoolkit.2.9.6-centos_linux64/bin/fastq-dump --defline-seq '@$sn[_$rn]/$ri' --split-3 ~/scratch60/agalma/data/sra_transcriptomes/SRR######.sra -O ~/scratch60/agalma/data/transcriptomes/
@@ -66,7 +68,16 @@ To convert files from .sra to .fq format, I ran fastq-dump through the SRA toolk
 
 I automated this step with the fastq_dump.slurm file. The --split-3 option will output 1, 2, or 3 files. Since all your data here was paired, at least two files should have been outputted. If a third outputted file is produced, it consists of orphaned, unpaired reads after trimming. It's normal to just ignore it (unless you really need the extra reads). One accession in this study that was supposed to be paired resulted in only one fastq file after being processed through fastq-dump with the split option (the Lampetra planeri sequence). I'm not really sure what was going on there but the single-read sequence was included in the study regardless.
 
-(Note that in retrospect, you could've run fastq-dump to begin with when uploading the files on to the server, but I didn't know better and therefore didn't actually do that here.)
+Just doing this alone still caused issues in Step 1 of trinity for some of the reads.  The headers of four of the pairs of fastq files were followed by an underscore and "forward" or "reverse" depending on the strand. I corrected this with a perl command similar to the following (see perl_header.slurm script)
+
+```
+
+cat file_1.fastq | perl -lane 's/_forward//; print;' > file_1.adj.fastq
+
+cat file_2.fastq | perl -lane 's/_reverse//; print;' > file_2.adj.fastq
+````
+and then used the .adj.fastq files as input to Trinity.
+
 
 #### Genomes
 
@@ -79,7 +90,11 @@ gunzip filename.fna.gz
 Since .fna files are in FASTA format, all I had to do to make them readable by Agalma was to rename the files (with the mv BASH command) to have a .fastq ending.
 
 
-### Preparing the Pipeline Itself
+### The Agalma Pipeline
+
+I used the Agalma pipelines (Dunn et al. 2013) to identify homologous sequences across the multiple species and to create nucleotide alignments for each set of homologus sequence.
+
+The Agalma repo can be found here: (https://bitbucket.org/caseywdunn/agalma/src/master/).
 
 Once you've created a conda environment for Agalma, make sure you're always activating it with:
 
@@ -88,8 +103,10 @@ source activate agalma
 ```
 and double check that you're actually in that conda environment with 
 
-```which conda
 ```
+which conda
+```
+
 #### Registering Data in the BioLite Catalog
 
 To keep track of things (different taxonomic names, etc) always look up the species codes at the [NCBI Taxonomy database](https://www.ncbi.nlm.nih.gov/taxonomy) and the [Integrated Taxonomic Information System database](https://www.itis.gov/). NCBI IDs and ITIS IDs must just be labelled with the number. Catalog these IDs with a command like this (-p or path directs Agalma to the file you're referring to):
@@ -119,9 +136,9 @@ Before generating the catalog, you specify a path for the local Agalma database 
 export AGALMA_DB=$PWD/agalma.sqlite
 ````
 
-but after generating, you can/should backup your this agalma.sqlite file unless you want to regenerate it each time. You can load this previously generated database in the same way.
+but after generating, you can/should backup your this agalma.sqlite file somewhere else unless you want to regenerate it each time. You can load this previously generated database in the same way (but I've found you may need to run the command and activate the agalma environment a couple of times to get it to work).
 
-To check on your entire agalma catalog, run:
+To check on your entire agalma catalog and see that it all loaded properly, run:
 
 ```
 agalma catalog all
@@ -131,13 +148,38 @@ You can always update these catalogs with the insert function. You just have to 
 
 #### Quality Control 
 
-You can generate a quality control report for each run with FastQC using the script in the repo, fastqc.slurm.
+You can generate a quality control report for each run with FastQC using the script in the repo, fastqc.slurm. This does not work on your genome assemblies, of course. 
 
+#### Running the Transcriptome Pipeline
 
+If you ever want to remind yourself of the steps in the pipeline, type:
 
-I plan to use the Agalma pipelines (Dunn et al. 2013) to identify homologous sequences across the multiple species, create nucleotide alignments for each set of homologus sequence, and infer a preliminary species tree with RAxML.
+```
+agalma transcriptome -h
+```
+If you're running on an interactive node on Farnam, there's no need to specify the number of threads/memory you want to allocate to Agalma. It's already default set to 20 threads and 200G of max memory.
 
-Agalma repo: (https://bitbucket.org/caseywdunn/agalma/src/master/)
+That said, these runs take longer than you'd think, so it's better to submit jobs through Farnam. When doing so, make sure you request at least 90 Gb of memory. This seems to be the max for Step 11 of the pipeline, and if you don't have enough memory, the pipeline will fail here. So far it seems that requesting 1 node, 20 cpu, and 4600 mem-per-cpu should do the trick. Also, do yourself a favor and use the scavenge partition, because it's painful to wait hours for the job to start to have it fail immediately.
+
+To run the pipeline for a single transcriptome, your job should contain a script that looks something like this:
+
+````
+source activate agalma
+cd ~/scratch60/agalma/data/data
+export AGALMA_DB=$PWD/agalma.sqlite
+cd ~/scratch60/agalma/scratch
+agalma transcriptome -i SRR###### -o path/to/output/directory
+````
+
+If/when the pipeline fails, you can always restart it. Keep everything in the script above the same, but adjust the last line to say something like
+
+```
+agalma transcriptome -i SRR#####3 --restart --stage N
+
+```
+
+where in is the stage that it failed at.
+
 
 ## Results
 
