@@ -514,6 +514,26 @@ $ perl spine.pl -f salmonella_clustage_list.txt -a 90 -o salmonella_clust_90 --p
   - Use the output files (.tree and heatmap files) in iTOL, a free online tool for displaying and creating visualizations of trees
   - This will be used to show the relationships of all 19 enterica genomes, along with their relationship to the one S. bongori genome included; Comparing this to the tree previously created of only 16 reference genomes
 
+- Found chloramphenicol resistance genes, type III secretion effector proteins, and hypothetical proteins that were then used as images in class presentation
+  - Bins were identified by looking at literature or potential genes that I personally am knowledgeable about concerning what would be interesting
+  - Did not do anything fancy, I did so by looking at individual bins that had shared or dissimilar gene patterns and seeing if those genes related to something of interest by then searching for the relevant Annotations in `out_subelements.annotations.txt`
+    - Bins IDed were:
+      - 93
+      - 220
+        - Genes unique to S_Abortusovis_SR44
+      - 297
+        - Hypothetical Genes unique to S_Abortusovis_SR44
+      - 524
+        - Efflux pump for chloramphenicol resistance (source: UniProt)
+      - 555
+        - Hypothetical protein for abx resistance (sourch: UniProt)
+        - cat2
+          - Known protein for Chloramphenicol resistance
+- Including these bins in separate folder in Data on git repository
+- Also including an attempted BLAST search done on one of the proteins found in one of the bins (524) by looking for the gene ENA|ACF88516|ACF88516.1 Salmonella enterica subsp. enterica serovar Schwarzengrund str. CVM19633 chloramphenicol resistance protein using BLAST search on NCBI of any bacteria that share this, just to see its spread
+- IDed genes that were similar in other species, downloaded those in `seqdump.fasta` and tried a MEGA alignment, although it doesn't show much anything interesting, just that it is a similar protein in all of these different bacterial species
+  - Possible event of Horizontal Gene Transfer so that only two of the genomes (CVM1966 and SCB67) had this gene, which could be clinically relevant
+
 ### April 21, 2019
 
   - Attempted to rerun MAFFT alignment locally and with different parameters (fastest available)

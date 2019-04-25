@@ -1,0 +1,23 @@
+#Step	Date	Elapsed time	Since Beginning
+Network testing	2019-04-16T11:19:01	0 seconds	0 seconds
+Counting sequences to assemble	2019-04-16T11:19:01	0 seconds	0 seconds
+Sequence loading	2019-04-16T11:19:05	4 seconds	4 seconds
+K-mer counting	2019-04-16T11:24:03	4 minutes, 58 seconds	5 minutes, 2 seconds
+Coverage distribution analysis	2019-04-16T11:24:07	4 seconds	5 minutes, 6 seconds
+Graph construction	2019-04-16T11:30:25	6 minutes, 18 seconds	11 minutes, 24 seconds
+Null edge purging	2019-04-16T11:34:14	3 minutes, 49 seconds	15 minutes, 13 seconds
+Selection of optimal read markers	2019-04-16T11:42:38	8 minutes, 24 seconds	23 minutes, 37 seconds
+Detection of assembly seeds	2019-04-16T11:50:19	7 minutes, 41 seconds	31 minutes, 18 seconds
+Estimation of outer distances for paired reads	2019-04-16T11:50:38	19 seconds	31 minutes, 37 seconds
+Bidirectional extension of seeds	2019-04-16T12:06:11	15 minutes, 33 seconds	47 minutes, 10 seconds
+Merging of redundant paths	2019-04-16T12:27:26	21 minutes, 15 seconds	1 hours, 8 minutes, 25 seconds
+Generation of contigs	2019-04-16T12:27:29	3 seconds	1 hours, 8 minutes, 28 seconds
+Scaffolding of contigs	2019-04-16T12:30:58	3 minutes, 29 seconds	1 hours, 11 minutes, 57 seconds
+Counting sequences to search	2019-04-16T12:30:58	0 seconds	1 hours, 11 minutes, 57 seconds
+Graph coloring	2019-04-16T12:31:02	4 seconds	1 hours, 12 minutes, 1 seconds
+Counting contig biological abundances	2019-04-16T12:31:15	13 seconds	1 hours, 12 minutes, 14 seconds
+Counting sequence biological abundances	2019-04-16T12:31:15	0 seconds	1 hours, 12 minutes, 14 seconds
+Loading taxons	2019-04-16T12:31:20	5 seconds	1 hours, 12 minutes, 19 seconds
+Loading tree	2019-04-16T12:31:24	4 seconds	1 hours, 12 minutes, 23 seconds
+Processing gene ontologies	2019-04-16T12:31:33	9 seconds	1 hours, 12 minutes, 32 seconds
+Computing neighbourhoods	2019-04-16T12:31:33	0 seconds	1 hours, 12 minutes, 32 seconds

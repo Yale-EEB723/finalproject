@@ -1,0 +1,9 @@
+NumberOfPairedLibraries: 1
+
+LibraryNumber: 0
+ InputFormat: Interleaved,Paired
+ DetectionType: Automatic
+ File: ERX2691743.fastq
+  NumberOfSequences: 591656
+ Distribution: RayOutput/LibraryData.xml
+

@@ -1,0 +1,1 @@
+#LeftContigPath	LengthInKmers	DNAStrand	PositionOnStrand	RightContigPath	LengthInKmers	DNAStrand	PositionOnStrand	DistanceInKmers	QualityControlStatus

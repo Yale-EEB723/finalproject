@@ -1,0 +1,7 @@
+organism: Salmonella species strain 
+contigs: 213
+bases: 4508347
+rRNA: 2
+CDS: 4817
+tmRNA: 1
+tRNA: 53

@@ -1,0 +1,9 @@
+k-mer length:	31
+Number of k-mers in the distributed de Bruijn graph: 14437924
+Lowest coverage observed:	2
+MinimumCoverage:	5
+PeakCoverage:	22
+RepeatCoverage:	39
+Number of k-mers with at least MinimumCoverage:	9822586 k-mers
+Percentage of vertices with coverage 2:	30.1321 %
+DistributionFile: RayOutput/CoverageDistribution.txt

@@ -1,0 +1,5 @@
+AGEnt.pl version 0.3.1
+inputs -m 85 -s 10
+
+source	total_bp	gc_%	num_segs	min_seg	max_seg	avg_leng	median_leng	num_cds
+accessory	1193097	48.98	627	10	23791	1902.87	579	1279

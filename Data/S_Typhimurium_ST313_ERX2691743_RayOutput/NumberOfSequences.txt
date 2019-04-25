@@ -1,0 +1,13 @@
+Files: 1
+
+FileNumber: 0
+	FilePath: ERX2691743.fastq
+ 	NumberOfSequences: 591656
+	FirstSequence: 0
+	LastSequence: 591655
+
+
+Summary
+	NumberOfSequences: 591656
+	FirstSequence: 0
+	LastSequence: 591655
