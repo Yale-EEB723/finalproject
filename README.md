@@ -37,6 +37,7 @@ This is the final project for Andrew Verdegaal in [Comparative Genomics](https:/
     - Salmonella enterica subsp. enterica serovar Abortusovis str. SS44, whole genome shotgun sequencing project
 #### Genomic Data Sources
   - Reference genomes (whole genome sequences and plasmids separately, used either .gbk or .fasta)
+    - Downloaded from NCBI GenBank (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4702903/pdf/gkv1276.pdf) using the NCBI Batch Entrez number
     - For analysis, concatenated relevant chromosomes and plasmids into single file for each serovar/ strain
 
       1. Salmonella enterica subsp. enterica serovar Agona str. SL483 plasmid, complete sequence
@@ -305,21 +306,24 @@ What are the main obstacles encountered?
   - Another obstacle in the preliminary stages was finding programs with outputs that were in the correct file/ format for other programs as inputs
     - This happened with progressiveMauve which was very frustrating
       - By all accounts, this program was highly recommended as a multiple genome sequence alignment tool, but the output file was supposedly in xmfa, not fasta format, and even had a .align file associated with it. I tried many different ways of using this file in downstream analysis such as creating a true phylogenetic tree (since the tree in the Mauve output was just a guide tree) using a program like PhyML or FastTree, but no matter what I did, this file couldn't be used or even converted into a working file from what I saw.
+  - Finally, I am lacking in coding experience, especially in regards to Python. Looking back and having been exposed to more Python and the potential for it more recently, I realize how useful it would have been not only with analyzing the data I wanted (ie: searching the data sets created by ClustAGE for relevant information regarding differences in genes in different genomes through accessory genome elements comparisons), it would have been extremely useful in creating my own, custom images and graphs to show my analyses.
 
 What would you have done differently?
 
-  - I think going into this project I was a bit naive in terms of my expectations on what I could get done.
+  - I think going into this project I was a bit naïve in terms of my expectations on what I could get done.
   - I also really got ahead of myself of trying to use many programs all at once without a SPECIFIC goal in mind every time I started to use one.
   - I would have done a bit more research and spent more time methodically sifting through programs and what the ultimate downstream output of them was and how that could help me determine differences in genomic makeup of Salmonella species.
   - I think I got the hang of using command line programs by the end, but I would have spent more time determining the best path instead of just throwing myself into the deep-end metaphorically speaking.
+  - Get better at Python and integrate my own code with these programs to increase automation and give me more power over the path of the analysis.
 
 What are future directions this could go in?
 
-  - Definitely gene discovery, or at the very least gene identification for relevant experimental studies
+  - Definitely gene discovery, or at the very least gene identification for relevant experimental studies.
   - Using this comparative functional genomics approach, it is feasible to identify accessory genomic elements in new and emerging relevant Salmonella strains to help better identify their lineage and what factors are important for their virulence, be it in animals or humans.
-  - Using multiple genome alignments to rapidly identify specific genes to be tested and experimentally manipulated
-  - Could be useful information for Salmonella vaccine development as well
+  - Using multiple genome alignments to rapidly identify specific genes to be tested and experimentally manipulated.
+  - Could be useful information for Salmonella vaccine development as well.
   - Look specifically at the region I identified that is unique to S_Abortusovis_SR44 with the hypothetical proteins, could be important to its unique pathogenesis in ovine sp.
+  - As a whole, these regions identified even in this small study could be very informative for potentially how different genes affect host specificity and host adaptation. Although I personally did not reach that goal here like I wanted, I believe that it is potentially feasible to do using the data I generated.
 
 ## References
 
@@ -331,6 +335,10 @@ What are future directions this could go in?
 
   - Ozer EA. ClustAGE: a tool for clustering and distribution analysis of bacterial accessory genomic elements. BMC Bioinformatics 2018 19:150
   - Saitou, N. and Nei, M., 1987. The neighbor-joining method: a new method for reconstructing phylogenetic trees. Molecular biology and evolution, 4(4), pp.406-425. (Neighbor joining tree)
+
+### GenBank
+  - Benson, D.A., Cavanaugh, M., Clark, K., Karsch-Mizrachi, I., Lipman, D.J., Ostell, J. and Sayers, E.W., 2012. GenBank. Nucleic acids research, 41(D1), pp.D36-D42.
+  - GenBank [Internet]. Bethesda (MD): National Library of Medicine (US), National Center for Biotechnology Information; [1982] - [cited 2019 Apr 25]. Available from: https://www.ncbi.nlm.nih.gov/nucleotide/
 
 ### iTOL
 

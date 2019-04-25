@@ -541,3 +541,10 @@ $ perl spine.pl -f salmonella_clustage_list.txt -a 90 -o salmonella_clust_90 --p
       - Basically default parameters, auto detecting which ones to use; salmonella_chromosomes.txt is a list of only chromosomes of the serovars (and not including any chromosomes) just to see if I could get the MAFFT to work for the chromosomes alone
       - Again, program made it to the fifth iteration about (5/17 chromosomes being analyzed) and got hung up for hours
       - Had to cancel program and move on without using another multiple genome aligner
+
+## Final Note
+
+  - To get genomes used in this study, I ID'ed genomes that I wanted, found their accession numbers, and used the Batch Entrez function of NCBI to call all genomes by providing the accession number in a .txt file and download the information directly from NCBI
+    - https://www.ncbi.nlm.nih.gov/sites/batchentrez
+    - Information received from GenBank
+      - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4702903/pdf/gkv1276.pdf
