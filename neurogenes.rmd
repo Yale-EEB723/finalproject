@@ -655,8 +655,8 @@ absent_genes.csv: cut -f 1 -d "," final.master.table_absentgenes.csv |grep "NA"
 gff3.table.save<-gff3.table
 
 #***SUBSAMPLE: choose from which animals you want to cluster scaffolds. Not doing so makes computation impossible on a local machine.
-#filter_target=c("Homo_sapiens","Danio_rerio","Strongylocentrotus_purpuratus")
-#gff3.table<-filter(gff3.table, animal==filter_target)
+filter_target=c("Homo_sapiens","Danio_rerio")
+gff3.table<-filter(gff3.table, animal==filter_target)
 
 
 #~~~Create contingency.table~~~
@@ -669,7 +669,7 @@ contingency.table<-inner_join(gff3.table,agalma.homologs)%>%dplyr::select(.,seqi
 contingency<-table(contingency.table$species_scaffold,contingency.table$homology_id)%>%as.matrix()
 contingency<-1*(contingency>0)
 #***DOWNSAMPLE contingency table for computation on a local machine.
-#contingency<-contingency[sample(100),sample(100)]
+contingency<-contingency[sample(100),sample(100)]
 
 
 #distance matrix
@@ -696,7 +696,7 @@ di<-diana(dist.matrix)
 plot(di,labels=FALSE)
 
 #kmeans
-kmean<-kmeans(dist.matrix,51)
+kmean<-kmeans(dist.matrix,30)
 kclust<-kmean$cluster
 tsne_obj<-Rtsne(dist.matrix,is_distance=TRUE,perplexity=1)
 tsne_data<-tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(cluster=factor(kclust))

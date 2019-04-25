@@ -17,12 +17,14 @@ While biologists characterize most animals by what they have, non-bilaterians ar
 
 Loss is trivial to establish phylogenetically, but is less so when the phylogeny itself possesses a degree of uncertainty. Synteny analysis provides one method of determining loss. In particular, the ghost locus hypothesis suggests that in the case of gene loss, the synteny surrounding the locus of the gene may be preserved even in the absence of the gene itself @Ramos2012. In this project, I will identify candidate 'ghost loci' across broad evolutionary distances.  
 
+Many studies examining synteny across long evolutionary distances choose a microsynteny approach. Is it possible to identify synteny at a macro, whole-scaffold level?  
+
 ## Goals
 
 This project can be broken up into 3 goals:  
 1. Characterize the genomes. Is synteny analysis possible?  
-*How contiguous are the genomes?  
-*How many scaffolds have at least three genes?  
+* How contiguous are the genomes?  
+* How many scaffolds have at least three genes?  
 2. Identify homologous genes on scaffolds. This requires running Agalma and learning how to parse GFF3 files.  
 3. Combine the data in (2) to identify candidates for gene loss ('ghost loci').  
 
@@ -521,10 +523,10 @@ In the following analyses, gff3.table and agalma.homologs will be joined in two 
 Subsample contingency table 100x100 to allow computation on a laptop.  
 4. Create distance matrix using gower. Gower is a widely used algorithm capable of working on a mix of continuous and categorical data. For categorical data, it uses Jaccard Similarty Index.  
 5. Cluster.  
-* cross-clustering: uses principles from Ward's minimum variance and complete-linkage algorithms. Selected because is superior in dealing with outliers, does not require a priori estimate of the number of clusters.  
-* agnes: agglomerative hierarchical clustering.   
-* diana: divisive hierarchical clustering.  
-* kmeans: allocate each scaffold to a centroid. Number of centroids specified a priori. 
+* cross-clustering  
+* agnes    
+* diana   
+* kmeans  
 
 tSNE code is by [Daniel P. Martin](http://dpmartin42.github.io/posts/r/cluster-mixed-types).  
 
@@ -743,7 +745,7 @@ Synteny analysis, which studies the spatial distribution of genes in the genome,
 #### Most Genomes Have Short Scaffolds   
 There is a momentous difference in median scaffold length between assemblies from model organisms (Homo sapiens, Danio rerio, Drosophila melanogaster, and Taeniopygia guttata) and other animals. The human genome possesses the highest median scaffold length (approximately 133 million base pairs). In contrast, Strongylocentrotus posseses the shortest median scaffold length (just 1006 bp). 
 
-The frequency histogram of scaffolds for each species is generally right-skewed, except for the model organisms which possess few scaffolds of great length.  
+The frequency histogram of scaffolds for each species is right-skewed, except for the model organisms which possess few scaffolds of great length.  
 
 #### Most Genomes Are Highly Fragmented   
 A similar divide between model organisms and all other animal is seen in the degree to which assemblies are fragmented. Chromosome-level assemblies are available for only the model organisms (Homo sapiens, Danio rerio, Drosophila melanogaster, Taeniopygia guttata), and thus were used here. All other assemblies were primary or top-level assemblies, and possessed over 1,000 scaffolds each. In particular, Strongylocentrotus, again, possessed over 32,000 scaffolds. Danio rerio possessed the fewest number of chromosomes: 8.  
@@ -763,13 +765,9 @@ However, because the assemblies of non-model animals are highly fragmented, this
 Showing only the proportion *or* number of scaffolds alone is misleading. Having substantially more scaffolds will simulataneously decrease the proportion with > 3 genes but increase the count of scaffolds with > 3 genes. For the latter metric, highly contiguous genomes (Homo, Danio, Taeniopygia, Drosophila) will possess many fewer scaffolds. A more ideal metric may be a normalized ratio of the number:proportion of scaffolds with > 3 genes.  
 
 ### Ghost Loci Analysis 
-
+I pursued the strategy of aggregating data at each step into a master table. Although most analyses were performed on subsets of this table, the master table remains available for use in future analyses. For instance, I included the start and end coordinates of each gene in the master table so that collinearity can be examined.  
 
 Contingency matrix: choice of genes: scaffold.  
-
-
-
-
 
 #### Clustering Result
 
@@ -782,6 +780,8 @@ I selected a tSNE plot for a visualization of clustering (not the clustering its
 
 
 #### Absence Analysis Output  
+By default, genes that arose after the emergence of a particular clade will not be present in that clade. As seen in my presentation, I had initially pursued a 'nesting' approach: I assigned each tip a number, which increased in value the more successively nested that tip was. However, I ultimately pursued the phylogenetic approach you suggested in class. Rather than comparing only two animals (a reference and comparison), I found the most recent common ancestor of each homolog and all taxa within the clade defined by this common ancestor. Instances where a tip is a member of that clade yet lacks the homolog is flagged as a candidate gene loss event.  
+
 The final output looks like this:  
 
 
@@ -845,7 +845,7 @@ Given that different subsets of data and clustering algorithms seem to return th
 For randomization, a random 100x100 matrix of 1's (gene present) and 0's (gene absent) was created, with proportions matching the original proportions of 1's and 0's seen in the true data. Simply randomizing the rows or columns would potentially change the labels of the clusters, but would not test the overall configuration of the clusters themselves.  
 
  
-Scaffolds do *not* cluster into a single large cluster! I have implicitly assumed that the clustering pattern I've been receiving is incorrect, but perhaps it is a true reflection of the structure of the data. It is interesting, then, that I receive similar clustering profiles from clustering scaffolds by gene presence/absence and clustering cell types by gene presence/absence across broad distances.      
+Scaffolds do *not* cluster into a single large cluster! I have implicitly assumed that the clustering pattern I've been receiving is incorrect, but perhaps it is a true reflection of the structure of the data. Alternatively, while this pattern may be true at a high level, clustering methods may lack the resolution to identify relationships at finer levels. It is interesting that I receive similar clustering profiles from clustering scaffolds by gene presence/absence and clustering cell types by gene presence/absence across broad distances.      
 
 
 ## Assessment  
@@ -853,26 +853,25 @@ Scaffolds do *not* cluster into a single large cluster! I have implicitly assume
 Yes, this project completed all three goals it set out to achieve. However, because clustering did not resolve scaffolds into tight clusters, the results of the absence analysis itself is less meaningful.  
 
 *What are the main obstacles encountered?*  
-*Computation: My laptop did not have enough computing power to process the dataset in its entirety. The next step is to run R on the cluster.  
-*Clustering: As discussed, I could not resolve tight clusters.  
+* Computation: My laptop did not have enough computing power to process the dataset in its entirety. The next step is to run R on the cluster.  
+* Clustering: As discussed, I could not resolve tight clusters.  
 
 *What would you have done differently?*  
-*Include animal outgroups (choanoflagellates etc.)  
-*I've received advice on other clustering strategies:  
-**Perform local clustering and link them together like a daisy chain  
-**Go through genes on a scaffold using a sliding 10-gene window. If two homologs within this window are also on the same scaffold in another organism, this suggests a possible syntenic region.  Quantify how many of these pairs you can find in the window.  
-**Instead of making a homolog x scaffold contingency matrix, make a homolog x homolog matrix. (*I'm still not fully clear on this idea - can we go over this again, Casey?*)  
+* Include animal outgroups (choanoflagellates etc.)  
+* I've received advice on other clustering strategies:  
+** Perform local clustering and link them together like a daisy chain  
+** Go through genes on a scaffold using a sliding 10-gene window. If two homologs within this window are also on the same scaffold in another organism, this suggests a possible syntenic region.  Quantify how many of these pairs you can find in the window.  
+** Instead of making a homolog x scaffold contingency matrix, make a homolog x homolog matrix. (*I'm still not fully clear on this idea - can we go over this again, Casey?*)  
 
 *What are future directions this could go in?*  
-**Ancestral state reconstruction - it is difficult to study what is absent, but perhaps this can be achieved by reconstructing the gene that was lost.    
-**Study system-specific questions eg. Have sponges lost a nervous system? This is the question that started the project.  
-**Study the characteristics of the genes that have been lost eg. are they orthologs or paralogs? Genes that arose earlier or later?  
+* Ancestral state reconstruction - it is difficult to study what is absent, but perhaps this can be achieved by reconstructing the gene that was lost.    
+* Study system-specific questions eg. Have sponges lost a nervous system? This is the question that started the project.  
+* Study the characteristics of the genes that have been lost eg. are they orthologs or paralogs? Genes that arose earlier or later?  
 **waaaaay more!  
 
 
 
-Synteny analysis is generally performed in the context of closely related species.
-Most studies pursuing broad evolutionary comparisons focus on microsynteny.
+
 
 Compare clustering algorithms:
 few genes, test statistically whether > expected number of neighbour genes:
@@ -882,12 +881,8 @@ Irimia
 Warren francis
 class paper - microsynteny
 vs. mine - whole scaffold synteny
--more genes = more chance for similarity, = more chance for difference
 -clustering algorithms not as sensitive as these synteny-specific programs/detecting synteny at micro-level
-What to do differently:  
--outgroups
--Top-level assemblies, which can possess many unplaced scaffolds, were used for. Perhaps introducing many low quality scaffolds lead to noise, preventing clustering. 
+
 
 
 -macro vs micro synteny: but interesting that long-range papers start off with a more wholescale macrosynteny approach, then extremely manual microsynteny search - very low throughput.  
-Antonio's approach 
