@@ -33,6 +33,7 @@ library(cluster)
 library(CrossClustering)
 library(vegan)
 library(Rtsne)
+library(factoextra)
 
 #tree manipulation
 library(ape)
@@ -696,7 +697,10 @@ di<-diana(dist.matrix)
 plot(di,labels=FALSE)
 
 #kmeans
-kmean<-kmeans(dist.matrix,30)
+dist.matrix.coerced<-as.matrix(dist.matrix)
+fviz_nbclust(dist.matrix.coerced,kmeans,method="wss")
+
+kmean<-kmeans(dist.matrix,2)
 kclust<-kmean$cluster
 tsne_obj<-Rtsne(dist.matrix,is_distance=TRUE,perplexity=1)
 tsne_data<-tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(cluster=factor(kclust))
@@ -717,6 +721,11 @@ master.table<-left_join(gff3.table.save,agalma.homologs)%>%select(.,"seqid","sta
 
 
 ```
+
+
+
+
+
 
 Note: nrows in contingency table is much smaller than in contingency.table because the latter lists 1 row for each gene while the former 1 row for each scaffold. Nrow of contingency table will equal number of unique scaffolds among the animals selected.
 

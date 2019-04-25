@@ -835,6 +835,7 @@ Both agnes and diana produce a dendrogram. The general pattern I've received fro
 ##### k-means: clustering around centroids  
 Start by choosing k, the number of clusters. K random data points are initally selected to serve as the initial centroids of k clusters, then each observation is grouped into the cluster with the closest centroid. Centroids can be thought of as a cluster's mean, and is computed as the arithmetic mean of the coordinates of each point in a cluster (correct me if I'm wrong?). Centroids are re-calculated based on the new members. Re-arrangment of clusters continue with a goal of minimizing the total within sum of squares until the number of different clusters do not change.  
 
+An elbow plot suggests that the optimal k is 2. 
 Where k=30, K-means does seem to produce approximately three clusters of moderate size. However, the presence of these moderately-sized clusters seem sensitive to the value of k. ********
 
 ### Testing the null hypothesis  
