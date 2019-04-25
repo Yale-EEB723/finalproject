@@ -20,9 +20,9 @@
         - "nucmer (NUCleotide MUMmer) is the most user-friendly alignment script for standard DNA sequence alignment. It is a robust pipeline that allows for multiple reference and multiple query sequences to be aligned in a many vs. many fashion."
         - http://nebc.nox.ac.uk/bioinformatics/docs/nucmer.html
       - Attempting spine on my computer as well, figured out the file mistakes I think, just needed to add in all file names to a .txt file and then run the program with that
-        `ls -d -1 $PWD/* > genome_files.txt`
+        - `ls -d -1 $PWD/* > genome_files.txt`
           - Made the .txt file with all file names needed
-        - perl spine.pl -f genome_files_full.txt --pangenome
+        - `perl spine.pl -f genome_files_full.txt --pangenome`
           - got output core genome, aligned similar loci, and a pangenome
         - Now running AGEnt on my own to see what I get
   - Should get from Spine
@@ -40,17 +40,17 @@ Ozer EA. ClustAGE: a tool for clustering and distribution analysis of bacterial 
     - Running ClustAGE now
 
 #### ClustAGE Results
-    - Got many bins with shared or unique (depending on the strain) genomic loci between the strains I analyzed
-    - Can apparently use this information to create a tree of relationship of containing these elements (instead of just based on sequence similarity)
-    - This pipeline script calculates a Bray-Curtis distance matrix from distributions of accessory elements that it uses to create a neighbor joining tree of accessory element distribution patterns. Note these distances are not based on sequence similarity, but only on presence or absence of an accessory element within a genome within the threshold parameters given to ClustAGE. It will also produce output files that can be used to create a heatmap of Bray-Curtis similarity values.
-    - Analyzing further using subelements_to_tree.pl
-    - Makes a tree file as well as heatmap for comparing presence of similar regions between Genomes
-    - Used Phylip to help run This
-      - http://evolution.genetics.washington.edu/phylip/getme-new1.html
-      - perl subelements_to_tree.pl -c clustage_subelements.csv -k clustage_subelements.key.txt
-    - ClustAGE site says to use either iTOL (online) or FigTree (software) to view trees
-    - Can also produce a ClustAGE plot here:
-      - http://vfsmspineagent.fsm.northwestern.edu/cgi-bin/clustage_plot.cgi
+  - Got many bins with shared or unique (depending on the strain) genomic loci between the strains I analyzed
+  - Can apparently use this information to create a tree of relationship of containing these elements (instead of just based on sequence similarity)
+  - This pipeline script calculates a Bray-Curtis distance matrix from distributions of accessory elements that it uses to create a neighbor joining tree of accessory element distribution patterns. Note these distances are not based on sequence similarity, but only on presence or absence of an accessory element within a genome within the threshold parameters given to ClustAGE. It will also produce output files that can be used to create a heatmap of Bray-Curtis similarity values.
+  - Analyzing further using subelements_to_tree.pl
+  - Makes a tree file as well as heatmap for comparing presence of similar regions between Genomes
+  - Used Phylip to help run This
+    - http://evolution.genetics.washington.edu/phylip/getme-new1.html
+    - `$ perl subelements_to_tree.pl -c clustage_subelements.csv -k clustage_subelements.key.txt`
+  - ClustAGE site says to use either iTOL (online) or FigTree (software) to view trees
+  - Can also produce a ClustAGE plot here:
+    - http://vfsmspineagent.fsm.northwestern.edu/cgi-bin/clustage_plot.cgi
 
 ##### Clustage paper
   - From the paper itself
@@ -89,12 +89,12 @@ Ozer EA. ClustAGE: a tool for clustering and distribution analysis of bacterial 
         - Ran into issues with using Salmonella_Typhi_Ty2.gb downloaded from NCBI
           - Just ran it through Prokka instead, and used that gbk file
             - Was missing a CDS annotation
-    - Then ran the accessory_elements.txt files for comparison through ClustAGE
-      - Used --annot to add annotations to any subelements, files were the accessory_loci.txt List
+    - Then ran the `accessory_elements.txt` files for comparison through ClustAGE
+      - Used `--annot` to add annotations to any subelements, files were the accessory_loci.txt List
       - Created these text files with path to file, name of genomes
-        - perl ClustAGE.pl -f accessory_elements.txt --annot accessory_loci_list.txt
-    - Had to add gnuplot to ClustAGE directory bin in order to run the program to produce graphs of accessory accessory_loci
-      - Got this to work, by compiling with ./configure > make > make install
+        - `perl ClustAGE.pl -f accessory_elements.txt --annot accessory_loci_list.txt`
+    - Had to add gnuplot to ClustAGE directory bin in order to run the program to produce graphs of accessory `accessory_loci`
+      - Got this to work, by compiling with `./configure > make > make install`
 
 
 ### Project Notes 4/9/2019
@@ -110,7 +110,7 @@ Ozer EA. ClustAGE: a tool for clustering and distribution analysis of bacterial 
     - Found a program called
         - ncbi-acc-download
           - https://github.com/kblin/ncbi-acc-download
-          - Use command ncbi-acc-download --format fasta <accession number>
+          - Use command `ncbi-acc-download --format fasta <accession number>`
             - to download files
             - Will do this to get .fasta's of all of my 16 genomes
           - ALso downloaded concatenated .gbk files to run through progressive mauve as well
@@ -118,7 +118,7 @@ Ozer EA. ClustAGE: a tool for clustering and distribution analysis of bacterial 
   - NOTE: Need to include accession numbers ultimately used for Salmonella Sequences
   - Did progressiveMauve using windows java executable, having issues understanding if I received an xmfa file from it
     - using xmfa2fasta.pl to try and see if i can convert file salmonella_16_promauve_full into a fasta file or not
-      - perl xmfa2fasta.pl --file salmonella_16_promauve_full > salmonell_16.fasta, after moving the file into the same directory as the alignment
+      - `perl xmfa2fasta.pl --file salmonella_16_promauve_full > salmonell_16.fasta`, after moving the file into the same directory as the alignment
     - Goal: to run the alignment file using FastTree. I had uploaded the original fasta files of all of the genomes (concatenated with their plasmids if available) to CSI Phylogeny, but still waiting in queue
       - That will ultimately use FastTree for me, but may have to find alternative route to get phylogenic tree of sequences this way
         - Found other programs:
@@ -128,15 +128,16 @@ Ozer EA. ClustAGE: a tool for clustering and distribution analysis of bacterial 
             - Would use these to construct trees of samples
             - If all else fails, revert to using either PhyLIP3 or RaXML
               - don't understand the difference but I think its just a matter of finding the correct pipeline and if I want to identify phylogenies based on SNPs or recombination events/ backbones / LCBs
-          - FastTree -gtr -nt salmonella_16.fasta > tree_file
+          - `FastTree -gtr -nt salmonella_16.fasta > tree_file`
             - Did this on a VERY large file (24gb) and unsure if this is too large
+            - Was much too large, did not work
 
 
 ### Project Notes 4/10/19
   - Still confused on differences between phylogenetic programs
   - Helpful website: https://www.ridom.de/u/FAQ%253AHow_to_build_Advanced_Phylogenetic_Trees%253F.html
-    -   Currently looking at using either:
-      -   Core & Accessory Genome Phylogeny comparison
+    - Currently looking at using either:
+      - Core & Accessory Genome Phylogeny comparison
         - multiple alignment with MAFFT (Mol Biol Evol. 2013, 30:772)
         - ClonalFrameML (PLoS Comput Biol. 2015, 11:e100404),
         - ( or ClonalOrigin)
@@ -155,12 +156,12 @@ Ozer EA. ClustAGE: a tool for clustering and distribution analysis of bacterial 
       - I believe it has alignment built in
     - Research differences between mauve/Gubbins, ClonalFrameML, and ClustAGE
     - Installing gubbins (http://sanger-pathogens.github.io/gubbins/)
-      sudo apt-get install gubbins
+       - `sudo apt-get install gubbins`
     - Installing MAFFT
-      - sudo apt-get install MAFFT
-      - using mafft: mafft
+      - `sudo apt-get install MAFFT`
+      - using mafft: `mafft`
         - use fasta file with all genomes/sequences
-        - cat * .fasta > all_salmonella.fasta
+        - `cat * .fasta > all_salmonella.fasta`
         - Seems to be stalling, dont know how fast it will go to be honest
         - Choosing to see if the online tool works any better for the 30 sequences I am uploading (since some of the plasmids are involved)
     - Using MAUVE to align genomes (instead of ProgressiveMauve)
@@ -175,16 +176,18 @@ Ozer EA. ClustAGE: a tool for clustering and distribution analysis of bacterial 
         - https://realphy.unibas.ch/realphy/
         - Results: https://realphy.unibas.ch/REALPHY/scratch/data_op230wmv/report/
 
-    - Later
-      - Want to re-download ONLY the chromosomal sequences in FASTA format  
-        - Can do this both as one large file and also individually, depending on what service I am using
-        - Edited .fasta files to only get chromosomes
-          - Uploading to MAFFT online tool, all default except using parameters:
-            - G-INS-1 (Slow; progressive method with an accurate guide tree) to see how it does
-          - Also attempting locally:
-             $ mafft --localpair --maxiterate 1000 salmonella_chromosomes.fasta
-             - actually realized this method may take forever, going with "fast progressive method" as stated on website
-           $ mafft --retree 2 --maxiterate 0 salmonella_chromosomes.fasta
+  - Later in day:
+    - Want to re-download ONLY the chromosomal sequences in FASTA format  
+      - Can do this both as one large file and also individually, depending on what service I am using
+      - Edited .fasta files to only get chromosomes
+        - Uploading to MAFFT online tool, all default except using parameters:
+          - `G-INS-1` (Slow; progressive method with an accurate guide tree) to see how it does
+        - Also attempting locally:
+           - `$ mafft --localpair --maxiterate 1000 salmonella_chromosomes.fasta`
+           - actually realized this method may take forever, going with "fast progressive method" as stated on website
+         - `$ mafft --retree 2 --maxiterate 0 salmonella_chromosomes.fasta`
+          - Ended up not working, always stalling after 5 alignments
+            - Would need to use core like Farnam to do this type of alignment, or shorten how many sequences I use which I do not want to do
 
 
 ### April 15, 2019
@@ -207,12 +210,12 @@ Ozer EA. ClustAGE: a tool for clustering and distribution analysis of bacterial 
   - Goal is to get alignment in order to run it on PhyML (phylip file) to get starting tree, and a multiple alignment file (either fasta or XFMA), both needed for ClonalML pipeline
     - For some reason, have trouble finding a way to use mauve output files
       - for .alignment (xfma) conversion, found software package in conda (bioconvert)
-        - $ conda install bioconvert
-        - $ bioconvert xfma2phylip
+        - `$ conda install bioconvert`
+        - `$ bioconvert xfma2phylip`
         - https://github.com/bioconvert/bioconvert
           - numpybase causing issue?
           - going to update Conda Now
-          - $ conda update --prefix /home/aaverdegaal/anaconda3 anaconda
+          - `$ conda update --prefix /home/aaverdegaal/anaconda3 anaconda`
   - Found new software called MUGSY
     - Getting desperate since online service for MAFFT above said my file was too big (>50kb, mine is 86kb)
     - Will look at MUGSY now
@@ -224,7 +227,7 @@ Ozer EA. ClustAGE: a tool for clustering and distribution analysis of bacterial 
         - Bayesian inference, Maximum Parsimony, and Maximum Likelihood
   - Running MAFFT on own computer with FS-1 setting, default everything else
     - Should output a phylip and fasta file if works
-    - DOing better than Ive seen yet so hopeful
+    - Ding better than Ive seen yet so hopeful
   - Also want to use Brig to show comparison of Genomes
     - http://brig.sourceforge.net/
   - Read about:
@@ -242,20 +245,21 @@ Ozer EA. ClustAGE: a tool for clustering and distribution analysis of bacterial 
   - Code:
     - ClustalML
       - Downloaded it using debian
-        - $ sudo apt-get install clustalml
+        - `$ sudo apt-get install clustalml`
       - Ran program using CSI Phylogeny files as input
-        - $ ClonalFrameML snp_tree.main_tree.newick snp_tree.aln.fasta salmonella_clustalml_first
+        - `$ ClonalFrameML snp_tree.main_tree.newick snp_tree.aln.fasta salmonella_clustalml_first`
         - Need to install two R packages to visualize Results
-          - $ conda install -c bioconda r-phangorn
-          - $ conda install -c r r-ape
+          - `$ conda install -c bioconda r-phangorn`
+          - `$ conda install -c r r-ape`
       - Results came out in same folder as CSI_Phylogeny_Results
         - Results had been run through FastTree in pipeline
       - Results for RealPHY are being run in FastTree to see if there are differences
-        -  FastTree -nt polymorphisms_move.fas > salmonella_poly_realphy_ft
-        - Created tree successully
+        - `FastTree -nt polymorphisms_move.fas > salmonella_poly_realphy_ft`
+        - Created tree successully(?)
           - salmonella_poly_realphy_ft
           - Compare with Clustage Tree and CSI Tree
             - PhyML tree vs FastTree
+          - Didn't work correctly for some reason
       - Now run ClustAGE Pipeline with all genomes, including plasmids
           - Re running ClustAGE using all 18 genomes
           - Doing same process as before, as stated above using command line to run Spine then ClustAGE programs
@@ -274,14 +278,14 @@ genomes produced by NGS" - (Ozer et al. 2014 BMC Genomics)
               - Paper https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6256508/pdf/e00990-18.pdf
       - Code for ClustAGE this run:
        make list for Spine run for reference genome; creating core genome
-        $ ls * .gb > salmonella_clustage_list.txt
+        `$ ls * .gb > salmonella_clustage_list.txt`
           - added path to each file using replace command in atom
-            - /c/users/aaver/documents/_ Yale/Spring_2019/Comparative_Genomics/Final_project/Full_Sequence_Set/gbk_full/
+            - `/c/users/aaver/documents/_ Yale/Spring_2019/Comparative_Genomics/Final_project/Full_Sequence_Set/gbk_full/``
             - Added title (strain name) and gbk after path
-            - placed list file in Spine folder (same as spine.pl)
-       run Spine with option to create pan genome of reference genomes, and output files to have prefix salmonella_clustage
-        navigate to Final_project/Programs/Spine
-        $ perl spine.pl -f genome_files_full.txt --pangenome -o salmonella_clustage
+            - placed list file in Spine folder (same as `spine.pl`)
+       - run Spine with option to create pan genome of reference genomes, and output files to have prefix salmonella_clustage
+       - navigate to Final_project/Programs/Spine
+        `$ perl spine.pl -f genome_files_full.txt --pangenome -o salmonella_clustage`
 
 #### Project Notes April 16, 2019
   - Today going to try and finish the ClustAGE Pipeline
@@ -292,56 +296,58 @@ genomes produced by NGS" - (Ozer et al. 2014 BMC Genomics)
   - Read in paper as well, that including outlier strain (soil Pseudomonas aeruginosa PA7) greatly changed what the "core" genome was
     - Therefore, they used the parameter -a 90 in order to tell the program that core is any segment of the genome in >90% of the reference strains
       - Doing the same for mine as well
-        - $ perl spine.pl -f salmonella_clustage_list.txt -a 90 -o salmonella_clust_90 --pangenome
+        - `$ perl spine.pl -f salmonella_clustage_list.txt -a 90 -o salmonella_clust_90 --pangenome`
         - Can compare the differences later perhaps based on whatever they did
   - Will have to assemble genome of at least the 313 strain I was looking at
     - Data is from Illumina NextSeq 500 base paired end reads
     - Can use Ray software for this (from paper as well)
-      - $ sudo apt-get install ray
+      - `$ sudo apt-get install ray`
       http://denovoassembler.sourceforge.net/
     - One set of reads is in SRA format, have to get sra-toolkit
-      - $ sudo apt-get install sra-toolkit
+      - `$ sudo apt-get install sra-toolkit`
     - Can run to get fastq files from sra files, with accession number
-      - $ fastq-dump ERX2691743
+      - `$ fastq-dump ERX2691743`
     - Running Ray on own computer to try and assemble reads from this fastq file; paired end so assuming they are interleaved?
-      - $ mpiexec -n 2 Ray -k 31 -i ERX2691743
+      - `$ mpiexec -n 2 Ray -k 31 -i ERX2691743`
+      - NOTE: Looking back, should have looked to do some quality control on the reads from this set of SRA files, as others have talked about previously in class
+        - Seems to have worked well enough to create a working genome to use for the ClustAGE pipeline, however, although a caveat may be if genes are missing from the small regions that were not assembled.
     - Once this is done, going to run through Prokka using a reference Typhimurium genome gbk file that i have (probably the non LT2 one)
     - Description I found of Prokka online when looking at differences between RAST and Prokka
       - "Genome annotation is a two-step process, first you have to predict where the genes are - which tools like Augustus and GeneMark do - then you have to assign function to the predicted genes - usually by means of similarity searches using good quality databases. This is what Prokka and RAST are doing, but integrated in a pipeline. I don't know how RAST works, but prokka uses several programs to predict genes (protein coding, non-coding RNA, tRNA, rRNA, and more) from the genome, then, after having these predictions, it tries to annotated them by searching available databases. Prokka uses Prodigal for protein coding gene prediction, which I don't know if it appropriate for virus gene prediction. But the most important reason your annotation came up mostly as hypothetical proteins probably is you don't have installed an appropriate database to annotate viral genomes - you can pass one at run time with the --proteins option, which will have precedence over other installed databases."
   - Ray finished and was successful
-    - Have contigs.fasta and scaffold.FastA
-  - Uploaded contigs.fasta to RAST server (got access)
+    - Have `contigs.fasta` and `scaffold.FastA`
+  - Uploaded `contigs.fasta` to RAST server (got access)
     - using taxonomy ID 90371 to insert information
   - In parallel, will run Prokka on the contigs
     - Use S Typhimurium SL1344 as reference gbk for This
-    - $ prokka --proteins S_Typhimurium_SL1344_FQ.gb --outdir S_Typhimurium_ST313 --prefix S_Typhimurium_ST313 Contigs.fasta
+    - `$ prokka --proteins S_Typhimurium_SL1344_FQ.gb --outdir S_Typhimurium_ST313 --prefix S_Typhimurium_ST313 Contigs.fasta`
   - Also do same for S Abortusovis SR44
     - Already in Contigs
-      - $ prokka --proteins S_Typhimurium_SL1344_FQ.gb --outdir S_Abortusovis_SR44 --prefix S_Abortusovis_SR44 AUYQ02.1.fa
+      - `$ prokka --proteins S_Typhimurium_SL1344_FQ.gb --outdir S_Abortusovis_SR44 --prefix S_Abortusovis_SR44 AUYQ02.1.fa`
   - Now ready to use AGEnt to predict accessory elements in two new draft Genomes
     - Paper states that they used the core genome generated by Spine as the core/reference (-r) sequence in the AGEnt command
     - Moved files relevant to this to the Programs/AGEnt/ folder
-      - $ perl AGEnt.pl -r salmonella_clustage.backbone.fasta -q S_Abortusovis_SR44.gbk -o S_Abortusovis_SR44_AGEnt
+      - `$ perl AGEnt.pl -r salmonella_clustage.backbone.fasta -q S_Abortusovis_SR44.gbk -o S_Abortusovis_SR44_AGEnt`
         - Used Prokka annotated genome .gbk file for this
     - Now for S_Typhimurium_ST313
-      - $ perl AGEnt.pl -r salmonella_clustage.backbone.fasta -q S_Typhimurium_ST313.gbk -o S_Typhimurium_ST313_AGEnt
+      - `$ perl AGEnt.pl -r salmonella_clustage.backbone.fasta -q S_Typhimurium_ST313.gbk -o S_Typhimurium_ST313_AGEnt`
         - Attempted to use RAST annotated genome file for this, but ran into issue with CDS region not included (?)
         - Just used the Prokka annotated one instead
     - For ClustAGE, wanted to remove a prefix I had added (salmonella_clustage.) so I actually (sadly) found the easiest command to be in powershell for both .fasta and .txt files
-      - get-childitem * .txt | foreach { rename-item $_ $_ .Name.Replace("salmonella_clustage.", "") }
-      - get-childitem * .fasta | foreach { rename-item $_ $_ .Name.Replace("salmonella_clustage.", "") }
+      - `get-childitem * .txt | foreach { rename-item $_ $_ .Name.Replace("salmonella_clustage.", "") }`
+      - `get-childitem * .fasta | foreach { rename-item $_ $_ .Name.Replace("salmonella_clustage.", "") }`
     - Moving files to make it easier for ClustAGE analysis (same directory)
-      - $ mv * accessory.fasta FASTA_Accessory
-      - $ mv * accessory_loci.txt Txt_loci_Accessory
+      - `$ mv * accessory.fasta FASTA_Accessory`
+      - `$ mv * accessory_loci.txt Txt_loci_Accessory`
     - Making files for referencing these files in the ClustAGE software command line
       - Helpful command to make list of path and file to easily work with after:
-        - $ find $(pwd) > fasta_accessory_list.txt
+        - `$ find $(pwd) > fasta_accessory_list.txt`
     - Running ClustAGE with all 20 Genomes
-      - $ perl ClustAGE.pl -f fasta_accessory_list.txt --annot loci_accessory_list.txt -p
+      - `$ perl ClustAGE.pl -f fasta_accessory_list.txt --annot loci_accessory_list.txt -p`
     - Move to Clustage/utilies/ folder
     - Used .csv and .key.txt files to create a tree file to use to construct a Phylogeny
-      - $ perl subelements_to_tree.pl -c out_subelements.csv -k out_subelements.key.txt
-        - Used Phylip3
+      - `$ perl subelements_to_tree.pl -c out_subelements.csv -k out_subelements.key.txt`
+        - This used Phylip3 to create a NJ tree from the comparison of the accessory genomic elements of all of the genomes analyzed
     - Plotting circular plot to show bin relationships between Genomes
       - http://vfsmspineagent.fsm.northwestern.edu
       - default settings
@@ -363,13 +369,14 @@ genomes produced by NGS" - (Ozer et al. 2014 BMC Genomics)
             - Used S_Typhimurium_SL1344_FQ as the reference (.fasta) and its annotations (.gff3)
             - Have information on the Ray assembly now
       - Re run ST313 with velvet
-        - Getting velvet and velvetoptimiser from sudo apt-get install
-        - $ velveth Assem 31 -shortPaired -fastq ERX2691743.fastq
+        - Getting velvet and velvetoptimiser from `sudo apt-get install`
+        - `$ velveth Assem 31 -shortPaired -fastq ERX2691743.fastq`
           - Using this website to help
           - http://evomics.org/learning/assembly-and-alignment/velvet/
-        - $ velvetg auto_33 -exp_cov auto
+        - `$ velvetg auto_33 -exp_cov auto`
           - Final graph has 1481591 nodes and n50 of 29, max 269, total 20415996, using 99802/591656 reads
-        -
+        - Ended up not using velvet, there seem to be some issues with the output, unsure of how to move forward with files output
+        - Going to just stick with assembly that I got from using Ray
 
 
 
@@ -379,7 +386,7 @@ genomes produced by NGS" - (Ozer et al. 2014 BMC Genomics)
       - "As more completed genomes become available and are added to this analysis, it is anticipated that the size of the core genome will decrease. A curve fit to the data in Figure 2 suggests that the core genome size may plateau at approximately 5.10 Mbp, or 78% of the P. aeruginosa genome.""
       - "novel accessory genomic sequences will continue to be forthcoming, especially in bacteria such as P. aeruginosa with theoretically open genomes. For this reason, methods for rapidly and accurately identifying accessory genome sequences are needed. To accomplish this, we developed a new software algorithm for identification of both core and accessory genomes from bacterial genome sequences."
   - Also created file of list of chromosome and plasmid accession numbers used in the analysis
-    - Accession_list_chromosomes_plasmids.txt
+    - `Accession_list_chromosomes_plasmids.txt`
   - In parallel, wanted to see what I would get with using RealPHY as a way to infer phylogenetic relationships between the same two draft genomes and the reference genomes:
     - https://realphy.unibas.ch/realphy/
     - Placed the 18 reference Genomes
@@ -403,17 +410,22 @@ genomes produced by NGS" - (Ozer et al. 2014 BMC Genomics)
 - Re doing Prokka for S_Typhimurium_ST313
   - Found out that should have used the scaffolds.fasta not the contigs.fasta, for contiguous sequence
     - Actually dont think it really matters now
-  - $ prokka --proteins S_Typhimurium_SL1344_FQ.gb --outdir S_Typhimurium_ST313_scaffold --prefix S_Typhimurium_ST313 Contigs.fasta
+  - `$ prokka --proteins S_Typhimurium_SL1344_FQ.gb --outdir S_Typhimurium_ST313_scaffold --prefix S_Typhimurium_ST313 scaffolds.fasta`
     - Taking this .gbk file and running it through webtool ICEfinder
       - http://202.120.12.136:7913/ICEfinder/ICEfinder.html
   - Doing same for S_Abortusovis_SR44 to annotate that file in a similar fashion
   - Once S_Abortusovis_SR44 is done in Prokka, going to run that .gbk file through ICEfinder as well
-  - Running RAST again as well with S_Typhimurium_ST313 scaffolds.fasta file instead this time
+      - Ended up not working correctly, tried to use webtool but it wouldn't run the whole file, just kept running only one contig?
+  - Running RAST again as well with S_Typhimurium_ST313 `scaffolds.fasta` file instead this time
     - Should help with any missing regions, so get those and use both ST313 and SR44 together in the Spine analysis later
     - ERROR: Got convergent overlap error again, dont know how to fix
+      - Going to move forward with just the Prokka annotations
   - Looking at ICEberg since Spine paper used it for its annotations
     - http://db-mml.sjtu.edu.cn/ICEberg/
     - But appears to be a blast service to create a blast database, dont know how they then went ahead and use this information to annotate their genome
+      - Ended up not doing this part of the pipeline (ICE finding)
+    -
+
 
 #### Ideas for Presentation
   - Talk about these things in this order or similar:
@@ -478,6 +490,34 @@ genomes produced by NGS" - (Ozer et al. 2014 BMC Genomics)
     - Just uploaded the .fastq files I had to this service to see if I got the same assemble as they did (79 contig instead of 100+)
       - Used the "trim reads" option
     - Error: Needs paired end Illumina reads to be in two files
-    - SPlitting the fastq interleaved file using Galaxy webtool for FastQ Splitter then trying again
+    - Splitting the fastq interleaved file using Galaxy webtool for FastQ Splitter then trying again
       - https://usegalaxy.org/
     - Downloading files and going to apply to the CGE Assembly server
+    - Ended up not working, and kept running into errors uploading these fastq files
+      - Going to just use the Ray output, although it itself is not perfect
+
+### April 20, 2019
+
+  - With newly annotated forms of ST313 and SR44 serovars (using the scaffolds.fa instead of contigs.fa), rerunning Spine/AGEnt/ ClustAGE pipeline as described above
+    - In review:
+```
+# Spine creates core genomes as well as identify accessory genomes of all input reference genomes; Core genomes identified as being found in 90% of genomes input (17/18)
+$ perl spine.pl -f salmonella_clustage_list.txt -a 90 -o salmonella_clust_90 --pangenome
+# AGEnt used to ID accessory genomic elements of newly annotated draft genomes
+`$ perl AGEnt.pl -r salmonella_clustage.backbone.fasta -q S_Abortusovis_SR44.gbk -o S_Abortusovis_SR44_AGEnt`
+`$ perl AGEnt.pl -r salmonella_clustage.backbone.fasta -q S_Typhimurium_ST313.gbk -o S_Typhimurium_ST313_AGEnt`
+# Run the accessory genomes (referred to in the list fasta_accessory_list.txt) with another input identified the annotated CDS of each region (--annot <file>)
+`$ perl ClustAGE.pl -f fasta_accessory_list.txt --annot loci_accessory_list.txt -p`
+# Relocate output files that include the subelements present in each accessory genome along with a key of the annotated region to folder containing a perl command to analyze the similarity of the serovars using a Neighbor Joining method in Phylip3, creating a tree output file along with a heat map that ID's similarities between the genomes
+`$ perl subelements_to_tree.pl -c out_subelements.csv -k out_subelements.key.txt`
+```
+  - Use the output files (.tree and heatmap files) in iTOL, a free online tool for displaying and creating visualizations of trees
+  - This will be used to show the relationships of all 19 enterica genomes, along with their relationship to the one S. bongori genome included; Comparing this to the tree previously created of only 16 reference genomes
+
+### April 21, 2019
+
+  - Attempted to rerun MAFFT alignment locally and with different parameters (fastest available)
+     - `$ mafft salmonella_chromosomes.txt > salmonella_chrom_mafft.txt`
+      - Basically default parameters, auto detecting which ones to use; salmonella_chromosomes.txt is a list of only chromosomes of the serovars (and not including any chromosomes) just to see if I could get the MAFFT to work for the chromosomes alone
+      - Again, program made it to the fifth iteration about (5/17 chromosomes being analyzed) and got hung up for hours
+      - Had to cancel program and move on without using another multiple genome aligner
