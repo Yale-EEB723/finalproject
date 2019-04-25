@@ -31,9 +31,9 @@ This project can be broken up into 3 goals:
 
 ## The data  
 
-**Data source**: All genomes and gff3 files were downloaded from Ensembl. In general, only the toplevel assembly was available, so all synteny analysis was run on either toplevel or primary assemblies. GFF3 statistics were run on chromosomal level assemblies for Drosophila, Danio, Homo and Taeniopygia since the presence of many short scaffolds lacking annotated genes produced misleading results.    
+**Data source**: All genomes and GFF3 files were downloaded from Ensembl. In general, only the toplevel assembly was available, so all synteny analysis was run on either toplevel or primary assemblies. GFF3 statistics were run on chromosomal level assemblies for Drosophila, Danio, Homo and Taeniopygia since the presence of many short scaffolds lacking annotated genes produced misleading results.    
 
-**The genome versions I used:**    
+**The genome versions:**    
 Amphimedon queenslandica: Aqu1  
 Capitella telata: Capitella telata v1.0  
 Danio rerio: GRCz11  
@@ -58,7 +58,6 @@ All code was written in R, except where indicated.
 Load libraries:    
 
 ```
-{r preliminaries}
 library( tidyverse )
 library(ggplot2)
 library(seqinr)
@@ -71,6 +70,11 @@ library(cluster)
 library(CrossClustering)
 library(vegan)
 library(Rtsne)
+library(factoextra)
+
+#tree manipulation
+library(ape)
+library(hutan)
 ```
 
 ### Genome Statistics  
@@ -78,7 +82,7 @@ library(Rtsne)
 #### What is the distribution of median assembly scaffold length?  
 How fragmented are the genomes?  
 
-The human and zebrafish fastas were too large to run through this code, but median scaffold length was found online. The many small unplaced scaffolds in the Drosophila toplevel assembly reduced median scaffold length, so only chromosomes were used.  
+The human and zebrafish fastas were too large to run through this code, but median scaffold length was found from online database resources. The many small unplaced scaffolds in the Drosophila toplevel assembly reduced median scaffold length, so only chromosomes were used.  
 
 ```
 {r distr scaffold length}
@@ -110,7 +114,6 @@ print(paste("Minimum scaffold/contig length (bp):",min(as.numeric(fasta.len))))
 
 ```
 {r count no genes per contig/scaffold}
-#install.packages("ape")
 
 gff3_dir<-"data/genomes/gff3/"
 gff3<-c("Amphimedon_queenslandica.Aqu1.42.gff3","Capitella_teleta.Capitella_teleta_v1.0.42.gff3","Danio_rerio.GRCz11.96.chr.gff3","Drosophila_melanogaster.BDGP6.22.96.chr.gff3","Helobdella_robusta.Helro1.42.gff3","Homo_sapiens.GRCh38.96.chr.gff3","Lottia_gigantea.Lotgi1.42.gff3","Mnemiopsis_leidyi.MneLei_Aug2011.42.gff3","Nematostella_vectensis.ASM20922v1.42.gff3","Strongylocentrotus_purpuratus.Spur_3.1.42.gff3","Taeniopygia_guttata.taeGut3.2.4.96.chr.gff3","Trichoplax_adhaerens.ASM15027v1.42.gff3")
@@ -738,6 +741,8 @@ rand.tsne_plot
 ## Results
 ### Broad Sampling Across the Animal Tree  
 These are the animals chosen for this project. They were selected to represent a broad swath of diversity across Metazoa.  
+
+![phylogeny](readme_figs/phylogeny)  
 
 ### Is Synteny Analysis Possible?   
 Synteny analysis, which studies the spatial distribution of genes in the genome, greatly depends on the use of high quality assemblies. How does assembly contiguity vary across the animal tree?  

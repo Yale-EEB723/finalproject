@@ -276,20 +276,24 @@ for (blah in fasta){
 fasta_path<-paste0(fasta_dir,blah)  
 
 #histogram of call ontig lengths,
-scaffold.length.plot<-read.fasta(fasta_path)%>%getLength(.)%>%as.data.frame()%>%ggplot()+geom_histogram(aes(x=.), fill="skyblue3", color="black",binwidth=100)+xlab("Scaffold Length")+labs(title=blah)
-scaffold.length.plot
+scaffold.length.plot<-read.fasta(fasta_path)%>%getLength(.)%>%as.data.frame()%>%ggplot()+geom_histogram(aes(x=.), fill="skyblue3", color="black",binwidth=100)+xlab("Scaffold Length (bp)")+ylab("Frequency")+labs(title=blah)
+scaffold.length.plotggplot(df,aes(x=x,y=y))+geom_col(fill="skyblue3")+scale_y_continuous(trans='log10')
+ggsave(scaffold.length.plot,file=paste0("scaffold.len_",blah,".pdf"))
 
 #histogram of contig lengths, restricted to scaffolds < 10,000 bp
-restricted.plot<-read.fasta(fasta_path)%>%getLength(.)%>%as.data.frame()%>%filter(.<10000)%>%ggplot()+geom_histogram(aes(x=.), fill="skyblue3", color="black",binwidth=100)+xlab("Scaffold Length")+labs(title=blah)
+restricted.plot<-read.fasta(fasta_path)%>%getLength(.)%>%as.data.frame()%>%filter(.<10000)%>%ggplot()+geom_histogram(aes(x=.), fill="skyblue3", color="black",binwidth=100)+xlab("Scaffold Length (bp)")+ylab("Frequency")+labs(title=blah)
 restricted.plot
+ggsave(scaffold.length.plot,file=paste0("scaffold.len_10000bp_",blah,".pdf"))
 
 #stats
+print(blah)
 fasta.len=read.fasta(fasta_path)%>%getLength()
 print(paste("Median scaffold/contig length (bp):",median(as.numeric(fasta.len))))
 print(paste("Max scaffold/contig length (bp):",max(as.numeric(fasta.len))))
 print(paste("Minimum scaffold/contig length (bp):",min(as.numeric(fasta.len))))
   
 }
+
 
 
 
@@ -326,25 +330,43 @@ contig.gene.df <- ape::read.gff(file=gff3_path, GFF3=TRUE) %>% select(.,"seqid",
 gene.count<- as.data.frame(table(contig.gene.df$seqid))
 
 #plot frequency of frequencies
-gff3.plot<-ggplot(data = gene.count, aes(x=gene.count$Freq)) + geom_histogram(binwidth=1) + geom_vline(xintercept = 3,color="red")+ggtitle(blah)
+gff3.plot<-ggplot(data = gene.count, aes(x=gene.count$Freq)) + geom_histogram(binwidth=1) + geom_vline(xintercept = 3,color="red")+ggtitle(blah) +xlab("Number of Genes Per Contig")+ylab("Frequency")+labs(title=blah)
 gff3.plot
+ggsave(gff3.plot,file=paste0("gff3_",blah,".pdf"))
+
 #use for custom axes
-#gff3.plot<-ggplot(data = gene.count, aes(x=gene.count$Freq)) + geom_histogram(binwidth=1) + geom_vline(xintercept = 3,color="red") +xlim(0,10)+ylim(0,3000)
+gff3.plot.custom.axes<-ggplot(data = gene.count, aes(x=gene.count$Freq)) + geom_histogram(binwidth=1) + geom_vline(xintercept = 3,color="red") +xlim(0,10)+ylim(0,3000)+xlab("Number of Genes Per Contig")+ylab("Frequency")+labs(title=blah)
+gff3.plot.custom.axes<
+ggsave(gff3.plot.custom.axes,file=paste0("gff3_customaxes_",blah,".pdf"))
+
 
 #stats
-
 print(blah)
-
 print(paste("proportion contigs with gene count >= 3:",nrow(subset(gene.count, gene.count$Freq >= 3))/nrow(gene.count)*100))
-
 print(paste("Median no. genes/contig:",median(gene.count$Freq)))
-
 print(paste("Max no. genes/contig:",max(gene.count$Freq))) 
 
 }
 
 
 ```
+
+```{r overall genome stats}
+#median scaffold length
+species<-c("Mle","Aqu","Tad","Nve","Lgi","Cte","Hro","Dme","Spur","Dre","Hsa","Tgu")
+csv<-read.csv("output/genome_data.csv")
+df<-data.frame(y=csv$median_scaff_len)
+df$x<-as.character(df$x)
+ggplot_median.scaffold.len<-ggplot(df,aes(x=x,y=y))+geom_bar(fill="skyblue3",stat="identity")+scale_y_continuous(trans='log10')+xlab("Species")+ylab("Log10 Median Scaffold Length (bp)")+labs(title = "Median Scaffold Length")
+
+df<-data.frame(y=csv$no.chromosomes)
+df$x<-factor(x=c("Mle","Aqu","Tad","Nve","Lgi","Cte","Hro","Dme","Spur","Dre","Hsa","Tgu"))%>%factor()
+ggplot_no_scaff<-ggplot(df,aes(x=x,y=y))+geom_col(fill="skyblue3")+scale_y_continuous(trans='log10')+xlab("Species")+ylab("Log10 Number of Scaffolds")+labs(title = "Number of Scaffolds per Genome Assembly")
+
+
+
+```
+
 
 #Find homologous genes between genomes
 Cannot use previous agalma runs for single cell seq analysis because those were custom fasta files from papers - ie have genes not in genome annotation.  
