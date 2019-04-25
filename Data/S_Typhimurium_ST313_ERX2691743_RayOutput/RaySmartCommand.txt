@@ -1,0 +1,5 @@
+mpiexec -n 2 Ray \
+ -k \
+ 31 \
+ -i \
+ ERX2691743.fastq

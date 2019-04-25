@@ -1,0 +1,30 @@
+ClustAGE.pl
+version: 0.8
+Support software:
+blastn (version: 2.3.0)
+makeblastdb (version: 2.3.0)
+bwa (version: N/A)
+gnuplot (version: 5.2)
+
+Started at 15:17:28 on 4/16/2019
+
+Input list (file|f): fasta_accessory_list.txt
+Annotation files (annot): loci_accessory_list.txt
+Minimum e-value (evalue|e): 1e-06
+Minimum sequence identity % (pctid|i): 85
+Maximum alignment number (maxalign|a): 100000
+Minimum accessory element size (min_age|x): 200
+Minimum alignment length (min_align): 100
+Output prefix (out|o): out
+Skip outputting csv (--skip_se): No
+Minimum csv subelment size (min_se|s): 1
+Minimum sublement sequence size (min_se_seq): 100
+Minimum genome number (min_gen|g): 1
+Output graphics (graph|p): Yes
+
+Read correction file (reads|r): N/A
+Core genome sequence (core|c): N/A
+Minimum read depth (depth|d): 5
+
+Verbose output (verbose|v): No
+Threads (threads|t): 4

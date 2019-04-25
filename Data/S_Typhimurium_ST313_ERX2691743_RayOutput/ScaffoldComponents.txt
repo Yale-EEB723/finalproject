@@ -1,0 +1,2028 @@
+scaffold-0	contig-0	F	19676
+
+scaffold-1	contig-1	F	24390
+
+scaffold-2	contig-1000000	F	21848
+
+scaffold-3	contig-1000001	F	22854
+
+scaffold-4	contig-2000000	F	18988
+
+scaffold-5	contig-2000001	F	20115
+
+scaffold-6	contig-3000000	F	15155
+
+scaffold-7	contig-3000001	F	18681
+
+scaffold-8	contig-4000000	F	19065
+
+scaffold-9	contig-4000001	F	16962
+
+scaffold-10	contig-5000000	F	17204
+
+scaffold-11	contig-5000001	F	16325
+
+scaffold-12	contig-6000000	F	13685
+
+scaffold-13	contig-6000001	F	15891
+
+scaffold-14	contig-7000000	F	14581
+
+scaffold-15	contig-7000001	F	16233
+
+scaffold-16	contig-8000000	F	15092
+
+scaffold-17	contig-8000001	F	14805
+
+scaffold-18	contig-9000000	F	12678
+
+scaffold-19	contig-9000001	F	14704
+
+scaffold-20	contig-10000000	F	12921
+
+scaffold-21	contig-11000000	F	12850
+
+scaffold-22	contig-10000001	F	13768
+
+scaffold-23	contig-12000000	F	12490
+
+scaffold-24	contig-11000001	F	14918
+
+scaffold-25	contig-13000000	F	12151
+
+scaffold-26	contig-12000001	F	12633
+
+scaffold-27	contig-14000000	F	12313
+
+scaffold-28	contig-13000001	F	12746
+
+scaffold-29	contig-15000000	F	11894
+
+scaffold-30	contig-14000001	F	13309
+
+scaffold-31	contig-16000000	F	11111
+
+scaffold-32	contig-15000001	F	12491
+
+scaffold-33	contig-17000000	F	11795
+
+scaffold-34	contig-16000001	F	15146
+
+scaffold-35	contig-18000000	F	14194
+
+scaffold-36	contig-17000001	F	11690
+
+scaffold-37	contig-19000000	F	10914
+
+scaffold-38	contig-18000001	F	11061
+
+scaffold-39	contig-20000000	F	10322
+
+scaffold-40	contig-19000001	F	12720
+
+scaffold-41	contig-21000000	F	10308
+
+scaffold-42	contig-20000001	F	11003
+
+scaffold-43	contig-22000000	F	13994
+
+scaffold-44	contig-21000001	F	9837
+
+scaffold-45	contig-23000000	F	11142
+
+scaffold-46	contig-22000001	F	10154
+
+scaffold-47	contig-24000000	F	10435
+
+scaffold-48	contig-23000001	F	10546
+
+scaffold-49	contig-25000000	F	9638
+
+scaffold-50	contig-24000001	F	12705
+
+scaffold-51	contig-26000000	F	13186
+
+scaffold-52	contig-25000001	F	9731
+
+scaffold-53	contig-27000000	F	10325
+
+scaffold-54	contig-26000001	F	9465
+
+scaffold-55	contig-28000000	F	9245
+
+scaffold-56	contig-27000001	F	9528
+
+scaffold-57	contig-29000000	F	11528
+
+scaffold-58	contig-28000001	F	10286
+
+scaffold-59	contig-30000000	F	9609
+
+scaffold-60	contig-29000001	F	10086
+
+scaffold-61	contig-31000000	F	9601
+
+scaffold-62	contig-30000001	F	9360
+
+scaffold-63	contig-32000000	F	10209
+
+scaffold-64	contig-31000001	F	8934
+
+scaffold-65	contig-33000000	F	9471
+
+scaffold-66	contig-32000001	F	8769
+
+scaffold-67	contig-33000001	F	9057
+
+scaffold-68	contig-34000000	F	11596
+
+scaffold-69	contig-35000000	F	8742
+
+scaffold-70	contig-34000001	F	11046
+
+scaffold-71	contig-36000000	F	9162
+
+scaffold-72	contig-35000001	F	13152
+
+scaffold-73	contig-37000000	F	10066
+
+scaffold-74	contig-36000001	F	10752
+
+scaffold-75	contig-38000000	F	8694
+
+scaffold-76	contig-37000001	F	9771
+
+scaffold-77	contig-39000000	F	9101
+
+scaffold-78	contig-38000001	F	8729
+
+scaffold-79	contig-40000000	F	8730
+
+scaffold-80	contig-41000000	F	8497
+
+scaffold-81	contig-39000001	F	13144
+
+scaffold-82	contig-42000000	F	8592
+
+scaffold-83	contig-40000001	F	8993
+
+scaffold-84	contig-41000001	F	8289
+
+scaffold-85	contig-43000000	F	11480
+
+scaffold-86	contig-42000001	F	8304
+
+scaffold-87	contig-44000000	F	9066
+
+scaffold-88	contig-43000001	F	8622
+
+scaffold-89	contig-45000000	F	8603
+
+scaffold-90	contig-44000001	F	9198
+
+scaffold-91	contig-46000000	F	9049
+
+scaffold-92	contig-47000000	F	8245
+
+scaffold-93	contig-45000001	F	11143
+
+scaffold-94	contig-46000001	F	7489
+
+scaffold-95	contig-48000000	F	8821
+
+scaffold-96	contig-49000000	F	8057
+
+scaffold-97	contig-47000001	F	10667
+
+scaffold-98	contig-50000000	F	8149
+
+scaffold-99	contig-48000001	F	8968
+
+scaffold-100	contig-51000000	F	9451
+
+scaffold-101	contig-49000001	F	8139
+
+scaffold-102	contig-50000001	F	7670
+
+scaffold-103	contig-52000000	F	7684
+
+scaffold-104	contig-51000001	F	7873
+
+scaffold-105	contig-53000000	F	9354
+
+scaffold-106	contig-52000001	F	7626
+
+scaffold-107	contig-54000000	F	7779
+
+scaffold-108	contig-53000001	F	6960
+
+scaffold-109	contig-55000000	F	8221
+
+scaffold-110	contig-54000001	F	10377
+
+scaffold-111	contig-56000000	F	8084
+
+scaffold-112	contig-57000000	F	7386
+
+scaffold-113	contig-55000001	F	7670
+
+scaffold-114	contig-56000001	F	6954
+
+scaffold-115	contig-58000000	F	7706
+
+scaffold-116	contig-57000001	F	8299
+
+scaffold-117	contig-59000000	F	7961
+
+scaffold-118	contig-60000000	F	7210
+
+scaffold-119	contig-58000001	F	9961
+
+scaffold-120	contig-61000000	F	7257
+
+scaffold-121	contig-59000001	F	6217
+
+scaffold-122	contig-62000000	F	7053
+
+scaffold-123	contig-60000001	F	7157
+
+scaffold-124	contig-61000001	F	6186
+
+scaffold-125	contig-63000000	F	8324
+
+scaffold-126	contig-62000001	F	6736
+
+scaffold-127	contig-64000000	F	6462
+
+scaffold-128	contig-63000001	F	6040
+
+scaffold-129	contig-65000000	F	6738
+
+scaffold-130	contig-64000001	F	8625
+
+scaffold-131	contig-66000000	F	8081
+
+scaffold-132	contig-65000001	F	6535
+
+scaffold-133	contig-67000000	F	6544
+
+scaffold-134	contig-68000000	F	6149
+
+scaffold-135	contig-66000001	F	7479
+
+scaffold-136	contig-67000001	F	6041
+
+scaffold-137	contig-69000000	F	7518
+
+scaffold-138	contig-68000001	F	6537
+
+scaffold-139	contig-70000000	F	7390
+
+scaffold-140	contig-69000001	F	7526
+
+scaffold-141	contig-71000000	F	7773
+
+scaffold-142	contig-70000001	F	6289
+
+scaffold-143	contig-72000000	F	7407
+
+scaffold-144	contig-71000001	F	9082
+
+scaffold-145	contig-73000000	F	6567
+
+scaffold-146	contig-72000001	F	5745
+
+scaffold-147	contig-74000000	F	6526
+
+scaffold-148	contig-73000001	F	6177
+
+scaffold-149	contig-75000000	F	5935
+
+scaffold-150	contig-74000001	F	6754
+
+scaffold-151	contig-76000000	F	6180
+
+scaffold-152	contig-75000001	F	5890
+
+scaffold-153	contig-77000000	F	6850
+
+scaffold-154	contig-76000001	F	5675
+
+scaffold-155	contig-78000000	F	7480
+
+scaffold-156	contig-77000001	F	8135
+
+scaffold-157	contig-79000000	F	7368
+
+scaffold-158	contig-78000001	F	6295
+
+scaffold-159	contig-80000000	F	5532
+
+scaffold-160	contig-79000001	F	5781
+
+scaffold-161	contig-81000000	F	5946
+
+scaffold-162	contig-80000001	F	9453
+
+scaffold-163	contig-82000000	F	7581
+
+scaffold-164	contig-81000001	F	5438
+
+scaffold-165	contig-83000000	F	5402
+
+scaffold-166	contig-82000001	F	7085
+
+scaffold-167	contig-84000000	F	7054
+
+scaffold-168	contig-83000001	F	8039
+
+scaffold-169	contig-85000000	F	9344
+
+scaffold-170	contig-84000001	F	5452
+
+scaffold-171	contig-86000000	F	5646
+
+scaffold-172	contig-85000001	F	5538
+
+scaffold-173	contig-87000000	F	6553
+
+scaffold-174	contig-86000001	F	5595
+
+scaffold-175	contig-88000000	F	5675
+
+scaffold-176	contig-87000001	F	5974
+
+scaffold-177	contig-89000000	F	5068
+
+scaffold-178	contig-88000001	F	6409
+
+scaffold-179	contig-90000000	F	5224
+
+scaffold-180	contig-89000001	F	5395
+
+scaffold-181	contig-91000000	F	5690
+
+scaffold-182	contig-90000001	F	7497
+
+scaffold-183	contig-92000000	F	6336
+
+scaffold-184	contig-91000001	F	6173
+
+scaffold-185	contig-93000000	F	5760
+
+scaffold-186	contig-94000000	F	6823
+
+scaffold-187	contig-92000001	F	7313
+
+scaffold-188	contig-95000000	F	6218
+
+scaffold-189	contig-93000001	F	6551
+
+scaffold-190	contig-96000000	F	4824
+
+scaffold-191	contig-94000001	F	8865
+
+scaffold-192	contig-97000000	F	6286
+
+scaffold-193	contig-95000001	F	6104
+
+scaffold-194	contig-98000000	F	4997
+
+scaffold-195	contig-96000001	F	4900
+
+scaffold-196	contig-99000000	F	5007
+
+scaffold-197	contig-97000001	F	5378
+
+scaffold-198	contig-100000000	F	6226
+
+scaffold-199	contig-98000001	F	5614
+
+scaffold-200	contig-101000000	F	5956
+
+scaffold-201	contig-99000001	F	6178
+
+scaffold-202	contig-102000000	F	6918
+
+scaffold-203	contig-100000001	F	5249
+
+scaffold-204	contig-103000000	F	5230
+
+scaffold-205	contig-101000001	F	6419
+
+scaffold-206	contig-104000000	F	6665
+
+scaffold-207	contig-102000001	F	8046
+
+scaffold-208	contig-105000000	F	6227
+
+scaffold-209	contig-103000001	F	4638
+
+scaffold-210	contig-106000000	F	5649
+
+scaffold-211	contig-104000001	F	4634
+
+scaffold-212	contig-107000000	F	5495
+
+scaffold-213	contig-105000001	F	6023
+
+scaffold-214	contig-108000000	F	4508
+
+scaffold-215	contig-106000001	F	5172
+
+scaffold-216	contig-109000000	F	4466
+
+scaffold-217	contig-107000001	F	4545
+
+scaffold-218	contig-110000000	F	6453
+
+scaffold-219	contig-108000001	F	6938
+
+scaffold-220	contig-111000000	F	5423
+
+scaffold-221	contig-109000001	F	4941
+
+scaffold-222	contig-112000000	F	5732
+
+scaffold-223	contig-110000001	F	4458
+
+scaffold-224	contig-113000000	F	5021
+
+scaffold-225	contig-111000001	F	4731
+
+scaffold-226	contig-114000000	F	4461
+
+scaffold-227	contig-112000001	F	7384
+
+scaffold-228	contig-115000000	F	6844
+
+scaffold-229	contig-113000001	F	5622
+
+scaffold-230	contig-116000000	F	6637
+
+scaffold-231	contig-114000001	F	5011
+
+scaffold-232	contig-117000000	F	4200
+
+scaffold-233	contig-115000001	F	5333
+
+scaffold-234	contig-118000000	F	5260
+
+scaffold-235	contig-116000001	F	4386
+
+scaffold-236	contig-119000000	F	5324
+
+scaffold-237	contig-120000000	F	4585
+
+scaffold-238	contig-117000001	F	10143
+
+scaffold-239	contig-121000000	F	4047
+
+scaffold-240	contig-118000001	F	4575
+
+scaffold-241	contig-122000000	F	4199
+
+scaffold-242	contig-123000000	F	4220
+
+scaffold-243	contig-119000001	F	7542
+
+scaffold-244	contig-124000000	F	5757
+
+scaffold-245	contig-120000001	F	4420
+
+scaffold-246	contig-125000000	F	4262
+
+scaffold-247	contig-121000001	F	4286
+
+scaffold-248	contig-126000000	F	3964
+
+scaffold-249	contig-122000001	F	5136
+
+scaffold-250	contig-127000000	F	4502
+
+scaffold-251	contig-123000001	F	4966
+
+scaffold-252	contig-128000000	F	4045
+
+scaffold-253	contig-124000001	F	4141
+
+scaffold-254	contig-129000000	F	4268
+
+scaffold-255	contig-125000001	F	5367
+
+scaffold-256	contig-130000000	F	6163
+
+scaffold-257	contig-126000001	F	4068
+
+scaffold-258	contig-131000000	F	6437
+
+scaffold-259	contig-127000001	F	8761
+
+scaffold-260	contig-132000000	F	4583
+
+scaffold-261	contig-133000000	F	4017
+
+scaffold-262	contig-128000001	F	5741
+
+scaffold-263	contig-134000000	F	3837
+
+scaffold-264	contig-129000001	F	5285
+
+scaffold-265	contig-135000000	F	3632
+
+scaffold-266	contig-136000000	F	4135
+
+scaffold-267	contig-130000001	F	4770
+
+scaffold-268	contig-131000001	F	4524
+
+scaffold-269	contig-137000000	F	5219
+
+scaffold-270	contig-138000000	F	3564
+
+scaffold-271	contig-132000001	F	3894
+
+scaffold-272	contig-133000001	F	3893
+
+scaffold-273	contig-139000000	F	3836
+
+scaffold-274	contig-134000001	F	4705
+
+scaffold-275	contig-140000000	F	4709
+
+scaffold-276	contig-135000001	F	5078
+
+scaffold-277	contig-141000000	F	5545
+
+scaffold-278	contig-136000001	F	4290
+
+scaffold-279	contig-142000000	F	3464
+
+scaffold-280	contig-137000001	F	4669
+
+scaffold-281	contig-143000000	F	4979
+
+scaffold-282	contig-138000001	F	3884
+
+scaffold-283	contig-144000000	F	6663
+
+scaffold-284	contig-139000001	F	4831
+
+scaffold-285	contig-145000000	F	3979
+
+scaffold-286	contig-140000001	F	5059
+
+scaffold-287	contig-146000000	F	4135
+
+scaffold-288	contig-141000001	F	3817
+
+scaffold-289	contig-147000000	F	3386
+
+scaffold-290	contig-142000001	F	4054
+
+scaffold-291	contig-148000000	F	3237
+
+scaffold-292	contig-143000001	F	5031
+
+scaffold-293	contig-149000000	F	6224
+
+scaffold-294	contig-150000000	F	4025
+
+scaffold-295	contig-144000001	F	6755
+
+scaffold-296	contig-151000000	F	3183
+
+scaffold-297	contig-145000001	F	4428
+
+scaffold-298	contig-152000000	F	3465
+
+scaffold-299	contig-146000001	F	4127
+
+scaffold-300	contig-153000000	F	3345
+
+scaffold-301	contig-154000000	F	3038
+
+scaffold-302	contig-147000001	F	4678
+
+scaffold-303	contig-155000000	F	3003
+
+scaffold-304	contig-148000001	F	5161
+
+scaffold-305	contig-156000000	F	5768
+
+scaffold-306	contig-149000001	F	4057
+
+scaffold-307	contig-157000000	F	2986
+
+scaffold-308	contig-150000001	F	4617
+
+scaffold-309	contig-158000000	F	5025
+
+scaffold-310	contig-159000000	F	2867
+
+scaffold-311	contig-151000001	F	5932
+
+scaffold-312	contig-160000000	F	2841
+
+scaffold-313	contig-152000001	F	4180
+
+scaffold-314	contig-161000000	F	3518
+
+scaffold-315	contig-153000001	F	3522
+
+scaffold-316	contig-162000000	F	2790
+
+scaffold-317	contig-163000000	F	3440
+
+scaffold-318	contig-154000001	F	5199
+
+scaffold-319	contig-164000000	F	2728
+
+scaffold-320	contig-155000001	F	4184
+
+scaffold-321	contig-165000000	F	5605
+
+scaffold-322	contig-156000001	F	3461
+
+scaffold-323	contig-157000001	F	4220
+
+scaffold-324	contig-166000000	F	4356
+
+scaffold-325	contig-167000000	F	2711
+
+scaffold-326	contig-158000001	F	3443
+
+scaffold-327	contig-168000000	F	3503
+
+scaffold-328	contig-159000001	F	3732
+
+scaffold-329	contig-169000000	F	3722
+
+scaffold-330	contig-160000001	F	3427
+
+scaffold-331	contig-170000000	F	3192
+
+scaffold-332	contig-161000001	F	4537
+
+scaffold-333	contig-171000000	F	3744
+
+scaffold-334	contig-162000001	F	3331
+
+scaffold-335	contig-172000000	F	3873
+
+scaffold-336	contig-163000001	F	3316
+
+scaffold-337	contig-173000000	F	6464
+
+scaffold-338	contig-164000001	F	7997
+
+scaffold-339	contig-174000000	F	2564
+
+scaffold-340	contig-175000000	F	3283
+
+scaffold-341	contig-165000001	F	4085
+
+scaffold-342	contig-176000000	F	2979
+
+scaffold-343	contig-166000001	F	3220
+
+scaffold-344	contig-167000001	F	3205
+
+scaffold-345	contig-177000000	F	5733
+
+scaffold-346	contig-168000001	F	5102
+
+scaffold-347	contig-178000000	F	5230
+
+scaffold-348	contig-179000000	F	3210
+
+scaffold-349	contig-169000001	F	5240
+
+scaffold-350	contig-180000000	F	3114
+
+scaffold-351	contig-170000001	F	4304
+
+scaffold-352	contig-181000000	F	2971
+
+scaffold-353	contig-171000001	F	3881
+
+scaffold-354	contig-182000000	F	2852
+
+scaffold-355	contig-172000001	F	3701
+
+scaffold-356	contig-183000000	F	4337
+
+scaffold-357	contig-184000000	F	3497
+
+scaffold-358	contig-173000001	F	7535
+
+scaffold-359	contig-185000000	F	3738
+
+scaffold-360	contig-186000000	F	2701
+
+scaffold-361	contig-174000001	F	4210
+
+scaffold-362	contig-187000000	F	3171
+
+scaffold-363	contig-175000001	F	4301
+
+scaffold-364	contig-188000000	F	3318
+
+scaffold-365	contig-189000000	F	2449
+
+scaffold-366	contig-176000001	F	4466
+
+scaffold-367	contig-190000000	F	2362
+
+scaffold-368	contig-177000001	F	3111
+
+scaffold-369	contig-191000000	F	3300
+
+scaffold-370	contig-178000001	F	2986
+
+scaffold-371	contig-192000000	F	3204
+
+scaffold-372	contig-179000001	F	3788
+
+scaffold-373	contig-193000000	F	3330
+
+scaffold-374	contig-194000000	F	2552
+
+scaffold-375	contig-180000001	F	5115
+
+scaffold-376	contig-195000000	F	2213
+
+scaffold-377	contig-196000000	F	2549
+
+scaffold-378	contig-181000001	F	4941
+
+scaffold-379	contig-197000000	F	3075
+
+scaffold-380	contig-182000001	F	4000
+
+scaffold-381	contig-198000000	F	3266
+
+scaffold-382	contig-183000001	F	3539
+
+scaffold-383	contig-199000000	F	2492
+
+scaffold-384	contig-200000000	F	2256
+
+scaffold-385	contig-184000001	F	3704
+
+scaffold-386	contig-201000000	F	2479
+
+scaffold-387	contig-185000001	F	2895
+
+scaffold-388	contig-202000000	F	2410
+
+scaffold-389	contig-203000000	F	2127
+
+scaffold-390	contig-186000001	F	6009
+
+scaffold-391	contig-204000000	F	4340
+
+scaffold-392	contig-205000000	F	3797
+
+scaffold-393	contig-187000001	F	5952
+
+scaffold-394	contig-206000000	F	3180
+
+scaffold-395	contig-188000001	F	3392
+
+scaffold-396	contig-189000001	F	2691
+
+scaffold-397	contig-207000000	F	5778
+
+scaffold-398	contig-190000001	F	2675
+
+scaffold-399	contig-208000000	F	2406
+
+scaffold-400	contig-191000001	F	4348
+
+scaffold-401	contig-209000000	F	3252
+
+scaffold-402	contig-192000001	F	3382
+
+scaffold-403	contig-210000000	F	3644
+
+scaffold-404	contig-193000001	F	3536
+
+scaffold-405	contig-211000000	F	3905
+
+scaffold-406	contig-194000001	F	2906
+
+scaffold-407	contig-212000000	F	2486
+
+scaffold-408	contig-195000001	F	2569
+
+scaffold-409	contig-213000000	F	2995
+
+scaffold-410	contig-196000001	F	2660
+
+scaffold-411	contig-214000000	F	2152
+
+scaffold-412	contig-197000001	F	2813
+
+scaffold-413	contig-215000000	F	1830
+
+scaffold-414	contig-216000000	F	2686
+
+scaffold-415	contig-198000001	F	5193
+
+scaffold-416	contig-217000000	F	4450
+
+scaffold-417	contig-199000001	F	2572
+
+scaffold-418	contig-218000000	F	3328
+
+scaffold-419	contig-200000001	F	3659
+
+scaffold-420	contig-219000000	F	2583
+
+scaffold-421	contig-220000000	F	1795
+
+scaffold-422	contig-201000001	F	4100
+
+scaffold-423	contig-202000001	F	2562
+
+scaffold-424	contig-203000001	F	4435
+
+scaffold-425	contig-221000000	F	10398
+
+scaffold-426	contig-204000001	F	2428
+
+scaffold-427	contig-222000000	F	1990
+
+scaffold-428	contig-205000001	F	3084
+
+scaffold-429	contig-223000000	F	1715
+
+scaffold-430	contig-206000001	F	2665
+
+scaffold-431	contig-207000001	F	2618
+
+scaffold-432	contig-224000000	F	6057
+
+scaffold-433	contig-225000000	F	1992
+
+scaffold-434	contig-208000001	F	3629
+
+scaffold-435	contig-209000001	F	3401
+
+scaffold-436	contig-226000000	F	5344
+
+scaffold-437	contig-210000001	F	3423
+
+scaffold-438	contig-227000000	F	2761
+
+scaffold-439	contig-228000000	F	1637
+
+scaffold-440	contig-229000000	F	2032
+
+scaffold-441	contig-211000001	F	7407
+
+scaffold-442	contig-230000000	F	4966
+
+scaffold-443	contig-212000001	F	2809
+
+scaffold-444	contig-231000000	F	2775
+
+scaffold-445	contig-213000001	F	3044
+
+scaffold-446	contig-232000000	F	1699
+
+scaffold-447	contig-214000001	F	2559
+
+scaffold-448	contig-233000000	F	2074
+
+scaffold-449	contig-215000001	F	2619
+
+scaffold-450	contig-234000000	F	3983
+
+scaffold-451	contig-216000001	F	2532
+
+scaffold-452	contig-217000001	F	2809
+
+scaffold-453	contig-235000000	F	4592
+
+scaffold-454	contig-236000000	F	1558
+
+scaffold-455	contig-218000001	F	2952
+
+scaffold-456	contig-237000000	F	2591
+
+scaffold-457	contig-219000001	F	2984
+
+scaffold-458	contig-238000000	F	1537
+
+scaffold-459	contig-239000000	F	2255
+
+scaffold-460	contig-220000001	F	4231
+
+scaffold-461	contig-240000000	F	1903
+
+scaffold-462	contig-221000001	F	2706
+
+scaffold-463	contig-241000000	F	3066
+
+scaffold-464	contig-242000000	F	2509
+
+scaffold-465	contig-222000001	F	3624
+
+scaffold-466	contig-223000001	F	2147
+
+scaffold-467	contig-243000000	F	4090
+
+scaffold-468	contig-224000001	F	2714
+
+scaffold-469	contig-244000000	F	1435
+
+scaffold-470	contig-245000000	F	1409
+
+scaffold-471	contig-246000000	F	1402
+
+scaffold-472	contig-225000001	F	3924
+
+scaffold-473	contig-247000000	F	2138
+
+scaffold-474	contig-248000000	F	1386
+
+scaffold-475	contig-226000001	F	3783
+
+scaffold-476	contig-249000000	F	2810
+
+scaffold-477	contig-227000001	F	2753
+
+scaffold-478	contig-250000000	F	1564
+
+scaffold-479	contig-228000001	F	2249
+
+scaffold-480	contig-251000000	F	2284
+
+scaffold-481	contig-229000001	F	1949
+
+scaffold-482	contig-230000001	F	2604
+
+scaffold-483	contig-231000001	F	2737
+
+scaffold-484	contig-252000000	F	9314
+
+scaffold-485	contig-232000001	F	3148
+
+scaffold-486	contig-253000000	F	1649
+
+scaffold-487	contig-233000001	F	4108
+
+scaffold-488	contig-254000000	F	2214
+
+scaffold-489	contig-234000001	F	1904
+
+scaffold-490	contig-255000000	F	1556
+
+scaffold-491	contig-256000000	F	1247
+
+scaffold-492	contig-257000000	F	1308
+
+scaffold-493	contig-235000001	F	3542
+
+scaffold-494	contig-258000000	F	1392
+
+scaffold-495	contig-236000001	F	2184
+
+scaffold-496	contig-259000000	F	2205
+
+scaffold-497	contig-260000000	F	1411
+
+scaffold-498	contig-237000001	F	1813
+
+scaffold-499	contig-261000000	F	1724
+
+scaffold-500	contig-238000001	F	2720
+
+scaffold-501	contig-262000000	F	2804
+
+scaffold-502	contig-239000001	F	2375
+
+scaffold-503	contig-263000000	F	2178
+
+scaffold-504	contig-240000001	F	1926
+
+scaffold-505	contig-264000000	F	3297
+
+scaffold-506	contig-265000000	F	1507
+
+scaffold-507	contig-241000001	F	4664
+
+scaffold-508	contig-266000000	F	2443
+
+scaffold-509	contig-242000001	F	2368
+
+scaffold-510	contig-267000000	F	1819
+
+scaffold-511	contig-243000001	F	2059
+
+scaffold-512	contig-268000000	F	1350
+
+scaffold-513	contig-269000000	F	1423
+
+scaffold-514	contig-270000000	F	1614
+
+scaffold-515	contig-244000001	F	4020
+
+scaffold-516	contig-245000001	F	1750
+
+scaffold-517	contig-271000000	F	1142
+
+scaffold-518	contig-272000000	F	1036
+
+scaffold-519	contig-246000001	F	1939
+
+scaffold-520	contig-273000000	F	1285
+
+scaffold-521	contig-274000000	F	1304
+
+scaffold-522	contig-247000001	F	2460
+
+scaffold-523	contig-275000000	F	1018
+
+scaffold-524	contig-276000000	F	996
+
+scaffold-525	contig-248000001	F	1784
+
+scaffold-526	contig-277000000	F	1423
+
+scaffold-527	contig-249000001	F	2295
+
+scaffold-528	contig-278000000	F	2047
+
+scaffold-529	contig-279000000	F	1003
+
+scaffold-530	contig-250000001	F	2811
+
+scaffold-531	contig-280000000	F	925
+
+scaffold-532	contig-281000000	F	1083
+
+scaffold-533	contig-282000000	F	926
+
+scaffold-534	contig-251000001	F	2323
+
+scaffold-535	contig-283000000	F	945
+
+scaffold-536	contig-284000000	F	2054
+
+scaffold-537	contig-252000001	F	2976
+
+scaffold-538	contig-253000001	F	2345
+
+scaffold-539	contig-285000000	F	2636
+
+scaffold-540	contig-286000000	F	1784
+
+scaffold-541	contig-254000001	F	2140
+
+scaffold-542	contig-287000000	F	889
+
+scaffold-543	contig-288000000	F	1506
+
+scaffold-544	contig-255000001	F	2706
+
+scaffold-545	contig-256000001	F	1521
+
+scaffold-546	contig-289000000	F	1376
+
+scaffold-547	contig-290000000	F	1224
+
+scaffold-548	contig-257000001	F	2348
+
+scaffold-549	contig-291000000	F	882
+
+scaffold-550	contig-292000000	F	1451
+
+scaffold-551	contig-258000001	F	2441
+
+scaffold-552	contig-293000000	F	1292
+
+scaffold-553	contig-259000001	F	1922
+
+scaffold-554	contig-294000000	F	2552
+
+scaffold-555	contig-295000000	F	832
+
+scaffold-556	contig-260000001	F	2331
+
+scaffold-557	contig-296000000	F	799
+
+scaffold-558	contig-297000000	F	1052
+
+scaffold-559	contig-298000000	F	1927
+
+scaffold-560	contig-261000001	F	4017
+
+scaffold-561	contig-299000000	F	975
+
+scaffold-562	contig-300000000	F	898
+
+scaffold-563	contig-301000000	F	756
+
+scaffold-564	contig-262000001	F	3333
+
+scaffold-565	contig-302000000	F	2442
+
+scaffold-566	contig-263000001	F	2387
+
+scaffold-567	contig-303000000	F	1762
+
+scaffold-568	contig-304000000	F	1037
+
+scaffold-569	contig-264000001	F	1517
+
+scaffold-570	contig-305000000	F	992
+
+scaffold-571	contig-265000001	F	1743
+
+scaffold-572	contig-306000000	F	1483
+
+scaffold-573	contig-266000001	F	1890
+
+scaffold-574	contig-267000001	F	1613
+
+scaffold-575	contig-307000000	F	3186
+
+scaffold-576	contig-308000000	F	909
+
+scaffold-577	contig-268000001	F	1527
+
+scaffold-578	contig-309000000	F	666
+
+scaffold-579	contig-310000000	F	1310
+
+scaffold-580	contig-311000000	F	876
+
+scaffold-581	contig-269000001	F	3370
+
+scaffold-582	contig-312000000	F	2028
+
+scaffold-583	contig-270000001	F	1462
+
+scaffold-584	contig-271000001	F	2103
+
+scaffold-585	contig-313000000	F	2531
+
+scaffold-586	contig-272000001	F	1310
+
+scaffold-587	contig-314000000	F	1319
+
+scaffold-588	contig-273000001	F	1581
+
+scaffold-589	contig-315000000	F	1888
+
+scaffold-590	contig-274000001	F	1700
+
+scaffold-591	contig-316000000	F	2062
+
+scaffold-592	contig-275000001	F	1756
+
+scaffold-593	contig-317000000	F	1248
+
+scaffold-594	contig-318000000	F	1264
+
+scaffold-595	contig-276000001	F	2194
+
+scaffold-596	contig-319000000	F	1109
+
+scaffold-597	contig-277000001	F	2327
+
+scaffold-598	contig-320000000	F	3535
+
+scaffold-599	contig-321000000	F	808
+
+scaffold-600	contig-278000001	F	2516
+
+scaffold-601	contig-322000000	F	519
+
+scaffold-602	contig-279000001	F	1242
+
+scaffold-603	contig-323000000	F	1738
+
+scaffold-604	contig-324000000	F	1163
+
+scaffold-605	contig-280000001	F	1787
+
+scaffold-606	contig-325000000	F	745
+
+scaffold-607	contig-326000000	F	2101
+
+scaffold-608	contig-327000000	F	788
+
+scaffold-609	contig-281000001	F	3968
+
+scaffold-610	contig-328000000	F	1225
+
+scaffold-611	contig-282000001	F	1567
+
+scaffold-612	contig-329000000	F	484
+
+scaffold-613	contig-330000000	F	1036
+
+scaffold-614	contig-331000000	F	435
+
+scaffold-615	contig-332000000	F	518
+
+scaffold-616	contig-333000000	F	630
+
+scaffold-617	contig-283000001	F	3164
+
+scaffold-618	contig-334000000	F	933
+
+scaffold-619	contig-335000000	F	488
+
+scaffold-620	contig-284000001	F	1212
+
+scaffold-621	contig-336000000	F	555
+
+scaffold-622	contig-337000000	F	670
+
+scaffold-623	contig-285000001	F	2110
+
+scaffold-624	contig-338000000	F	2077
+
+scaffold-625	contig-286000001	F	2672
+
+scaffold-626	contig-287000001	F	1445
+
+scaffold-627	contig-339000000	F	4696
+
+scaffold-628	contig-340000000	F	413
+
+scaffold-629	contig-288000001	F	2066
+
+scaffold-630	contig-341000000	F	822
+
+scaffold-631	contig-289000001	F	1678
+
+scaffold-632	contig-290000001	F	1310
+
+scaffold-633	contig-342000000	F	3416
+
+scaffold-634	contig-343000000	F	437
+
+scaffold-635	contig-291000001	F	1117
+
+scaffold-636	contig-344000000	F	360
+
+scaffold-637	contig-345000000	F	539
+
+scaffold-638	contig-292000001	F	1125
+
+scaffold-639	contig-346000000	F	474
+
+scaffold-640	contig-347000000	F	468
+
+scaffold-641	contig-348000000	F	309
+
+scaffold-642	contig-349000000	F	987
+
+scaffold-643	contig-293000001	F	1848
+
+scaffold-644	contig-350000000	F	799
+
+scaffold-645	contig-351000000	F	698
+
+scaffold-646	contig-294000001	F	1374
+
+scaffold-647	contig-352000000	F	738
+
+scaffold-648	contig-353000000	F	625
+
+scaffold-649	contig-295000001	F	1269
+
+scaffold-650	contig-354000000	F	921
+
+scaffold-651	contig-296000001	F	1165
+
+scaffold-652	contig-355000000	F	405
+
+scaffold-653	contig-356000000	F	304
+
+scaffold-654	contig-357000000	F	546
+
+scaffold-655	contig-358000000	F	457
+
+scaffold-656	contig-297000001	F	1462
+
+scaffold-657	contig-359000000	F	415
+
+scaffold-658	contig-360000000	F	268
+
+scaffold-659	contig-361000000	F	317
+
+scaffold-660	contig-298000001	F	2458
+
+scaffold-661	contig-362000000	F	2387
+
+scaffold-662	contig-363000000	F	632
+
+scaffold-663	contig-299000001	F	1774
+
+scaffold-664	contig-364000000	F	1343
+
+scaffold-665	contig-300000001	F	1053
+
+scaffold-666	contig-365000000	F	426
+
+scaffold-667	contig-366000000	F	272
+
+scaffold-668	contig-367000000	F	293
+
+scaffold-669	contig-368000000	F	393
+
+scaffold-670	contig-369000000	F	287
+
+scaffold-671	contig-370000000	F	256
+
+scaffold-672	contig-371000000	F	426
+
+scaffold-673	contig-372000000	F	237
+
+scaffold-674	contig-373000000	F	311
+
+scaffold-675	contig-374000000	F	227
+
+scaffold-676	contig-375000000	F	350
+
+scaffold-677	contig-376000000	F	236
+
+scaffold-678	contig-377000000	F	821
+
+scaffold-679	contig-301000001	F	4660
+
+scaffold-680	contig-302000001	F	1249
+
+scaffold-681	contig-378000000	F	2930
+
+scaffold-682	contig-379000000	F	259
+
+scaffold-683	contig-303000001	F	1286
+
+scaffold-684	contig-380000000	F	890
+
+scaffold-685	contig-304000001	F	1048
+
+scaffold-686	contig-381000000	F	362
+
+scaffold-687	contig-382000000	F	202
+
+scaffold-688	contig-383000000	F	500
+
+scaffold-689	contig-384000000	F	211
+
+scaffold-690	contig-385000000	F	271
+
+scaffold-691	contig-386000000	F	213
+
+scaffold-692	contig-387000000	F	307
+
+scaffold-693	contig-305000001	F	2087
+
+scaffold-694	contig-388000000	F	434
+
+scaffold-695	contig-389000000	F	259
+
+scaffold-696	contig-390000000	F	773
+
+scaffold-697	contig-391000000	F	491
+
+scaffold-698	contig-306000001	F	1774
+
+scaffold-699	contig-307000001	F	897
+
+scaffold-700	contig-308000001	F	1132
+
+scaffold-701	contig-392000000	F	3130
+
+scaffold-702	contig-393000000	F	381
+
+scaffold-703	contig-309000001	F	1833
+
+scaffold-704	contig-394000000	F	1179
+
+scaffold-705	contig-395000000	F	455
+
+scaffold-706	contig-396000000	F	182
+
+scaffold-707	contig-310000001	F	850
+
+scaffold-708	contig-397000000	F	1742
+
+scaffold-709	contig-398000000	F	186
+
+scaffold-710	contig-399000000	F	182
+
+scaffold-711	contig-400000000	F	319
+
+scaffold-712	contig-401000000	F	214
+
+scaffold-713	contig-402000000	F	160
+
+scaffold-714	contig-403000000	F	171
+
+scaffold-715	contig-404000000	F	467
+
+scaffold-716	contig-311000001	F	3619
+
+scaffold-717	contig-405000000	F	349
+
+scaffold-718	contig-406000000	F	151
+
+scaffold-719	contig-407000000	F	152
+
+scaffold-720	contig-408000000	F	370
+
+scaffold-721	contig-409000000	F	157
+
+scaffold-722	contig-312000001	F	863
+
+scaffold-723	contig-410000000	F	142
+
+scaffold-724	contig-411000000	F	141
+
+scaffold-725	contig-412000000	F	189
+
+scaffold-726	contig-413000000	F	265
+
+scaffold-727	contig-414000000	F	164
+
+scaffold-728	contig-415000000	F	294
+
+scaffold-729	contig-416000000	F	1207
+
+scaffold-730	contig-313000001	F	2520
+
+scaffold-731	contig-417000000	F	409
+
+scaffold-732	contig-418000000	F	136
+
+scaffold-733	contig-419000000	F	197
+
+scaffold-734	contig-420000000	F	136
+
+scaffold-735	contig-421000000	F	216
+
+scaffold-736	contig-314000001	F	1085
+
+scaffold-737	contig-422000000	F	227
+
+scaffold-738	contig-423000000	F	136
+
+scaffold-739	contig-424000000	F	129
+
+scaffold-740	contig-425000000	F	128
+
+scaffold-741	contig-426000000	F	132
+
+scaffold-742	contig-427000000	F	185
+
+scaffold-743	contig-428000000	F	179
+
+scaffold-744	contig-315000001	F	975
+
+scaffold-745	contig-429000000	F	176
+
+scaffold-746	contig-430000000	F	350
+
+scaffold-747	contig-431000000	F	198
+
+scaffold-748	contig-316000001	F	1674
+
+scaffold-749	contig-317000001	F	1583
+
+scaffold-750	contig-432000000	F	4860
+
+scaffold-751	contig-318000001	F	4980
+
+scaffold-752	contig-319000001	F	804
+
+scaffold-753	contig-320000001	F	1115
+
+scaffold-754	contig-321000001	F	1074
+
+scaffold-755	contig-433000000	F	6045
+
+scaffold-756	contig-322000001	F	2065
+
+scaffold-757	contig-323000001	F	1256
+
+scaffold-758	contig-324000001	F	2529
+
+scaffold-759	contig-434000000	F	6557
+
+scaffold-760	contig-325000001	F	2176
+
+scaffold-761	contig-326000001	F	879
+
+scaffold-762	contig-327000001	F	1100
+
+scaffold-763	contig-328000001	F	1076
+
+scaffold-764	contig-329000001	F	2255
+
+scaffold-765	contig-435000000	F	6774
+
+scaffold-766	contig-330000001	F	1238
+
+scaffold-767	contig-331000001	F	1071
+
+scaffold-768	contig-332000001	F	1296
+
+scaffold-769	contig-333000001	F	614
+
+scaffold-770	contig-334000001	F	1664
+
+scaffold-771	contig-335000001	F	1038
+
+scaffold-772	contig-436000000	F	6056
+
+scaffold-773	contig-336000001	F	1625
+
+scaffold-774	contig-337000001	F	1562
+
+scaffold-775	contig-437000000	F	5475
+
+scaffold-776	contig-338000001	F	3691
+
+scaffold-777	contig-339000001	F	1566
+
+scaffold-778	contig-340000001	F	779
+
+scaffold-779	contig-341000001	F	953
+
+scaffold-780	contig-438000000	F	6130
+
+scaffold-781	contig-342000001	F	3542
+
+scaffold-782	contig-343000001	F	1942
+
+scaffold-783	contig-344000001	F	804
+
+scaffold-784	contig-345000001	F	477
+
+scaffold-785	contig-346000001	F	782
+
+scaffold-786	contig-347000001	F	1592
+
+scaffold-787	contig-348000001	F	392
+
+scaffold-788	contig-439000000	F	7977
+
+scaffold-789	contig-349000001	F	581
+
+scaffold-790	contig-350000001	F	722
+
+scaffold-791	contig-351000001	F	495
+
+scaffold-792	contig-352000001	F	681
+
+scaffold-793	contig-353000001	F	996
+
+scaffold-794	contig-354000001	F	4416
+
+scaffold-795	contig-355000001	F	927
+
+scaffold-796	contig-356000001	F	380
+
+scaffold-797	contig-440000000	F	8794
+
+scaffold-798	contig-357000001	F	747
+
+scaffold-799	contig-358000001	F	1103
+
+scaffold-800	contig-359000001	F	1768
+
+scaffold-801	contig-360000001	F	1241
+
+scaffold-802	contig-361000001	F	413
+
+scaffold-803	contig-362000001	F	615
+
+scaffold-804	contig-363000001	F	533
+
+scaffold-805	contig-364000001	F	423
+
+scaffold-806	contig-365000001	F	466
+
+scaffold-807	contig-366000001	F	593
+
+scaffold-808	contig-367000001	F	1482
+
+scaffold-809	contig-441000000	F	8323
+
+scaffold-810	contig-368000001	F	627
+
+scaffold-811	contig-369000001	F	920
+
+scaffold-812	contig-370000001	F	702
+
+scaffold-813	contig-371000001	F	843
+
+scaffold-814	contig-372000001	F	311
+
+scaffold-815	contig-373000001	F	1188
+
+scaffold-816	contig-374000001	F	343
+
+scaffold-817	contig-375000001	F	1547
+
+scaffold-818	contig-376000001	F	763
+
+scaffold-819	contig-377000001	F	342
+
+scaffold-820	contig-378000001	F	499
+
+scaffold-821	contig-379000001	F	666
+
+scaffold-822	contig-442000000	F	8722
+
+scaffold-823	contig-380000001	F	358
+
+scaffold-824	contig-381000001	F	1872
+
+scaffold-825	contig-382000001	F	292
+
+scaffold-826	contig-383000001	F	263
+
+scaffold-827	contig-384000001	F	661
+
+scaffold-828	contig-385000001	F	349
+
+scaffold-829	contig-386000001	F	349
+
+scaffold-830	contig-387000001	F	672
+
+scaffold-831	contig-388000001	F	1185
+
+scaffold-832	contig-389000001	F	239
+
+scaffold-833	contig-390000001	F	226
+
+scaffold-834	contig-391000001	F	228
+
+scaffold-835	contig-392000001	F	221
+
+scaffold-836	contig-393000001	F	337
+
+scaffold-837	contig-443000000	F	7357
+
+scaffold-838	contig-394000001	F	972
+
+scaffold-839	contig-395000001	F	213
+
+scaffold-840	contig-396000001	F	453
+
+scaffold-841	contig-397000001	F	435
+
+scaffold-842	contig-398000001	F	408
+
+scaffold-843	contig-399000001	F	202
+
+scaffold-844	contig-400000001	F	395
+
+scaffold-845	contig-401000001	F	619
+
+scaffold-846	contig-402000001	F	270
+
+scaffold-847	contig-403000001	F	718
+
+scaffold-848	contig-404000001	F	330
+
+scaffold-849	contig-405000001	F	192
+
+scaffold-850	contig-406000001	F	206
+
+scaffold-851	contig-407000001	F	255
+
+scaffold-852	contig-408000001	F	185
+
+scaffold-853	contig-409000001	F	243
+
+scaffold-854	contig-410000001	F	182
+
+scaffold-855	contig-411000001	F	263
+
+scaffold-856	contig-444000000	F	5671
+
+scaffold-857	contig-412000001	F	232
+
+scaffold-858	contig-413000001	F	198
+
+scaffold-859	contig-414000001	F	445
+
+scaffold-860	contig-415000001	F	510
+
+scaffold-861	contig-416000001	F	395
+
+scaffold-862	contig-417000001	F	161
+
+scaffold-863	contig-418000001	F	227
+
+scaffold-864	contig-419000001	F	191
+
+scaffold-865	contig-420000001	F	278
+
+scaffold-866	contig-421000001	F	281
+
+scaffold-867	contig-422000001	F	281
+
+scaffold-868	contig-423000001	F	235
+
+scaffold-869	contig-424000001	F	406
+
+scaffold-870	contig-425000001	F	244
+
+scaffold-871	contig-426000001	F	148
+
+scaffold-872	contig-427000001	F	151
+
+scaffold-873	contig-428000001	F	343
+
+scaffold-874	contig-429000001	F	406
+
+scaffold-875	contig-430000001	F	162
+
+scaffold-876	contig-431000001	F	139
+
+scaffold-877	contig-432000001	F	137
+
+scaffold-878	contig-445000000	F	5184
+
+scaffold-879	contig-433000001	F	179
+
+scaffold-880	contig-434000001	F	135
+
+scaffold-881	contig-435000001	F	212
+
+scaffold-882	contig-436000001	F	151
+
+scaffold-883	contig-437000001	F	401
+
+scaffold-884	contig-438000001	F	137
+
+scaffold-885	contig-439000001	F	259
+
+scaffold-886	contig-440000001	F	692
+
+scaffold-887	contig-441000001	F	125
+
+scaffold-888	contig-442000001	F	330
+
+scaffold-889	contig-443000001	F	2652
+
+scaffold-890	contig-444000001	F	4379
+
+scaffold-891	contig-446000000	F	9637
+
+scaffold-892	contig-445000001	F	4798
+
+scaffold-893	contig-446000001	F	5328
+
+scaffold-894	contig-447000000	F	12640
+
+scaffold-895	contig-447000001	F	4232
+
+scaffold-896	contig-448000001	F	4417
+
+scaffold-897	contig-448000000	F	9195
+
+scaffold-898	contig-449000001	F	4509
+
+scaffold-899	contig-450000001	F	4980
+
+scaffold-900	contig-451000001	F	2288
+
+scaffold-901	contig-449000000	F	11184
+
+scaffold-902	contig-452000001	F	4293
+
+scaffold-903	contig-453000001	F	5159
+
+scaffold-904	contig-450000000	F	9136
+
+scaffold-905	contig-454000001	F	5451
+
+scaffold-906	contig-451000000	F	7363
+
+scaffold-907	contig-455000001	F	5802
+
+scaffold-908	contig-456000001	F	5129
+
+scaffold-909	contig-452000000	F	9296
+
+scaffold-910	contig-457000001	F	6664
+
+scaffold-911	contig-458000001	F	5254
+
+scaffold-912	contig-453000000	F	10712
+
+scaffold-913	contig-459000001	F	6001
+
+scaffold-914	contig-454000000	F	5752
+
+scaffold-915	contig-460000001	F	4280
+
+scaffold-916	contig-455000000	F	10386
+
+scaffold-917	contig-461000001	F	9097
+
+scaffold-918	contig-456000000	F	8458
+
+scaffold-919	contig-462000001	F	8740
+
+scaffold-920	contig-463000001	F	4505
+
+scaffold-921	contig-457000000	F	8459
+
+scaffold-922	contig-464000001	F	6172
+
+scaffold-923	contig-458000000	F	9905
+
+scaffold-924	contig-465000001	F	5912
+
+scaffold-925	contig-466000001	F	5101
+
+scaffold-926	contig-459000000	F	11501
+
+scaffold-927	contig-467000001	F	6296
+
+scaffold-928	contig-468000001	F	4992
+
+scaffold-929	contig-460000000	F	9253
+
+scaffold-930	contig-469000001	F	7257
+
+scaffold-931	contig-470000001	F	7425
+
+scaffold-932	contig-461000000	F	15256
+
+scaffold-933	contig-471000001	F	7067
+
+scaffold-934	contig-472000001	F	5088
+
+scaffold-935	contig-462000000	F	9984
+
+scaffold-936	contig-473000001	F	8922
+
+scaffold-937	contig-463000000	F	12471
+
+scaffold-938	contig-474000001	F	7182
+
+scaffold-939	contig-475000001	F	7458
+
+scaffold-940	contig-464000000	F	13360
+
+scaffold-941	contig-476000001	F	7639
+
+scaffold-942	contig-465000000	F	9575
+
+scaffold-943	contig-477000001	F	7026
+
+scaffold-944	contig-478000001	F	5944
+
+scaffold-945	contig-466000000	F	14458
+
+scaffold-946	contig-479000001	F	9420
+
+scaffold-947	contig-480000001	F	9305
+
+scaffold-948	contig-467000000	F	13131
+
+scaffold-949	contig-481000001	F	5498
+
+scaffold-950	contig-482000001	F	6659
+
+scaffold-951	contig-468000000	F	15277
+
+scaffold-952	contig-483000001	F	8126
+
+scaffold-953	contig-484000001	F	10265
+
+scaffold-954	contig-469000000	F	20696
+
+scaffold-955	contig-485000001	F	8294
+
+scaffold-956	contig-486000001	F	7825
+
+scaffold-957	contig-487000001	F	8408
+
+scaffold-958	contig-470000000	F	24307
+
+scaffold-959	contig-488000001	F	14195
+
+scaffold-960	contig-471000000	F	10026
+
+scaffold-961	contig-489000001	F	7805
+
+scaffold-962	contig-472000000	F	11464
+
+scaffold-963	contig-490000001	F	11298
+
+scaffold-964	contig-491000001	F	8786
+
+scaffold-965	contig-492000001	F	10493
+
+scaffold-966	contig-473000000	F	27789
+
+scaffold-967	contig-493000001	F	10923
+
+scaffold-968	contig-474000000	F	13054
+
+scaffold-969	contig-494000001	F	8972
+
+scaffold-970	contig-495000001	F	8406
+
+scaffold-971	contig-496000001	F	17010
+
+scaffold-972	contig-497000001	F	10042
+
+scaffold-973	contig-498000001	F	12791
+
+scaffold-974	contig-499000001	F	11828
+
+scaffold-975	contig-500000001	F	11461
+
+scaffold-976	contig-501000001	F	9228
+
+scaffold-977	contig-502000001	F	13562
+
+scaffold-978	contig-503000001	F	9608
+
+scaffold-979	contig-504000001	F	13627
+
+scaffold-980	contig-505000001	F	19176
+
+scaffold-981	contig-506000001	F	14699
+
+scaffold-982	contig-507000001	F	12534
+
+scaffold-983	contig-508000001	F	17342
+
+scaffold-984	contig-509000001	F	13414
+
+scaffold-985	contig-510000001	F	13295
+
+scaffold-986	contig-511000001	F	22184
+
+scaffold-987	contig-512000001	F	19408
+
+scaffold-988	contig-513000001	F	21771
+
+scaffold-989	contig-514000001	F	22719
+
+scaffold-990	contig-515000001	F	7595
+
+scaffold-991	contig-516000001	F	9914
+
+scaffold-992	contig-517000001	F	9970
+
+scaffold-993	contig-518000001	F	7238
+
+scaffold-994	contig-519000001	F	8431
+
+scaffold-995	contig-520000001	F	10211
+
+scaffold-996	contig-521000001	F	4883
+
+scaffold-997	contig-522000001	F	10323
+
+scaffold-998	contig-523000001	F	12068
+
+scaffold-999	contig-524000001	F	17794
+
+scaffold-1000	contig-525000001	F	16742
+
+scaffold-1001	contig-526000001	F	15131
+
+scaffold-1002	contig-527000001	F	13087
+
+scaffold-1003	contig-528000001	F	21729
+
+scaffold-1004	contig-529000001	F	14854
+
+scaffold-1005	contig-530000001	F	18629
+
+scaffold-1006	contig-531000001	F	15909
+
+scaffold-1007	contig-532000001	F	17642
+
+scaffold-1008	contig-533000001	F	14576
+
+scaffold-1009	contig-534000001	F	23771
+
+scaffold-1010	contig-535000001	F	16900
+
+scaffold-1011	contig-536000001	F	20698
+
+scaffold-1012	contig-537000001	F	5341
+
+scaffold-1013	contig-538000001	F	5425
+

@@ -1,0 +1,1 @@
+#Left contig name	Left contig strand	Right contig name	Right contig strand	Average gap length	Average gap count	Summary link iterator 1	Summary count 1	Summary average 1	Summary standard  deviation 1	Summary link iterator 2	Summary count 2	Summary average 2	Summary standard  deviation 2

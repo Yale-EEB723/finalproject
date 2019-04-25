@@ -1,0 +1,16 @@
+/c/users/aaver/documents/_Yale/Spring_2019/Comparative_Genomics/Final_project/Full_Sequence_Set/S_Agona_SL483.gb,S_Agona_SL483_p.gb	S_Agona_SL483	gbk
+/c/users/aaver/documents/_Yale/Spring_2019/Comparative_Genomics/Final_project/Full_Sequence_Set/S_Choleraesuis_SCB67.gb,S_Choleraesuis_SCB67_p2.gb,S_Choleraesuis_SCB67_p.gb	S_Choleraesuis_SCB67	gbk
+/c/users/aaver/documents/_Yale/Spring_2019/Comparative_Genomics/Final_project/Full_Sequence_Set/S_Dublin_CT_02021853.gb,S_Dublin_CT_02021853_p.gb	S_Dublin_CT_02021853	gbk
+/c/users/aaver/documents/_Yale/Spring_2019/Comparative_Genomics/Final_project/Full_Sequence_Set/S_Enteritdis_P125109.gb	S_Enteritdis_P125109	gbk
+/c/users/aaver/documents/_Yale/Spring_2019/Comparative_Genomics/Final_project/Full_Sequence_Set/S_Gallinarum_28791.gb	S_Gallinarum_28791	gbk
+/c/users/aaver/documents/_Yale/Spring_2019/Comparative_Genomics/Final_project/Full_Sequence_Set/S_Gallinarum_Pullorum_RKS5078.gb	S_Gallinarum_Pullorum_RKS5078	gbk
+/c/users/aaver/documents/_Yale/Spring_2019/Comparative_Genomics/Final_project/Full_Sequence_Set/S_Heidelberg_SL476.gb,S_Heidelberg_SL476_p2.gb,S_Heidelberg_SL476_p.gb	S_Heidelberg_SL476	gbk
+/c/users/aaver/documents/_Yale/Spring_2019/Comparative_Genomics/Final_project/Full_Sequence_Set/S_Newport_SL254.gb,S_Newport_SL254_p2.gb,S_Newport_SL254_p.gb	S_Newport_SL254	gbk
+/c/users/aaver/documents/_Yale/Spring_2019/Comparative_Genomics/Final_project/Full_Sequence_Set/S_ParatyphiA_AKU12601.gb,S_ParatyphiA_AKU_p.gb	S_ParatyphiA_AKU12601	gbk
+/c/users/aaver/documents/_Yale/Spring_2019/Comparative_Genomics/Final_project/Full_Sequence_Set/S_ParatyphiA_ATCC9150.gb	S_ParatyphiA_ATCC9150	gbk
+/c/users/aaver/documents/_Yale/Spring_2019/Comparative_Genomics/Final_project/Full_Sequence_Set/S_ParatyphiB_SPB7.gb	S_ParatyphiB_SPB7	gbk
+/c/users/aaver/documents/_Yale/Spring_2019/Comparative_Genomics/Final_project/Full_Sequence_Set/S_ParatyphiC_RKS4594.gb,S_ParatyphiC_RKS4594_p.gb	S_ParatyphiC_RKS4594	gbk
+/c/users/aaver/documents/_Yale/Spring_2019/Comparative_Genomics/Final_project/Full_Sequence_Set/S_Schwarzengrund_CVM19633.gb,S_Schwarzengrund_CVM19633_p2.gb,S_Schwarzengrund_CVM19633_p.gb	S_Schwarzengrund_CVM19633	gbk
+/c/users/aaver/documents/_Yale/Spring_2019/Comparative_Genomics/Final_project/Full_Sequence_Set/S_Typhi_CT18.gb,S_Typhi_CT18_p2.gb,S_Typhi_CT18_p.gb	S_Typhi_CT18	gbk
+/c/users/aaver/documents/_Yale/Spring_2019/Comparative_Genomics/Final_project/Full_Sequence_Set/S_Typhimurium_LT2.gb,S_Typhimurium_LT2_p.gb	S_Typhimurium_LT2	gbk
+/c/users/aaver/documents/_Yale/Spring_2019/Comparative_Genomics/Final_project/Full_Sequence_Set/S_Typhi_Ty2.gb	S_Typhi_Ty2	gbk

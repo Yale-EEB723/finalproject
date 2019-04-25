@@ -1,0 +1,6 @@
+# average and mode round trip latency in microseconds (10^-6 seconds) when requesting a reply for a message of 4000 bytes
+# MessagePassingInterfaceRank	Name	ModeLatencyInMicroseconds	AverageLatencyInMicroseconds	NumberOfExchanges
+# AverageForAllRanks: 16.5
+# StandardDeviation: 0
+0	DESKTOP-2VQ8I6R	7	16	1000
+1	DESKTOP-2VQ8I6R	7	17	1000

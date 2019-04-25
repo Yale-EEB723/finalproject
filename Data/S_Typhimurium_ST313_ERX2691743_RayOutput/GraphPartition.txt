@@ -1,0 +1,6 @@
+#Rank	NumberOfKmers	IdealNumberOfKmers	Difference	RelativeDifference
+#TotalKmers: 14437924
+#Ranks: 2
+#IdealNumberOfKmers: 7218962
+0	7218812	7218962	-150	-0.00207786%
+1	7219112	7218962	150	0.00207786%

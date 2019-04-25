@@ -1,0 +1,2 @@
+#File	Name	FirstSequence	LastSequence	NumberOfSequences
+0	ERX2691743.fastq	0	591655	591656
