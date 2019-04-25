@@ -639,7 +639,7 @@ gff3.table$animal<-c(rep.int("Amphimedon_queenslandica",43615),rep.int("Capitell
 
 
 #Read in agalma homologs csv
-agalma.homologs<-read.csv("compgen_homologs_nohydra_geneNames.csv",header=TRUE,sep=",")
+agalma.homologs<-read.csv("5taxa_results_alt.csv",header=TRUE,sep=",")
 
 
 
@@ -655,8 +655,8 @@ absent_genes.csv: cut -f 1 -d "," final.master.table_absentgenes.csv |grep "NA"
 gff3.table.save<-gff3.table
 
 #***SUBSAMPLE: choose from which animals you want to cluster scaffolds. Not doing so makes computation impossible on a local machine.
-filter_target=c("Homo_sapiens","Danio_rerio","Strongylocentrotus_purpuratus")
-gff3.table<-filter(gff3.table, animal==filter_target)
+#filter_target=c("Homo_sapiens","Danio_rerio","Strongylocentrotus_purpuratus")
+#gff3.table<-filter(gff3.table, animal==filter_target)
 
 
 #~~~Create contingency.table~~~
@@ -669,7 +669,7 @@ contingency.table<-inner_join(gff3.table,agalma.homologs)%>%dplyr::select(.,seqi
 contingency<-table(contingency.table$species_scaffold,contingency.table$homology_id)%>%as.matrix()
 contingency<-1*(contingency>0)
 #***DOWNSAMPLE contingency table for computation on a local machine.
-contingency<-contingency[sample(100),sample(100)]
+#contingency<-contingency[sample(100),sample(100)]
 
 
 #distance matrix
@@ -724,7 +724,39 @@ for understanding tsne: https://www.youtube.com/watch?v=NEaUSP4YerM
 tsne data = 160 points
 192 unique scaffolds in gff3.table
 
--
+```{r contingency stats}
+#First run the chunk "Parse GFF3 and Agalma data"
+#must run previous chunk prior to running this chunk
+gff3.table.save<-gff3.table
+
+
+#~~~Create contingency.table~~~
+#Make scaffold names unique- join seqid and catalog id
+contingency.table<-inner_join(gff3.table,agalma.homologs)%>%dplyr::select(.,seqid,homology_id,animal)%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%dplyr::select(.,species_scaffold,homology_id)
+#~~~contingency.table compelte~~~
+
+#Use contingency.table to make the contingency table
+contingency<-table(contingency.table$species_scaffold,contingency.table$homology_id)%>%as.matrix()
+contingency<-1*(contingency>0)
+
+#number of scaffolds
+nrow(contingency)
+#number of homologs shared across scaffolds
+ncol(contingency)
+#sums of each column
+colsum<-colSums(contingency)
+#histogram of number of sacffolds occupied per homolog
+hist<-ggplot() + aes(colsum)+geom_histogram(fill="skyblue3",color="black")+xlab("Number of Scaffolds Occupied") + ylab("Count")+ggtitle("Number of Scaffolds Occupied Per Homolog (5taxa)")
+
+#median number of scaffolds occupied
+median(colsum)
+#average number of sacffolds occupied
+mean(colsum)
+#min number of scaffolds occupied
+min(colsum)
+#max number of scaffolds occupied.
+max(colsum)
+```
 
 ###Other clustering methods:
 https://stats.stackexchange.com/questions/305179/cross-cluster-analysis-of-categorical-data-in-r/305218
