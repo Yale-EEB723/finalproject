@@ -20,7 +20,7 @@
         - "nucmer (NUCleotide MUMmer) is the most user-friendly alignment script for standard DNA sequence alignment. It is a robust pipeline that allows for multiple reference and multiple query sequences to be aligned in a many vs. many fashion."
         - http://nebc.nox.ac.uk/bioinformatics/docs/nucmer.html
       - Attempting spine on my computer as well, figured out the file mistakes I think, just needed to add in all file names to a .txt file and then run the program with that
-        'ls -d -1 $PWD/* > genome_files.txt'
+        `ls -d -1 $PWD/* > genome_files.txt`
           - Made the .txt file with all file names needed
         - perl spine.pl -f genome_files_full.txt --pangenome
           - got output core genome, aligned similar loci, and a pangenome
