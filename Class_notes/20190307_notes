@@ -58,3 +58,7 @@ Query genome with small set of tissue sample willtell us alot -> For gene specii
 Exciting now: We can apply this of the shelf tols to quickly get down to a set of 10 genes that ar emost interested for my phenoype and my organism _> I  can pound or crispr all of these!
 -> Tools give me wider build of platform.
 -> Being able to deplo y these tools depends on high quality genome to map these too.
+
+NOTE to self:
+write a script that pushes to github itself with the input:
+basically what goes into git commit -am 'XXX_input'

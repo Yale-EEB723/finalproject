@@ -1,0 +1,1165 @@
+IQ-TREE multicore version 1.5.5 for Mac OS X 64-bit built Feb  4 2018
+Copyright (c) 2011-2017 by Bui Quang Minh, Nguyen Lam Tung,
+Olga Chernomor, Heiko Schmidt, and Arndt von Haeseler.
+
+Host:    Bizzle.wireless.yale.internal (AVX2, FMA3, 16 GB RAM)
+Command: iqtree -s trimed_inout_TLR.fasta -bb 1000 -nt AUTO -redo
+Seed:    745282 (Using SPRNG - Scalable Parallel Random Number Generator)
+Time:    Mon Apr 22 13:52:25 2019
+Kernel:  AVX+FMA - auto-detect threads (8 CPU cores detected)
+
+Reading alignment file trimed_inout_TLR.fasta ... Fasta format detected
+Alignment most likely contains protein sequences
+Alignment has 358 sequences with 135 columns and 135 patterns (120 informative sites, 5 constant sites)
+WARNING: Some sequence names are changed as follows:
+sp|B2KI57.1|TP8L2_RHIFE -> sp_B2KI57.1_TP8L2_RHIFE
+
+                         Gap/Ambiguity  Composition  p-value
+   1  NP_001307209.1             0.00%    passed     77.35%
+   2  NP_001277092.1             0.00%    passed     99.99%
+   3  NP_001277101.1             0.00%    passed     97.00%
+   4  NP_001307210.1             0.00%    passed     97.20%
+   5  NP_001307208.1             0.74%    passed     99.83%
+   6  NP_001307211.1             0.00%    passed     37.83%
+   7  NP_001277093.1             0.00%    passed     99.92%
+   8  NP_001277098.1             0.00%    passed     99.88%
+   9  NP_001277089.1             0.00%    passed     57.80%
+  10  NP_001277090.1             0.00%    passed     84.14%
+  11  XP_024900573.1             0.00%    passed     60.41%
+  12  AMZ03373.1                 0.00%    passed     99.89%
+  13  AMZ03370.1                 0.00%    passed     99.99%
+  14  AMZ03367.1                 0.74%    passed     99.88%
+  15  APR72783.1                 6.67%    passed     20.35%
+  16  APR72782.1                 0.00%    passed     32.81%
+  17  APR72781.1                 6.67%    passed     16.48%
+  18  APR72780.1                 0.00%    passed     55.87%
+  19  APR72779.1                 0.00%    passed     55.87%
+  20  APR72778.1                10.37%    passed     27.37%
+  21  APR72775.1                 3.70%    passed     99.90%
+  22  APR72773.1                 3.70%    passed     99.98%
+  23  APR72772.1                 3.70%    passed     99.95%
+  24  APR72771.1                 3.70%    passed     99.63%
+  25  APR72770.1                 0.00%    passed     99.97%
+  26  APR72769.1                 0.00%    passed    100.00%
+  27  APR72768.1                 0.00%    passed    100.00%
+  28  APR72766.1                 0.00%    passed    100.00%
+  29  APR72765.1                 0.00%    passed    100.00%
+  30  APR72764.1                 0.00%    passed    100.00%
+  31  APR72763.1                 0.00%    passed    100.00%
+  32  APR72762.1                 0.00%    passed    100.00%
+  33  APR72407.1                 0.00%    passed     99.92%
+  34  APR72406.1                 0.00%    passed     99.68%
+  35  APR72405.1                 0.00%    passed     99.70%
+  36  APR72404.1                 0.00%    passed     99.18%
+  37  APR72403.1                 0.00%    passed     99.33%
+  38  APR72402.1                 0.00%    passed     99.88%
+  39  APR72401.1                 0.00%    passed     99.92%
+  40  AMZ03374.1                 0.00%    passed     92.63%
+  41  AMZ03372.1                69.63%    passed     84.02%
+  42  AMZ03371.1                74.07%    passed     73.04%
+  43  AMZ03369.1                69.63%    passed     94.22%
+  44  AMZ03368.1                69.63%    passed     94.22%
+  45  AMZ03366.1                74.07%    passed     81.27%
+  46  AMZ03365.1                74.07%    passed     83.55%
+  47  AOC60648.1                 0.00%    passed     99.99%
+  48  AOC60647.1                 0.00%    passed     99.91%
+  49  AOC60646.1                 0.00%    passed     99.97%
+  50  AOC60645.1                 0.00%    passed     99.91%
+  51  AOC60644.1                 0.00%    passed     99.41%
+  52  AOC60643.1                 0.00%    passed     99.97%
+  53  AOC60642.1                 0.00%    passed     99.95%
+  54  AOC60641.1                 0.00%    passed     99.75%
+  55  AOC60640.1                 0.00%    passed     99.98%
+  56  AOC60639.1                 0.00%    passed     99.50%
+  57  AOC60638.1                 0.00%    passed     99.50%
+  58  AOC60637.1                 0.00%    passed    100.00%
+  59  AOC60636.1                 0.00%    passed    100.00%
+  60  AOC60635.1                 0.00%    passed     99.94%
+  61  AOC60634.1                 0.00%    passed     99.94%
+  62  AOC60633.1                 0.00%    passed     99.96%
+  63  ADO01610.1                 0.00%    passed     99.99%
+  64  ADO01607.1                 0.00%    passed     77.35%
+  65  ADO01606.1                 0.00%    passed     97.00%
+  66  XP_024898085.1             0.74%    passed     99.83%
+  67  XP_015450319.1             0.00%    passed     97.20%
+  68  XP_015450318.1             0.00%    passed     97.20%
+  69  XP_015448271.1             0.00%    passed     99.87%
+  70  XP_015448270.1             0.00%    passed     99.87%
+  71  XP_006906317.1             0.74%    passed     99.83%
+  72  APR72777.1                28.15%    passed     99.98%
+  73  APR72776.1                27.41%    passed     57.31%
+  74  APR72774.1                28.15%    passed     99.90%
+  75  APR72767.1                 0.00%    passed    100.00%
+  76  ADO01612.1                 0.00%    passed     57.80%
+  77  ADO01611.1                 0.00%    passed     37.83%
+  78  ADO01609.1                 0.00%    passed     99.92%
+  79  ADO01608.1                 0.00%    passed     97.20%
+  80  ADO01605.1                 0.00%    passed     99.88%
+  81  ADO01604.1                 0.74%    passed     99.83%
+  82  ADO01603.1                 0.00%    passed     84.14%
+  83  BAH02557.1                 0.00%    passed     50.78%
+  84  BAH02556.1                 0.00%    passed    100.00%
+  85  BAH02555.1                 0.00%    passed     99.21%
+  86  XP_024429446.1             0.00%    passed     91.00%
+  87  XP_024429444.1             0.00%    passed     98.94%
+  88  XP_023389075.1             0.00%    passed     45.07%
+  89  ATW00984.1                 0.00%    passed     88.67%
+  90  ATW00983.1                 0.00%    passed     99.89%
+  91  ATW00982.1                 0.00%    passed     99.99%
+  92  ATW00981.1                 0.74%    passed     99.88%
+  93  XP_008154798.1             0.00%    passed     99.94%
+  94  XP_008148110.1             0.00%    passed     57.29%
+  95  XP_024431750.1             0.00%    passed     94.80%
+  96  XP_024430744.1             2.96%    passed     99.88%
+  97  XP_024429636.1             0.00%    passed     97.53%
+  98  XP_024425724.1             0.00%    passed     99.89%
+  99  XP_024425638.1             0.00%    passed     99.99%
+ 100  XP_024425637.1             0.00%    passed     99.99%
+ 101  XP_024421674.1             0.00%    passed     92.63%
+ 102  XP_024421673.1             0.00%    passed     92.63%
+ 103  XP_024418466.1             0.74%    passed     99.88%
+ 104  XP_024418465.1             0.74%    passed     99.88%
+ 105  XP_024418464.1             0.74%    passed     99.88%
+ 106  XP_024418463.1             0.74%    passed     99.88%
+ 107  XP_024417891.1             8.89%    passed     75.05%
+ 108  XP_024417890.1             0.00%    passed     86.97%
+ 109  XP_023603048.1             0.00%    passed     24.05%
+ 110  XP_023612945.1            10.37%    passed     99.96%
+ 111  XP_023609502.1             0.00%    passed    100.00%
+ 112  XP_023609423.1             0.00%    passed     94.38%
+ 113  XP_023609422.1             0.00%    passed     99.04%
+ 114  XP_023619450.1             2.96%    passed     99.87%
+ 115  XP_023610977.1             0.74%    passed     99.82%
+ 116  XP_023610971.1             0.74%    passed     99.82%
+ 117  XP_006091147.1             0.00%    passed     95.79%
+ 118  XP_006088668.1             0.00%    passed    100.00%
+ 119  XP_011361215.1             0.00%    passed     99.99%
+ 120  XP_011361214.1             0.00%    passed     99.99%
+ 121  XP_011361213.1             0.00%    passed     99.99%
+ 122  XP_011359267.1             0.00%    passed     97.00%
+ 123  XP_011359155.1             0.00%    passed     80.98%
+ 124  XP_016076639.1             0.00%    passed     91.73%
+ 125  XP_016076638.1             0.00%    passed     91.73%
+ 126  XP_016066808.1             0.00%    passed     99.92%
+ 127  XP_016066807.1             0.00%    passed     99.92%
+ 128  XP_016066806.1             0.00%    passed     99.92%
+ 129  XP_015978184.1             0.00%    passed     96.88%
+ 130  XP_015978183.1             0.00%    passed     96.88%
+ 131  XP_015978182.1             0.00%    passed     96.88%
+ 132  XP_015978181.1             0.00%    passed     96.88%
+ 133  XP_015975010.1             0.00%    passed     99.83%
+ 134  XP_015975005.1             0.00%    passed     99.83%
+ 135  XP_015975001.1             0.00%    passed     99.83%
+ 136  XP_015974993.1             0.00%    passed     99.83%
+ 137  XP_015974986.1             0.00%    passed     99.83%
+ 138  XP_015974977.1             0.00%    passed     99.83%
+ 139  XP_015974968.1             0.00%    passed     99.83%
+ 140  XP_016007714.1             8.89%    passed     82.25%
+ 141  XP_016007706.1             8.89%    passed     82.25%
+ 142  XP_016007696.1             0.00%    passed     95.66%
+ 143  XP_015425387.1             0.00%    passed     96.08%
+ 144  XP_015419441.1             0.00%    passed    100.00%
+ 145  XP_015419440.1             0.00%    passed    100.00%
+ 146  XP_006763858.1             0.00%    passed    100.00%
+ 147  XP_014384419.1             0.00%    passed    100.00%
+ 148  XP_014384418.1             0.00%    passed    100.00%
+ 149  XP_014395423.1             0.00%    passed     70.41%
+ 150  XP_014395422.1             0.00%    passed     70.41%
+ 151  XP_014395421.1             0.00%    passed     70.41%
+ 152  XP_014395420.1             0.00%    passed     70.41%
+ 153  XP_014395419.1             0.00%    passed     70.41%
+ 154  XP_014395417.1             0.00%    passed     70.41%
+ 155  XP_005881009.1             0.00%    passed    100.00%
+ 156  XP_005880997.1             0.00%    passed     95.03%
+ 157  EPQ16884.1                 0.00%    passed    100.00%
+ 158  EPQ16880.1                 0.00%    passed     95.03%
+ 159  EPQ07938.1                 0.00%    passed     70.41%
+ 160  ELK30183.1                 0.00%    passed    100.00%
+ 161  ELK23363.1                 2.96%    passed     98.68%
+ 162  ELK17709.1                 0.00%    passed     99.99%
+ 163  ELK08897.1                 0.00%    passed     41.46%
+ 164  ELK08218.1                14.81%    passed     84.26%
+ 165  XP_028364050.1             0.00%    passed     59.94%
+ 166  XP_028363909.1             0.00%    passed     96.49%
+ 167  XP_028363908.1             0.00%    passed     96.49%
+ 168  XP_028363059.1             0.00%    passed     89.56%
+ 169  XP_028379290.1             0.00%    passed     99.60%
+ 170  XP_028378935.1             0.00%    passed     99.99%
+ 171  XP_028378555.1             2.96%    passed     79.75%
+ 172  XP_028382386.1             0.74%    passed     99.88%
+ 173  XP_028369613.1             0.00%    passed     31.08%
+ 174  XP_028387037.1             0.00%    passed     75.62%
+ 175  XP_028376194.1             0.74%    passed     99.81%
+ 176  XP_028374392.1             0.00%    passed     55.63%
+ 177  XP_028385115.1             0.00%    passed     32.38%
+ 178  XP_028360025.1             0.00%    failed      0.05%
+ 179  XP_008157403.2             2.96%    passed     99.94%
+ 180  XP_008150129.2             0.00%    passed     99.70%
+ 181  XP_028013824.1             0.00%    passed     57.29%
+ 182  XP_028013823.1             0.00%    passed     57.29%
+ 183  XP_027999467.1             0.00%    passed     99.19%
+ 184  XP_027999466.1             0.00%    passed     99.19%
+ 185  XP_008153288.2             0.00%    passed     16.77%
+ 186  XP_008153297.2             0.00%    passed     16.77%
+ 187  XP_008158733.1             0.00%    failed      0.15%
+ 188  XP_008155195.1             0.00%    failed      0.47%
+ 189  XP_008154799.1             0.00%    passed    100.00%
+ 190  XP_008150338.1             0.00%    passed     78.12%
+ 191  XP_008138581.1             0.00%    passed     73.82%
+ 192  XP_008138437.1             0.00%    passed     99.19%
+ 193  XP_008142370.1             0.74%    passed     99.76%
+ 194  XP_024905538.1             2.96%    passed     26.29%
+ 195  XP_024424941.1             0.74%    passed     99.61%
+ 196  XP_024423095.1             0.00%    failed      0.00%
+ 197  XP_023600720.1             1.48%    passed     54.51%
+ 198  XP_014314572.1             0.00%    passed     99.92%
+ 199  XP_006087587.2            11.11%    failed      0.14%
+ 200  XP_006094328.1             0.00%    failed      0.84%
+ 201  XP_023385943.1             0.74%    passed     99.10%
+ 202  XP_011383257.1             2.96%    passed     27.48%
+ 203  XP_011362944.1             0.00%    passed     45.07%
+ 204  XP_011362288.1             0.00%    passed     99.72%
+ 205  XP_011362287.1             0.00%    passed     99.72%
+ 206  XP_011361212.1             0.00%    passed    100.00%
+ 207  XP_011357663.1             0.74%    passed     99.10%
+ 208  XP_011357661.1             0.74%    passed     99.10%
+ 209  XP_011357660.1             0.74%    passed     99.10%
+ 210  XP_011364011.1             0.00%    passed     96.14%
+ 211  XP_011364002.1             0.00%    passed     96.14%
+ 212  XP_011363991.1             0.00%    passed     88.44%
+ 213  XP_011363982.1            17.78%    passed      8.84%
+ 214  XP_019486897.1             0.00%    passed     32.81%
+ 215  XP_019486895.1             0.00%    passed     32.81%
+ 216  XP_019522778.1             0.00%    passed     99.68%
+ 217  XP_019522777.1             0.00%    passed     99.68%
+ 218  XP_019522776.1             0.00%    passed     99.68%
+ 219  XP_019522775.1             0.00%    passed     99.68%
+ 220  XP_019522774.1             0.00%    passed     99.68%
+ 221  XP_019522773.1             0.00%    passed     99.68%
+ 222  XP_019506735.1             0.00%    passed    100.00%
+ 223  XP_019506734.1             0.00%    passed    100.00%
+ 224  XP_019506733.1             0.00%    passed     99.97%
+ 225  XP_019503824.1             0.00%    passed     85.33%
+ 226  XP_019503700.1             2.96%    passed     99.99%
+ 227  XP_019503699.1             2.96%    passed     99.99%
+ 228  XP_019503698.1             2.96%    passed     99.99%
+ 229  XP_019503697.1             2.96%    passed     99.99%
+ 230  XP_019503696.1             2.96%    passed     99.99%
+ 231  XP_019503695.1             2.96%    passed     99.99%
+ 232  XP_019503694.1             2.96%    passed     99.99%
+ 233  XP_019503693.1             2.96%    passed     99.99%
+ 234  XP_019503692.1             2.96%    passed     99.99%
+ 235  XP_019503691.1             2.96%    passed     99.99%
+ 236  XP_019503689.1             2.96%    passed     99.99%
+ 237  XP_019496781.1             0.74%    passed     98.46%
+ 238  XP_019496780.1             0.74%    passed     98.46%
+ 239  XP_019496779.1             0.74%    passed     98.46%
+ 240  XP_019496778.1             0.74%    passed     98.46%
+ 241  XP_019496777.1             0.74%    passed     98.46%
+ 242  XP_019496776.1             0.74%    passed     98.46%
+ 243  XP_019496775.1             0.74%    passed     98.46%
+ 244  XP_019496774.1             0.74%    passed     98.46%
+ 245  XP_019495211.1             0.00%    passed     88.33%
+ 246  XP_019495209.1             0.00%    passed     88.33%
+ 247  XP_019495208.1             0.00%    passed     88.33%
+ 248  XP_019495207.1             0.00%    passed     88.33%
+ 249  XP_019491619.1             0.00%    passed     47.28%
+ 250  XP_019491618.1             0.00%    passed     47.28%
+ 251  XP_019491617.1             0.00%    passed     47.28%
+ 252  XP_019491616.1             0.00%    passed     47.28%
+ 253  XP_019491542.1            29.63%    passed     68.94%
+ 254  XP_019491533.1             0.00%    passed     91.21%
+ 255  XP_016071121.1             0.00%    passed    100.00%
+ 256  XP_016069168.1             0.00%    passed     94.09%
+ 257  XP_016062734.1             2.96%    passed     87.01%
+ 258  XP_016058412.1             0.00%    passed     98.71%
+ 259  XP_016057935.1             0.00%    passed     24.65%
+ 260  XP_016055136.1             0.00%    failed      1.36%
+ 261  XP_016053252.1             0.74%    passed     99.11%
+ 262  XP_016075250.1             0.00%    failed      2.97%
+ 263  XP_016063339.1             0.00%    passed     96.90%
+ 264  XP_016061923.1             0.00%    passed     95.13%
+ 265  XP_016061915.1             0.00%    passed     95.13%
+ 266  XP_016061903.1             0.00%    passed     74.94%
+ 267  XP_016061897.1             0.00%    passed     74.94%
+ 268  XP_016061888.1             0.00%    passed     74.94%
+ 269  XP_015988692.1             0.00%    passed     50.78%
+ 270  XP_015988120.1             2.96%    passed     92.78%
+ 271  XP_016005870.1            50.37%    failed      0.02%
+ 272  XP_016000097.1             0.74%    passed     99.92%
+ 273  XP_016000096.1             0.74%    passed     99.92%
+ 274  XP_016000095.1             0.74%    passed     99.92%
+ 275  XP_016000094.1             0.74%    passed     99.92%
+ 276  XP_016000093.1             0.74%    passed     99.92%
+ 277  XP_016000092.1             0.74%    passed     99.92%
+ 278  XP_016000091.1             0.74%    passed     99.92%
+ 279  XP_015999411.1             0.00%    passed     99.41%
+ 280  XP_015999410.1             0.00%    passed     99.41%
+ 281  XP_015999409.1             0.00%    passed     99.41%
+ 282  XP_015999408.1             0.00%    passed     99.41%
+ 283  XP_015999407.1             0.00%    passed     99.41%
+ 284  XP_015999406.1             0.00%    passed     99.41%
+ 285  XP_015999405.1             0.00%    passed     99.41%
+ 286  XP_015996193.1             0.00%    passed     65.98%
+ 287  XP_015996192.1             0.00%    passed     65.98%
+ 288  XP_015996191.1             0.00%    passed     65.98%
+ 289  XP_015996190.1             0.00%    passed     60.59%
+ 290  XP_015996189.1             0.00%    passed     60.59%
+ 291  XP_015996188.1             0.00%    passed     60.59%
+ 292  XP_015996187.1             0.00%    passed     60.59%
+ 293  XP_015996185.1             0.00%    passed     60.59%
+ 294  XP_015996184.1             0.00%    passed     91.68%
+ 295  XP_015996183.1             0.00%    passed     91.68%
+ 296  XP_015996182.1             0.00%    passed     91.68%
+ 297  XP_015996181.1             0.00%    passed     91.68%
+ 298  XP_015996180.1             0.00%    passed     91.68%
+ 299  XP_015996179.1             0.00%    passed     91.68%
+ 300  XP_015975073.1             0.00%    passed    100.00%
+ 301  XP_015975065.1             0.00%    passed    100.00%
+ 302  XP_015423787.1            36.30%    passed      6.48%
+ 303  XP_006770169.2             0.74%    passed     99.82%
+ 304  XP_015419449.1             0.00%    passed    100.00%
+ 305  XP_015417855.1             0.00%    passed     37.47%
+ 306  XP_015417854.1             0.00%    passed     37.47%
+ 307  XP_015417853.1             0.00%    passed     37.47%
+ 308  XP_015416490.1             5.19%    passed     82.01%
+ 309  XP_015414941.1             0.00%    failed      0.30%
+ 310  XP_006754308.2             2.96%    passed     86.02%
+ 311  XP_006777760.1            56.30%    passed     41.51%
+ 312  XP_006761323.1             0.00%    passed     37.47%
+ 313  XP_006759401.1             8.15%    passed     93.89%
+ 314  XP_006777478.1             0.00%    failed      0.28%
+ 315  XP_006772771.1             0.00%    passed     99.92%
+ 316  XP_006772769.1             0.00%    passed     99.92%
+ 317  XP_006772768.1             0.00%    passed     99.92%
+ 318  XP_014385207.1            14.07%    passed     29.94%
+ 319  XP_005881008.2             0.00%    passed    100.00%
+ 320  XP_014384420.1             0.00%    passed    100.00%
+ 321  XP_014404205.1             0.00%    passed     95.59%
+ 322  XP_005877197.2             2.96%    passed     86.02%
+ 323  XP_014403943.1             2.96%    passed     86.02%
+ 324  XP_014403942.1             2.96%    passed     86.02%
+ 325  XP_014399389.1             0.74%    passed     99.82%
+ 326  XP_005857008.2             0.00%    failed      0.30%
+ 327  XP_005878466.1             0.00%    failed      0.67%
+ 328  XP_005877498.1             0.00%    passed     99.04%
+ 329  XP_005863158.1             0.00%    passed     99.92%
+ 330  XP_005863157.1             0.00%    passed     99.92%
+ 331  XP_005863156.1             0.00%    passed     99.92%
+ 332  EPQ17463.1                17.78%    passed     19.25%
+ 333  EPQ16883.1                 0.00%    passed    100.00%
+ 334  EPQ15238.1                 0.00%    failed      0.67%
+ 335  EPQ14694.1                 0.00%    passed     99.04%
+ 336  EPQ14693.1                 0.00%    passed     95.59%
+ 337  EPQ14497.1                 2.96%    passed     86.02%
+ 338  EPQ10918.1                 0.74%    passed     99.82%
+ 339  EPQ05808.1                 0.00%    passed     99.92%
+ 340  EPQ01888.1                 0.00%    failed      0.30%
+ 341  ELK37324.1                 2.96%    passed     86.02%
+ 342  ELK36781.1                48.15%    failed      0.10%
+ 343  ELK35500.1                 0.00%    failed      0.30%
+ 344  ELK33594.1                 8.15%    passed     93.89%
+ 345  ELK32148.1                 0.00%    passed     37.47%
+ 346  ELK30184.1                 0.00%    passed    100.00%
+ 347  ELK25354.1                37.78%    passed     93.85%
+ 348  ELK25079.1                13.33%    passed     15.61%
+ 349  ELK23529.1                27.41%    passed     14.20%
+ 350  ELK17710.1                 0.00%    passed    100.00%
+ 351  ELK17490.1                32.59%    passed     97.84%
+ 352  ELK15169.1                 0.00%    passed     60.41%
+ 353  ELK08977.1                77.04%    failed      3.40%
+ 354  ELK06424.1                18.52%    passed     62.28%
+ 355  ELK06423.1                 0.00%    passed     97.20%
+ 356  JAA49194.1                 0.00%    passed     86.97%
+ 357  sp_B2KI57.1_TP8L2_RHIFE   81.48%    failed      0.23%
+ 358  AAA59137.1                40.00%    failed      0.00%
+WARNING: 10 sequences contain more than 50% gaps/ambiguity
+****  TOTAL                      3.75%  20 sequences failed composition chi2 test (p-value<5%; df=19)
+NOTE: ADO01607.1 is identical to NP_001307209.1 but kept for subsequent analysis
+NOTE: AOC60648.1 is identical to NP_001277092.1 but kept for subsequent analysis
+NOTE: ADO01606.1 is identical to NP_001277101.1 but kept for subsequent analysis
+NOTE: XP_015450319.1 is identical to NP_001307210.1 but kept for subsequent analysis
+NOTE: XP_024898085.1 is identical to NP_001307208.1 but kept for subsequent analysis
+NOTE: ADO01611.1 is identical to NP_001307211.1 but kept for subsequent analysis
+NOTE: ADO01609.1 is identical to NP_001277093.1 but kept for subsequent analysis
+NOTE: ADO01605.1 is identical to NP_001277098.1 but kept for subsequent analysis
+NOTE: ADO01612.1 is identical to NP_001277089.1 but kept for subsequent analysis
+NOTE: ADO01603.1 is identical to NP_001277090.1 but kept for subsequent analysis
+NOTE: ELK15169.1 is identical to XP_024900573.1 but kept for subsequent analysis
+NOTE: ATW00983.1 is identical to AMZ03373.1 but kept for subsequent analysis
+NOTE: ATW00982.1 is identical to AMZ03370.1 but kept for subsequent analysis
+NOTE: ATW00981.1 is identical to AMZ03367.1 but kept for subsequent analysis
+NOTE: XP_019486897.1 is identical to APR72782.1 but kept for subsequent analysis
+NOTE: APR72779.1 is identical to APR72780.1 but kept for subsequent analysis
+NOTE: AOC60646.1 is identical to APR72770.1 but kept for subsequent analysis
+NOTE: AOC60637.1 is identical to APR72769.1 but kept for subsequent analysis
+NOTE: XP_016071121.1 is identical to APR72768.1 but kept for subsequent analysis
+NOTE: XP_008154799.1 is identical to APR72766.1 but kept for subsequent analysis
+NOTE: APR72764.1 is identical to APR72765.1 but kept for subsequent analysis
+NOTE: XP_023609502.1 is identical to APR72762.1 but kept for subsequent analysis
+NOTE: XP_016066808.1 is identical to APR72407.1 but kept for subsequent analysis
+NOTE: XP_019522778.1 is identical to APR72406.1 but kept for subsequent analysis
+NOTE: XP_008150129.2 is identical to APR72405.1 but kept for subsequent analysis
+NOTE: XP_014314572.1 is identical to APR72401.1 but kept for subsequent analysis
+NOTE: XP_024421674.1 is identical to AMZ03374.1 but kept for subsequent analysis
+NOTE: AMZ03368.1 is identical to AMZ03369.1 but kept for subsequent analysis
+NOTE: AOC60645.1 is identical to AOC60647.1 but kept for subsequent analysis
+NOTE: AOC60638.1 is identical to AOC60639.1 but kept for subsequent analysis
+NOTE: AOC60634.1 is identical to AOC60635.1 but kept for subsequent analysis
+NOTE: XP_015448270.1 is identical to XP_015448271.1 but kept for subsequent analysis
+NOTE: XP_015988692.1 is identical to BAH02557.1 but kept for subsequent analysis
+NOTE: XP_011362944.1 is identical to XP_023389075.1 but kept for subsequent analysis
+NOTE: XP_028013824.1 is identical to XP_008148110.1 but kept for subsequent analysis
+NOTE: JAA49194.1 is identical to XP_024417890.1 but kept for subsequent analysis
+NOTE: XP_005877498.1 is identical to XP_023609422.1 but kept for subsequent analysis
+NOTE: XP_023610971.1 is identical to XP_023610977.1 but kept for subsequent analysis
+NOTE: XP_014384419.1 is identical to XP_006088668.1 but kept for subsequent analysis
+NOTE: XP_016076638.1 is identical to XP_016076639.1 but kept for subsequent analysis
+NOTE: XP_015978183.1 is identical to XP_015978184.1 but kept for subsequent analysis
+NOTE: XP_015975005.1 is identical to XP_015975010.1 but kept for subsequent analysis
+NOTE: XP_016007706.1 is identical to XP_016007714.1 but kept for subsequent analysis
+NOTE: XP_014395422.1 is identical to XP_014395423.1 but kept for subsequent analysis
+NOTE: EPQ16880.1 is identical to XP_005880997.1 but kept for subsequent analysis
+NOTE: XP_028363908.1 is identical to XP_028363909.1 but kept for subsequent analysis
+NOTE: XP_027999466.1 is identical to XP_027999467.1 but kept for subsequent analysis
+NOTE: XP_008153297.2 is identical to XP_008153288.2 but kept for subsequent analysis
+NOTE: XP_011357663.1 is identical to XP_023385943.1 but kept for subsequent analysis
+NOTE: XP_011362287.1 is identical to XP_011362288.1 but kept for subsequent analysis
+NOTE: XP_011364002.1 is identical to XP_011364011.1 but kept for subsequent analysis
+NOTE: XP_019503699.1 is identical to XP_019503700.1 but kept for subsequent analysis
+NOTE: XP_019496780.1 is identical to XP_019496781.1 but kept for subsequent analysis
+NOTE: XP_019495209.1 is identical to XP_019495211.1 but kept for subsequent analysis
+NOTE: XP_019491618.1 is identical to XP_019491619.1 but kept for subsequent analysis
+NOTE: XP_016061915.1 is identical to XP_016061923.1 but kept for subsequent analysis
+NOTE: XP_016061897.1 is identical to XP_016061903.1 but kept for subsequent analysis
+NOTE: XP_016000096.1 is identical to XP_016000097.1 but kept for subsequent analysis
+NOTE: XP_015999410.1 is identical to XP_015999411.1 but kept for subsequent analysis
+NOTE: XP_015996192.1 is identical to XP_015996193.1 but kept for subsequent analysis
+NOTE: XP_015996189.1 is identical to XP_015996190.1 but kept for subsequent analysis
+NOTE: XP_015996183.1 is identical to XP_015996184.1 but kept for subsequent analysis
+NOTE: XP_015417854.1 is identical to XP_015417855.1 but kept for subsequent analysis
+NOTE: XP_005857008.2 is identical to XP_015414941.1 but kept for subsequent analysis
+NOTE: ELK37324.1 is identical to XP_006754308.2 but kept for subsequent analysis
+NOTE: ELK33594.1 is identical to XP_006759401.1 but kept for subsequent analysis
+NOTE: EPQ14693.1 is identical to XP_014404205.1 but kept for subsequent analysis
+NOTE: XP_014403943.1 is identical to XP_005877197.2 but kept for subsequent analysis
+NOTE: EPQ15238.1 is identical to XP_005878466.1 but kept for subsequent analysis
+NOTE: 122 identical sequences (see below) will be ignored for subsequent analysis
+NOTE: ADO01610.1 (identical to NP_001277092.1) is ignored but added at the end
+NOTE: XP_011361215.1 (identical to NP_001277092.1) is ignored but added at the end
+NOTE: XP_011361214.1 (identical to NP_001277092.1) is ignored but added at the end
+NOTE: XP_011361213.1 (identical to NP_001277092.1) is ignored but added at the end
+NOTE: ELK17709.1 (identical to NP_001277092.1) is ignored but added at the end
+NOTE: XP_011359267.1 (identical to NP_001277101.1) is ignored but added at the end
+NOTE: XP_015450318.1 (identical to NP_001307210.1) is ignored but added at the end
+NOTE: ADO01608.1 (identical to NP_001307210.1) is ignored but added at the end
+NOTE: ELK06423.1 (identical to NP_001307210.1) is ignored but added at the end
+NOTE: XP_006906317.1 (identical to NP_001307208.1) is ignored but added at the end
+NOTE: ADO01604.1 (identical to NP_001307208.1) is ignored but added at the end
+NOTE: XP_024425724.1 (identical to AMZ03373.1) is ignored but added at the end
+NOTE: XP_024425638.1 (identical to AMZ03370.1) is ignored but added at the end
+NOTE: XP_024425637.1 (identical to AMZ03370.1) is ignored but added at the end
+NOTE: XP_024418466.1 (identical to AMZ03367.1) is ignored but added at the end
+NOTE: XP_024418465.1 (identical to AMZ03367.1) is ignored but added at the end
+NOTE: XP_024418464.1 (identical to AMZ03367.1) is ignored but added at the end
+NOTE: XP_024418463.1 (identical to AMZ03367.1) is ignored but added at the end
+NOTE: XP_028382386.1 (identical to AMZ03367.1) is ignored but added at the end
+NOTE: XP_019486895.1 (identical to APR72782.1) is ignored but added at the end
+NOTE: XP_015419441.1 (identical to APR72769.1) is ignored but added at the end
+NOTE: XP_015419440.1 (identical to APR72769.1) is ignored but added at the end
+NOTE: XP_006763858.1 (identical to APR72769.1) is ignored but added at the end
+NOTE: ELK30183.1 (identical to APR72769.1) is ignored but added at the end
+NOTE: APR72763.1 (identical to APR72765.1) is ignored but added at the end
+NOTE: APR72767.1 (identical to APR72765.1) is ignored but added at the end
+NOTE: BAH02556.1 (identical to APR72765.1) is ignored but added at the end
+NOTE: XP_011361212.1 (identical to APR72765.1) is ignored but added at the end
+NOTE: XP_019506735.1 (identical to APR72765.1) is ignored but added at the end
+NOTE: XP_019506734.1 (identical to APR72765.1) is ignored but added at the end
+NOTE: XP_015975073.1 (identical to APR72765.1) is ignored but added at the end
+NOTE: XP_015975065.1 (identical to APR72765.1) is ignored but added at the end
+NOTE: ELK17710.1 (identical to APR72765.1) is ignored but added at the end
+NOTE: XP_015419449.1 (identical to APR72762.1) is ignored but added at the end
+NOTE: XP_005881008.2 (identical to APR72762.1) is ignored but added at the end
+NOTE: XP_014384420.1 (identical to APR72762.1) is ignored but added at the end
+NOTE: EPQ16883.1 (identical to APR72762.1) is ignored but added at the end
+NOTE: ELK30184.1 (identical to APR72762.1) is ignored but added at the end
+NOTE: XP_016066807.1 (identical to APR72407.1) is ignored but added at the end
+NOTE: XP_016066806.1 (identical to APR72407.1) is ignored but added at the end
+NOTE: XP_019522777.1 (identical to APR72406.1) is ignored but added at the end
+NOTE: XP_019522776.1 (identical to APR72406.1) is ignored but added at the end
+NOTE: XP_019522775.1 (identical to APR72406.1) is ignored but added at the end
+NOTE: XP_019522774.1 (identical to APR72406.1) is ignored but added at the end
+NOTE: XP_019522773.1 (identical to APR72406.1) is ignored but added at the end
+NOTE: XP_006772771.1 (identical to APR72401.1) is ignored but added at the end
+NOTE: XP_006772769.1 (identical to APR72401.1) is ignored but added at the end
+NOTE: XP_006772768.1 (identical to APR72401.1) is ignored but added at the end
+NOTE: XP_005863158.1 (identical to APR72401.1) is ignored but added at the end
+NOTE: XP_005863157.1 (identical to APR72401.1) is ignored but added at the end
+NOTE: XP_005863156.1 (identical to APR72401.1) is ignored but added at the end
+NOTE: EPQ05808.1 (identical to APR72401.1) is ignored but added at the end
+NOTE: XP_024421673.1 (identical to AMZ03374.1) is ignored but added at the end
+NOTE: XP_008154798.1 (identical to AOC60635.1) is ignored but added at the end
+NOTE: XP_028013823.1 (identical to XP_008148110.1) is ignored but added at the end
+NOTE: EPQ14694.1 (identical to XP_023609422.1) is ignored but added at the end
+NOTE: XP_006770169.2 (identical to XP_023610977.1) is ignored but added at the end
+NOTE: XP_014399389.1 (identical to XP_023610977.1) is ignored but added at the end
+NOTE: EPQ10918.1 (identical to XP_023610977.1) is ignored but added at the end
+NOTE: XP_014384418.1 (identical to XP_006088668.1) is ignored but added at the end
+NOTE: XP_005881009.1 (identical to XP_006088668.1) is ignored but added at the end
+NOTE: EPQ16884.1 (identical to XP_006088668.1) is ignored but added at the end
+NOTE: XP_015978182.1 (identical to XP_015978184.1) is ignored but added at the end
+NOTE: XP_015978181.1 (identical to XP_015978184.1) is ignored but added at the end
+NOTE: XP_015975001.1 (identical to XP_015975010.1) is ignored but added at the end
+NOTE: XP_015974993.1 (identical to XP_015975010.1) is ignored but added at the end
+NOTE: XP_015974986.1 (identical to XP_015975010.1) is ignored but added at the end
+NOTE: XP_015974977.1 (identical to XP_015975010.1) is ignored but added at the end
+NOTE: XP_015974968.1 (identical to XP_015975010.1) is ignored but added at the end
+NOTE: XP_014395421.1 (identical to XP_014395423.1) is ignored but added at the end
+NOTE: XP_014395420.1 (identical to XP_014395423.1) is ignored but added at the end
+NOTE: XP_014395419.1 (identical to XP_014395423.1) is ignored but added at the end
+NOTE: XP_014395417.1 (identical to XP_014395423.1) is ignored but added at the end
+NOTE: EPQ07938.1 (identical to XP_014395423.1) is ignored but added at the end
+NOTE: XP_008138437.1 (identical to XP_027999467.1) is ignored but added at the end
+NOTE: XP_011357661.1 (identical to XP_023385943.1) is ignored but added at the end
+NOTE: XP_011357660.1 (identical to XP_023385943.1) is ignored but added at the end
+NOTE: XP_019503698.1 (identical to XP_019503700.1) is ignored but added at the end
+NOTE: XP_019503697.1 (identical to XP_019503700.1) is ignored but added at the end
+NOTE: XP_019503696.1 (identical to XP_019503700.1) is ignored but added at the end
+NOTE: XP_019503695.1 (identical to XP_019503700.1) is ignored but added at the end
+NOTE: XP_019503694.1 (identical to XP_019503700.1) is ignored but added at the end
+NOTE: XP_019503693.1 (identical to XP_019503700.1) is ignored but added at the end
+NOTE: XP_019503692.1 (identical to XP_019503700.1) is ignored but added at the end
+NOTE: XP_019503691.1 (identical to XP_019503700.1) is ignored but added at the end
+NOTE: XP_019503689.1 (identical to XP_019503700.1) is ignored but added at the end
+NOTE: XP_019496779.1 (identical to XP_019496781.1) is ignored but added at the end
+NOTE: XP_019496778.1 (identical to XP_019496781.1) is ignored but added at the end
+NOTE: XP_019496777.1 (identical to XP_019496781.1) is ignored but added at the end
+NOTE: XP_019496776.1 (identical to XP_019496781.1) is ignored but added at the end
+NOTE: XP_019496775.1 (identical to XP_019496781.1) is ignored but added at the end
+NOTE: XP_019496774.1 (identical to XP_019496781.1) is ignored but added at the end
+NOTE: XP_019495208.1 (identical to XP_019495211.1) is ignored but added at the end
+NOTE: XP_019495207.1 (identical to XP_019495211.1) is ignored but added at the end
+NOTE: XP_019491617.1 (identical to XP_019491619.1) is ignored but added at the end
+NOTE: XP_019491616.1 (identical to XP_019491619.1) is ignored but added at the end
+NOTE: XP_016061888.1 (identical to XP_016061903.1) is ignored but added at the end
+NOTE: XP_016000095.1 (identical to XP_016000097.1) is ignored but added at the end
+NOTE: XP_016000094.1 (identical to XP_016000097.1) is ignored but added at the end
+NOTE: XP_016000093.1 (identical to XP_016000097.1) is ignored but added at the end
+NOTE: XP_016000092.1 (identical to XP_016000097.1) is ignored but added at the end
+NOTE: XP_016000091.1 (identical to XP_016000097.1) is ignored but added at the end
+NOTE: XP_015999409.1 (identical to XP_015999411.1) is ignored but added at the end
+NOTE: XP_015999408.1 (identical to XP_015999411.1) is ignored but added at the end
+NOTE: XP_015999407.1 (identical to XP_015999411.1) is ignored but added at the end
+NOTE: XP_015999406.1 (identical to XP_015999411.1) is ignored but added at the end
+NOTE: XP_015999405.1 (identical to XP_015999411.1) is ignored but added at the end
+NOTE: XP_015996191.1 (identical to XP_015996193.1) is ignored but added at the end
+NOTE: XP_015996188.1 (identical to XP_015996190.1) is ignored but added at the end
+NOTE: XP_015996187.1 (identical to XP_015996190.1) is ignored but added at the end
+NOTE: XP_015996185.1 (identical to XP_015996190.1) is ignored but added at the end
+NOTE: XP_015996182.1 (identical to XP_015996184.1) is ignored but added at the end
+NOTE: XP_015996181.1 (identical to XP_015996184.1) is ignored but added at the end
+NOTE: XP_015996180.1 (identical to XP_015996184.1) is ignored but added at the end
+NOTE: XP_015996179.1 (identical to XP_015996184.1) is ignored but added at the end
+NOTE: XP_015417853.1 (identical to XP_015417855.1) is ignored but added at the end
+NOTE: XP_006761323.1 (identical to XP_015417855.1) is ignored but added at the end
+NOTE: ELK32148.1 (identical to XP_015417855.1) is ignored but added at the end
+NOTE: EPQ01888.1 (identical to XP_015414941.1) is ignored but added at the end
+NOTE: ELK35500.1 (identical to XP_015414941.1) is ignored but added at the end
+NOTE: XP_014403942.1 (identical to XP_005877197.2) is ignored but added at the end
+NOTE: EPQ14497.1 (identical to XP_005877197.2) is ignored but added at the end
+
+For your convenience alignment with unique sequences printed to trimed_inout_TLR.fasta.uniqueseq.phy
+
+Create initial parsimony tree by phylogenetic likelihood library (PLL)... 0.067 seconds
+
+NOTE: ModelFinder requires 57 MB RAM!
+ModelFinder will test 468 protein models (sample size: 135) ...
+ No. Model         -LnL         df  AIC          AICc         BIC
+Measuring multi-threading efficiency up to 8 CPU cores
+Increase to 10 rounds for branch lengths
+38 trees examined
+Threads: 1 / Time: 8.098 sec / Speedup: 1.000 / Efficiency: 100% / LogL: -26411
+Threads: 2 / Time: 13.753 sec / Speedup: 0.589 / Efficiency: 29% / LogL: -26411
+BEST NUMBER OF THREADS: 1
+
+  1  Dayhoff       4892.317     469 10722.635    451582.635   12085.209
+  2  Dayhoff+I     4889.742     470 10719.484    453459.484   12084.963
+  3  Dayhoff+G4    4825.577     470 10591.155    453331.155   11956.634
+  4  Dayhoff+I+G4  4825.595     471 10593.190    455217.190   11961.575
+  5  Dayhoff+R2    4829.675     471 10601.351    455225.351   11969.735
+  6  Dayhoff+R3    4825.498     473 10596.997    459000.997   11971.192
+  7  Dayhoff+R4    Skipped 
+  8  Dayhoff+R5    Skipped 
+  9  Dayhoff+R6    Skipped 
+ 10  Dayhoff+R7    Skipped 
+ 11  Dayhoff+R8    Skipped 
+ 12  Dayhoff+R9    Skipped 
+ 13  Dayhoff+R10   Skipped 
+ 14  Dayhoff+F     4783.360     488 10542.721    487806.721   11960.495
+ 15  Dayhoff+F+I   4780.662     489 10539.323    489759.323   11960.003
+ 16  Dayhoff+F+G4  4737.087     489 10452.173    489672.173   11872.853
+ 17  Dayhoff+F+I+G4 4737.062     490 10454.124    491634.124   11877.708
+ 18  Dayhoff+F+R2  4739.939     490 10459.878    491639.878   11883.463
+ 19  Dayhoff+F+R3  4736.990     492 10457.981    495569.981   11887.376
+ 20  Dayhoff+F+R4  Skipped 
+ 21  Dayhoff+F+R5  Skipped 
+ 22  Dayhoff+F+R6  Skipped 
+ 23  Dayhoff+F+R7  Skipped 
+ 24  Dayhoff+F+R8  Skipped 
+ 25  Dayhoff+F+R9  Skipped 
+ 26  Dayhoff+F+R10 Skipped 
+ 27  mtMAM         4912.630     469 10763.259    451623.259   12125.833
+ 28  mtMAM+I       4901.517     470 10743.033    453483.033   12108.512
+ 29  mtMAM+G4      4850.928     470 10641.856    453381.856   12007.336
+ 30  mtMAM+I+G4    4850.094     471 10642.188    455266.188   12010.572
+ 31  mtMAM+R2      4859.996     471 10661.991    455285.991   12030.376
+ 32  mtMAM+R3      4833.377     473 10612.754    459016.754   11986.949
+ 33  mtMAM+R4      4823.830     475 10597.659    462797.659   11977.665
+ 34  mtMAM+R5      4823.355     477 10600.711    466612.711   11986.527
+ 35  mtMAM+R6      Skipped 
+ 36  mtMAM+R7      Skipped 
+ 37  mtMAM+R8      Skipped 
+ 38  mtMAM+R9      Skipped 
+ 39  mtMAM+R10     Skipped 
+ 40  mtMAM+F       4850.674     488 10677.348    487941.348   12095.122
+ 41  mtMAM+F+I     4847.307     489 10672.615    489892.615   12093.294
+ 42  mtMAM+F+G4    4772.665     489 10523.331    489743.331   11944.010
+ 43  mtMAM+F+I+G4  4772.705     490 10525.410    491705.410   11948.994
+ 44  mtMAM+F+R2    4782.834     490 10545.669    491725.669   11969.254
+ 45  mtMAM+F+R3    4756.039     492 10496.079    495608.079   11925.474
+ 46  mtMAM+F+R4    4748.825     494 10485.650    499545.650   11920.855
+ 47  mtMAM+F+R5    4747.383     496 10486.766    503510.766   11927.782
+ 48  mtMAM+F+R6    Skipped 
+ 49  mtMAM+F+R7    Skipped 
+ 50  mtMAM+F+R8    Skipped 
+ 51  mtMAM+F+R9    Skipped 
+ 52  mtMAM+F+R10   Skipped 
+ 53  JTT           4762.287     469 10462.574    451322.574   11825.148
+ 54  JTT+I         4755.919     470 10451.839    453191.839   11817.318
+ 55  JTT+G4        4718.583     470 10377.166    453117.166   11742.645
+ 56  JTT+I+G4      4718.535     471 10379.071    455003.071   11747.455
+ 57  JTT+R2        4720.870     471 10383.740    455007.740   11752.124
+ 58  JTT+R3        4718.113     473 10382.226    458786.226   11756.421
+ 59  JTT+R4        Skipped 
+ 60  JTT+R5        Skipped 
+ 61  JTT+R6        Skipped 
+ 62  JTT+R7        Skipped 
+ 63  JTT+R8        Skipped 
+ 64  JTT+R9        Skipped 
+ 65  JTT+R10       Skipped 
+ 66  JTT+F         4723.788     488 10423.575    487687.575   11841.349
+ 67  JTT+F+I       4720.513     489 10419.026    489639.026   11839.705
+ 68  JTT+F+G4      4677.395     489 10332.791    489552.791   11753.470
+ 69  JTT+F+I+G4    4677.401     490 10334.802    491514.802   11758.387
+ 70  JTT+F+R2      4681.908     490 10343.815    491523.815   11767.400
+ 71  JTT+F+R3      4676.355     492 10336.710    495448.710   11766.106
+ 72  JTT+F+R4      4666.815     494 10321.630    499381.630   11756.836
+ 73  JTT+F+R5      4666.475     496 10324.950    503348.950   11765.966
+ 74  JTT+F+R6      Skipped 
+ 75  JTT+F+R7      Skipped 
+ 76  JTT+F+R8      Skipped 
+ 77  JTT+F+R9      Skipped 
+ 78  JTT+F+R10     Skipped 
+ 79  WAG           4792.402     469 10522.804    451382.804   11885.378
+ 80  WAG+I         4785.923     470 10511.847    453251.847   11877.326
+ 81  WAG+G4        4750.056     470 10440.113    453180.113   11805.592
+ 82  WAG+I+G4      4749.967     471 10441.935    455065.935   11810.319
+ 83  WAG+R2        4751.677     471 10445.354    455069.354   11813.738
+ 84  WAG+R3        4750.274     473 10446.548    458850.548   11820.743
+ 85  WAG+R4        Skipped 
+ 86  WAG+R5        Skipped 
+ 87  WAG+R6        Skipped 
+ 88  WAG+R7        Skipped 
+ 89  WAG+R8        Skipped 
+ 90  WAG+R9        Skipped 
+ 91  WAG+R10       Skipped 
+ 92  WAG+F         4771.675     488 10519.349    487783.349   11937.123
+ 93  WAG+F+I       4767.288     489 10512.576    489732.576   11933.256
+ 94  WAG+F+G4      4728.089     489 10434.178    489654.178   11854.857
+ 95  WAG+F+I+G4    4727.979     490 10435.959    491615.959   11859.544
+ 96  WAG+F+R2      4731.125     490 10442.251    491622.251   11865.836
+ 97  WAG+F+R3      4726.485     492 10436.970    495548.970   11866.365
+ 98  WAG+F+R4      Skipped 
+ 99  WAG+F+R5      Skipped 
+100  WAG+F+R6      Skipped 
+101  WAG+F+R7      Skipped 
+102  WAG+F+R8      Skipped 
+103  WAG+F+R9      Skipped 
+104  WAG+F+R10     Skipped 
+105  cpREV         4785.180     469 10508.360    451368.360   11870.934
+106  cpREV+I       4773.991     470 10487.982    453227.982   11853.461
+107  cpREV+G4      4730.993     470 10401.986    453141.986   11767.465
+108  cpREV+I+G4    4730.359     471 10402.718    455026.718   11771.103
+109  cpREV+R2      4733.402     471 10408.804    455032.804   11777.188
+110  cpREV+R3      4730.316     473 10406.633    458810.633   11780.828
+111  cpREV+R4      Skipped 
+112  cpREV+R5      Skipped 
+113  cpREV+R6      Skipped 
+114  cpREV+R7      Skipped 
+115  cpREV+R8      Skipped 
+116  cpREV+R9      Skipped 
+117  cpREV+R10     Skipped 
+118  cpREV+F       4822.380     488 10620.760    487884.760   12038.534
+119  cpREV+F+I     4815.390     489 10608.779    489828.779   12029.459
+120  cpREV+F+G4    4769.617     489 10517.234    489737.234   11937.913
+121  cpREV+F+I+G4  4769.320     490 10518.641    491698.641   11942.225
+122  cpREV+F+R2    4773.233     490 10526.467    491706.467   11950.052
+123  cpREV+F+R3    4768.530     492 10521.060    495633.060   11950.456
+124  cpREV+F+R4    Skipped 
+125  cpREV+F+R5    Skipped 
+126  cpREV+F+R6    Skipped 
+127  cpREV+F+R7    Skipped 
+128  cpREV+F+R8    Skipped 
+129  cpREV+F+R9    Skipped 
+130  cpREV+F+R10   Skipped 
+131  mtREV         4877.664     469 10693.327    451553.327   12055.901
+132  mtREV+I       4866.146     470 10672.292    453412.292   12037.772
+133  mtREV+G4      4827.517     470 10595.035    453335.035   11960.514
+134  mtREV+I+G4    4826.457     471 10594.913    455218.913   11963.298
+135  mtREV+R2      4830.712     471 10603.424    455227.424   11971.808
+136  mtREV+R3      4824.035     473 10594.071    458998.071   11968.266
+137  mtREV+R4      4813.646     475 10577.293    462777.293   11957.298
+138  mtREV+R5      4813.651     477 10581.303    466593.303   11967.119
+139  mtREV+R6      Skipped 
+140  mtREV+R7      Skipped 
+141  mtREV+R8      Skipped 
+142  mtREV+R9      Skipped 
+143  mtREV+R10     Skipped 
+144  mtREV+F       4796.292     488 10568.583    487832.583   11986.357
+145  mtREV+F+I     4792.380     489 10562.760    489782.760   11983.439
+146  mtREV+F+G4    4744.419     489 10466.839    489686.839   11887.518
+147  mtREV+F+I+G4  4744.373     490 10468.746    491648.746   11892.331
+148  mtREV+F+R2    4749.017     490 10478.034    491658.034   11901.619
+149  mtREV+F+R3    4744.555     492 10473.111    495585.111   11902.506
+150  mtREV+F+R4    Skipped 
+151  mtREV+F+R5    Skipped 
+152  mtREV+F+R6    Skipped 
+153  mtREV+F+R7    Skipped 
+154  mtREV+F+R8    Skipped 
+155  mtREV+F+R9    Skipped 
+156  mtREV+F+R10   Skipped 
+157  rtREV         4807.221     469 10552.442    451412.442   11915.016
+158  rtREV+I       4796.119     470 10532.238    453272.238   11897.717
+159  rtREV+G4      4759.397     470 10458.794    453198.794   11824.273
+160  rtREV+I+G4    4758.481     471 10458.963    455082.963   11827.347
+161  rtREV+R2      4763.394     471 10468.787    455092.787   11837.172
+162  rtREV+R3      4757.612     473 10461.224    458865.224   11835.419
+163  rtREV+R4      4754.849     475 10459.698    462659.698   11839.704
+164  rtREV+R5      Skipped 
+165  rtREV+R6      Skipped 
+166  rtREV+R7      Skipped 
+167  rtREV+R8      Skipped 
+168  rtREV+R9      Skipped 
+169  rtREV+R10     Skipped 
+170  rtREV+F       4838.494     488 10652.988    487916.988   12070.762
+171  rtREV+F+I     4828.852     489 10635.703    489855.703   12056.382
+172  rtREV+F+G4    4774.490     489 10526.979    489746.979   11947.659
+173  rtREV+F+I+G4  4773.607     490 10527.214    491707.214   11950.799
+174  rtREV+F+R2    4780.444     490 10540.888    491720.888   11964.472
+175  rtREV+F+R3    4773.549     492 10531.098    495643.098   11960.493
+176  rtREV+F+R4    4762.885     494 10513.769    499573.769   11948.975
+177  rtREV+F+R5    4762.414     496 10516.829    503540.829   11957.845
+178  rtREV+F+R6    Skipped 
+179  rtREV+F+R7    Skipped 
+180  rtREV+F+R8    Skipped 
+181  rtREV+F+R9    Skipped 
+182  rtREV+F+R10   Skipped 
+183  mtART         4982.109     469 10902.218    451762.218   12264.792
+184  mtART+I       4962.524     470 10865.049    453605.049   12230.528
+185  mtART+G4      4902.780     470 10745.559    453485.559   12111.039
+186  mtART+I+G4    4900.762     471 10743.524    455367.524   12111.909
+187  mtART+R2      4916.816     471 10775.633    455399.633   12144.017
+188  mtART+R3      4880.821     473 10707.642    459111.642   12081.837
+189  mtART+R4      4870.533     475 10691.067    462891.067   12071.072
+190  mtART+R5      4870.485     477 10694.971    466706.971   12080.787
+191  mtART+R6      Skipped 
+192  mtART+R7      Skipped 
+193  mtART+R8      Skipped 
+194  mtART+R9      Skipped 
+195  mtART+R10     Skipped 
+196  mtART+F       4985.171     488 10946.342    488210.342   12364.116
+197  mtART+F+I     4975.717     489 10929.434    490149.434   12350.114
+198  mtART+F+G4    4893.923     489 10765.846    489985.846   12186.526
+199  mtART+F+I+G4  4893.414     490 10766.828    491946.828   12190.413
+200  mtART+F+R2    4908.941     490 10797.882    491977.882   12221.466
+201  mtART+F+R3    4873.023     492 10730.047    495842.047   12159.442
+202  mtART+F+R4    4867.715     494 10723.431    499783.431   12158.637
+203  mtART+F+R5    4864.937     496 10721.874    503745.874   12162.890
+204  mtART+F+R6    Skipped 
+205  mtART+F+R7    Skipped 
+206  mtART+F+R8    Skipped 
+207  mtART+F+R9    Skipped 
+208  mtART+F+R10   Skipped 
+209  mtZOA         4806.103     469 10550.206    451410.206   11912.780
+210  mtZOA+I       4790.363     470 10520.726    453260.726   11886.205
+211  mtZOA+G4      4740.245     470 10420.490    453160.490   11785.969
+212  mtZOA+I+G4    4738.632     471 10419.265    455043.265   11787.649
+213  mtZOA+R2      4748.587     471 10439.174    455063.174   11807.558
+214  mtZOA+R3      4729.362     473 10404.724    458808.724   11778.919
+215  mtZOA+R4      4719.150     475 10388.301    462588.301   11768.306
+216  mtZOA+R5      4719.180     477 10392.360    466404.360   11778.176
+217  mtZOA+R6      Skipped 
+218  mtZOA+R7      Skipped 
+219  mtZOA+R8      Skipped 
+220  mtZOA+R9      Skipped 
+221  mtZOA+R10     Skipped 
+222  mtZOA+F       4853.148     488 10682.296    487946.296   12100.070
+223  mtZOA+F+I     4845.838     489 10669.677    489889.677   12090.356
+224  mtZOA+F+G4    4776.957     489 10531.914    489751.914   11952.593
+225  mtZOA+F+I+G4  4776.624     490 10533.249    491713.249   11956.833
+226  mtZOA+F+R2    4786.296     490 10552.591    491732.591   11976.176
+227  mtZOA+F+R3    4767.108     492 10518.217    495630.217   11947.612
+228  mtZOA+F+R4    4760.728     494 10509.457    499569.457   11944.662
+229  mtZOA+F+R5    4758.709     496 10509.419    503533.419   11950.435
+230  mtZOA+F+R6    Skipped 
+231  mtZOA+F+R7    Skipped 
+232  mtZOA+F+R8    Skipped 
+233  mtZOA+F+R9    Skipped 
+234  mtZOA+F+R10   Skipped 
+235  VT            4799.468     469 10536.936    451396.936   11899.510
+236  VT+I          4790.819     470 10521.638    453261.638   11887.117
+237  VT+G4         4760.636     470 10461.272    453201.272   11826.751
+238  VT+I+G4       4760.115     471 10462.230    455086.230   11830.614
+239  VT+R2         4762.671     471 10467.343    455091.343   11835.727
+240  VT+R3         4759.858     473 10465.717    458869.717   11839.912
+241  VT+R4         Skipped 
+242  VT+R5         Skipped 
+243  VT+R6         Skipped 
+244  VT+R7         Skipped 
+245  VT+R8         Skipped 
+246  VT+R9         Skipped 
+247  VT+R10        Skipped 
+248  VT+F          4795.178     488 10566.357    487830.357   11984.131
+249  VT+F+I        4789.291     489 10556.581    489776.581   11977.261
+250  VT+F+G4       4749.178     489 10476.356    489696.356   11897.035
+251  VT+F+I+G4     4748.979     490 10477.958    491657.958   11901.542
+252  VT+F+R2       4752.362     490 10484.723    491664.723   11908.308
+253  VT+F+R3       4747.854     492 10479.707    495591.707   11909.103
+254  VT+F+R4       Skipped 
+255  VT+F+R5       Skipped 
+256  VT+F+R6       Skipped 
+257  VT+F+R7       Skipped 
+258  VT+F+R8       Skipped 
+259  VT+F+R9       Skipped 
+260  VT+F+R10      Skipped 
+261  LG            4729.356     469 10396.711    451256.711   11759.285
+262  LG+I          4719.162     470 10378.324    453118.324   11743.803
+263  LG+G4         4686.213     470 10312.425    453052.425   11677.905
+264  LG+I+G4       4685.453     471 10312.905    454936.905   11681.290
+265  LG+R2         4688.991     471 10319.982    454943.982   11688.366
+266  LG+R3         4684.745     473 10315.489    458719.489   11689.684
+267  LG+R4         Skipped 
+268  LG+R5         Skipped 
+269  LG+R6         Skipped 
+270  LG+R7         Skipped 
+271  LG+R8         Skipped 
+272  LG+R9         Skipped 
+273  LG+R10        Skipped 
+274  LG+F          4797.642     488 10571.284    487835.284   11989.058
+275  LG+F+I        4791.096     489 10560.192    489780.192   11980.872
+276  LG+F+G4       4738.027     489 10454.053    489674.053   11874.733
+277  LG+F+I+G4     4737.774     490 10455.547    491635.547   11879.132
+278  LG+F+R2       4743.604     490 10467.208    491647.208   11890.792
+279  LG+F+R3       4738.263     492 10460.526    495572.526   11889.921
+280  LG+F+R4       4725.720     494 10439.441    499499.441   11874.646
+281  LG+F+R5       4724.996     496 10441.993    503465.993   11883.009
+282  LG+F+R6       Skipped 
+283  LG+F+R7       Skipped 
+284  LG+F+R8       Skipped 
+285  LG+F+R9       Skipped 
+286  LG+F+R10      Skipped 
+287  DCMut         4892.842     469 10723.683    451583.683   12086.257
+288  DCMut+I       4890.231     470 10720.463    453460.463   12085.942
+289  DCMut+G4      4826.522     470 10593.044    453333.044   11958.523
+290  DCMut+I+G4    4826.537     471 10595.075    455219.075   11963.459
+291  DCMut+R2      4830.576     471 10603.152    455227.152   11971.536
+292  DCMut+R3      4826.443     473 10598.886    459002.886   11973.081
+293  DCMut+R4      Skipped 
+294  DCMut+R5      Skipped 
+295  DCMut+R6      Skipped 
+296  DCMut+R7      Skipped 
+297  DCMut+R8      Skipped 
+298  DCMut+R9      Skipped 
+299  DCMut+R10     Skipped 
+300  DCMut+F       4783.857     488 10543.713    487807.713   11961.487
+301  DCMut+F+I     4781.149     489 10540.297    489760.297   11960.976
+302  DCMut+F+G4    4737.675     489 10453.350    489673.350   11874.029
+303  DCMut+F+I+G4  4737.651     490 10455.301    491635.301   11878.886
+304  DCMut+F+R2    4740.506     490 10461.011    491641.011   11884.596
+305  DCMut+F+R3    4737.580     492 10459.159    495571.159   11888.554
+306  DCMut+F+R4    Skipped 
+307  DCMut+F+R5    Skipped 
+308  DCMut+F+R6    Skipped 
+309  DCMut+F+R7    Skipped 
+310  DCMut+F+R8    Skipped 
+311  DCMut+F+R9    Skipped 
+312  DCMut+F+R10   Skipped 
+313  PMB           4820.871     469 10579.743    451439.743   11942.317
+314  PMB+I         4812.018     470 10564.037    453304.037   11929.516
+315  PMB+G4        4788.112     470 10516.225    453256.225   11881.704
+316  PMB+I+G4      4787.140     471 10516.280    455140.280   11884.665
+317  PMB+R2        4790.312     471 10522.624    455146.624   11891.008
+318  PMB+R3        4786.947     473 10519.894    458923.894   11894.089
+319  PMB+R4        Skipped 
+320  PMB+R5        Skipped 
+321  PMB+R6        Skipped 
+322  PMB+R7        Skipped 
+323  PMB+R8        Skipped 
+324  PMB+R9        Skipped 
+325  PMB+R10       Skipped 
+326  PMB+F         4852.907     488 10681.815    487945.815   12099.589
+327  PMB+F+I       4847.962     489 10673.924    489893.924   12094.604
+328  PMB+F+G4      4809.129     489 10596.257    489816.257   12016.937
+329  PMB+F+I+G4    4808.925     490 10597.850    491777.850   12021.435
+330  PMB+F+R2      4811.734     490 10603.468    491783.468   12027.052
+331  PMB+F+R3      4807.706     492 10599.411    495711.411   12028.807
+332  PMB+F+R4      Skipped 
+333  PMB+F+R5      Skipped 
+334  PMB+F+R6      Skipped 
+335  PMB+F+R7      Skipped 
+336  PMB+F+R8      Skipped 
+337  PMB+F+R9      Skipped 
+338  PMB+F+R10     Skipped 
+339  HIVb          4788.284     469 10514.568    451374.568   11877.142
+340  HIVb+I        4781.963     470 10503.927    453243.927   11869.406
+341  HIVb+G4       4739.498     470 10418.997    453158.997   11784.476
+342  HIVb+I+G4     4739.458     471 10420.916    455044.916   11789.300
+343  HIVb+R2       4742.127     471 10426.254    455050.254   11794.638
+344  HIVb+R3       4739.468     473 10424.935    458828.935   11799.130
+345  HIVb+R4       Skipped 
+346  HIVb+R5       Skipped 
+347  HIVb+R6       Skipped 
+348  HIVb+R7       Skipped 
+349  HIVb+R8       Skipped 
+350  HIVb+R9       Skipped 
+351  HIVb+R10      Skipped 
+352  HIVb+F        4831.568     488 10639.136    487903.136   12056.910
+353  HIVb+F+I      4826.856     489 10631.713    489851.713   12052.392
+354  HIVb+F+G4     4763.326     489 10504.653    489724.653   11925.332
+355  HIVb+F+I+G4   4763.371     490 10506.743    491686.743   11930.328
+356  HIVb+F+R2     4769.872     490 10519.744    491699.744   11943.329
+357  HIVb+F+R3     4761.923     492 10507.845    495619.845   11937.240
+358  HIVb+F+R4     4751.619     494 10491.237    499551.237   11926.443
+359  HIVb+F+R5     4751.470     496 10494.939    503518.939   11935.956
+360  HIVb+F+R6     Skipped 
+361  HIVb+F+R7     Skipped 
+362  HIVb+F+R8     Skipped 
+363  HIVb+F+R9     Skipped 
+364  HIVb+F+R10    Skipped 
+365  HIVw          4976.733     469 10891.467    451751.467   12254.040
+366  HIVw+I        4967.264     470 10874.528    453614.528   12240.007
+367  HIVw+G4       4923.999     470 10787.998    453527.998   12153.477
+368  HIVw+I+G4     4923.512     471 10789.024    455413.024   12157.408
+369  HIVw+R2       4927.868     471 10797.737    455421.737   12166.121
+370  HIVw+R3       4921.890     473 10789.779    459193.779   12163.974
+371  HIVw+R4       4919.069     475 10788.138    462988.138   12168.144
+372  HIVw+R5       Skipped 
+373  HIVw+R6       Skipped 
+374  HIVw+R7       Skipped 
+375  HIVw+R8       Skipped 
+376  HIVw+R9       Skipped 
+377  HIVw+R10      Skipped 
+378  HIVw+F        4858.725     488 10693.450    487957.450   12111.224
+379  HIVw+F+I      4854.724     489 10687.448    489907.448   12108.127
+380  HIVw+F+G4     4799.627     489 10577.253    489797.253   11997.933
+381  HIVw+F+I+G4   4799.617     490 10579.235    491759.235   12002.820
+382  HIVw+F+R2     4804.428     490 10588.856    491768.856   12012.441
+383  HIVw+F+R3     4794.988     492 10573.976    495685.976   12003.372
+384  HIVw+F+R4     4791.771     494 10571.541    499631.541   12006.747
+385  HIVw+F+R5     Skipped 
+386  HIVw+F+R6     Skipped 
+387  HIVw+F+R7     Skipped 
+388  HIVw+F+R8     Skipped 
+389  HIVw+F+R9     Skipped 
+390  HIVw+F+R10    Skipped 
+391  JTTDCMut      4768.162     469 10474.323    451334.323   11836.897
+392  JTTDCMut+I    4761.836     470 10463.672    453203.672   11829.151
+393  JTTDCMut+G4   4724.583     470 10389.167    453129.167   11754.646
+394  JTTDCMut+I+G4 4724.495     471 10390.991    455014.991   11759.375
+395  JTTDCMut+R2   4726.876     471 10395.752    455019.752   11764.137
+396  JTTDCMut+R3   4722.708     473 10391.415    458795.415   11765.610
+397  JTTDCMut+R4   Skipped 
+398  JTTDCMut+R5   Skipped 
+399  JTTDCMut+R6   Skipped 
+400  JTTDCMut+R7   Skipped 
+401  JTTDCMut+R8   Skipped 
+402  JTTDCMut+R9   Skipped 
+403  JTTDCMut+R10  Skipped 
+404  JTTDCMut+F    4726.589     488 10429.179    487693.179   11846.953
+405  JTTDCMut+F+I  4723.416     489 10424.831    489644.831   11845.511
+406  JTTDCMut+F+G4 4680.692     489 10339.385    489559.385   11760.064
+407  JTTDCMut+F+I+G4 4680.721     490 10341.441    491521.441   11765.026
+408  JTTDCMut+F+R2 4685.137     490 10350.275    491530.275   11773.859
+409  JTTDCMut+F+R3 4674.253     492 10332.505    495444.505   11761.900
+410  JTTDCMut+F+R4 4669.865     494 10327.730    499387.730   11762.935
+411  JTTDCMut+F+R5 Skipped 
+412  JTTDCMut+F+R6 Skipped 
+413  JTTDCMut+F+R7 Skipped 
+414  JTTDCMut+F+R8 Skipped 
+415  JTTDCMut+F+R9 Skipped 
+416  JTTDCMut+F+R10 Skipped 
+417  FLU           4787.881     469 10513.762    451373.762   11876.336
+418  FLU+I         4781.605     470 10503.211    453243.211   11868.690
+419  FLU+G4        4747.523     470 10435.046    453175.046   11800.525
+420  FLU+I+G4      4747.250     471 10436.501    455060.501   11804.885
+421  FLU+R2        4749.369     471 10440.738    455064.738   11809.123
+422  FLU+R3        4746.496     473 10438.991    458842.991   11813.186
+423  FLU+R4        Skipped 
+424  FLU+R5        Skipped 
+425  FLU+R6        Skipped 
+426  FLU+R7        Skipped 
+427  FLU+R8        Skipped 
+428  FLU+R9        Skipped 
+429  FLU+R10       Skipped 
+430  FLU+F         4794.773     488 10565.546    487829.546   11983.320
+431  FLU+F+I       4790.983     489 10559.967    489779.967   11980.646
+432  FLU+F+G4      4732.337     489 10442.673    489662.673   11863.353
+433  FLU+F+I+G4    4732.328     490 10444.657    491624.657   11868.241
+434  FLU+F+R2      4738.694     490 10457.388    491637.388   11880.973
+435  FLU+F+R3      4727.753     492 10439.505    495551.505   11868.901
+436  FLU+F+R4      4724.294     494 10436.587    499496.587   11871.793
+437  FLU+F+R5      Skipped 
+438  FLU+F+R6      Skipped 
+439  FLU+F+R7      Skipped 
+440  FLU+F+R8      Skipped 
+441  FLU+F+R9      Skipped 
+442  FLU+F+R10     Skipped 
+443  Blosum62      4807.943     469 10553.886    451413.886   11916.460
+444  Blosum62+I    4798.333     470 10536.666    453276.666   11902.145
+445  Blosum62+G4   4774.656     470 10489.312    453229.312   11854.791
+446  Blosum62+I+G4 4773.525     471 10489.050    455113.050   11857.435
+447  Blosum62+R2   4777.067     471 10496.133    455120.133   11864.518
+448  Blosum62+R3   4772.561     473 10491.121    458895.121   11865.316
+449  Blosum62+R4   Skipped 
+450  Blosum62+R5   Skipped 
+451  Blosum62+R6   Skipped 
+452  Blosum62+R7   Skipped 
+453  Blosum62+R8   Skipped 
+454  Blosum62+R9   Skipped 
+455  Blosum62+R10  Skipped 
+456  Blosum62+F    4831.047     488 10638.093    487902.093   12055.867
+457  Blosum62+F+I  4825.058     489 10628.117    489848.117   12048.796
+458  Blosum62+F+G4 4785.509     489 10549.017    489769.017   11969.697
+459  Blosum62+F+I+G4 4785.196     490 10550.392    491730.392   11973.977
+460  Blosum62+F+R2 4788.177     490 10556.354    491736.354   11979.939
+461  Blosum62+F+R3 4779.471     492 10542.943    495654.943   11972.338
+462  Blosum62+F+R4 4775.458     494 10538.916    499598.916   11974.121
+463  Blosum62+F+R5 Skipped 
+464  Blosum62+F+R6 Skipped 
+465  Blosum62+F+R7 Skipped 
+466  Blosum62+F+R8 Skipped 
+467  Blosum62+F+R9 Skipped 
+468  Blosum62+F+R10 Skipped 
+Akaike Information Criterion:           LG+G4
+Corrected Akaike Information Criterion: LG
+Bayesian Information Criterion:         LG+G4
+Best-fit model: LG+G4 chosen according to BIC
+
+All model information printed to trimed_inout_TLR.fasta.model
+CPU time for ModelFinder: 512.722 seconds (0h:8m:32s)
+Wall-clock time for ModelFinder: 520.414 seconds (0h:8m:40s)
+Generating 1000 samples for ultrafast bootstrap (seed: 745282)...
+
+NOTE: 23 MB RAM (0 GB) is required!
+Estimate model parameters (epsilon = 0.100)
+1. Initial log-likelihood: -4706.368
+2. Current log-likelihood: -4687.400
+3. Current log-likelihood: -4686.234
+Optimal log-likelihood: -4686.213
+Gamma shape alpha: 2.765
+Parameters optimization took 3 rounds (1.955 sec)
+Computing ML distances based on estimated model parameters... 13.882 sec
+WARNING: Some pairwise ML distances are too long (saturated)
+Computing BIONJ tree...
+0.065 seconds
+Log-likelihood of BIONJ tree: -4828.912
+--------------------------------------------------------------------
+|             INITIALIZING CANDIDATE TREE SET                      |
+--------------------------------------------------------------------
+Generating 98 parsimony trees... 12.095 second
+Computing log-likelihood of 98 initial trees ... 27.266 seconds
+Current best score: -4677.859
+
+Do NNI search on 20 best initial trees
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 1: -4651.671
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 5: -4649.430
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 6: -4648.019
+Iteration 10 / LogL: -4656.769 / Time: 0h:10m:40s
+Iteration 20 / LogL: -4671.276 / Time: 0h:11m:46s
+Finish initializing candidate tree set (20)
+Current best tree score: -4648.019 / CPU time: 169.232
+Number of iterations: 20
+--------------------------------------------------------------------
+|               OPTIMIZING CANDIDATE TREE SET                      |
+--------------------------------------------------------------------
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 23: -4646.890
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 26: -4644.900
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 27: -4640.477
+Iteration 30 / LogL: -4665.272 / Time: 0h:13m:8s (0h:14m:57s left)
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 35: -4640.168
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 37: -4638.554
+BETTER TREE FOUND at iteration 38: -4638.554
+Iteration 40 / LogL: -4641.672 / Time: 0h:14m:26s (0h:14m:30s left)
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 44: -4638.223
+Iteration 50 / LogL: -4638.556 / Time: 0h:15m:39s (0h:13m:23s left)
+Log-likelihood cutoff on original alignment: -4696.081
+Iteration 60 / LogL: -4647.762 / Time: 0h:16m:59s (0h:11m:50s left)
+Iteration 70 / LogL: -4654.490 / Time: 0h:28m:47s (0h:21m:34s left)
+Iteration 80 / LogL: -4680.718 / Time: 0h:30m:28s (0h:17m:39s left)
+Iteration 90 / LogL: -4642.850 / Time: 0h:32m:8s (0h:14m:14s left)
+Iteration 100 / LogL: -4653.560 / Time: 0h:32m:51s (0h:10m:44s left)
+Log-likelihood cutoff on original alignment: -4690.540
+NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.996
+Iteration 110 / LogL: -4668.761 / Time: 0h:33m:31s (0h:20m:31s left)
+Iteration 120 / LogL: -4642.686 / Time: 0h:34m:10s (0h:17m:8s left)
+Iteration 130 / LogL: -4664.449 / Time: 0h:34m:53s (0h:14m:13s left)
+Iteration 140 / LogL: -4646.836 / Time: 0h:35m:36s (0h:11m:37s left)
+TREE SEARCH COMPLETED AFTER 145 ITERATIONS / Time: 0h:36m:0s
+
+--------------------------------------------------------------------
+|                    FINALIZING TREE SEARCH                        |
+--------------------------------------------------------------------
+Performs final model parameters optimization
+Estimate model parameters (epsilon = 0.010)
+1. Initial log-likelihood: -4638.223
+Optimal log-likelihood: -4638.222
+Gamma shape alpha: 2.793
+Parameters optimization took 1 rounds (0.229 sec)
+BEST SCORE FOUND : -4638.222
+Creating bootstrap support values...
+Split supports printed to NEXUS file trimed_inout_TLR.fasta.splits.nex
+Total tree length: 10.000
+
+Total number of iterations: 145
+CPU time used for tree search: 910.021 sec (0h:15m:10s)
+Wall-clock time used for tree search: 1622.942 sec (0h:27m:2s)
+Total CPU time used: 1440.854 sec (0h:24m:0s)
+Total wall-clock time used: 2161.653 sec (0h:36m:1s)
+
+Computing bootstrap consensus tree...
+Reading input file trimed_inout_TLR.fasta.splits.nex...
+236 taxa and 1941 splits.
+Consensus tree written to trimed_inout_TLR.fasta.contree
+Reading input trees file trimed_inout_TLR.fasta.contree
+Log-likelihood of consensus tree: -4638.227
+
+Analysis results written to: 
+  IQ-TREE report:                trimed_inout_TLR.fasta.iqtree
+  Maximum-likelihood tree:       trimed_inout_TLR.fasta.treefile
+  Likelihood distances:          trimed_inout_TLR.fasta.mldist
+
+Ultrafast bootstrap approximation results written to:
+  Split support values:          trimed_inout_TLR.fasta.splits.nex
+  Consensus tree:                trimed_inout_TLR.fasta.contree
+  Screen log file:               trimed_inout_TLR.fasta.log
+
+Date and Time: Mon Apr 22 14:28:28 2019

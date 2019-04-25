@@ -70,19 +70,46 @@ trimal -in aligned_ingr_outgr_all_TLR.fasta -out trimed_inout_TLR.fasta -htmlout
 # Now that we have aligned and trimmed our sequences its time to build our gene tree
 # echo 'Lets try IQtree' | conda install -c bioconda iqtree
 # Say bioconda is super useful instead of going to github pages or such to download
+# Construct a maximum likelihood tree
 iqtree -b 100 -nt AUTO -s trimed_inout_TLR.fasta
+This simple command will perform three important steps:
+Model selection (with ModelFinder) to select the best-fit model to the data.
+Reconstruct the ML tree with the selected model.
+Assess branch supports with the ultrafast bootstrap.
+# Once the run is done, IQ-TREE will write several output files including:
+# .iqtree: the main report file that is self-readable. You should look at this file to see the computational results. It also contains a textual representation of the final tree.
+# .treefile: the ML tree in NEWICK format, which can be visualized in FigTree.
+# .log: log file of the entire run (also printed on the screen).
+# .ckp.gz: checkpoint file used to resume an interrupted analysis.
+And a few other files.
+# In R transform the tree to a nexus format:
+require(phytools)
+tree <- read.tree('/Users/diegoellis/projects/development/Comparative_genomics/finalproject/Data/All_TLR_2/trimed_inout_TLR.fasta.contree')
+writeNexus(tree, file = '/Users/diegoellis/projects/development/Comparative_genomics/finalproject/Data/All_TLR_2/All_TLR_gene_tree.nex')
+# We now perform a partition model analysis, where one allows each partition to have its own model:
+# I transformed the concensus tree to nexus:
+iqtree -s trimed_inout_TLR.fasta -spp All_TLR_gene_tree.nex -bb 1000 -nt AUTO # Could also be: trimed_inout_TLR.fasta.splits.nex Split support values:
+iqtree -b 100 -nt -spp
 
 
 # --- --- --- --- --- --- --- --- --- --- --- ---
 # [G] Visualizing the gene tree
 # --- --- --- --- --- --- --- --- --- --- --- ---
 
+# phylo.io
+Visualize the gene tree with ete3 (python plugin) or with ggtree and ape (R)
+echo 'Quick bash visualization of the gene tree'
+mkdir /Users/diegoellis/projects/development/Comparative_genomics/finalproject/Figures/
+cd /Users/diegoellis/projects/development/Comparative_genomics/finalproject/Data/All_TLR/
+ete3 view -t trimed_inout_TLR_tree_newick.nw
+echo 'Plot the gene tree using ggTree'
+Rscript /Users/diegoellis/projects/development/Comparative_genomics/finalproject/Code/read_tree.R
+echo 'Plot the gene tree using ggTree of only 4 TLR sequences with aligned sequences next to them'
+Rscript /Users/diegoellis/projects/development/Comparative_genomics/finalproject/Code/read_tree.R
 # All PhyloTree instances are, by default, attached to such layout for tree visualization, thus allowing for in-place alignment visualization and evolutionary events labeling.
 [9] The tree is in Newack format; I converted the TREE using ape::write.tree.
 # This takes a few hours
 # ete3 annotated -t tree.nw --ncbi
-cd /Users/diegoellis/projects/development/Comparative_genomics/finalproject/Data/All_TLR/
-ete3 view -t trimed_inout_TLR_tree_newick.nw
 # http://etetoolkit.org/documentation/tools/
  iqtree -nt AUTO -b 100 -s trimmed_al_in_outgroup.fasta  # Make a tree with 100 bootstrap.
 # For command line visualizaiton:
@@ -92,12 +119,21 @@ ete3 view --text MyTreeFile.nw
 [10] Ape? Try this out.
 ete3 view --text MyTreeFile.nw
 Load a tree and link it to the alignment:
-from ete3 import PhyloTree
 # http://etetoolkit.org/docs/latest/tutorial/tutorial_phylogeny.html
 # Make a pipeline for everything else.
-was there diversification of TLR between bats or did it arose efore that?
+# was there diversification of TLR between bats or did it arose efore that?
 # Get the protein name and accesion number -> Show in my presentation for all my TLR genes.
-#
+
+
+[H] Associate taxonomy to gene accesion number
+
+
+
+
+[11]
+
+# ete annotate: annotate tree nodes with external data or using NCBI taxonomy information.
+ete3 annotate -t trimed_inout_TLR_tree_newick.nw --ncbi
 
 # Next I could try to align all the sequences i got from SUMAC?!
 
@@ -105,3 +141,10 @@ was there diversification of TLR between bats or did it arose efore that?
 # ete annotate: annotate tree nodes with external data or using NCBI taxonomy information.
 ete3 annotated -t tree.nw --ncbi
 ete3 annotated -t trimed_inout_TLR_tree_newick.nw
+# ete annotate: annotate tree nodes with external data or using NCBI taxonomy information.
+ete3 annotate -t trimed_inout_TLR_tree_newick.nw --ncbi
+
+ete build: Build gene and species trees with a single command.
+
+ete3 build -a seqs.fasta -w soft_modeltest -o mytree/
+ete3 build -a seqs.fasta -w soft_modeltest -o mytree/
