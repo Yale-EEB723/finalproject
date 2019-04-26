@@ -646,7 +646,7 @@ gff3.table$animal<-c(rep.int("Amphimedon_queenslandica",43615),rep.int("Capitell
 
 
 #Read in agalma homologs csv
-agalma.homologs<-read.csv("5taxa_results_alt.csv",header=TRUE,sep=",")
+agalma.homologs<-read.csv("compgen_homologs_nohydra_geneNames.csv",header=TRUE,sep=",")
 
 
 
