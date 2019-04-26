@@ -277,7 +277,6 @@ fasta_path<-paste0(fasta_dir,blah)
 
 #histogram of call ontig lengths,
 scaffold.length.plot<-read.fasta(fasta_path)%>%getLength(.)%>%as.data.frame()%>%ggplot()+geom_histogram(aes(x=.), fill="skyblue3", color="black",binwidth=100)+xlab("Scaffold Length (bp)")+ylab("Frequency")+labs(title=blah)
-scaffold.length.plotggplot(df,aes(x=x,y=y))+geom_col(fill="skyblue3")+scale_y_continuous(trans='log10')
 ggsave(scaffold.length.plot,file=paste0("scaffold.len_",blah,".pdf"))
 
 #histogram of contig lengths, restricted to scaffolds < 10,000 bp
@@ -335,9 +334,9 @@ gff3.plot
 ggsave(gff3.plot,file=paste0("gff3_",blah,".pdf"))
 
 #use for custom axes
-gff3.plot.custom.axes<-ggplot(data = gene.count, aes(x=gene.count$Freq)) + geom_histogram(binwidth=1) + geom_vline(xintercept = 3,color="red") +xlim(0,10)+ylim(0,3000)+xlab("Number of Genes Per Contig")+ylab("Frequency")+labs(title=blah)
-gff3.plot.custom.axes<
-ggsave(gff3.plot.custom.axes,file=paste0("gff3_customaxes_",blah,".pdf"))
+#gff3.plot.custom.axes<-ggplot(data = gene.count, aes(x=gene.count$Freq)) + geom_histogram(binwidth=1) + geom_vline(xintercept = 3,color="red") +xlim(0,10)+ylim(0,3000)+xlab("Number of Genes Per Contig")+ylab("Frequency")+labs(title=blah)
+#gff3.plot.custom.axes
+#ggsave(gff3.plot.custom.axes,file=paste0("gff3_customaxes_",blah,".pdf"))
 
 
 #stats
@@ -351,21 +350,6 @@ print(paste("Max no. genes/contig:",max(gene.count$Freq)))
 
 ```
 
-```{r overall genome stats}
-#median scaffold length
-species<-c("Mle","Aqu","Tad","Nve","Lgi","Cte","Hro","Dme","Spur","Dre","Hsa","Tgu")
-csv<-read.csv("output/genome_data.csv")
-df<-data.frame(y=csv$median_scaff_len)
-df$x<-as.character(df$x)
-ggplot_median.scaffold.len<-ggplot(df,aes(x=x,y=y))+geom_bar(fill="skyblue3",stat="identity")+scale_y_continuous(trans='log10')+xlab("Species")+ylab("Log10 Median Scaffold Length (bp)")+labs(title = "Median Scaffold Length")
-
-df<-data.frame(y=csv$no.chromosomes)
-df$x<-factor(x=c("Mle","Aqu","Tad","Nve","Lgi","Cte","Hro","Dme","Spur","Dre","Hsa","Tgu"))%>%factor()
-ggplot_no_scaff<-ggplot(df,aes(x=x,y=y))+geom_col(fill="skyblue3")+scale_y_continuous(trans='log10')+xlab("Species")+ylab("Log10 Number of Scaffolds")+labs(title = "Number of Scaffolds per Genome Assembly")
-
-
-
-```
 
 
 #Find homologous genes between genomes
@@ -467,7 +451,7 @@ Below code modified from:
 #~~~~~ Beginning of 'story''s code.~~~~~
 
 ## read your fasta in as Biostrings object
-fasta.s <- readDNAStringSet("./data/sample_data/fasta_sample.fasta")
+fasta.s <- readDNAStringSet("./data/sample_data/longest_pep_sample.fasta")
 
 ## get the read names (in your case it has the isoform info)
 names.fasta <- names(fasta.s)
@@ -678,7 +662,7 @@ absent_genes.csv: cut -f 1 -d "," final.master.table_absentgenes.csv |grep "NA"
 gff3.table.save<-gff3.table
 
 #***SUBSAMPLE: choose from which animals you want to cluster scaffolds. Not doing so makes computation impossible on a local machine.
-filter_target=c("Homo_sapiens","Danio_rerio")
+filter_target=c("Homo_sapiens","Danio_rerio","Strongylocentrotus_purpuratus")
 gff3.table<-filter(gff3.table, animal==filter_target)
 
 
