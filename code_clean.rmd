@@ -52,14 +52,14 @@ For each genome, the below code plots a histogram of scaffold lengths and finds 
 
 The human and zebrafish fastas were too large to run through this code, but median scaffold length was found from online database resources. The many small unplaced scaffolds in the Drosophila toplevel assembly reduced median scaffold length, so only chromosomes were used.   
 
-Note: The below code has been set to run on **sample data**.   
+Note: The below code has been set to run on **sample data**. Unfortunately, the sample data produces weird-looking graphs, but it's not possible to have a full genome in my repo.   
 
 ```{r distr scaffold length}
 
 
 #RUN SAMPLE DATA:
 fasta_dir<-"data/sample_data/"
-fasta<-c("sample1.fa")
+fasta<-c("sample1.fasta")
 
 #RUN REAL DATA:
 #fasta_dir<-"~/Desktop/compgen/repo/ensembl/genome_fasta/"
@@ -185,4 +185,5 @@ write.csv(list,"longestpep_list.txt",quote=FALSE,row.names=FALSE)
 ```
 
 
+To pull out the longest sequences from your fasta file, use fasta_puller.py. Fasta_puller.py requires that the names in the list exactly match the names in the fasta (including the '>'). This means that you have to Regex the names in the list.
 

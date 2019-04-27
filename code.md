@@ -430,7 +430,7 @@ list<-longest.pep.df[,1,drop=FALSE]
 write.csv(list,"longestpep_list.txt",quote=FALSE,row.names=FALSE)
 ```   
 
-The code above produces a list of all of the longest peptide per gene. Use the below Python script I wrote to pull out each sequence from the fasta file by name. The fasta headers in this list must perfectly match those in the fasta file, and names must be in a single column with no column header.
+The code above produces a list of all of the longest peptides per gene. Use the below Python script I wrote to pull out each sequence from the fasta file by name. The fasta headers in this list must perfectly match those in the fasta file, and names must be in a single column with no column header. This means that you have to regex the desired ID (in this case, protein ID), from the list of fasta headers.  
 
 ```
 #! /usr/bin/env python
