@@ -196,7 +196,7 @@ The resulting clustering appears below:
 ## Testing the null hypothesis  
 Given that different subsets of data and clustering algorithms seem to return the same general clustering structure, is it possible that this structure is inherent to this type of data itself? Is this clustering structure the 'true' result given the resolution afforded by this work-flow, or is it a random pattern?  
 
-*Null hypothesis*: The clustering pattern I have been observing so far (one big cluster + many small singleton clusters) is due to random chance.  
+*Null hypothesis*: The clustering pattern I have been observing so far (one big cluster + many small singleton clusters) is due to random chance. If so, the clustering pattern created by a random contingency matrix should match the pattern I've received in previous clustering attempts.    
 
 The randomized data was based off the original data from the Ghost Loci Analysis and the same clustering algorithm was used. The below tSNE is designed to be compared to the original tSNE in the Ghost Loci Analysis section.  
 
@@ -208,12 +208,12 @@ For randomization, I found the proportion of 1's (gene present on scaffold) vs 0
 
 ![null cluster](readme_figs/rm.null.cluster.png)  
  
-Scaffolds do *not* cluster into a single large cluster! I have implicitly assumed that the clustering pattern I've been receiving is incorrect, but perhaps it is a true reflection of the structure of the data. For example, perhaps the scaffolds are clustering into two categories: high vs low quality. Alternatively, while this pattern may be true at a high level, clustering methods may lack the resolution to identify relationships at finer levels. It is interesting that I receive similar clustering profiles from clustering scaffolds by gene presence/absence and clustering cell types by gene presence/absence across broad distances.      
+Scaffolds do *not* cluster into a single large cluster! I have assumed that the clustering pattern I've been receiving is incorrect, but perhaps it is a true reflection of the structure of the data. For example, perhaps the scaffolds are clustering into two categories: high vs low quality. Alternatively, while this pattern may be true at a high level, clustering methods may lack the resolution to identify relationships at finer levels. It is interesting that I receive similar clustering profiles from clustering scaffolds by gene presence/absence and clustering cell types by gene presence/absence across broad distances.      
 
 
 ## Assessment  
 *Was it successful in achieving the initial goal?*  
-Yes, this project completed all three goals it set out to achieve. However, because clustering did not resolve scaffolds into tight clusters, the results of the absence analysis itself is less meaningful.  
+Yes, this project completed all three goals it set out to achieve. However, due to the difficulty in interpreting the results of the clustering step, the results of the absence analysis itself less clear.  
 
 *What are the main obstacles encountered?*  
 * Computation: My laptop did not have enough computing power to process the dataset in its entirety. The next step is to run R on the cluster.  
@@ -224,13 +224,13 @@ Yes, this project completed all three goals it set out to achieve. However, beca
 * I've received advice on other clustering strategies:  
   * Perform local clustering and link them together like a daisy chain  
   * Go through genes on a scaffold using a sliding 10-gene window. If two homologs within this window are also on the same scaffold in another organism, this suggests a possible syntenic region.  Quantify how many of these pairs you can find in the window.  
-  * Instead of making a homolog x scaffold contingency matrix, make a homolog x homolog matrix. (*I'm still not fully clear on this idea - can we go over this again, Casey?*)  
+  * Instead of making a homolog x scaffold contingency matrix, make a homolog x homolog matrix. (*I'm still not fully clear about this4 - can we go over this again, Casey?*)  
 
 *What are future directions this could go in?*  
 * Ancestral state reconstruction - it is difficult to study what is absent, but perhaps this can be achieved by reconstructing the gene that was lost.    
 * Study system-specific questions eg. Have sponges lost a nervous system? This is the question that started the project.  
 * Study the characteristics of the genes that have been lost eg. are they orthologs or paralogs? Genes that arose earlier or later?  
-*waaaaay more! I would like to write a more in depth document should we decide this is a promising direction to go.  
+* WAAAAAAAAY MORE!!! I would like to write a more in depth document should we decide this is a promising direction to go.  
 
 
 ## Methods  
