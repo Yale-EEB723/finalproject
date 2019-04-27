@@ -679,7 +679,8 @@ for (t in taxa$animal){
   find.taxa<-which(phy$tip.label==t)
   taxa.list<-append(taxa.list,find.taxa)
 }
-#4. Compare which tips do not possess the homology_id. 
+#4. Compare which tips do not possess the homology_id.
+#Where ther eare no differences absent.in.taxa will equal integer(0). Hence need rbind.fill
 absent.in.taxa<-setdiff(all.tips,taxa.list)
 taxa.list<-NULL
 
