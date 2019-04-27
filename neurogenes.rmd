@@ -691,7 +691,7 @@ clust<-cc_get_cluster(cross.clust)
 #adjust perplexity if get error "perplexity is too large for the number of samples"
 tsne_obj<-Rtsne(dist.matrix,is_distance=TRUE,perplexity=1)
 tsne_data<-tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(cluster=factor(clust))
-tsne_plot<-ggplot(aes(x = X, y = Y), data = tsne_data) + geom_point(aes(color = cluster))
+tsne_plot<-ggplot(aes(x = X, y = Y), data = tsne_data) + geom_point(aes(color = cluster)) + labs(title="Cross Cluster tSNE")
 tsne_plot
 
 #agglomerative
@@ -710,7 +710,7 @@ kmean<-kmeans(dist.matrix,2)
 kclust<-kmean$cluster
 tsne_obj<-Rtsne(dist.matrix,is_distance=TRUE,perplexity=1)
 tsne_data<-tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(cluster=factor(kclust))
-tsn_plot_k<-ggplot(aes(x = X, y = Y), data = tsne_data) + geom_point(aes(color = cluster))
+tsn_plot_k<-ggplot(aes(x = X, y = Y), data = tsne_data) + geom_point(aes(color = cluster))+labs(title="Kmeans tSNE")
 tsn_plot_k
 #~~~Clustering complete~~~
 
@@ -882,8 +882,8 @@ Trying to get around sparse matrix issue:
 ```{r tree}
 #initialize
 mrca.df<-data.frame()
-absent.df<-data.frame()
 taxa.list<-NULL
+
 
 #phylogeny
 tree_text = "(Mnemiopsis_leidyi,(Amphimedon_queenslandica,(Trichoplax_adhaerens,(Nematostella_vectensis,((Drosophila_melanogaster,(Lottia_gigantea,(Capitella_telata,Helobdella_robusta))),(Strongylocentrotus_purpuratus,(Danio_rerio,(Homo_sapiens,Taeniopygia_guttata))))))));"
@@ -902,29 +902,29 @@ for (h in homolog.list){
 homolog.animals<-master.table%>%filter(.,homology_id == h) %>% select(.,animal)%>%unique()
 
 #2. Find the most recent common ancestor of all those taxa. 
-#If homology_id is possessed by only 1 taxon (eg. shared among paralogs), then the MRCA is the tip node.
+#If homology_id is possessed by only 1 taxon (eg. shared among paralogs), then skip. By default, there is no opportunity for detecting absence.  
 if (nrow(homolog.animals) == 1){
-  mrca<-which(phy$tip.label == homolog.animals$animal)
+  next
 }
 
 if (nrow(homolog.animals) > 1){
   mrca <-getMRCA(phy,as.character(homolog.animals$animal))
+  bind.df<-cbind(homology_id=h,mrca)
+  mrca.df<-rbind(mrca.df,bind.df)
 }
 
-bind.df<-cbind(homology_id=h,mrca)
-mrca.df<-rbind(mrca.df,bind.df)
 }
 
 #Add MRCAs to master.table
 new.master.table<-left_join(master.table,mrca.df, by="homology_id")
 
 
-
+absent.df<-data.frame(h=integer(0),absent.in.taxa=integer(0))
 for (h in mrca.df$homology_id){
 #3. Find all the tips of the last common ancestor.  
 all.tips<-mrca.df$mrca[mrca.df$homology_id==h]%>%descendants(phy,.)
-all.tips<-tips[tips<=length(phy$tip.label)]
-  
+all.tips<-all.tips[all.tips<=length(phy$tip.label)]
+
 taxa<-new.master.table%>%filter(homology_id==h)%>%select(.,animal)%>%unique()
 
 
@@ -938,15 +938,18 @@ absent.in.taxa<-setdiff(all.tips,taxa.list)
 taxa.list<-NULL
 
 #append to table of homology_id + absent.in.taxa
-combine.df<-cbind(h,absent.in.taxa)
-absent.df<-rbind(absent.df,combine.df)
+combine.df<-cbind(h,absent.in.taxa)%>%as.data.frame()
+absent.df<-rbind.fill(absent.df,combine.df)
+
 
 }
 
 names(absent.df)<-c("homology_id","absent")
-new.master.table<-left_join(new.master.table,absent.df,by=homology_id)
-absent.master.table<-new.master.table[!is.na(new.master.table$absent),]
+new.master.table<-left_join(new.master.table,absent.df)
+absence.analysis.result<-new.master.table[!is.na(new.master.table$absent),]
+absence.analysis.result
 
+write.csv(absence.analysis.result,"absence.analysis.result.csv",quote=FALSE,row.names=FALSE)
 ```
 
 ```{r test null model}
