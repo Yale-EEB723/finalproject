@@ -275,14 +275,14 @@ fasta<-c("Amphimedon_queenslandica.Aqu1.dna.toplevel.fa","Capitella_teleta.Capit
 for (blah in fasta){
 fasta_path<-paste0(fasta_dir,blah)  
 
-#histogram of call ontig lengths,
+#histogram of all contig lengths,
 scaffold.length.plot<-read.fasta(fasta_path)%>%getLength(.)%>%as.data.frame()%>%ggplot()+geom_histogram(aes(x=.), fill="skyblue3", color="black",binwidth=100)+xlab("Scaffold Length (bp)")+ylab("Frequency")+labs(title=blah)
 ggsave(scaffold.length.plot,file=paste0("scaffold.len_",blah,".pdf"))
 
 #histogram of contig lengths, restricted to scaffolds < 10,000 bp
 restricted.plot<-read.fasta(fasta_path)%>%getLength(.)%>%as.data.frame()%>%filter(.<10000)%>%ggplot()+geom_histogram(aes(x=.), fill="skyblue3", color="black",binwidth=100)+xlab("Scaffold Length (bp)")+ylab("Frequency")+labs(title=blah)
 restricted.plot
-ggsave(scaffold.length.plot,file=paste0("scaffold.len_10000bp_",blah,".pdf"))
+ggsave(restricted.plot,file=paste0("scaffold.len_10000bp_",blah,".pdf"))
 
 #stats
 print(blah)

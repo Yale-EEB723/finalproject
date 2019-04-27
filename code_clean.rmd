@@ -1,0 +1,188 @@
+---
+title: "code for Comp Gen final project"
+output: md_document
+---
+
+---
+title: "Comp Gen Project"
+csl: plos.csl
+output:
+  github_document: default
+bibliography: Bib.bib
+---
+
+# Load Libraries
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	message = FALSE,
+	warning = FALSE,
+	echo=FALSE,
+	dpi=300,
+	cache=TRUE
+	)
+```
+
+```{r preliminaries}
+library( tidyverse )
+library(ggplot2)
+library(seqinr)
+library(ape)
+library(Biostrings)
+library(dplyr)
+
+#clustering
+library(cluster)
+library(CrossClustering)
+library(vegan)
+library(Rtsne)
+library(factoextra)
+
+#tree manipulation
+library(ape)
+library(hutan)
+```
+
+ 
+
+
+
+
+# What is the distribution of scaffold lengths?   
+For each genome, the below code plots a histogram of scaffold lengths and finds the median, maximum, and minimum scaffold lengths.  
+
+The human and zebrafish fastas were too large to run through this code, but median scaffold length was found from online database resources. The many small unplaced scaffolds in the Drosophila toplevel assembly reduced median scaffold length, so only chromosomes were used.   
+
+Note: The below code has been set to run on **sample data**.   
+
+```{r distr scaffold length}
+
+
+#RUN SAMPLE DATA:
+fasta_dir<-"data/sample_data/"
+fasta<-c("sample1.fa")
+
+#RUN REAL DATA:
+#fasta_dir<-"~/Desktop/compgen/repo/ensembl/genome_fasta/"
+#fasta<-c("Amphimedon_queenslandica.Aqu1.dna.toplevel.fa","Capitella_teleta.Capitella_teleta_v1.0.dna.toplevel.fa","Drosophila_chr.fa", "Helobdella_robusta.Helro1.dna.toplevel.fa","Lottia_gigantea.Lotgi1.dna.toplevel.fa","Mnemiopsis_leidyi.MneLei_Aug2011.dna.toplevel.fa","Nematostella_vectensis.ASM20922v1.dna.toplevel.fa","Strongylocentrotus_purpuratus.Spur_3.1.dna.toplevel.fa","Taeniopygia_guttata.taeGut3.2.4.dna.toplevel.fa","Trichoplax_adhaerens.ASM15027v1.dna.toplevel.fa")
+
+for (blah in fasta){
+fasta_path<-paste0(fasta_dir,blah)  
+
+#histogram of all contig lengths,
+scaffold.length.plot<-read.fasta(fasta_path)%>%getLength(.)%>%as.data.frame()%>%ggplot()+geom_histogram(aes(x=.), fill="skyblue3", color="black",binwidth=100)+xlab("Scaffold Length (bp)")+ylab("Frequency")+labs(title=blah)
+ggsave(scaffold.length.plot,file=paste0("scaffold.len_",blah,".pdf"))
+
+#histogram of contig lengths, restricted to scaffolds < 10,000 bp
+restricted.plot<-read.fasta(fasta_path)%>%getLength(.)%>%as.data.frame()%>%filter(.<10000)%>%ggplot()+geom_histogram(aes(x=.), fill="skyblue3", color="black",binwidth=100)+xlab("Scaffold Length (bp)")+ylab("Frequency")+labs(title=blah)
+restricted.plot
+ggsave(restricted.plot,file=paste0("scaffold.len_10000bp_",blah,".pdf"))
+
+#stats
+print(blah)
+fasta.len=read.fasta(fasta_path)%>%getLength()
+print(paste("Median scaffold/contig length (bp):",median(as.numeric(fasta.len))))
+print(paste("Max scaffold/contig length (bp):",max(as.numeric(fasta.len))))
+print(paste("Minimum scaffold/contig length (bp):",min(as.numeric(fasta.len))))
+  
+}
+
+```
+
+
+
+
+# How many scaffolds have at least 3 genes?    
+For a given genome, this code plots a frequency histogram of the number of genes per scaffold. For each genome, it also finds the proportion of contigs with at least 3 genes, the median number of genes per contig, and the maximum number of genes per contig. 
+
+Note: The below code has been set to run on **sample data**.   
+
+```{r count no genes per contig/scaffold}
+
+#install.packages("ape")
+
+#RUN SAMPLE DATA:
+gff3_dir<-"data/sample_data/"
+gff3<-"gff3_sample.gff3"
+
+#RUN REAL DATA:
+#gff3_dir<-"data/genomes/gff3/"
+#gff3<-c("Amphimedon_queenslandica.Aqu1.42.gff3","Capitella_teleta.Capitella_teleta_v1.0.42.gff3","Danio_rerio.GRCz11.96.chr.gff3","Drosophila_melanogaster.BDGP6.22.96.chr.gff3","Helobdella_robusta.Helro1.42.gff3","Homo_sapiens.GRCh38.96.chr.gff3","Lottia_gigantea.Lotgi1.42.gff3","Mnemiopsis_leidyi.MneLei_Aug2011.42.gff3","Nematostella_vectensis.ASM20922v1.42.gff3","Strongylocentrotus_purpuratus.Spur_3.1.42.gff3","Taeniopygia_guttata.taeGut3.2.4.96.chr.gff3","Trichoplax_adhaerens.ASM15027v1.42.gff3")
+
+for (blah in gff3){
+
+
+gff3_path<-paste0(gff3_dir,blah)
+contig.gene.df <- ape::read.gff(file=gff3_path, GFF3=TRUE) %>% select(.,"seqid","type","start","end") %>% filter(.,type == "gene")
+
+#for histogram, take just the contig names and gene counts
+gene.count<- as.data.frame(table(contig.gene.df$seqid))
+
+#plot frequency of frequencies
+gff3.plot<-ggplot(data = gene.count, aes(x=gene.count$Freq)) + geom_histogram(binwidth=1) + geom_vline(xintercept = 3,color="red")+ggtitle(blah) +xlab("Number of Genes Per Contig")+ylab("Frequency")+labs(title=blah)
+gff3.plot
+ggsave(gff3.plot,file=paste0("gff3_",blah,".pdf"))
+
+#use for custom axes
+gff3.plot.custom.axes<-ggplot(data = gene.count, aes(x=gene.count$Freq)) + geom_histogram(binwidth=1) + geom_vline(xintercept = 3,color="red") +xlim(0,10)+ylim(0,3000)+xlab("Number of Genes Per Contig")+ylab("Frequency")+labs(title=blah)
+gff3.plot.custom.axes
+ggsave(gff3.plot.custom.axes,file=paste0("gff3_customaxes_",blah,".pdf"))
+
+
+#stats
+print(blah)
+print(paste("proportion contigs with gene count >= 3:",nrow(subset(gene.count, gene.count$Freq >= 3))/nrow(gene.count)*100))
+print(paste("Median no. genes/contig:",median(gene.count$Freq)))
+print(paste("Max no. genes/contig:",max(gene.count$Freq))) 
+
+}
+
+
+```
+
+
+# Prep sequences for Agalma - Select longest peptide only  
+Create a fasta where each gene has only 1 peptide sequence. Choose the longest peptide per gene. The below script produces a single column list of fasta headers of the longest peptide per gene.  
+
+```{r longest pep only}
+#install bioconductor 3.8 https://www.bioconductor.org/install/  
+#install Biostrings: BiocManager::install("Biostrings", version = "3.8") ; do not update mclust because it will have a warning and then biostrings module not installed.  
+
+#~~~~~ Beginning of 'story''s code.~~~~~
+
+## read your fasta in as Biostrings object
+fasta.s <- readDNAStringSet("./data/sample_data/longest_pep_sample.fasta")
+
+## get the read names (in your case it has the isoform info)
+names.fasta <- names(fasta.s)
+
+## extract only the relevant gene and isoform (JM: aka pep) id (split name by the period symbol)
+#JM: modify line to fit my name format
+gene.iso <- sapply(names.fasta,function(j) cbind(unlist(strsplit(j,'\\:'))[1:8]))
+
+## convert to good data.frame = transpose result from previous step and add relevant column names
+gene.iso.df <- data.frame(t(gene.iso))
+#JM: alter to put your own column names in:
+colnames(gene.iso.df) <- c('p','pepID','s','scaffID','g','geneID','t','transID')
+gene.iso.df<-select(gene.iso.df, geneID, pepID)
+
+## and length of isoforms
+gene.iso.df$width <- width(fasta.s)
+
+#Did not use rest of code.
+
+#~~~~~ End of 'story''s code.~~~~~
+
+#JLM:
+gene.iso.df<-rownames_to_column(gene.iso.df)
+
+#~~~~~beginning of code by nassimhddd (Jul 18 '16) Stackoverflow~~~~~
+longest.pep.df <-gene.iso.df%>%group_by(geneID)%>%mutate(the_rank = rank(-width,ties.method="random")) %>%filter(the_rank==1)%>%select(-the_rank)
+#~~~~~End of nassimhddd's code.~~~~~
+
+list<-longest.pep.df[,1,drop=FALSE]
+#wait why doesn't col.names=FALSE remove the column name?? Oh well.
+write.csv(list,"longestpep_list.txt",quote=FALSE,row.names=FALSE)
+```
+
+
+
