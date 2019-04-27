@@ -1,6 +1,5 @@
 ---
 title: "compgen final project"
-output: pdf_document
 bibliography: Bib.bib
 csl: plos.csl
 ---
@@ -50,6 +49,178 @@ Trichoplax adhaerens:  ASM15027v1
 **Data structure**:  
 - genome FASTA files: nt scaffolds, peptide  
 - genome GFF3 files  
+
+
+## Results
+### Broad Sampling Across the Animal Tree  
+These are the animals chosen for this project. They were selected to represent a broad swath of diversity across Metazoa.  
+
+![phylogeny](readme_figs/phylogeny.png)  
+
+### Is Synteny Analysis Possible?   
+Synteny analysis, which studies the spatial distribution of genes in the genome, greatly depends on the use of high quality assemblies. How does assembly contiguity vary across the animal tree?  
+
+#### Most Genomes Have Short Scaffolds   
+There is a momentous difference in median scaffold length between assemblies from model organisms (Homo sapiens, Danio rerio, Drosophila melanogaster, and Taeniopygia guttata) and other animals. The human genome possesses the highest median scaffold length (approximately 133 million base pairs). In contrast, Strongylocentrotus posseses the shortest median scaffold length (just 1006 bp). 
+
+![med.scaff.len](readme_figs/rm.med.scaff.len.png)  
+
+The frequency histogram of scaffolds for each species is right-skewed, except for the model organisms which possess few scaffolds of great length. Some examples are below.  
+
+
+#### Most Genomes Are Highly Fragmented   
+A similar divide between model organisms and all other animal is seen in the degree to which assemblies are fragmented. Chromosome-level assemblies are available for only the model organisms (Homo sapiens, Danio rerio, Drosophila melanogaster, Taeniopygia guttata), and thus were used here. All other assemblies were primary or top-level assemblies, and possessed over 1,000 scaffolds each. In particular, Strongylocentrotus, again, possessed over 32,000 scaffolds. Danio rerio possessed the fewest number of chromosomes: 8.  
+
+![chr.no.](readme_figs/rm.chr.no.png)  
+
+#### Scaffolds With At Least 3 Genes Per Scaffold  
+Synteny analysis requires at least 3 genes on a scaffold - two on either side of the gene of interest to serve as anchors delineating the synteny block, and the gene of interest itself. Are my genomes contiguous enough to satisfy this requirement?  
+
+Excluding the model organisms, in general the proportion of scaffolds that possess at least 3 genes is less than 10%, although this is higher in Mnemiopsis leidyi and Amphimedon queenslandica (20%  and 17%, respectively).  
+
+![prop.contig.>3](readme_figs/rm.prop.contig.morethan3.png)  
+
+However, because the assemblies of non-model animals are highly fragmented, this low proportion still translates into a high number of scaffolds with three or more genes.  
+
+![no.contig.>3](readme_figs/rm.no.contig.morethan3.png)  
+
+Showing only the proportion *or* number of scaffolds alone is misleading. Having substantially more scaffolds will simulataneously decrease the proportion with > 3 genes but increase the count of scaffolds with > 3 genes. For the latter metric, highly contiguous genomes (Homo, Danio, Taeniopygia, Drosophila) will possess many fewer scaffolds. A more ideal metric may be a normalized ratio of the number:proportion of scaffolds with > 3 genes.  
+
+### Synteny Analysis Workflow  
+I pursued the strategy of aggregating data at each step into a master table. Although most analyses were performed on subsets of this table, the master table remains available for use in future analyses (eg. start and end gene coordinates for collinearity analysis).  
+
+Below is an overview of my workflow, elaborated from my presentation. The steps are:  
+1. Parse the GFF3 files.  
+2. Run Agalma and parse Agalma output files.    
+3. Aggregate the data to identify homologous genes on scaffold.  
+4. Input this aggregated data into a contingency table and perform cluster analysis.  
+5. Combined GFF3, homolog ID, and cluster ID data to form a master table.  
+6. Take a phylogenetic approach to identify ghost loci.    
+
+Greater detail can be found in the Methods section.   
+
+![workflow](readme_figs/rm.workflow.png)  
+
+For the following analyses, GFF3 files and Agalma was run on the entire 12-species data set. However, only Homo sapiens, Danio rerio and Strongylocentrotus were selected to form the contingency table, which was subsequently downsampled to a 100x100 matrix. Thus, clustering was performed only on Homo, Danio and Strongylocentrotus.  
+
+#### Clustering Result
+
+Cross-clustering was selected as the clustering method due to its ability to be robust to outliers and the fact that a priori knowledge of k, the 'true' number of clusters, is not required (Tellaroli et al., 2016). It achieves this by combining principles from 2 clustering algorithms: Ward's minimum variance and complete linkage. As Ward's builds clusters by minimizing squared distances of points from the cluster centroid, it is good for shaping clusters and estimating the optimal number of clusters. Complete linkage is used to identify outliers based on the fact that it uses the max distance between two points in different clusters as an estimate of the overall proximity between those clusters.  
+
+I selected a tSNE plot for a visualization of clustering (not the clustering itself). The biplot resulting from a correspondence analysis was essentially unreadable, with all points bunching up along the 0-values of the x or y axes. In the tSNE below, each dot represents a scaffold, and dots are colored according to the cluster each scaffold was assigned to by cross-clustering.  
+
+There is a single large cluster (cluster 2) containing the majority of the points. The remaining "clusters" have extremely low membership, most often consisting of a single scaffold.  
+
+![HsaDreSpu100 p=1 main cluster](readme_figs/rm.HsDreSpu100_cluster_main.png)  
+
+It is possible this pattern arises from the clustering algorithm. Cross-cluster deals with outliers by excluding them from clustering - singleton clusters may represent outliers. Tellaroli et al. (2016) suggest that obtaining a single large cluster from cross-clustering suggests that clustering the data is not appropriate. However, my previous rotation project, where I attempted to cluster different animal cell types, used a different clustering algorithm (DBScan) which produced the same clustering pattern. This is pattern is further repeated using several other clustering algorithms (see Clustering Troubleshooting).  
+
+#### Absence Analysis Output  
+By default, genes that arose after the emergence of a particular clade will not be present in that clade. As seen in my presentation, I had initially pursued a 'nesting' approach: I assigned each tip a number, which increased in value the more successively nested that tip was. However, I ultimately pursued the phylogenetic approach you suggested in class. Rather than comparing only two animals (a reference and comparison), I found the most recent common ancestor of each homolog and all taxa within the clade defined by this common ancestor. Instances where a tip is a member of that clade yet lacks the homolog is flagged as a candidate gene loss event.  
+
+The final output looks like this:  
+
+
+
+## Clustering Troubleshooting  
+There are at least three elements to clustering: the data, the algorithm used to create the distance matrix, and the clustering algorithm.  
+
+### Is the contingency matrix underlying the distance matrix too sparse?  
+Is it possible that all scaffolds appear similar because most scaffolds share few genes? If so, most scaffolds may look similar because they share the absence of many genes (many 0's). 
+
+Using the entire data set (not subsetted or downsampled) with the default Agalma bitscore threshold, I counted the number of scaffolds each homolog was found on. This produced the below histogram. 13,685 homologs were shared across 9,183 scaffolds. The median number of scaffolds a homolog was found on was 9. The minimum was 1 and the maximum was 306.  
+
+![scaffold occupancy](readme_figs/rm.scaffold.occupancy_nohydraALL.pdf)
+
+Thus, most frequently, a homolog is shared across 0.1% of the scaffolds. This is indeed low.  
+
+### Testing different subsets of data   
+#### relaxedbit data set  
+This project compares sequences of very distantly related taxa. As such, lowering the BLAST bit score threshold to 100 for Agalma homologize may increase the number of identified homologs. Data from all animal genomes was run through homologize with this relaxed threshold. A contingency matrix of Homo, Danio, and Strongylocentrotus sequences was made and subsequently downsampled into a 100x100 matrix.  
+
+The scaffold occupancy profile improves, but not by much. The number of scaffolds with homologs increases to 17,353, as does the number of homologs (19,016). However, the median number of scaffolds occupied per homolog was 11, and the maximum 600.  
+
+![scaffold occupancy relaxed bit](readme_figs/rm.scaffold.occupancy_relaxedbit.pdf)  
+
+Clustering with Cross-clustering produced a familiar pattern: one big cluster plus many small clusters with a low number of members per cluster.   
+
+![relaxedbit cluster](readme_figs/rm.relaxedbit_cluster.png)  
+
+One anomaly in the Agalma output is that the same gene can have multiple homology_ids. As far as I can tell, this does not occur in any of the other Agalma runs that used the higher bitscore threshold.  
+
+#### 5taxa dataset:  
+Another way to increase the number of 'shared' genes is to limit our comparison to a smaller subset of closely related, high quality genomes. Sequences from Strongylocentrotus, Danio, Homo, Drosophila, and Taeniopygia were run through Agalma homologize (at normal bitscore threshold). Homo, Danio, and Strongylocentrotus were then used to create a contingency matrix, which was ultimately downsampled into a 100x100 matrix.  
+
+7,248 homologs were shared across 3,466 scaffolds. The median number of scaffolds each homolog occupied was 5; the maximum occupied was 218. 
+
+![scaffold occupancy 5taxa](readme_figs/rm.scaffold.occupancy_5taxa.pdf)  
+
+Again, the familiar clustering pattern is produced by Cross-clustering:  
+
+![5 taxa cluster](readme_figs/rm.5taxa_cluster.png)   
+
+Agalma won't run on data from only 3 taxa, which is why I tried 5. Strongylocentrotus was included because it is closely related to Homo and Danio, but its genome is in fact highly fragmented. It may be useful to try this again, but excluding Strongylocentrotus. Where possible, using chromosome-level assemblies that lack unplaced scaffolds would have also been an improvement.  
+
+### Testing different clustering algorithms  
+**Data**: Different clustering algorithms were tested on a 100x100 subset of the "5 taxa" dataset described in the previous section. Only Homo and Danio were selected for clustering, the reasoning being that clustering only two high quality well-annotated genomes would give the highest likelihood of success.  
+
+I tested if basic clustering algorithms that lack Cross-clustering's outlier approach produce the same pattern.  
+
+#### agnes: aggregative hierarchical clustering  
+Initially, each data point is declared a cluster. Each sucessive step, the nearest clusters are combined to form a larger cluster, until all points form a single cluster. [R documentation](https://www.rdocumentation.org/packages/cluster/versions/2.0.7-1/topics/agnes)  
+
+![agnes](readme_figs/rm.agnes.dendrogram.png)  
+
+#### diana: divisive hierarchical clustering  
+All data points are initially members of a single large cluster. At each step, diana searches for the two most distant points, then reassigns all other points based on whether they are closer to the "splinter group" than the "old party" (see R documentation). This continues until every point is relegated to its own cluster. [R documentation](https://astrostatistics.psu.edu/su07/R/html/cluster/html/diana.html)      
+
+![diana](readme_figs/rm.diana.dendrogram.png)  
+
+Both agnes and diana produce a dendrogram. The general pattern I've received from all other clustering attempts is reiterated in the dendrogram structure. There is one large cluster, following by many little clusters of low membership consecutively splitting off.  
+
+#### k-means: clustering around centroids  
+Start by choosing k, the number of clusters. K random data points are initally selected to serve as the initial centroids of k clusters, then each observation is grouped into the cluster with the closest centroid. Centroids can be thought of as a cluster's mean, and is computed as the arithmetic mean of the coordinates of each point in a cluster (correct me if I'm wrong?). Centroids are re-calculated based on the new members. Re-arrangment of clusters continue with a goal of minimizing the total within sum of squares until the number of different clusters do not change.  
+
+An elbow plot suggests that the optimal k is 2.  
+
+![kmeans elbow plot](readme_figs/rm.kmeans_elbowplot.png)  
+
+The resulting clustering appears below:  
+
+![kmeans cluster](readme_figs/rm.kmeans.cluster.png)  
+
+## Testing the null hypothesis  
+Given that different subsets of data and clustering algorithms seem to return the same general clustering structure, is it possible that this structure is inherent to this type of data itself? Is this clustering structure the 'true' result given the resolution afforded by this work-flow, or is it a random pattern?  
+
+**Data**: The null hypothesis was tested by using the same subset of data presented in the Ghost Loci Analysis section. Genomes from all animals were homologized, then gene presence/absence data was used to create a contingency matrix of gene residency per scaffold. Only Homo, Danio and Strongylocentrotus sequences were included in the contingency matrix, which was subsequently downsampled into a 100x100 matrix. Cross-clustering was used as the clustering algorithm. These results should be compared to the original cluster tSNE in the Ghost Loci Analysis section.  
+
+For randomization, a random 100x100 matrix of 1's (gene present) and 0's (gene absent) was created, with proportions matching the original proportions of 1's and 0's seen in the true data. Simply randomizing the rows or columns would potentially change the labels of the clusters, but would not test the overall configuration of the clusters themselves.  
+
+![null cluster](readme_figs/rm.null.cluster.png)  
+ 
+Scaffolds do *not* cluster into a single large cluster! I have implicitly assumed that the clustering pattern I've been receiving is incorrect, but perhaps it is a true reflection of the structure of the data. For example, perhaps the scaffolds are clustering into two categories: high vs low quality. Alternatively, while this pattern may be true at a high level, clustering methods may lack the resolution to identify relationships at finer levels. It is interesting that I receive similar clustering profiles from clustering scaffolds by gene presence/absence and clustering cell types by gene presence/absence across broad distances.      
+
+
+## Assessment  
+*Was it successful in achieving the initial goal?*  
+Yes, this project completed all three goals it set out to achieve. However, because clustering did not resolve scaffolds into tight clusters, the results of the absence analysis itself is less meaningful.  
+
+*What are the main obstacles encountered?*  
+* Computation: My laptop did not have enough computing power to process the dataset in its entirety. The next step is to run R on the cluster.  
+* Clustering: As discussed, I could not resolve tight clusters.  
+
+*What would you have done differently?*  
+* Include animal outgroups (choanoflagellates etc.)  
+* I've received advice on other clustering strategies:  
+  * Perform local clustering and link them together like a daisy chain  
+  * Go through genes on a scaffold using a sliding 10-gene window. If two homologs within this window are also on the same scaffold in another organism, this suggests a possible syntenic region.  Quantify how many of these pairs you can find in the window.  
+  * Instead of making a homolog x scaffold contingency matrix, make a homolog x homolog matrix. (*I'm still not fully clear on this idea - can we go over this again, Casey?*)  
+
+*What are future directions this could go in?*  
+* Ancestral state reconstruction - it is difficult to study what is absent, but perhaps this can be achieved by reconstructing the gene that was lost.    
+* Study system-specific questions eg. Have sponges lost a nervous system? This is the question that started the project.  
+* Study the characteristics of the genes that have been lost eg. are they orthologs or paralogs? Genes that arose earlier or later?  
+*waaaaay more! I would like to write a more in depth document should we decide this is a promising direction to go.  
 
 
 ## Methods  
@@ -739,175 +910,3 @@ rand.tsne_plot
 
 
 ```
-
-## Results
-### Broad Sampling Across the Animal Tree  
-These are the animals chosen for this project. They were selected to represent a broad swath of diversity across Metazoa.  
-
-![phylogeny](readme_figs/phylogeny.png)  
-
-### Is Synteny Analysis Possible?   
-Synteny analysis, which studies the spatial distribution of genes in the genome, greatly depends on the use of high quality assemblies. How does assembly contiguity vary across the animal tree?  
-
-#### Most Genomes Have Short Scaffolds   
-There is a momentous difference in median scaffold length between assemblies from model organisms (Homo sapiens, Danio rerio, Drosophila melanogaster, and Taeniopygia guttata) and other animals. The human genome possesses the highest median scaffold length (approximately 133 million base pairs). In contrast, Strongylocentrotus posseses the shortest median scaffold length (just 1006 bp). 
-
-![med.scaff.len](readme_figs/rm.med.scaff.len.png)  
-
-The frequency histogram of scaffolds for each species is right-skewed, except for the model organisms which possess few scaffolds of great length. Some examples are below.  
-
-
-#### Most Genomes Are Highly Fragmented   
-A similar divide between model organisms and all other animal is seen in the degree to which assemblies are fragmented. Chromosome-level assemblies are available for only the model organisms (Homo sapiens, Danio rerio, Drosophila melanogaster, Taeniopygia guttata), and thus were used here. All other assemblies were primary or top-level assemblies, and possessed over 1,000 scaffolds each. In particular, Strongylocentrotus, again, possessed over 32,000 scaffolds. Danio rerio possessed the fewest number of chromosomes: 8.  
-
-![chr.no.](readme_figs/rm.chr.no.png)  
-
-#### Scaffolds With At Least 3 Genes Per Scaffold  
-Synteny analysis requires at least 3 genes on a scaffold - two on either side of the gene of interest to serve as anchors delineating the synteny block, and the gene of interest itself. Are my genomes contiguous enough to satisfy this requirement?  
-
-Excluding the model organisms, in general the proportion of scaffolds that possess at least 3 genes is less than 10%, although this is higher in Mnemiopsis leidyi and Amphimedon queenslandica (20%  and 17%, respectively).  
-
-![prop.contig.>3](readme_figs/rm.prop.contig.morethan3.png)  
-
-However, because the assemblies of non-model animals are highly fragmented, this low proportion still translates into a high number of scaffolds with three or more genes.  
-
-![no.contig.>3](readme_figs/rm.no.contig.morethan3.png)  
-
-Showing only the proportion *or* number of scaffolds alone is misleading. Having substantially more scaffolds will simulataneously decrease the proportion with > 3 genes but increase the count of scaffolds with > 3 genes. For the latter metric, highly contiguous genomes (Homo, Danio, Taeniopygia, Drosophila) will possess many fewer scaffolds. A more ideal metric may be a normalized ratio of the number:proportion of scaffolds with > 3 genes.  
-
-### Synteny Analysis Workflow  
-I pursued the strategy of aggregating data at each step into a master table. Although most analyses were performed on subsets of this table, the master table remains available for use in future analyses (eg. start and end gene coordinates for collinearity analysis).  
-
-Below is an overview of my workflow, elaborated from my presentation. The steps are:  
-1. Parse the GFF3 files.  
-2. Run Agalma and parse Agalma output files.    
-3. Aggregate the data to identify homologous genes on scaffold.  
-4. Input this aggregated data into a contingency table and perform cluster analysis.  
-5. Combined GFF3, homolog ID, and cluster ID data to form a master table.  
-6. Take a phylogenetic approach to identify ghost loci.    
-
-Greater detail can be found in the Methods section.   
-
-![workflow](readme_figs/rm.workflow.png)  
-
-For the following analyses, GFF3 files and Agalma was run on the entire 12-species data set. However, only Homo sapiens, Danio rerio and Strongylocentrotus were selected to form the contingency table, which was subsequently downsampled to a 100x100 matrix. Thus, clustering was performed only on Homo, Danio and Strongylocentrotus.  
-
-#### Clustering Result
-
-Cross-clustering was selected as the clustering method due to its ability to be robust to outliers and the fact that a priori knowledge of k, the 'true' number of clusters, is not required (Tellaroli et al., 2016). It achieves this by combining principles from 2 clustering algorithms: Ward's minimum variance and complete linkage. As Ward's builds clusters by minimizing squared distances of points from the cluster centroid, it is good for shaping clusters and estimating the optimal number of clusters. Complete linkage is used to identify outliers based on the fact that it uses the max distance between two points in different clusters as an estimate of the overall proximity between those clusters.  
-
-I selected a tSNE plot for a visualization of clustering (not the clustering itself). The biplot resulting from a correspondence analysis was essentially unreadable, with all points bunching up along the 0-values of the x or y axes. In the tSNE below, each dot represents a scaffold, and dots are colored according to the cluster each scaffold was assigned to by cross-clustering.  
-
-There is a single large cluster (cluster 2) containing the majority of the points. The remaining "clusters" have extremely low membership, most often consisting of a single scaffold.  
-
-![HsaDreSpu100 p=1 main cluster](readme_figs/rm.HsDreSpu100_cluster_main.png)  
-
-It is possible this pattern arises from the clustering algorithm. Cross-cluster deals with outliers by excluding them from clustering - singleton clusters may represent outliers. Tellaroli et al. (2016) suggest that obtaining a single large cluster from cross-clustering suggests that clustering the data is not appropriate. However, my previous rotation project, where I attempted to cluster different animal cell types, used a different clustering algorithm (DBScan) which produced the same clustering pattern. This is pattern is further repeated using several other clustering algorithms (see Clustering Troubleshooting).  
-
-#### Absence Analysis Output  
-By default, genes that arose after the emergence of a particular clade will not be present in that clade. As seen in my presentation, I had initially pursued a 'nesting' approach: I assigned each tip a number, which increased in value the more successively nested that tip was. However, I ultimately pursued the phylogenetic approach you suggested in class. Rather than comparing only two animals (a reference and comparison), I found the most recent common ancestor of each homolog and all taxa within the clade defined by this common ancestor. Instances where a tip is a member of that clade yet lacks the homolog is flagged as a candidate gene loss event.  
-
-The final output looks like this:  
-
-
-
-### Clustering Troubleshooting  
-There are at least three elements to clustering: the data, the algorithm used to create the distance matrix, and the clustering algorithm.  
-
-#### Is the contingency matrix underlying the distance matrix too sparse?  
-Is it possible that all scaffolds appear similar because most scaffolds share few genes? If so, most scaffolds may look similar because they share the absence of many genes (many 0's). 
-
-Using the entire data set (not subsetted or downsampled) with the default Agalma bitscore threshold, I counted the number of scaffolds each homolog was found on. This produced the below histogram. 13,685 homologs were shared across 9,183 scaffolds. The median number of scaffolds a homolog was found on was 9. The minimum was 1 and the maximum was 306.  
-
-![scaffold occupancy](readme_figs/rm.scaffold.occupancy_nohydraALL.pdf)
-
-Thus, most frequently, a homolog is shared across 0.1% of the scaffolds. This is indeed low.  
-
-#### Testing different subsets of data   
-##### relaxedbit data set  
-This project compares sequences of very distantly related taxa. As such, lowering the BLAST bit score threshold to 100 for Agalma homologize may increase the number of identified homologs. Data from all animal genomes was run through homologize with this relaxed threshold. A contingency matrix of Homo, Danio, and Strongylocentrotus sequences was made and subsequently downsampled into a 100x100 matrix.  
-
-The scaffold occupancy profile improves, but not by much. The number of scaffolds with homologs increases to 17,353, as does the number of homologs (19,016). However, the median number of scaffolds occupied per homolog was 11, and the maximum 600.  
-
-![scaffold occupancy relaxed bit](readme_figs/rm.scaffold.occupancy_relaxedbit.pdf)  
-
-Clustering with Cross-clustering produced a familiar pattern: one big cluster plus many small clusters with a low number of members per cluster.   
-
-![relaxedbit cluster](readme_figs/rm.relaxedbit_cluster.png)  
-
-One anomaly in the Agalma output is that the same gene can have multiple homology_ids. As far as I can tell, this does not occur in any of the other Agalma runs that used the higher bitscore threshold.  
-
-##### 5taxa dataset:  
-Another way to increase the number of 'shared' genes is to limit our comparison to a smaller subset of closely related, high quality genomes. Sequences from Strongylocentrotus, Danio, Homo, Drosophila, and Taeniopygia were run through Agalma homologize (at normal bitscore threshold). Homo, Danio, and Strongylocentrotus were then used to create a contingency matrix, which was ultimately downsampled into a 100x100 matrix.  
-
-7,248 homologs were shared across 3,466 scaffolds. The median number of scaffolds each homolog occupied was 5; the maximum occupied was 218. 
-
-![scaffold occupancy 5taxa](readme_figs/rm.scaffold.occupancy_5taxa.pdf)  
-
-Again, the familiar clustering pattern is produced by Cross-clustering:  
-
-![5 taxa cluster](readme_figs/rm.5taxa_cluster.png)   
-
-Agalma won't run on data from only 3 taxa, which is why I tried 5. Strongylocentrotus was included because it is closely related to Homo and Danio, but its genome is in fact highly fragmented. It may be useful to try this again, but excluding Strongylocentrotus. Where possible, using chromosome-level assemblies that lack unplaced scaffolds would have also been an improvement.  
-
-#### Testing different clustering algorithms  
-**Data**: Different clustering algorithms were tested on a 100x100 subset of the "5 taxa" dataset described in the previous section. Only Homo and Danio were selected for clustering, the reasoning being that clustering only two high quality well-annotated genomes would give the highest likelihood of success.  
-
-I tested if basic clustering algorithms that lack Cross-clustering's outlier approach produce the same pattern.  
-
-##### agnes: aggregative hierarchical clustering  
-Initially, each data point is declared a cluster. Each sucessive step, the nearest clusters are combined to form a larger cluster, until all points form a single cluster. [R documentation](https://www.rdocumentation.org/packages/cluster/versions/2.0.7-1/topics/agnes)  
-
-![agnes](readme_figs/rm.agnes.dendrogram.png)  
-
-##### diana: divisive hierarchical clustering  
-All data points are initially members of a single large cluster. At each step, diana searches for the two most distant points, then reassigns all other points based on whether they are closer to the "splinter group" than the "old party" (see R documentation). This continues until every point is relegated to its own cluster. [R documentation](https://astrostatistics.psu.edu/su07/R/html/cluster/html/diana.html)      
-
-![diana](readme_figs/rm.diana.dendrogram.png)  
-
-Both agnes and diana produce a dendrogram. The general pattern I've received from all other clustering attempts is reiterated in the dendrogram structure. There is one large cluster, following by many little clusters of low membership consecutively splitting off.  
-
-##### k-means: clustering around centroids  
-Start by choosing k, the number of clusters. K random data points are initally selected to serve as the initial centroids of k clusters, then each observation is grouped into the cluster with the closest centroid. Centroids can be thought of as a cluster's mean, and is computed as the arithmetic mean of the coordinates of each point in a cluster (correct me if I'm wrong?). Centroids are re-calculated based on the new members. Re-arrangment of clusters continue with a goal of minimizing the total within sum of squares until the number of different clusters do not change.  
-
-An elbow plot suggests that the optimal k is 2.  
-
-![kmeans elbow plot](readme_figs/rm.kmeans_elbowplot.png)  
-
-The resulting clustering appears below:  
-
-![kmeans cluster](readme_figs/rm.kmeans.cluster.png)  
-
-### Testing the null hypothesis  
-Given that different subsets of data and clustering algorithms seem to return the same general clustering structure, is it possible that this structure is inherent to this type of data itself? Is this clustering structure the 'true' result given the resolution afforded by this work-flow, or is it a random pattern?  
-
-**Data**: The null hypothesis was tested by using the same subset of data presented in the Ghost Loci Analysis section. Genomes from all animals were homologized, then gene presence/absence data was used to create a contingency matrix of gene residency per scaffold. Only Homo, Danio and Strongylocentrotus sequences were included in the contingency matrix, which was subsequently downsampled into a 100x100 matrix. Cross-clustering was used as the clustering algorithm. These results should be compared to the original cluster tSNE in the Ghost Loci Analysis section.  
-
-For randomization, a random 100x100 matrix of 1's (gene present) and 0's (gene absent) was created, with proportions matching the original proportions of 1's and 0's seen in the true data. Simply randomizing the rows or columns would potentially change the labels of the clusters, but would not test the overall configuration of the clusters themselves.  
-
-![null cluster](readme_figs/rm.null.cluster.png)  
- 
-Scaffolds do *not* cluster into a single large cluster! I have implicitly assumed that the clustering pattern I've been receiving is incorrect, but perhaps it is a true reflection of the structure of the data. For example, perhaps the scaffolds are clustering into two categories: high vs low quality. Alternatively, while this pattern may be true at a high level, clustering methods may lack the resolution to identify relationships at finer levels. It is interesting that I receive similar clustering profiles from clustering scaffolds by gene presence/absence and clustering cell types by gene presence/absence across broad distances.      
-
-
-## Assessment  
-*Was it successful in achieving the initial goal?*  
-Yes, this project completed all three goals it set out to achieve. However, because clustering did not resolve scaffolds into tight clusters, the results of the absence analysis itself is less meaningful.  
-
-*What are the main obstacles encountered?*  
-* Computation: My laptop did not have enough computing power to process the dataset in its entirety. The next step is to run R on the cluster.  
-* Clustering: As discussed, I could not resolve tight clusters.  
-
-*What would you have done differently?*  
-* Include animal outgroups (choanoflagellates etc.)  
-* I've received advice on other clustering strategies:  
-** Perform local clustering and link them together like a daisy chain  
-** Go through genes on a scaffold using a sliding 10-gene window. If two homologs within this window are also on the same scaffold in another organism, this suggests a possible syntenic region.  Quantify how many of these pairs you can find in the window.  
-** Instead of making a homolog x scaffold contingency matrix, make a homolog x homolog matrix. (*I'm still not fully clear on this idea - can we go over this again, Casey?*)  
-
-*What are future directions this could go in?*  
-* Ancestral state reconstruction - it is difficult to study what is absent, but perhaps this can be achieved by reconstructing the gene that was lost.    
-* Study system-specific questions eg. Have sponges lost a nervous system? This is the question that started the project.  
-* Study the characteristics of the genes that have been lost eg. are they orthologs or paralogs? Genes that arose earlier or later?  
-**waaaaay more! I would like to write a more in depth report should we decide this is a promising direction to go.  
-
