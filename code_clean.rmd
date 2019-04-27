@@ -35,6 +35,7 @@ library(seqinr)
 library(ape)
 library(Biostrings)
 library(dplyr)
+library(plyr)
 
 #clustering
 library(cluster)
