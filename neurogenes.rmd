@@ -740,20 +740,9 @@ for understanding tsne: https://www.youtube.com/watch?v=NEaUSP4YerM
 tsne data = 160 points
 192 unique scaffolds in gff3.table
 
+# Contingency stats  
 ```{r contingency stats}
-#First run the chunk "Parse GFF3 and Agalma data"
-#must run previous chunk prior to running this chunk
-gff3.table.save<-gff3.table
-
-
-#~~~Create contingency.table~~~
-#Make scaffold names unique- join seqid and catalog id
-contingency.table<-inner_join(gff3.table,agalma.homologs)%>%dplyr::select(.,seqid,homology_id,animal)%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%dplyr::select(.,species_scaffold,homology_id)
-#~~~contingency.table compelte~~~
-
-#Use contingency.table to make the contingency table
-contingency<-table(contingency.table$species_scaffold,contingency.table$homology_id)%>%as.matrix()
-contingency<-1*(contingency>0)
+# The `Parse GFF3 and Agalma data` chunk and the `cluster` chunk must be run first before this chunk. *Whatever you have set as the contingency table there will be the input for this chunk.*  
 
 #number of scaffolds
 nrow(contingency)
@@ -773,6 +762,7 @@ min(colsum)
 #max number of scaffolds occupied.
 max(colsum)
 ```
+
 
 ###Other clustering methods:
 https://stats.stackexchange.com/questions/305179/cross-cluster-analysis-of-categorical-data-in-r/305218
@@ -880,6 +870,8 @@ Trying to get around sparse matrix issue:
   -tried Drosophila, Danio, Human but error at homologize step: "main__.select_clusters: no clusters passed the filtering criteria"
   -5 taxa: Drosophila, Danio, Strongylo, Taeniopgygia, Human: error at genetrees step. Looks like homologize worked - use.
   
+# Tree approach to absence analysis  
+
 ```{r tree}
 #initialize
 mrca.df<-data.frame()
@@ -935,7 +927,7 @@ for (t in taxa$animal){
   taxa.list<-append(taxa.list,find.taxa)
 }
 #4. Compare which tips do not possess the homology_id.
-#Where ther eare no differences absent.in.taxa will equal integer(0). Hence need rbind.fill
+#Where there are no instances in gene loss absent.in.taxa will equal integer(0). Hence need rbind.fill (not rbind) 
 absent.in.taxa<-setdiff(all.tips,taxa.list)
 taxa.list<-NULL
 
@@ -976,13 +968,12 @@ random.matrix<-c(rep("1",proportion_1s*n_entries),rep("0",proportion_0s*n_entrie
 rownames(random.matrix)<-row.names(contingency)
 colnames(random.matrix)<-colnames(contingency)
 
-
 #cluster
 rand.dist.matrix<-daisy(random.matrix,metric="gower",stand=FALSE)
 
+#cross-clustering
 rand.cross.clust<-cc_crossclustering(rand.dist.matrix,out=FALSE)
 rand.clust<-cc_get_cluster(rand.cross.clust)
-
 rand.tsne_obj<-Rtsne(rand.dist.matrix,is_distance=TRUE,perplexity=1)
 rand.tsne_data<-rand.tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(rand.cluster=factor(rand.clust))
 rand.tsne_plot<-ggplot(aes(x = X, y = Y), data = rand.tsne_data) + geom_point(aes(color = rand.cluster))
@@ -997,7 +988,9 @@ rand.di<-diana(rand.dist.matrix)
 plot(rand.di,labels=FALSE)
 
 #kmeans
-rand.kmean<-kmeans(rand.dist.matrix,51)
+rand.dist.matrix.coerced<-as.matrix(rand.dist.matrix)
+fviz_nbclust(rand.dist.matrix.coerced,kmeans,method="wss")
+rand.kmean<-kmeans(rand.dist.matrix,2)
 rand.kclust<-rand.kmean$cluster
 rand.tsne_obj<-Rtsne(rand.dist.matrix,is_distance=TRUE,perplexity=1)
 rand.tsne_data<-rand.tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(rand.cluster=factor(rand.kclust))
@@ -1007,6 +1000,7 @@ rand.tsne_plot
 
 
 ```
+
 #Cluster troubleshooting
 Data vs Distance matrix vs clustering algorithm
 Data: relaxed bit, 5 taxa

@@ -123,6 +123,11 @@ By default, genes that arose after the emergence of a particular clade will not 
 The final output looks like this:  
 ![absence analysis output](readme_figs/rm.absence.analysis.output.png)  
 
+Where:  
+* **species_scaffold**: A unique scaffold name.  
+* **gene**: ID of gene on scaffold.  
+* **homology_id**: homology ID of that gene (from Agalma).  
+* **absent**: The taxon from which the gene is absent. Currently these are represented by the node numbers of the tree but I will eventually include the species name instead. The above code is quite new and hasn't been perfected yet...  
 
 ## Clustering Troubleshooting  
 There are at least three elements to clustering: the data, the algorithm used to create the distance matrix, and the clustering algorithm.  
@@ -716,6 +721,8 @@ Subsample contingency table 100x100 to allow computation on a laptop.
 
 tSNE code is by [Daniel P. Martin](http://dpmartin42.github.io/posts/r/cluster-mixed-types).  
 
+**Note**: You must run the previous chunk `{r Parse GFF3 and Agalma data}` before running this chunk.  
+
 ```
 {r cluster}
 #must run previous chunk prior to running this chunk
@@ -801,8 +808,7 @@ I take a phylogenetic approach:
 3. Find all the tips of the last common ancestor.  
 4. Compare which tips do not possess the homology_id. These are candidate cases of gene loss.  
 
-```
-{r tree}
+```{r tree}
 #initialize
 mrca.df<-data.frame()
 taxa.list<-NULL
@@ -857,7 +863,7 @@ for (t in taxa$animal){
   taxa.list<-append(taxa.list,find.taxa)
 }
 #4. Compare which tips do not possess the homology_id.
-#Where ther eare no differences absent.in.taxa will equal integer(0). Hence need rbind.fill
+#Where there are no instances in gene loss absent.in.taxa will equal integer(0). Hence need rbind.fill (not rbind)  
 absent.in.taxa<-setdiff(all.tips,taxa.list)
 taxa.list<-NULL
 
@@ -885,20 +891,10 @@ new.master.table<-left_join(new.master.table,absent.df)
 ### Measure scaffold occupancy  
 The below code makes a histogram of scaffold occupancy per gene, and also finds the median, mean, minimum and maximum number of scaffolds occupied by a gene in a particular genome.  
 
+**IMPORTANT NOTE**:  The below code bases the random matrix on whatever contingency table was produced in the `{r cluster}` chunk.  
+
 ```{r contingency stats}
-#First run the chunk "Parse GFF3 and Agalma data"
-#must run previous chunk prior to running this chunk
-gff3.table.save<-gff3.table
-
-
-#~~~Create contingency.table~~~
-#Make scaffold names unique- join seqid and catalog id
-contingency.table<-inner_join(gff3.table,agalma.homologs)%>%dplyr::select(.,seqid,homology_id,animal)%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%dplyr::select(.,species_scaffold,homology_id)
-#~~~contingency.table compelte~~~
-
-#Use contingency.table to make the contingency table
-contingency<-table(contingency.table$species_scaffold,contingency.table$homology_id)%>%as.matrix()
-contingency<-1*(contingency>0)
+# The `Parse GFF3 and Agalma data` chunk and the `cluster` chunk must be run first before this chunk. *Whatever you have set as the contingency table there will be the input for this chunk.*  
 
 #number of scaffolds
 nrow(contingency)
@@ -922,10 +918,12 @@ max(colsum)
 ### Test the Null Hypothesis  
 
 Create a random contingency matrix with the same dimensions and proportion of 1s and 0s as from your real data. Cluster this random matrix using cross-clustering, agnes, diana, and kmeans.  
-   
-```
-{r test null model}
 
+**IMPORTANT NOTE**: The below code bases the random matrix on whatever contingency table was produced in the `{r cluster}` chunk.  
+
+```{r test null model}
+
+#mixing up the columns or rows will not affect overall clustering pattern (i.e. all clustering)
 #make a data frame with the same proportion of 1's and 0's in random order
 dim(contingency)
 n_entries<-ncol(contingency)*nrow(contingency)
@@ -936,14 +934,13 @@ random.matrix<-c(rep("1",proportion_1s*n_entries),rep("0",proportion_0s*n_entrie
 rownames(random.matrix)<-row.names(contingency)
 colnames(random.matrix)<-colnames(contingency)
 
-
-#cluster
+#distance matrix
 rand.dist.matrix<-daisy(random.matrix,metric="gower",stand=FALSE)
 
+#cross-clustering
 rand.cross.clust<-cc_crossclustering(rand.dist.matrix,out=FALSE)
 rand.clust<-cc_get_cluster(rand.cross.clust)
-
-rand.tsne_obj<-Rtsne(rand.dist.matrix,is_distance=TRUE,perplexity=10)
+rand.tsne_obj<-Rtsne(rand.dist.matrix,is_distance=TRUE,perplexity=1)
 rand.tsne_data<-rand.tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(rand.cluster=factor(rand.clust))
 rand.tsne_plot<-ggplot(aes(x = X, y = Y), data = rand.tsne_data) + geom_point(aes(color = rand.cluster))
 rand.tsne_plot
@@ -957,9 +954,11 @@ rand.di<-diana(rand.dist.matrix)
 plot(rand.di,labels=FALSE)
 
 #kmeans
-rand.kmean<-kmeans(rand.dist.matrix,51)
+rand.dist.matrix.coerced<-as.matrix(rand.dist.matrix)
+fviz_nbclust(rand.dist.matrix.coerced,kmeans,method="wss")
+rand.kmean<-kmeans(rand.dist.matrix,2)
 rand.kclust<-rand.kmean$cluster
-rand.tsne_obj<-Rtsne(rand.dist.matrix,is_distance=TRUE,perplexity=10)
+rand.tsne_obj<-Rtsne(rand.dist.matrix,is_distance=TRUE,perplexity=1)
 rand.tsne_data<-rand.tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(rand.cluster=factor(rand.kclust))
 rand.tsne_plot<-ggplot(aes(x = X, y = Y), data = rand.tsne_data) + geom_point(aes(color = rand.cluster))
 rand.tsne_plot
