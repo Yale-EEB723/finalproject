@@ -445,6 +445,8 @@ Below code modified from:
 -  user nassimhddd (Jul 18 '16) on [Stackoverflow](https://stackoverflow.com/questions/24237399/how-to-select-the-rows-with-maximum-values-in-each-group-with-dplyr)  
 
 
+NOTE: The group_by() doesn't work if the plyr package is loaded, for some reason.  
+
 ```{r longest pep only}
 #install bioconductor 3.8 https://www.bioconductor.org/install/  
 #install Biostrings: BiocManager::install("Biostrings", version = "3.8") ; do not update mclust because it will have a warning and then biostrings module not installed.  
@@ -474,17 +476,18 @@ gene.iso.df$width <- width(fasta.s)
 
 #~~~~~ End of 'story''s code.~~~~~
 
-#JLM:
+#JM:
 gene.iso.df<-rownames_to_column(gene.iso.df)
 
 #~~~~~beginning of code by nassimhddd (Jul 18 '16) Stackoverflow~~~~~
-longest.pep.df <-gene.iso.df%>%group_by(geneID)%>%mutate(the_rank = rank(-width,ties.method="random")) %>%filter(the_rank==1)%>%select(-the_rank)
+longest.pep.df <-gene.iso.df%>%dplyr::group_by(geneID)%>%mutate(the_rank = rank(-width,ties.method="random")) %>%filter(the_rank==1)%>%select(-the_rank)
 #~~~~~End of nassimhddd's code.~~~~~
 
 list<-longest.pep.df[,1,drop=FALSE]
 #wait why doesn't col.names=FALSE remove the column name?? Oh well.
-write.csv(list,"longestpep_list.txt",quote=FALSE,row.names=FALSE)
+write.csv(list,"longestpep.txt",quote=FALSE,row.names=FALSE)
 ```
+
 Notes:  
 
 Check the number of proteins in list of longest pep

@@ -203,6 +203,8 @@ Then, Replace with `>p:\1:s:\2:g:\3:t:\4`.
 ### Create a list of the longest sequences  
 Create a fasta where each gene has only 1 peptide sequence. Choose the longest peptide per gene. The below script produces a single column list of fasta headers of the longest peptide per gene.  
 
+**IMPORTANT NOTE**: Apr28: just noticed a bug. The group_by() doesn't work correctly if you also load the plyr library.  
+
 ```{r longest pep only}
 #install bioconductor 3.8 https://www.bioconductor.org/install/  
 #install Biostrings: BiocManager::install("Biostrings", version = "3.8") ; do not update mclust because it will have a warning and then biostrings module not installed.  
@@ -232,17 +234,16 @@ gene.iso.df$width <- width(fasta.s)
 
 #~~~~~ End of 'story''s code.~~~~~
 
-#JLM:
+#JM:
 gene.iso.df<-rownames_to_column(gene.iso.df)
 
 #~~~~~beginning of code by nassimhddd (Jul 18 '16) Stackoverflow~~~~~
-longest.pep.df <-gene.iso.df%>%group_by(geneID)%>%mutate(the_rank = rank(-width,ties.method="random")) %>%filter(the_rank==1)%>%select(-the_rank)
+longest.pep.df <-gene.iso.df%>%dplyr::group_by(geneID)%>%mutate(the_rank = rank(-width,ties.method="random")) %>%filter(the_rank==1)%>%select(-the_rank)
 #~~~~~End of nassimhddd's code.~~~~~
 
 list<-longest.pep.df[,1,drop=FALSE]
-#wait why doesn't col.names=FALSE remove the column name?? Oh well.
-write.csv(list,"longestpep_list.txt",quote=FALSE,row.names=FALSE)
-```
+write.csv(list,"longestpep.txt",quote=FALSE,row.names=FALSE)
+``` 
 
 ### Pull out the longest sequences from a fasta file with fasta_puller.py  
  

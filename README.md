@@ -11,7 +11,8 @@ bibliography: Bib.bib
 A quick description of the folders in my repo:  
 * **agalma**: scripts and output of Agalma runs  
 * **class_presentation**: slides and materials for my CompGen class presentation  
-* **code**: all the code used during this project. The code_clean.rmd file contains a runnable version of the code in the Methods section of this readme (see last section). Note that neurogenes.rmd are my rough notes.  
+* **code**: all the code used during this project. Note that neurogenes.rmd are my rough notes.  
+* **code_clean.rmd**: contains a runnable version of the code in the Methods section of this readme (see last section). 
 * **data**: contains genome data files (GFF3 and aa fastas), sample data for testing code, and a folder that contains some preliminary data for the distribution of "neuronal" genes across non-bilaterians. The latter is here for a potential future project. Note that the actual genome scaffold fastas are not included - they were too big.  
 * **output**: output from running the code.  
 * **readme_figs**: the figures I've embedded in this readme are found here.  
@@ -223,7 +224,7 @@ For randomization, I found the proportion of 1's (gene present on scaffold) vs 0
 
 ![null cluster](readme_figs/rm.null.cluster.png)  
  
-Scaffolds do *not* cluster into a single large cluster! I have assumed that the clustering pattern I've been receiving is incorrect, but perhaps it is a true reflection of the structure of the data. For example, perhaps the scaffolds are clustering into two categories: high vs low quality. Alternatively, while this pattern may be true at a high level, clustering methods may lack the resolution to identify relationships at finer levels. It is interesting that I receive similar clustering profiles from clustering scaffolds by gene presence/absence and clustering cell types by gene presence/absence across broad distances.      
+Scaffolds do *not* cluster into a single large cluster! I have assumed that the clustering pattern I've been receiving is incorrect, but perhaps it is a true reflection of the structure of the data. For example, perhaps the scaffolds are clustering into two categories: high vs low quality. I am currently investigating the identity of the scaffolds that are members of the large cluster. Alternatively, while this pattern may be true at a high level, clustering methods may lack the resolution to identify relationships at finer levels. It is interesting that I receive similar clustering profiles from clustering scaffolds by gene presence/absence and clustering cell types by gene presence/absence across broad distances.       
 
 
 ## Assessment  
@@ -403,17 +404,18 @@ no. peptides: `grep ">" pepfile.fasta|wc -l`
 
 Create a fasta where each gene has only 1 peptide sequence. Choose the longest peptide per gene.  
 
-The below code was adapted from code by [story (Jan 9'17')](https://bioinformatics.stackexchange.com/questions/595/how-can-longest-isoforms-per-gene-be-extracted-from-a-fasta-file) and [nassimhddd (Jul 18 '16)](https://stackoverflow.com/questions/24237399/how-to-select-the-rows-with-maximum-values-in-each-group-with-dplyr). 
+The below code was adapted from code by [story (Jan 9'17')](https://bioinformatics.stackexchange.com/questions/595/how-can-longest-isoforms-per-gene-be-extracted-from-a-fasta-file) and [nassimhddd (Jul 18 '16)](https://stackoverflow.com/questions/24237399/how-to-select-the-rows-with-maximum-values-in-each-group-with-dplyr).  
 
-```
-{r longest pep only}
+**IMPORTANT NOTE**: Apr28: just noticed a bug. The group_by() doesn't work correctly if you also load the plyr library.  
+
+```{r longest pep only}
 #install bioconductor 3.8 https://www.bioconductor.org/install/  
 #install Biostrings: BiocManager::install("Biostrings", version = "3.8") ; do not update mclust because it will have a warning and then biostrings module not installed.  
 
-#~~~~~ Beginning of code by story (Jan 9'17')~~~~~
+#~~~~~ Beginning of 'story''s code.~~~~~
 
 ## read your fasta in as Biostrings object
-fasta.s <- readDNAStringSet("./data/sample_data/fasta_sample.fasta")
+fasta.s <- readDNAStringSet("./data/sample_data/longest_pep_sample.fasta")
 
 ## get the read names (in your case it has the isoform info)
 names.fasta <- names(fasta.s)
@@ -432,18 +434,19 @@ gene.iso.df<-select(gene.iso.df, geneID, pepID)
 gene.iso.df$width <- width(fasta.s)
 
 #Did not use rest of code.
+
 #~~~~~ End of 'story''s code.~~~~~
 
 #JM:
 gene.iso.df<-rownames_to_column(gene.iso.df)
 
 #~~~~~beginning of code by nassimhddd (Jul 18 '16) Stackoverflow~~~~~
-longest.pep.df <-gene.iso.df%>%group_by(geneID)%>%mutate(the_rank = rank(-width,ties.method="random")) %>%filter(the_rank==1)%>%select(-the_rank)
+longest.pep.df <-gene.iso.df%>%dplyr::group_by(geneID)%>%mutate(the_rank = rank(-width,ties.method="random")) %>%filter(the_rank==1)%>%select(-the_rank)
 #~~~~~End of nassimhddd's code.~~~~~
 
 list<-longest.pep.df[,1,drop=FALSE]
-write.csv(list,"longestpep_list.txt",quote=FALSE,row.names=FALSE)
-```   
+write.csv(list,"longestpep.txt",quote=FALSE,row.names=FALSE)
+```  
 
 The code above produces a list of all of the longest peptides per gene. Use the below Python script I wrote to pull out each sequence from the fasta file by name. The fasta headers in this list must perfectly match those in the fasta file, and names must be in a single column with no column header. This means that you have to regex the desired ID (in this case, protein ID), from the list of fasta headers.  
 
