@@ -75,7 +75,7 @@ There is a momentous difference in median scaffold length between assemblies fro
 
 ![med.scaff.len](readme_figs/rm.med.scaff.len.png)  
 
- Some examples of each species' distribution of scaffold length is given below. I have limited the x-axis to 10,000 bp since the median scaffold length of all species was below 10,000 bp. The exceptions are the model organisms, including Taeniopygia, which is displayed here. For non-model animals, distributions were right-skewed with several small peaks as scaffold length increased. These smaller peaks were seen in Amphimedon, Trichoplax, Nematostella Capitella, Helobdella, Lottia.  
+ Some examples of the scaffold length distribution for various species is given below. I have limited the x-axis to 10,000 bp since median scaffold length of all species was below 10,000 bp. The exceptions are the model organisms, including Taeniopygia, which is displayed here. For non-model animals, distributions were right-skewed with several small peaks as scaffold length increased. These smaller peaks were seen in Amphimedon, Trichoplax, Nematostella Capitella, Helobdella, Lottia.  
 
 ![scaff.len.per.species](readme_figs/rm.scaff.len.per.species.examples.png)  
 
