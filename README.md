@@ -75,7 +75,7 @@ There is a momentous difference in median scaffold length between assemblies fro
 
 ![med.scaff.len](readme_figs/rm.med.scaff.len.png)  
 
- Some examples of each species' distribution of scaffold length is given below. While many had a small number of very long scaffolds, I only show scaffolds up to 10,000 bp for all but the model organisms since in general median scaffold length falls well below this cut-off. For non-model animals, distributions were right-skewed with several small peaks as scaffold length increased. These smaller peaks were seen in Amphimedon, Trichoplax, Nematostella Capitella, Helobdella, Lottia.
+ Some examples of each species' distribution of scaffold length is given below. I have limited the x-axis to 10,000 bp since the median scaffold length of all species was below 10,000 bp. The exceptions are the model organisms, including Taeniopygia, which is displayed here. For non-model animals, distributions were right-skewed with several small peaks as scaffold length increased. These smaller peaks were seen in Amphimedon, Trichoplax, Nematostella Capitella, Helobdella, Lottia.  
 
 ![scaff.len.per.species](readme_figs/rm.scaff.len.per.species.examples.png)  
 
@@ -135,7 +135,7 @@ The final output looks like this:
 ![absence analysis output](readme_figs/rm.absence.analysis.output.png)  
 
 Where:  
-* **species_scaffold**: A unique scaffold name.  
+* **species_scaffold**: The scaffold in which the gene is found. Species name is concatenated to scaffold ID to create a unique scaffold identifier.   
 * **gene**: ID of gene on scaffold.  
 * **homology_id**: homology ID of that gene (from Agalma).  
 * **absent**: The taxon from which the gene is absent. Currently these are represented by the tip numbers of the tree but I will eventually include the species name instead. The above code is really new and hasn't been perfected yet or as thoroughly debugged as I would like.   
@@ -904,7 +904,7 @@ new.master.table<-left_join(new.master.table,absent.df)
 ### Measure scaffold occupancy  
 The below code makes a histogram of scaffold occupancy per gene, and also finds the median, mean, minimum and maximum number of scaffolds occupied by a gene in a particular genome.  
 
-**IMPORTANT NOTE**:  The below code bases the random matrix on whatever contingency table was produced in the `{r cluster}` chunk.  
+**IMPORTANT NOTE**:  The below code runs on whatever contingency table was produced in the `{r cluster}` chunk.  
 
 ```{r contingency stats}
 # The `Parse GFF3 and Agalma data` chunk and the `cluster` chunk must be run first before this chunk. *Whatever you have set as the contingency table there will be the input for this chunk.*  
