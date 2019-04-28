@@ -127,7 +127,7 @@ Where:
 * **species_scaffold**: A unique scaffold name.  
 * **gene**: ID of gene on scaffold.  
 * **homology_id**: homology ID of that gene (from Agalma).  
-* **absent**: The taxon from which the gene is absent. Currently these are represented by the node numbers of the tree but I will eventually include the species name instead. The above code is quite new and hasn't been perfected yet...  
+* **absent**: The taxon from which the gene is absent. Currently these are represented by the tip numbers of the tree but I will eventually include the species name instead. The above code is really new and hasn't been perfected yet or as thoroughly debugged as I would like.   
 
 ## Clustering Troubleshooting  
 There are at least three elements to clustering: the data, the algorithm used to create the distance matrix, and the clustering algorithm.  
