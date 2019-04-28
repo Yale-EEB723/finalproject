@@ -805,7 +805,7 @@ In data matrix:
 -homology_id = genes
 -cluster = scaffolds
 
-```{r final analysis, eval = FALSE}
+```{r final analysis eval = FALSE}
 reference="Homo_sapiens"
 comparison="Danio_rerio"
 result<-data.frame()
@@ -934,25 +934,34 @@ for (t in taxa$animal){
   find.taxa<-which(phy$tip.label==t)
   taxa.list<-append(taxa.list,find.taxa)
 }
-#4. Compare which tips do not possess the homology_id. 
+#4. Compare which tips do not possess the homology_id.
 #Where ther eare no differences absent.in.taxa will equal integer(0). Hence need rbind.fill
 absent.in.taxa<-setdiff(all.tips,taxa.list)
 taxa.list<-NULL
 
-#append to table of homology_id + absent.in.taxa
+#append to table of homology_id + absent taxa
 combine.df<-cbind(h,absent.in.taxa)%>%as.data.frame()
 absent.df<-rbind.fill(absent.df,combine.df)
 
 
 }
 
+#prep absent.df dataframe
+#remove NAs in 'absent' column - these are homologs not absent in any of the child taxa.
+absent.df<-na.omit(absent.df)
 names(absent.df)<-c("homology_id","absent")
-new.master.table<-left_join(new.master.table,absent.df)
-absence.analysis.result<-new.master.table[!is.na(new.master.table$absent),]
-absence.analysis.result
 
-write.csv(absence.analysis.result,"absence.analysis.result.csv",quote=FALSE,row.names=FALSE)
+#Create table of scaffold - gene - homology id - taxa homolog is absent in
+absence.results<-left_join(master.table,absent.df,by="homology_id")%>%select(.,species_scaffold,gene,homology_id,absent)%>%na.omit(absent)%>%group_by(homology_id)
+
+write.csv(absence.results,"absence.analysis.results.csv",quote=FALSE,row.names=FALSE)
+
+#Add to master table.  
+new.master.table<-left_join(new.master.table,absent.df)
 ```
+
+
+# Test Null Hypothesis  
 
 ```{r test null model}
 

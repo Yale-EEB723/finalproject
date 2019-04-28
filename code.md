@@ -14,7 +14,7 @@ This is a final project for the [Comparative Genomics](https://github.com/Yale-E
 ## Background  
 While biologists characterize most animals by what they have, non-bilaterians are sometimes characterized by what they don't have. In sponges, traditionally these absences have been considered ancestral, an assumption contributing to their primitive image.  
 
-Loss is trivial to establish phylogenetically, but is less so when the phylogeny itself possesses a degree of uncertainty. Synteny analysis provides one method of determining loss. In particular, the ghost locus hypothesis suggests that in the case of gene loss, the synteny surrounding the locus of the gene may be preserved even in the absence of the gene itself @Ramos2012. In this project, I will identify candidate 'ghost loci' across broad evolutionary distances.  
+Loss is trivial to establish phylogenetically, but is less so when the phylogeny itself possesses a degree of uncertainty. Synteny analysis provides one method of determining loss. In particular, the ghost locus hypothesis suggests that in the case of gene loss, the synteny surrounding the locus of the gene may be preserved even in the absence of the gene itself (Ramos et al., 2012). In this project, I will identify candidate 'ghost loci' across broad evolutionary distances.  
 
 Many studies examining synteny across long evolutionary distances choose a microsynteny approach. Is it possible to identify synteny at a macro, whole-scaffold level?  
 
@@ -121,7 +121,7 @@ It is possible this pattern arises from the clustering algorithm. Cross-cluster 
 By default, genes that arose after the emergence of a particular clade will not be present in that clade. As seen in my presentation, I had initially pursued a 'nesting' approach: I assigned each tip a number, which increased in value the more successively nested that tip was. However, following your advice I've pursued a phylogenetic approach. For each homolog, I found its most recent common ancestor and all the taxa within the clade defined by this common ancestor. Instances where a tip is a member of this clade yet lacks the homolog is flagged as a candidate gene loss event.  
 
 The final output looks like this:  
-
+![absence analysis output](readme_figs/rm.absence.analysis.output.png)  
 
 
 ## Clustering Troubleshooting  
@@ -213,7 +213,7 @@ Scaffolds do *not* cluster into a single large cluster! I have assumed that the 
 
 ## Assessment  
 *Was it successful in achieving the initial goal?*  
-Yes, this project completed all three goals it set out to achieve. However, due to the difficulty in interpreting the results of the clustering step, the results of the absence analysis itself less clear.  
+Yes, this project completed all three goals it set out to achieve. However, due to the difficulty in interpreting the results of the clustering step, the results of the absence analysis is also less clear.  
 
 *What are the main obstacles encountered?*  
 * Computation: My laptop did not have enough computing power to process the dataset in its entirety. The next step is to run R on the cluster.  
@@ -222,9 +222,9 @@ Yes, this project completed all three goals it set out to achieve. However, due 
 *What would you have done differently?*  
 * Include animal outgroups (choanoflagellates etc.)  
 * I've received advice on other clustering strategies:  
-  * Perform local clustering and link them together like a daisy chain  
-  * Go through genes on a scaffold using a sliding 10-gene window. If two homologs within this window are also on the same scaffold in another organism, this suggests a possible syntenic region.  Quantify how many of these pairs you can find in the window.  
-  * Instead of making a homolog x scaffold contingency matrix, make a homolog x homolog matrix. (*I'm still not fully clear about this4 - can we go over this again, Casey?*)  
+  * Antonio: Perform local clustering and link them together like a daisy chain  
+  * Zack: Go through genes on a scaffold using a sliding 10-gene window. If two homologs within this window are also on the same scaffold in another organism, this suggests a possible syntenic region.  Quantify how many of these pairs you can find in the window.  
+  * Casey: Instead of making a homolog x scaffold contingency matrix, make a homolog x homolog matrix. (*I'm still not fully clear about this4 - can we go over this again, Casey?*)  
 
 *What are future directions this could go in?*  
 * Ancestral state reconstruction - it is difficult to study what is absent, but perhaps this can be achieved by reconstructing the gene that was lost.    
@@ -773,8 +773,6 @@ tsn_plot_k
 
 ```
 
-
-
 ### Create Master Table And Perform Absence Analysis    
 
 #### Create Master Table   
@@ -807,8 +805,8 @@ I take a phylogenetic approach:
 {r tree}
 #initialize
 mrca.df<-data.frame()
-absent.df<-data.frame()
 taxa.list<-NULL
+
 
 #phylogeny
 tree_text = "(Mnemiopsis_leidyi,(Amphimedon_queenslandica,(Trichoplax_adhaerens,(Nematostella_vectensis,((Drosophila_melanogaster,(Lottia_gigantea,(Capitella_telata,Helobdella_robusta))),(Strongylocentrotus_purpuratus,(Danio_rerio,(Homo_sapiens,Taeniopygia_guttata))))))));"
@@ -821,34 +819,35 @@ homolog.list<-unique(master.table$homology_id)
 homolog.list<-homolog.list[!is.na(homolog.list)]
 
 
+       
 for (h in homolog.list){
 #1.Find all taxa that possess a particular homology_id. 
 homolog.animals<-master.table%>%filter(.,homology_id == h) %>% select(.,animal)%>%unique()
 
 #2. Find the most recent common ancestor of all those taxa. 
-#If homology_id is possessed by only 1 taxon (eg. shared among paralogs), then the MRCA is the tip node.
+#If homology_id is possessed by only 1 taxon (eg. shared among paralogs), then skip. By default, there is no opportunity for detecting absence.  
 if (nrow(homolog.animals) == 1){
-  mrca<-which(phy$tip.label == homolog.animals$animal)
+  next
 }
 
 if (nrow(homolog.animals) > 1){
   mrca <-getMRCA(phy,as.character(homolog.animals$animal))
+  bind.df<-cbind(homology_id=h,mrca)
+  mrca.df<-rbind(mrca.df,bind.df)
 }
 
-bind.df<-cbind(homology_id=h,mrca)
-mrca.df<-rbind(mrca.df,bind.df)
 }
 
 #Add MRCAs to master.table
 new.master.table<-left_join(master.table,mrca.df, by="homology_id")
 
 
-
+absent.df<-data.frame(h=integer(0),absent.in.taxa=integer(0))
 for (h in mrca.df$homology_id){
 #3. Find all the tips of the last common ancestor.  
 all.tips<-mrca.df$mrca[mrca.df$homology_id==h]%>%descendants(phy,.)
-all.tips<-tips[tips<=length(phy$tip.label)]
-  
+all.tips<-all.tips[all.tips<=length(phy$tip.label)]
+
 taxa<-new.master.table%>%filter(homology_id==h)%>%select(.,animal)%>%unique()
 
 
@@ -857,27 +856,73 @@ for (t in taxa$animal){
   find.taxa<-which(phy$tip.label==t)
   taxa.list<-append(taxa.list,find.taxa)
 }
-#4. Compare which tips do not possess the homology_id. 
+#4. Compare which tips do not possess the homology_id.
+#Where ther eare no differences absent.in.taxa will equal integer(0). Hence need rbind.fill
 absent.in.taxa<-setdiff(all.tips,taxa.list)
 taxa.list<-NULL
 
-#append to table of homology_id + absent.in.taxa
-combine.df<-cbind(h,absent.in.taxa)
-absent.df<-rbind(absent.df,combine.df)
+#append to table of homology_id + absent taxa
+combine.df<-cbind(h,absent.in.taxa)%>%as.data.frame()
+absent.df<-rbind.fill(absent.df,combine.df)
+
 
 }
 
+#prep absent.df dataframe
+#remove NAs in 'absent' column - these are homologs not absent in any of the child taxa.
+absent.df<-na.omit(absent.df)
 names(absent.df)<-c("homology_id","absent")
-new.master.table<-left_join(new.master.table,absent.df,by=homology_id)
-absent.master.table<-new.master.table[!is.na(new.master.table$absent),]
 
+#Create table of scaffold - gene - homology id - taxa homolog is absent in
+absence.results<-left_join(master.table,absent.df,by="homology_id")%>%select(.,species_scaffold,gene,homology_id,absent)%>%na.omit(absent)%>%group_by(homology_id)
+
+write.csv(absence.results,"absence.analysis.results.csv",quote=FALSE,row.names=FALSE)
+
+#Add to master table.  
+new.master.table<-left_join(new.master.table,absent.df)
 ```
 
+### Measure scaffold occupancy  
+The below code makes a histogram of scaffold occupancy per gene, and also finds the median, mean, minimum and maximum number of scaffolds occupied by a gene in a particular genome.  
+
+```{r contingency stats}
+#First run the chunk "Parse GFF3 and Agalma data"
+#must run previous chunk prior to running this chunk
+gff3.table.save<-gff3.table
+
+
+#~~~Create contingency.table~~~
+#Make scaffold names unique- join seqid and catalog id
+contingency.table<-inner_join(gff3.table,agalma.homologs)%>%dplyr::select(.,seqid,homology_id,animal)%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%dplyr::select(.,species_scaffold,homology_id)
+#~~~contingency.table compelte~~~
+
+#Use contingency.table to make the contingency table
+contingency<-table(contingency.table$species_scaffold,contingency.table$homology_id)%>%as.matrix()
+contingency<-1*(contingency>0)
+
+#number of scaffolds
+nrow(contingency)
+#number of homologs shared across scaffolds
+ncol(contingency)
+#sums of each column
+colsum<-colSums(contingency)
+#histogram of number of sacffolds occupied per homolog
+hist<-ggplot() + aes(colsum)+geom_histogram(fill="skyblue3",color="black")+xlab("Number of Scaffolds Occupied") + ylab("Count")+ggtitle("Number of Scaffolds Occupied Per Homolog (5taxa)")
+
+#median number of scaffolds occupied
+median(colsum)
+#average number of sacffolds occupied
+mean(colsum)
+#min number of scaffolds occupied
+min(colsum)
+#max number of scaffolds occupied.
+max(colsum)
+```
 
 ### Test the Null Hypothesis  
 
-Create a random contingency matrix with the same dimensions and proportion of 1s and 0s as from your real data.   
-
+Create a random contingency matrix with the same dimensions and proportion of 1s and 0s as from your real data. Cluster this random matrix using cross-clustering, agnes, diana, and kmeans.  
+   
 ```
 {r test null model}
 
@@ -919,6 +964,10 @@ rand.tsne_data<-rand.tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(r
 rand.tsne_plot<-ggplot(aes(x = X, y = Y), data = rand.tsne_data) + geom_point(aes(color = rand.cluster))
 rand.tsne_plot
 
-
-
 ```
+
+# References  
+Ramos, O., Barker, D., and Ferrier, D. 2012. Ghost Loci Imply Hox and ParaHox Existence in the Last Common Ancestor of Animals. Current Biology, 22(20):1951-1956.  
+
+Tellaroli, P., Bazzi, M., Donato, M., Brazzale, C., and Draghici, S. Cross-Clustering: A Partial Clustering Algorithm with Automatic Estimation of the Number of Clusters. PLOS ONE, 11(3): e0152333.
+doi:10.1371/journal.pone.0152333.    

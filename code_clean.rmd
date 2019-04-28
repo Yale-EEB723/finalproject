@@ -685,24 +685,172 @@ for (t in taxa$animal){
 absent.in.taxa<-setdiff(all.tips,taxa.list)
 taxa.list<-NULL
 
-#append to table of homology_id + absent.in.taxa
+#append to table of homology_id + absent taxa
 combine.df<-cbind(h,absent.in.taxa)%>%as.data.frame()
 absent.df<-rbind.fill(absent.df,combine.df)
 
 
 }
 
+#prep absent.df dataframe
+#remove NAs in 'absent' column - these are homologs not absent in any of the child taxa.
+absent.df<-na.omit(absent.df)
 names(absent.df)<-c("homology_id","absent")
-new.master.table<-left_join(new.master.table,absent.df)
-absence.analysis.result<-new.master.table[!is.na(new.master.table$absent),]
-absence.analysis.result
 
-write.csv(absence.analysis.result,"absence.analysis.result.csv",quote=FALSE,row.names=FALSE)
+#Create table of scaffold - gene - homology id - taxa homolog is absent in
+absence.results<-left_join(master.table,absent.df,by="homology_id")%>%select(.,species_scaffold,gene,homology_id,absent)%>%na.omit(absent)%>%group_by(homology_id)
+
+write.csv(absence.results,"absence.analysis.results.csv",quote=FALSE,row.names=FALSE)
+
+#Add to master table.  
+new.master.table<-left_join(new.master.table,absent.df)
+```
+
+# Clustering Troubleshooting  
+
+### Is the contingency matrix underlying the distance matrix too sparse?  
+The below code makes a histogram of scaffold occupancy per gene, and also finds the median, mean, minimum and maximum number of scaffolds occupied by a gene in a particular genome.  
+
+```{r contingency stats}
+#First run the chunk "Parse GFF3 and Agalma data"
+#must run previous chunk prior to running this chunk
+gff3.table.save<-gff3.table
+
+
+#~~~Create contingency.table~~~
+#Make scaffold names unique- join seqid and catalog id
+contingency.table<-inner_join(gff3.table,agalma.homologs)%>%dplyr::select(.,seqid,homology_id,animal)%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%dplyr::select(.,species_scaffold,homology_id)
+#~~~contingency.table compelte~~~
+
+#Use contingency.table to make the contingency table
+contingency<-table(contingency.table$species_scaffold,contingency.table$homology_id)%>%as.matrix()
+contingency<-1*(contingency>0)
+
+#number of scaffolds
+nrow(contingency)
+#number of homologs shared across scaffolds
+ncol(contingency)
+#sums of each column
+colsum<-colSums(contingency)
+#histogram of number of sacffolds occupied per homolog
+hist<-ggplot() + aes(colsum)+geom_histogram(fill="skyblue3",color="black")+xlab("Number of Scaffolds Occupied") + ylab("Count")+ggtitle("Number of Scaffolds Occupied Per Homolog (5taxa)")
+
+#median number of scaffolds occupied
+median(colsum)
+#average number of sacffolds occupied
+mean(colsum)
+#min number of scaffolds occupied
+min(colsum)
+#max number of scaffolds occupied.
+max(colsum)
+```
+
+# Test the Null Hypothesis  
+Create a random contingency matrix with the same dimensions and proportion of 1s and 0s as from your real data.  
+Cluster this random matrix using cross-clustering, agnes, diana, and kmeans.  
+
+```{r test null model}
+
+#mixing up the columns or rows will not affect overall clustering pattern (i.e. all clustering)
+#make a data frame with the same proportion of 1's and 0's in random order
+dim(contingency)
+n_entries<-ncol(contingency)*nrow(contingency)
+proportion_1s<-sum(contingency)/n_entries
+proportion_0s<-1-proportion_1s
+
+random.matrix<-c(rep("1",proportion_1s*n_entries),rep("0",proportion_0s*n_entries))%>%sample(.,n_entries)%>%matrix(.,ncol=ncol(contingency),nrow=nrow(contingency))%>%as.data.frame()
+rownames(random.matrix)<-row.names(contingency)
+colnames(random.matrix)<-colnames(contingency)
+
+
+#cluster
+rand.dist.matrix<-daisy(random.matrix,metric="gower",stand=FALSE)
+
+rand.cross.clust<-cc_crossclustering(rand.dist.matrix,out=FALSE)
+rand.clust<-cc_get_cluster(rand.cross.clust)
+
+rand.tsne_obj<-Rtsne(rand.dist.matrix,is_distance=TRUE,perplexity=1)
+rand.tsne_data<-rand.tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(rand.cluster=factor(rand.clust))
+rand.tsne_plot<-ggplot(aes(x = X, y = Y), data = rand.tsne_data) + geom_point(aes(color = rand.cluster))
+rand.tsne_plot
+
+#agglomerative
+rand.ag<-agnes(rand.dist.matrix,diss=TRUE)
+plot(rand.ag,labels=FALSE)
+
+#divisive
+rand.di<-diana(rand.dist.matrix)
+plot(rand.di,labels=FALSE)
+
+#kmeans
+rand.kmean<-kmeans(rand.dist.matrix,51)
+rand.kclust<-rand.kmean$cluster
+rand.tsne_obj<-Rtsne(rand.dist.matrix,is_distance=TRUE,perplexity=1)
+rand.tsne_data<-rand.tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(rand.cluster=factor(rand.kclust))
+rand.tsne_plot<-ggplot(aes(x = X, y = Y), data = rand.tsne_data) + geom_point(aes(color = rand.cluster))
+rand.tsne_plot
+
+
+
 ```
 
 
+# Deprecated  
+Below is my original code for finding absent genes. It used a 'nesting index' approach, where I assigned taxa successively higher 'nesting indices' the more nested it was in the phylogeny.  
+
+```{r final analysis eval = FALSE}
+reference="Homo_sapiens"
+comparison="Danio_rerio"
+result<-data.frame()
+
+#subset master.table for the reference or comparison animal; remove NAs
+analysis.table.reference<-filter(master.table,animal==reference & !is.na(homology_id))
+analysis.table.comparison<-filter(master.table,animal==comparison & !is.na(homology_id))
 
 
+#remove any genes in the analysis.table.reference that are present only in clades that arose after the comparison clade.
+#get a list of all unique homology_ids in the analysis table
+ref.homolog.list<-unique(analysis.table.reference$homology_id)
+#get species_index of comparison animal
+comp.species.index<-analysis.table.comparison$species_index[1]
+#for each gene in the ref analysis table
+for (h in ref.homolog.list){
+  #select all the rows of that particular genes for all animals (except your comp animal)
+  #for sample data:
+  #check<-filter(sample.table, homology_id==h & animal!=comparison)
+  check<-filter(master.table, homology_id==h & animal!=comparison)
+  
+  #check if any of the species indices in the check table have an index <= comparison index
+  if( any(check$species_index<=comp.species.index)==FALSE){
+    #if so, remove all rows with that gene in the analysis.table.reference
+    analysis.table.reference<-filter(analysis.table.reference,homology_id != h)
+  }
+}
+#list of unique scaffold ids in reference
+ref.scaffold.list<-unique(analysis.table.reference$species_scaffold)
+#for each unique scaffold in the reference table:
+for (r in ref.scaffold.list){
+  #find cluster id for each scaffold
+  reference.table.scaffold<-analysis.table.reference%>%filter(.,species_scaffold==r)
+  ref.cluster_id<-unique(reference.table.scaffold$cluster_id)
+  
+  #find all unique scaffolds in comparison table with that cluster_id
+  comp.scaffold<-analysis.table.comparison%>%filter(.,cluster_id==ref.cluster_id)
+  comp.scaffold<-unique(comp.scaffold$species_scaffold)
+  
+  #for each unique scaffold in comparison table w/ cluster_id
+  for (c in comp.scaffold){
+    #isolate genes from that scaffold and compare to original ref scaffold
+   comp.table.scaffold<-analysis.table.comparison%>%filter(.,species_scaffold==c)
+   comparison_absent<-anti_join(reference.table.scaffold,comp.table.scaffold,by="homology_id")
+   comparison_absent<-mutate(comparison_absent,comp_scaff=c)
+   result<-rbind(result,comparison_absent)
+  }
+  
+  }
+result
+write.csv(result,"result.csv",quote=FALSE,row.names=FALSE)
+```
 
 
 
