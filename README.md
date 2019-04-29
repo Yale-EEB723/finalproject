@@ -2,7 +2,9 @@
 
 ## Introduction
 
-This is a final project for the [Comparative Genomics](https://github.com/Yale-EEB723/syllabus) seminar in the spring of 2019. This project used RNA-seq data published on SRA to test the validity of the group Cyclostomata, the living jawless fishes.
+This is a final project for the [Comparative Genomics](https://github.com/Yale-EEB723/syllabus) seminar in the spring of 2019. This project used RNA-seq data published on SRA to test the monophyly of Cyclostomata, the living jawless fishes.
+
+
 
 ## The goal
 
@@ -117,7 +119,6 @@ agalma catalog insert -i SRR### -p ~/scratch60/agalma/data/transcriptomes/SRR###
 
 This can be automated with a script like the catalog.slurm script in this repo.
 
-
 Adding the following entry in your .bash_profile will create a shortcut to retrieve the NCBI and ITIS ID numbers for a species in the format that Agalma expects (written by Steve Haddock; copied from Agalma Issue #233 on bitbucket):
 
 ```
@@ -129,6 +130,8 @@ getid(){
     echo -n "-d " ; curl -s "https://www.itis.gov/ITISWebService/services/ITISService/searchByScientificName?srchKey=Physalia+physalis" | sed -E 's/.*:tsn>([0-9]+)<.*/\1/'
  }
  ```
+
+You can always update these catalogs with the insert function. You just have to re-enter the field you want to change or add; everything else will stay the same.
 
 Before generating the catalog, you specify a path for the local Agalma database with a command like 
 
@@ -143,7 +146,35 @@ To check on your entire agalma catalog and see that it all loaded properly, run:
 ```
 agalma catalog all
 ```
-You can always update these catalogs with the insert function. You just have to re-enter the field you want to change or add; everything else will stay the same.
+
+If upon doing this you get an error saying "sqlite3.DatabaseError: database disk image is malformed," then this catalog has been corrupted. Hopefully you have a backup and it isn't the backup that's corrupted. If you don't however, run the following code through sqlite3 to double check that it's corrupted:
+
+```
+sqlite3 agalma.sqlite "PRAGMA integrity_check"
+```
+If it still gives you an error that the database disk image is malinformed, try cleaning the database up with
+
+```
+sqlite3 agalma.sqlite "reindex nodes"
+sqlite3 agalma.sqlite "reindex pristine"
+```
+If that still doesn't work (it didn't in my case), run the following to dump the contents of the database into a backup file, and then slurp back into a new database file.
+
+```
+sqlite3 .agalma.sqlite
+
+sqlite> .mode insert
+sqlite> .output dump_all.sql
+sqlite> .dump
+sqlite> .exit
+
+mv agalma.sqlite agalma_corrupt.sqlite
+sqlite3 agalma.sqlite
+
+sqlite> .read dump_all.sql
+sqlite> .exit
+```
+Then try loading the whole catalog again to see if it works.
 
 
 #### Quality Control 
@@ -157,29 +188,48 @@ If you ever want to remind yourself of the steps in the pipeline, type:
 ```
 agalma transcriptome -h
 ```
-If you're running on an interactive node on Farnam, there's no need to specify the number of threads/memory you want to allocate to Agalma. It's already default set to 20 threads and 200G of max memory.
-
-That said, these runs take longer than you'd think, so it's better to submit jobs through Farnam. When doing so, make sure you request at least 90 Gb of memory. This seems to be the max for Step 11 of the pipeline, and if you don't have enough memory, the pipeline will fail here. So far it seems that requesting 1 node, 20 cpu, and 4600 mem-per-cpu should do the trick. Also, do yourself a favor and use the scavenge partition, because it's painful to wait hours for the job to start to have it fail immediately.
+These pipeline runs take longer than you'd think, so it's better to submit jobs through Farnam. So far it seems that requesting 1 node, 16 cpu, and 4600 or 6000 mem-per-cpu is successful. Also, do yourself a favor and use the scavenge partition, because it's painful to wait hours for the job to start to have it fail immediately. It's really important not to leave out the line of code that allocates how many threads / how much memory Biolite should use. Sections of the pipeline (especially Stage 11 where you assemble with Trinity, and Stage 19) are very computationally demanding, and the program will want to use more memory/threads than you have requested on Farnam unless you've specifically prevented it from doing so.
 
 To run the pipeline for a single transcriptome, your job should contain a script that looks something like this:
 
 ````
 source activate agalma
+export BIOLITE_RESOURCES=threads=16,memory=91G
 cd ~/scratch60/agalma/data/data
 export AGALMA_DB=$PWD/agalma.sqlite
 cd ~/scratch60/agalma/scratch
 agalma transcriptome -i SRR###### -o path/to/output/directory
 ````
 
-If/when the pipeline fails, you can always restart it. Keep everything in the script above the same, but adjust the last line to say something like
+If/when the pipeline fails, you can always restart it. Keep everything in the script above the same, but adjust the last two lines to say something like
 
 ```
+cd ~/scratch60/agalma/scratch/transcriptome-##
 agalma transcriptome -i SRR#####3 --restart --stage N
-
 ```
 
-where in is the stage that it failed at.
+where N is the stage that it failed at and transcriptome-## is the directory that files for this run were previously outputting in to. It's also important to change the name of the output file in the BASH header to prevent it from overriding the output file of the first attempt.
 
+#### Reporting
+
+To generate reports for the transcriptome runs, use the slurm script report.slurm (or a similar script). This will run very quickly. The generated roports will have diagnostics for all transcriptome stages of the Agalma pipeline.
+
+
+### Inferring the Phylogeny
+
+
+### Helpful Agalma Commands
+
+To get a list of all your runs (so that you can keep track and specify which ones you actually want to use in your phylogeny analyses), use the command:
+```
+agalma diagnostics list
+```
+
+You can't eliminate entries from the Agalma catlog, but you can delete or hide previous runs from the diagnostics database so that you don't use them in downstream analyses. Your options can be seen at 
+
+```
+agalma diagnostics -h
+```
 
 ## Results
 
@@ -196,10 +246,26 @@ What are future directions this could go in?
 
 ## References
 
-Dunn CW, Howison M, Zapata F. 2013. Agalma: an automated phylogenomics workflow. BMC Bioinformatics 14(1): 330. doi:10.1186/1471-2105-14-330
+Bardack, D. (1991). First fossil hagfish (Myxinoidea): a record from the Pennsylvanian of Illinois. Science, 254(5032), 701-703.
 
-Smith, Jeramiah J., Francesca Antonacci, Evan E. Eichler, and Chris T. Amemiya. "Programmed loss of millions of base pairs from a vertebrate genome." Proceedings of the National Academy of Sciences 106, no. 27 (2009): 11212-11217.
+Delsuc, F., Philippe, H., Tsagkogeorga, G., Simion, P., Tilak, M. K., Turon, X., ... & Douzery, E. J. (2018). A phylogenomic framework and timescale for comparative studies of tunicates. BMC biology, 16(1), 39.
 
-Smith, Jeramiah J., Shigehiro Kuraku, Carson Holt, Tatjana Sauka-Spengler, Ning Jiang, Michael S. Campbell, Mark D. Yandell et al. "Sequencing of the sea lamprey (Petromyzon marinus) genome provides insights into vertebrate evolution." Nature genetics 45, no. 4 (2013): 415.
+Dunn CW, Howison M, Zapata F. (2013). Agalma: an automated phylogenomics workflow. BMC Bioinformatics 14(1): 330. doi:10.1186/1471-2105-14-330
 
-Smith, Jeramiah J., Nataliya Timoshevskaya, Chengxi Ye, Carson Holt, Melissa C. Keinath, Hugo J. Parker, Malcolm E. Cook et al. "The sea lamprey germline genome provides insights into programmed genome rearrangement and vertebrate evolution." Nature genetics 50, no. 2 (2018): 270.
+Kuraku, S. (2008). Insights into cyclostome phylogenomics: pre-2R or post-2R. Zoological science, 25(10), 960-969.
+
+Kuraku, S. (2010). Palaeophylogenomics of the vertebrate ancestor—impact of hidden paralogy on hagfish and lamprey gene phylogeny.
+
+McCauley, D. W., Docker, M. F., Whyard, S., & Li, W. (2015). Lampreys as diverse model organisms in the genomics era. BioScience, 65(11), 1046-1056.
+
+Mele, C. (2017, July 14). Chain-Reaction Crash With Minor Injuries, Except for the Slime Eels. The New York Times. https://www.nytimes.com/2017/07/14/us/slime-eels-oregon.html
+
+Miyashita, T., Coates, M. I., Farrar, R., Larson, P., Manning, P. L., Wogelius, R. A., ... & Currie, P. J. (2019). Hagfish from the Cretaceous Tethys Sea and a reconciliation of the morphological–molecular conflict in early vertebrate phylogeny. Proceedings of the National Academy of Sciences, 116(6), 2146-2151.
+
+Smith, J. J., Antonacci, F., Eichler, E. E., & Amemiya, C. T. (2009). Programmed loss of millions of base pairs from a vertebrate genome. Proceedings of the National Academy of Sciences, 106(27), 11212-11217.
+
+Smith, J. J., Kuraku, S., Holt, C., Sauka-Spengler, T., Jiang, N., Campbell, M. S., ... & Morgan, J. R. (2013). Sequencing of the sea lamprey (Petromyzon marinus) genome provides insights into vertebrate evolution. Nature genetics, 45(4), 415.
+
+Smith, J. J., Timoshevskaya, N., Ye, C., Holt, C., Keinath, M. C., Parker, H. J., ... & Kaessmann, H. (2018). The sea lamprey germline genome provides insights into programmed genome rearrangement and vertebrate evolution. Nature genetics, 50(2), 270.
+
+Suzuki, T., Ota, T., Fujiyama, A., & Kasahara, M. (2004). Construction of a bacterial artificial chromosome library from the inshore hagfish, Eptatretus burgeri: a resource for the analysis of the agnathan genome. Genes & genetic systems, 79(4), 251-253.
