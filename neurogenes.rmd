@@ -1,0 +1,1199 @@
+---
+title: "neurogenes"
+output: md_document
+---
+
+---
+title: "neurogenes synteny project"
+csl: plos.csl
+output:
+  github_document: default
+bibliography: Bib.bib
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	message = FALSE,
+	warning = FALSE,
+	echo=FALSE,
+	dpi=300,
+	cache=TRUE
+	)
+```
+
+```{r preliminaries}
+library( tidyverse )
+library(ggplot2)
+library(seqinr)
+library(ape)
+library(Biostrings)
+library(dplyr)
+library(plyr)
+
+#clustering
+library(cluster)
+library(CrossClustering)
+library(vegan)
+library(Rtsne)
+library(factoextra)
+
+#tree manipulation
+library(ape)
+library(hutan)
+```
+
+
+1.  
+#Readings  
+
+##Neural gene presence/absence data sources   
+
+**Moroz et al., 2014** [@Moroz2014]
+-Table 34S:
+-structure of figure shows that it is from bilaterian perspective (closer to bilateria more rectangles filled in)  
+-remember there are also random absences in cnidaria; the mirror of bilateria, but all the proteins are characterized from bilateria  
+-no examples where ctenophores or sponges don't have something present in fungi, capsaspora, monosiga  
+-Suppl Table 12as - it's possible didn't use Amphimedon genome, but Amphimedon was covered by the other papers and I crossreferenced them.  
+
+*Mentioned in text*:  
+Not in ctenophores:   
+neurogenin  
+NeuroD  
+Achaete-scute  
+REST  
+HOX  
+Otx  
+
+-not that much overlap in genes looked at by Riesgo vs Moroz  
+
+**Ryan et al., 2013** [@Ryan2013]  
+*netrin, slit, unc-5 (axon guidance) not in Mnemiopsis or Amphimedon*  
+-used genomes, since based on Alie and Manuel 2010  
+Supplementary Table S17: Presence and absence of post-synaptic genes  - pretty much Alie and Manuel 2010
+Supplementary Table S19: Presence and absence of Dopamine / Norepinephrine /Epinephrine Biosynthetic Pathway components   
+
+-are seqs of the animals in S17 genomes? Unsure, but all animals in table have genomes (and the Mle seqs are from the genome)  
+-AMPA iGluR and NMDA iGluR included as iGluR  
+
+**Alie and Manuel, 2010** [@Alie2010]  
+-used genomes  
+-Ryan built on Fig. 1. Cross ref with current data to make sure have everything.  
+-Only use Monosiga, Trichoplax, Amphimedon, Nematostella, Hydra, Homo  
+  Capitella (3 absences), Drosophila (2 absences), Homo very similar with few differences  
+  Unicellular animals mostly missing everything (except B-cat and PMCA). Start with Monosiga which has more things.
+B-cat and PMCA are ancient - interesting?  
+AMPAR and NMDAR collapsed into iGluR in table; presence of one of these trumped absence of the other  
+PKC alpha-beta-gamma = PKC on table  
+
+**Srivastava et al, 2010** [@Srivastava2010]  
+-has extensive tables of presence/absence neural genes (neurogenesis S.8.9.1, presynaptic S.8.9.2, postsynaptic S8.9.3, neurosecretory S. 8.9.4 and see Fig. 2.8.9.1 for "synapse diagram"). BUT classifies by Holozoa, Metazoa, Eumetazoa, Bilateria. Can figure out in sponges if Metazoa (?) but too vague? Need specific genomes?   
+
+###Quick Links to neural genes papers   
+Riesgo et al., 2014  
+https://academic.oup.com/mbe/article/31/5/1102/993377  
+Neural genes Fig  
+https://academic.oup.com/view-large/figure/74385341/msu057f3p.jpeg  
+
+Moroz et al., 2014  
+https://www.nature.com/articles/nature13400  
+Table 34S: neural genes  
+https://media.nature.com/original/nature-assets/nature/journal/v510/n7503/extref/nature13400-s1.pdf  
+
+Ryan et al, 2013  
+http://science.sciencemag.org/content/342/6164/1242592  
+Suppl Mat:  
+http://science.sciencemag.org/content/sci/suppl/2013/12/11/342.6164.1242592.DC1/Ryan.SM.pdf  
+
+Alie and Manuel, 2010  
+https://bmcevolbiol.biomedcentral.com/articles/10.1186/1471-2148-10-34  
+
+Srivastava et al., 2010  
+Suppl.S8.9 - neural genes
+https://media.nature.com/original/nature-assets/nature/journal/v466/n7307/extref/nature09201-s1.pdf
+
+Nichols et al., 2012  
+https://www.pnas.org/content/109/32/13046  
+Suppl  
+https://www.pnas.org/content/pnas/suppl/2012/07/25/1120685109.DCSupplemental/sapp.pdf  
+
+
+##Synteny papers
+
+**ghost locus hypothesis**:  
+Ramos et al., 2012 [@Ramos2012]  
+https://www.sciencedirect.com/science/article/pii/S0960982212009888  
+-first ghost locus paper - parahox, Amphimedon + Trichoplax  
+
+**Fortunato et al, 2014 [@Fortunato2014] - sycon Parahox**  
+https://www.nature.com/articles/nature13881  
+-second ghost locus paper?  
+
+**Ferrier 2015 [@Ferrier2015] (review)** 
+https://academic.oup.com/bfg/article/15/5/333/1741867  
+
+**_Reviews_**:  
+**Liu et al 2018 [@Liu2018]**   
+https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2026-4  
+ 
+Liu Results:  
+-Pos control (default params): comparison of genome with itself: SynChro (most synteny), DAGchainer/i-ADHoRe, MCScanX 
+-Fragmentation: break 2 species genomes [C. elegans, C. briggsae, S. rattis, S. stercoralis] (diff gene density) into diff fragment lengths. pos corr between error rate and level of fragmentation except for Satsuma. For anchor-based programs, fragmentation has biggest effect on MCScanX and lowest on SynChro.  
+-Find synteny between sister species: Satsuma worst (diff with alignments/nt homology), Anchor-based programs found much higher synteny - can't access Add. file 2 Table S1 that describes this.  
+-Fragmented species and compared to its own genome: MCScanX worst. The rest of anchor-based progs performed similarly.k SyncChro often better or second best.Degree of error differed per species.  
+-high gene density, less error (more anchors)  
+-fragmented assemblies lead to erroneous GO terms.  
+-reference-guided assembly methods rely on assumption of synteny = synteny errors.  
+
+Bottom line:  
+-most synteny programs designed with assumption working on complete high quality genomes. 
+-SynChro best for fragmented assemblies in general, imo.  
+-Satsuma does not have a positive correlation with error rate and level of fragmentation, but performed poorly comparing two closely related species due to failure of alignment - go with anchor-based.   
+-need N50 of at least 200 kb and gene density 290 genes/Mb, or N50 1 Mb and gene density 200 genes/Mb for error rate < 5%. Higher N50 for genomes with less gene density or many paralogues/expansion of gene families.   
+-annotation qualityt really doesn't matter just need high genome assembly contiguity.  
+-more paralogues less synteny finding?? may have misunderstood.  
+
+
+#ANALYSIS  
+
+##Running Synteny Programs  
+According to Liu et al 2018 [@Liu2018] Synchro is the ideal program to run on fragmented genomes BUT it runs on outdated file types that do not seem to exist for my genomes.  
+DAGchainer is the most popular synteny analysis program and performs decently.  
+Another very popular synteny program, MCScanx, performs poorly with fragmented genomes [@Liu2013]  
+
+###Synchro  
+-Do synteny analysis of one genome vs itself as positive control: Aqu A vs Aqu     
+.gbff from Genbank = ".dat" for Synchro   
+f.dat lat file from embl = ".embl" for Synchro    
+Found .dat aka .embl [here] (https://www.ebi.ac.uk/ena/data/view/GCA_000090795.1)  
+Found .gbff aka genbank .dat [here] (ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/090/795/GCA_000090795.1_v1.0)    
+
+genbank: it's possible .dat is outdated. .gbff has replaced .gbk and Synchro. Yeah, even C. elegans gbff doesn't work. 
+Archived [genbank] (ftp://ftp.ncbi.nlm.nih.gov/genomes/archive/old_genbank) and [refseq files] (ftp://ftp.ncbi.nlm.nih.gov/genomes/archive/old_refseq/) scaffolds only, no annotation files - before annotation done?  
+
+**Big wall: Can't find the correct file types**  
+
+
+###DAGchainer (http://dagchainer.sourceforge.net/)  
+Very popular synteny analysis program.     
+**make error:**    
+``  
+g++ -o dagchainer. dagchainer.cpp -Wno-deprecated  
+dagchainer.cpp:10:20: fatal error: stdio.h: No such file or directory  
+ #include  <stdio.h>  
+                    ^  
+compilation terminated.  
+make: *** [dagchainer.] Error 1  
+``  
+
+Current gcc version 4.8.5 20150623 (Red Hat 4.8.5-16) (GCC)
+Initially tried installing older GCC version (try GCC 4.2.3	February 1, 2008, since program last updated 2008) but requires sudo. Don't have permission.
+
+Instead rename deprecated libraries to their new versions
+iostream.h -> iostream
+iomanip.h -> iomanip
+fstream.h -> fstream - pre-standard, fstream exists but not comparable?
+
+[jlm329@farnam2 DAGCHAINER]$ make
+g++ -o dagchainer. dagchainer.cpp -Wno-deprecated
+
+Try example:
+
+bash: ../accessory_scripts/filter_repetitive_matches.pl: /usr/local/bin/perl: bad interpreter: No such file or directory
+Script not pointing to correct perl location.
+Change ``#!/usr/local/bin/perl`` to ``/usr/bin/perl`` in filter_repetitive_matches.pl
+
+Output files already given for examples. Running examples myself seemed to match original output files EXCEPT Tbrucei_vs_Lmajor.match_file.filtered.aligncoords ... Problem?
+
+Couldn't figure out how to produce this file: Tbrucei_vs_Lmajor.match_file.filtered.only_with_synteny or Arabidopsis.Release5.matchList.filtered.aligncoords.2 and unsure whether other files other than ...filtered or ..filtered.aligncoords were also supposed to be output files.
+
+##To do:
+**-Check to see whether genomes assembled via ref to related species -> leads to false synteny due to assumption of shared synteny**  
+
+###Synima  
+Synteny analysis viewer/figure maker. Works on DAGchainer output files.  
+
+**Installs on Farnam**: Problem with setting up env var, need to `export PATH=$PATH:/home/jlm329/eeb723/jlm329/programs/R-3.5.2/bin:/home/jlm329/eeb723/jlm329/programs/blast-2.2.9-amd64-linux` for now. Something with my .bashrc file. Sad.  
+
+*Programs*:  
+- Bio/SeqIO.pm via BioPerl-1.7.5 https://metacpan.org/pod/Bio::SeqIO  
+- Math/Round.pm via Math-Round-0.07 https://metacpan.org/pod/Math::Round  
+- R-3.5.2 - install doesn't work unless:  
+  ./configure  
+  make  
+  make install
+- Java error: Could not allocate metaspace: 1073741824 bytes - Rerun in interactive with 5G memory -&gt; works, but with message: `configure: WARNING: neither inconsolata.sty nor zi4.sty found: PDF vignettes and package manuals will not be rendered optimally`  
+- legacy BLAST: blast-2.2.9-amd64-linux ftp://ftp.ncbi.nlm.nih.gov/blast/executables/legacy.NOTSUPPORTED/2.2.9/  
+
+See exampls on [Synima Readme] (https://github.com/rhysf/Synima)  
+1st example ran successfully  
+Pipeline: 
+2nd command:  problem with BLAST with second command: [blastall] WARNING: [000.000] 7000010424373976: SetUpBlastSearch failed.
+Must set env var `export BLASTMAT=/home/jlm329/eeb723/jlm329/programs/blast-2.2.9-amd64-linux/data`  
+
+
+
+#RAMOS et al. 2012 Approach:  
+There are very few papers that look into synteny of non-bilaterians. The ones that have take a manual approach to synteny analysis, looking only at one or two 'targets' at a time. The paper I am modelling my approach off of is (Ramos et al. 2012)[https://doi.org/10.1016/j.cub.2012.08.023], the original 'ghost locus' paper that examined sponges and placozoans for synteny.  
+
+The paper starts with a list of neighbour genes known to be syntenic with their gene of interest (GOI) in humans. They then classified all genes in their genomes of interest as being orthologous to neighbour genes, orthologous to non-neighbour genes, or species-specific. Then, to identify significant clustering they used the exact binomial test to test whether the observed number of neighbour gene orthologues co-localizing to a scaffold is significantly higher than the expected number. There are additional steps to deal with situations where orthologues are more than just 1:1.  
+
+However for Amphimedon they also (or instead?) did a Monte Carlo simulation, where they simulated the null distribution of neighbour genes in the absence of synteny. I'm not completely sure why they also did this MC, but perhaps because the Amphimedon scaffolds are sub-chromosomal? The p-value for a test of clustering is calculated as the proportion of simulations in which the number of scaffolds occupied by neighbour genes is less than or equal to the actual number observed. This was described in the Ramos supplement, and most of it seems to make sense to me, but not everything. For instance they say that the results are stored in an "amphisimulation" relational database, but what is that?! Google only brings up that paper and 3 random websites.  
+
+There is a link to the scripts but the link is broken...  
+
+Ramos started with a list of neighbour genes; I would need to produce this myself. Can use DAGchainer to define and identify neighbour genes in eg. humans.  
+
+#Robertson et al. 2009  
+https://bmcresnotes.biomedcentral.com/articles/10.1186/1756-0500-2-59  
+-two genes, appear to have been done manually?  
+
+#Irimia et al. 2012 Approach:  
+https://genome.cshlp.org/content/22/12/2356.full  
+"For each pair of neighboring genes in the genome of a given species, we assessed whether the two genes were also tightly genetically linked (with four or fewer intervening genes) in other lineages (see Methods for details). We identified hundreds of pairs in each genome that were conserved across at least four major lineages, ranging from 197 in the tunicate Ciona intestinalis to 842 in the cephalochordate Branchiostoma floridae, and 600 in human (Supplemental Table S1). To test this significance we randomized gene order within each chromosome/scaffold. Across 100 replicates per species, we found an average of 0.015 conserved pairs using the same criteria, a false discovery rate lower than 0.0002 for all species (Supplemental Table S1)."  
+
+
+##Scaffold N50s of genomes    
+Liu et al. 2018 [Liu@2018] says that need N50 of at least 200 kb (w/ gene density 290genes/Mb) or 1Mb (gene densit 200 genes/Mb) for error rate < 5%.  
+
+Listed Scaffold N50s:  
+-Mnemiopsis (from orig @Ryan2013): 187 kb  
+-Pleurobachia (Suppl Table 5S from @Moroz2014): 20.607 kb  
+-Amphimedon orig, [Ensembl (https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Annotation/): 120 kb >> likely improved, looking for Aqu2.1 (or is this only a re-annotation not reassembly?)  
+  - Slightly confused with scaffold N50 stats in @Srivastava2010 suppl Table S2.3.2  
+(Oscarella carmela (Suppl from @Nichols2012): 5.897 kb!!) --> not using, no GFF3 file anyways.  
+
+##Distribution of scaffold lengths  
+Q: Just how badly are my genomes fragmented??  
+A: quite badly.  
+Use seqinr R package.  
+
+```{r distr scaffold length}
+
+
+
+fasta_dir<-"~/Desktop/compgen/repo/ensembl/genome_fasta/"
+fasta<-c("Amphimedon_queenslandica.Aqu1.dna.toplevel.fa","Capitella_teleta.Capitella_teleta_v1.0.dna.toplevel.fa","Drosophila_chr.fa", "Helobdella_robusta.Helro1.dna.toplevel.fa","Lottia_gigantea.Lotgi1.dna.toplevel.fa","Mnemiopsis_leidyi.MneLei_Aug2011.dna.toplevel.fa","Nematostella_vectensis.ASM20922v1.dna.toplevel.fa","Strongylocentrotus_purpuratus.Spur_3.1.dna.toplevel.fa","Taeniopygia_guttata.taeGut3.2.4.dna.toplevel.fa","Trichoplax_adhaerens.ASM15027v1.dna.toplevel.fa")
+
+for (blah in fasta){
+fasta_path<-paste0(fasta_dir,blah)  
+
+#histogram of all contig lengths,
+scaffold.length.plot<-read.fasta(fasta_path)%>%getLength(.)%>%as.data.frame()%>%ggplot()+geom_histogram(aes(x=.), fill="skyblue3", color="black",binwidth=100)+xlab("Scaffold Length (bp)")+ylab("Frequency")+labs(title=blah)
+ggsave(scaffold.length.plot,file=paste0("scaffold.len_",blah,".pdf"))
+
+#histogram of contig lengths, restricted to scaffolds < 10,000 bp
+restricted.plot<-read.fasta(fasta_path)%>%getLength(.)%>%as.data.frame()%>%filter(.<10000)%>%ggplot()+geom_histogram(aes(x=.), fill="skyblue3", color="black",binwidth=100)+xlab("Scaffold Length (bp)")+ylab("Frequency")+labs(title=blah)
+restricted.plot
+ggsave(restricted.plot,file=paste0("scaffold.len_10000bp_",blah,".pdf"))
+
+#stats
+print(blah)
+fasta.len=read.fasta(fasta_path)%>%getLength()
+print(paste("Median scaffold/contig length (bp):",median(as.numeric(fasta.len))))
+print(paste("Max scaffold/contig length (bp):",max(as.numeric(fasta.len))))
+print(paste("Minimum scaffold/contig length (bp):",min(as.numeric(fasta.len))))
+  
+}
+
+
+
+
+
+
+
+
+
+```
+
+#Parse GFF3 files:  
+[How to read a GFF3 file:](https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md)  
+
+R parser:  
+https://www.rdocumentation.org/packages/ape/versions/5.2/topics/read.gff  
+
+-'supercontigs' indicated in gff3 but all seem to be supercontig 1 and actual seq chunks are called contigs. Probably because they needed to enter some kind of value for supercontig. My analyses are at 'contig' level.    
+
+```{r count no genes per contig/scaffold}
+
+#install.packages("ape")
+
+
+gff3_dir<-"data/genomes/gff3/"
+gff3<-c("Amphimedon_queenslandica.Aqu1.42.gff3","Capitella_teleta.Capitella_teleta_v1.0.42.gff3","Danio_rerio.GRCz11.96.chr.gff3","Drosophila_melanogaster.BDGP6.22.96.chr.gff3","Helobdella_robusta.Helro1.42.gff3","Homo_sapiens.GRCh38.96.chr.gff3","Lottia_gigantea.Lotgi1.42.gff3","Mnemiopsis_leidyi.MneLei_Aug2011.42.gff3","Nematostella_vectensis.ASM20922v1.42.gff3","Strongylocentrotus_purpuratus.Spur_3.1.42.gff3","Taeniopygia_guttata.taeGut3.2.4.96.chr.gff3","Trichoplax_adhaerens.ASM15027v1.42.gff3")
+
+for (blah in gff3){
+
+
+gff3_path<-paste0(gff3_dir,blah)
+contig.gene.df <- ape::read.gff(file=gff3_path, GFF3=TRUE) %>% select(.,"seqid","type","start","end") %>% filter(.,type == "gene")
+
+#for histogram, take just the contig names and gene counts
+gene.count<- as.data.frame(table(contig.gene.df$seqid))
+
+#plot frequency of frequencies
+gff3.plot<-ggplot(data = gene.count, aes(x=gene.count$Freq)) + geom_histogram(binwidth=1) + geom_vline(xintercept = 3,color="red")+ggtitle(blah) +xlab("Number of Genes Per Contig")+ylab("Frequency")+labs(title=blah)
+gff3.plot
+ggsave(gff3.plot,file=paste0("gff3_",blah,".pdf"))
+
+#use for custom axes
+#gff3.plot.custom.axes<-ggplot(data = gene.count, aes(x=gene.count$Freq)) + geom_histogram(binwidth=1) + geom_vline(xintercept = 3,color="red") +xlim(0,10)+ylim(0,3000)+xlab("Number of Genes Per Contig")+ylab("Frequency")+labs(title=blah)
+#gff3.plot.custom.axes
+#ggsave(gff3.plot.custom.axes,file=paste0("gff3_customaxes_",blah,".pdf"))
+
+
+#stats
+print(blah)
+print(paste("proportion contigs with gene count >= 3:",nrow(subset(gene.count, gene.count$Freq >= 3))/nrow(gene.count)*100))
+print(paste("Median no. genes/contig:",median(gene.count$Freq)))
+print(paste("Max no. genes/contig:",max(gene.count$Freq))) 
+
+}
+
+
+```
+
+
+
+#Find homologous genes between genomes
+Cannot use previous agalma runs for single cell seq analysis because those were custom fasta files from papers - ie have genes not in genome annotation.  
+
+_Data massaging for agalma:_
+Downloaded all the pep files, preferably from Ensembl.  
+Rename .fa to .fasta (I think agalma had a problem with fa?)  
+Agalma cuts off contig names after first space. But contig names from Ensembl are very informative (eg gene, transcript name, location on chromosome). Replace all spaces with @  (don't use symbols in headers : _- / ; or * which is interpreted by grep...).  
+- regex: find: ; replace: *   
+
+pep file MD5s  on farnam:  MADE NEW Fastas OF ONLY LONGEST PEPS! See below.  
+
+_Run agalma_:   
+Install agalma 2.0 onto farnam. Farnam currently has 1.0.1.  
+Installed Miniconda on Farnam  
+00-catalog script does not like having 'NA' entries - get rid of all flags with NA.   
+Error: ``ImportError: No module named agalma`` - use full path: ``source activate /gpfs/ysm/project/jlm329/conda_envs/agalma``  
+
+Install test ran succssfully.  
+
+modified 00-catalog.sh  
+chose partition 'general' on farnam  
+full path to environment  
+
+#Connect protein IDs from agalma to gene ids  
+Is there only 1 protein per gene? No.  
+``grep "gene:" gff3.gff3|wc -l`` vs. ``grep ">" pep file|wc -l``
+eg. Aqu: 87,490 (gff3) vs 43,615 (pep) = some genes have > 1 protein...
+Is there only 1 protein per transcript? In every file there is the same no. proteins vs transcripts.  
+``grep "transcript:" file.gff|cut -d "@" -f 5|sort|uniq|wc -l`` vs. ``grep ">" file.gff|wc -l`` - tested on sample  
+eg. Aqu: 43,615 vs 43,615
+BUT in Danio, Drosophila, Homo, Taenia peps - transcript and gene ids do not match pep ids in any systematic fashion  
+
+Make names simpler with regex. Format all so that >p:protID:s:scaffoldID:g:geneID:t:transID = delimit by : but also human readable   
+**Be careful of spaces after simplified name!!**
+for ensembl genomes, gene_biotype is in every seq name. But some names have more after, some not, hence "gene_biotyp.*" haha  
+Amphimedon:  
+```>(.*?)@pep@scaffold:Aqu1:(Contig\w+):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+Capitella:   
+```>(.*?)@pep@supercontig:Capitella_teleta_v1.0:(CAPTEscaffold_\w+?):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*?)@.*?$```  
+Danio:   
+```>(.*?)@pep@chromosome:GRCz11:(\w+):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotype.*```  
+Drosophila:  
+```>(.*?)@pep@chromosome:BDGP6:(\w+):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.* ```  
+-_corrected the ~5 that didn't work by hand_  
+Helobdella:   
+```>(.*?)@pep@supercontig:Helro1:(\w+):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+Homo:   
+-need chromosome version AND scaffold version
+```>(.*?)@pep@scaffold:GRCh38:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+```>(.*?)@pep@chromosome:GRCh38:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+Danio:  
+```>(.*?)@pep@chromosome:GRCz11:(\w+):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+```>(.*?)@pep@scaffold:GRCz11:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+Lottia:
+```>(.*?)@pep@supercontig:Lotgi1:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+Mnemiopsis:   
+```>(.*?)@pep@supercontig:MneLei_Aug2011:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+```>(.*?)@pep@chromosome:MneLei_Aug2011:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+Nvec:  
+```>(.*?)@pep@supercontig:ASM20922v1:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+Strongylocentrotus:  
+```>(.*?)@pep@supercontig:Spur_3.1:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+Tae:    
+```>(.*?)@pep@chromosome:taeGut3.2.4:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+Tricho:  
+```>(.*?)@pep@scaffold:ASM15027v1:(.*):\w+?:\w+?:.*?@gene:(.*?)@transcript:(.*)@gene_biotyp.*```  
+Hydra names:  
+
+Sc4wPfr_97.g13.t1  
+Sc4wPfr_97 = scaffold  
+g13 = gene  
+t1 = transcript  
+
+```>(Sc4wPfr_\d+).(g\d+).(t\d+)```  
+made up protein name as Sc4wPfrg13t1.  
+
+For all, replace with: >p:\1:s:\2:g:\3:t:\4  
+
+Renamed all fastas Genus_simple.fasta  
+
+
+Downloading genomes:  
+Aqu, Capitella: there is no primary assembly. chose dna.toplevel.fa
+
+Filter pep files to include only the longest protein per gene.   
+Transdecoder works (only?) on nt files?  
+
+Below code modified from: 
+- user story Jan'9'17 on [Stack Overflow](https://bioinformatics.stackexchange.com/questions/595/how-can-longest-isoforms-per-gene-be-extracted-from-a-fasta-file)   
+-  user nassimhddd (Jul 18 '16) on [Stackoverflow](https://stackoverflow.com/questions/24237399/how-to-select-the-rows-with-maximum-values-in-each-group-with-dplyr)  
+
+
+NOTE: The group_by() doesn't work if the plyr package is loaded, for some reason.  
+
+```{r longest pep only}
+#install bioconductor 3.8 https://www.bioconductor.org/install/  
+#install Biostrings: BiocManager::install("Biostrings", version = "3.8") ; do not update mclust because it will have a warning and then biostrings module not installed.  
+
+#~~~~~ Beginning of 'story''s code.~~~~~
+
+## read your fasta in as Biostrings object
+fasta.s <- readDNAStringSet("./data/sample_data/longest_pep_sample.fasta")
+
+## get the read names (in your case it has the isoform info)
+names.fasta <- names(fasta.s)
+
+## extract only the relevant gene and isoform (JM: aka pep) id (split name by the period symbol)
+#JM: modify line to fit my name format
+gene.iso <- sapply(names.fasta,function(j) cbind(unlist(strsplit(j,'\\:'))[1:8]))
+
+## convert to good data.frame = transpose result from previous step and add relevant column names
+gene.iso.df <- data.frame(t(gene.iso))
+#JM: alter to put your own column names in:
+colnames(gene.iso.df) <- c('p','pepID','s','scaffID','g','geneID','t','transID')
+gene.iso.df<-select(gene.iso.df, geneID, pepID)
+
+## and length of isoforms
+gene.iso.df$width <- width(fasta.s)
+
+#Did not use rest of code.
+
+#~~~~~ End of 'story''s code.~~~~~
+
+#JM:
+gene.iso.df<-rownames_to_column(gene.iso.df)
+
+#~~~~~beginning of code by nassimhddd (Jul 18 '16) Stackoverflow~~~~~
+longest.pep.df <-gene.iso.df%>%dplyr::group_by(geneID)%>%mutate(the_rank = rank(-width,ties.method="random")) %>%filter(the_rank==1)%>%select(-the_rank)
+#~~~~~End of nassimhddd's code.~~~~~
+
+list<-longest.pep.df[,1,drop=FALSE]
+#wait why doesn't col.names=FALSE remove the column name?? Oh well.
+write.csv(list,"longestpep.txt",quote=FALSE,row.names=FALSE)
+```
+
+Notes:  
+
+Check the number of proteins in list of longest pep
+Then check that the R chunk extracted exactly 1 pep per gene by finding the number of uniq genes in pep fasta:  
+```grep ">" Amphimedon_simple.fasta |cut -f 6 -d ":"|sort|uniq|wc -l```  
+Compare to original number pep in pep file.
+
+Animals with > pep vs genes:   
+Danio (30,313 genes vs  52,089 pep)    
+Drosophila (13,931 genes, 30,493 pep)    
+Homo (23,358 gene, 109095 pep)  
+Nematostella (24773 gene vs 24780 pep)    
+Strongylocentrotus (28842 genes, 28886 pep)  
+Taeniopygia (17488 genes, 18204 pep)  
+Hydra (33820 genes, 36059 pep)  
+
+*fasta_puller.py*  
+Python script used to pull out particular fasta sequences from a list of fasta header names. I tried really hard to do this in R but, well...... -_-.         
+Use the list generated from the above chunk with fasta_puller.py to create fastas with only longest pep.    
+
+There are some bugs to smooth out:    
+List of sequence names must be in form of a single column, with no column name and names must match fasta exactly.  
+-must remove rowname from longest pep list by hand    
+-must add '>' to beginning of every fasta name in list  
+fasta_puller.py cycles through the list and compares to every sequences so it is admittedly slow.  
+
+usage: fasta_puller.py <listofseqnames> <fastafile.fasta>    
+
+Double check that the number of sequences pulled out matches number of genes/longest pep list.    
+
+Resulting files after fasta puller: Genus_longestpep.fasta  
+md5:
+7c2ad7bbbb5a5574ce5aee5451ec39ae  Amphimedon_longestpep.fasta
+aef8c9746ef4009ea2e01014c3850ef2  Capitella_longestpep.fasta
+a1c97d211f66b7660c2fb917d567fd37  Danio_longestpep.fasta
+05eee073a820c76803bb08e228a43d1a  Drosophila_longestpep.fasta
+793004cad89e0930bf78d2b7786e3312  Helobdella_longestpep.fasta
+f36e9f9cdfa1f74fedde6d9f48547f2d  Homo_longestpep.fasta
+d59303179be7f87143a9385528a940af  Hydra_longestpep.fasta
+e03f004fa79d98c4ec47eea90b2871ea  Lottia_longestpep.fasta
+309f7a59194c715e7f73d9d3ab6f1168  Mnemiopsis_longestpep.fasta
+24272681d1bed44ac70a53e7a614c036  Nematostella_longestpep.fasta
+a9c5697b4a79c7b8a6350090362bc26c  Strongylocentrotus_longestpep.fasta
+290e6b7501f1c322b3b81c6cf0501f53  Taeniopygia_longestpep.fasta
+bdc7fb0a4c85cfa8a1308a62d747f734  Trichoplax_longestpep.fasta
+
+submit 02 -30750716
+
+Can _really_ see myself having trouble handling Hydra - gff3 file for each scaffold, looks difficult to combine into a gff3. Send in a run with no hydra.  
+submit 02- 30750718
+
+#Parse agalma output  
+-Need the homology ids connected to *gene* id, but proteins were used for agalma analysis.  
+Use Casey's script:  query_homology.sql
+```
+SELECT DISTINCT
+       homology.id          AS homology_id,
+       genes.gene           AS gene,
+       models.catalog_id    AS catalog_id,
+       models.id            AS id,
+       homology_models.homology_id,
+       homology_models.model_id,
+       sequences.model_id,
+       genes.model_id
+FROM agalma_homology        AS homology        JOIN
+     agalma_homology_models AS homology_models JOIN
+     agalma_models          AS models          JOIN
+     agalma_genes           AS genes          JOIN
+     agalma_sequences       AS sequences
+     ON homology.id=homology_models.homology_id AND
+        homology_models.model_id=models.id AND
+        models.id=sequences.model_id AND
+        models.id=genes.model_id
+ORDER BY homology.id ASC;
+```
+To run the database query:
+
+    sqlite3 -csv -header homologs.sqlite < query_homology.sql > homology_results.csv
+
+
+
+#Make a master table  
+
+GFF3 seems to be a flat file designed to have very defined vocabulary, so should make a master table instead of adding to GFF3.
+
+##Clean agalma csv  
+Add headers to agalma csv:  homology_id,gene,catalog_id,id,homology_id,model_id,model_id,model_id    
+
+Turns out I am an idiot and the p:blah:s:blah:g:blah:t:blah I came up with for the agalma protein names - really needed the gene names so that I can join them into the Master table. So just regexed out the gene names. Happily easy to parse because of my naming pattern = compagen_homologs_nohydra_geneNames.csv.  Must also regex Danio and Homo gene names because have an extra .n after gene name not present in gff3s.
+
+```(.*,)p:.*?:s:.*?:g:(.*?):t:.*?(,.*)``` and ```$1$2$3```.  
+
+Get rid of decimal points after gene names:
+Danio:
+(\d+,ENSDARG.*).\d+(,Dre_.*)
+(.*,ENSDARG\d+)\.(,Dre_.*) -> seemed to do the trick better - needed two rounds
+
+Hsap:
+(\d+,ENSG.*?)\.\d+(,Hsa_.*)
+Tgu
+(\d+,ENSTGUG.*?).\d+(,Tgu_.*)
+
+Test the rest: blah\d+\.\d+,blah_id
+Spu: yes but also present in gff3
+
+
+Need to add a column to gff3.table indicate which animal each gene came from (not all scaffold/gene names consistent). Here are the rownumbers for each animal:  
+View(gff3.table) -> filter by each animal and find beginning and end row nums  
+
+Aqu 	1:43615  
+Capt	43616:75790  
+Danio	75791:101396  
+Drosophila	101397:115327  
+Helo	115328:138759  
+Homo	138760:160251  
+Lotgi	160252:183600    
+Mle	(ML) 183601:200159  
+Nve	200160:224932  
+Spu	(SPU) 224933:253919  
+Tae (ENTSGU)	253920:271407  
+Tri	271408:282927  
+
+
+
+
+Note that things like "ncRNA_gene" in gff3 files also have "gene_id=", but in the below R code I filter first by just "gene", which is why grep "gene_id" GFF3.gff3 will bring up more lines than are in my table. Spot checked table - does not appear to have any ncRNA_genes.  
+
+```{r Parse GFF3 and Agalma data}
+
+
+#~~~Create GFF3 Table~~~
+
+#set up empty df to rbind to
+all.df<-data.frame(matrix(ncol=5,nrow=0))
+names<-c("seqid","type","start","end","attributes")
+colnames(all.df)<-names
+
+#set up file names to loop through
+gff3_dir="data/genomes/gff3/"
+gff3=c("Amphimedon_queenslandica.Aqu1.42.gff3","Capitella_teleta.Capitella_teleta_v1.0.42.gff3","Danio_rerio.GRCz11.95.gff3","Drosophila_melanogaster.BDGP6.95.gff3","Helobdella_robusta.Helro1.42.gff3","Homo_sapiens.GRCh38.95.gff3","Lottia_gigantea.Lotgi1.42.gff3","Mnemiopsis_leidyi.MneLei_Aug2011.42.gff3","Nematostella_vectensis.ASM20922v1.42.gff3","Strongylocentrotus_purpuratus.Spur_3.1.42.gff3","Taeniopygia_guttata.taeGut3.2.4.95.gff3","Trichoplax_adhaerens.ASM15027v1.42.gff3")
+
+#read in each gff3 file and extract seqid, type, start, end, attributes. Filter lines by type = gene.
+for (blah in gff3)
+{
+gff3_path<-paste0(gff3_dir,blah)
+contig.gene.df <- ape::read.gff(file=gff3_path, GFF3=TRUE) %>% dplyr::select(.,"seqid","type","start","end","attributes") %>% filter(.,type == "gene")
+all.df<-bind_rows(all.df,contig.gene.df)
+}
+
+#Parse out the gene_id from the attributes 
+all.df$gene<-gsub(".*gene_id=(.*?);.*","\\1",all.df$attributes)
+
+#Construct gff3 table
+gff3.table<-select(all.df,"seqid","start","end","gene")
+
+#add animal IDs to gff3 table
+gff3.table$animal<-c(rep.int("Amphimedon_queenslandica",43615),rep.int("Capitella_telata",32175),rep.int("Danio_rerio",25606),rep.int("Drosophila_melanogaster",13931),rep.int("Helobdella_robusta",23432),rep.int("Homo_sapiens",21492),rep.int("Lottia_gigantea",23349),rep.int("Mnemiopsis_leidyi",16559),rep.int("Nematostella_vectensis",24773),rep.int("Strongylocentrotus_purpuratus",28987),rep.int("Taeniopygia_guttata",17488),rep.int("Trichoplax_adhaerens",11520))
+
+#~~~ GFF3 Table Finished ~~~
+
+
+#Read in agalma homologs csv
+agalma.homologs<-read.csv("agalma/no_hydra_aka_ALL_ANIMALS/compgen_homologs_nohydra_geneNames.csv",header=TRUE,sep=",")
+
+
+
+```
+
+Check no NAs
+absent_genes.csv: cut -f 1 -d "," final.master.table_absentgenes.csv |grep "NA"
+
+#Do the analysis  
+
+```{r cluster}
+#must run previous chunk prior to running this chunk
+gff3.table.save<-gff3.table
+
+#***SUBSAMPLE: choose from which animals you want to cluster scaffolds. Not doing so makes computation impossible on a local machine.
+#filter_target=c("Strongylocentrotus_purpuratus","Homo_sapiens","Danio_rerio")
+filter_target=c("Homo_sapiens","Danio_rerio", "Taeniopygia_guttata")
+gff3.table<-filter(gff3.table, animal==filter_target)
+
+
+#~~~Create contingency.table~~~
+#Make scaffold names unique- join seqid and catalog id
+contingency.table<-inner_join(gff3.table,agalma.homologs)%>%dplyr::select(.,seqid,homology_id,animal)%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%dplyr::select(.,species_scaffold,homology_id)
+#~~~contingency.table compelte~~~
+
+
+#Use contingency.table to make the contingency table
+contingency<-table(contingency.table$species_scaffold,contingency.table$homology_id)%>%as.matrix()
+contingency<-1*(contingency>0)
+#***DOWNSAMPLE contingency table for computation on a local machine.
+contingency<-contingency[sample(1:nrow(contingency),100,replace=FALSE),sample(1:nrow(contingency),100,replace=FALSE)]
+
+
+#distance matrix
+dist.matrix<-daisy(contingency,metric="gower",stand=FALSE)
+
+
+#cluster
+#cross-cluster
+cross.clust<-cc_crossclustering(dist.matrix,out=FALSE)
+clust<-cc_get_cluster(cross.clust)
+#plot w/ tSNE
+#adjust perplexity if get error "perplexity is too large for the number of samples"
+tsne_obj<-Rtsne(dist.matrix,is_distance=TRUE,perplexity=1)
+tsne_data<-tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(cluster=factor(clust))
+tsne_plot<-ggplot(aes(x = X, y = Y), data = tsne_data) + geom_point(aes(color = cluster)) + labs(title="Cross Cluster tSNE")
+tsne_plot
+
+#agglomerative
+ag<-agnes(dist.matrix,diss=TRUE)
+plot(ag,labels=FALSE)
+
+#divisive
+di<-diana(dist.matrix)
+plot(di,labels=FALSE)
+
+#kmeans
+dist.matrix.coerced<-as.matrix(dist.matrix)
+fviz_nbclust(dist.matrix.coerced,kmeans,method="wss")
+
+kmean<-kmeans(dist.matrix,2)
+kclust<-kmean$cluster
+tsne_obj<-Rtsne(dist.matrix,is_distance=TRUE,perplexity=1)
+tsne_data<-tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(cluster=factor(kclust))
+tsn_plot_k<-ggplot(aes(x = X, y = Y), data = tsne_data) + geom_point(aes(color = cluster))+labs(title="Kmeans tSNE")
+tsn_plot_k
+#~~~Clustering complete~~~
+
+
+#~~~Create master.table.~~~
+
+#Put together a scaffold:cluster df
+clust.df<-as.data.frame(clust)
+colnames(clust.df)<-"cluster_id"
+clust.df<-mutate(clust.df,species_scaffold=row.names(contingency))
+
+#note: animals excluded from cluster analysis will of course not have a cluster_id
+master.table<-left_join(gff3.table.save,agalma.homologs)%>%select(.,"seqid","start","end","gene","homology_id","catalog_id","animal")%>%mutate(species_scaffold=str_c(seqid,animal,sep="_"))%>%left_join(.,clust.df,by="species_scaffold")%>%select(.,species_scaffold,start,end,gene,homology_id,animal,cluster_id)
+
+
+
+```
+
+
+Note: nrows in contingency table is much smaller than in contingency.table because the latter lists 1 row for each gene while the former 1 row for each scaffold. Nrow of contingency table will equal number of unique scaffolds among the animals selected.  
+
+NOTE: the number of scaffolds in gff3/fasta for Homo does not match the number in my master.table. Looks like some scaffolds do not have genes, and I only selected scaffolds w/ genes.  
+
+Debug  
+Q: Why does my 100x100 sample never seem to have Strongylo seqs? In contingency.table, there are: 2936 homologs for Hsa, 6209 Dre, 5219 Spu - should have same proportion?  
+-not due to order animals are filtered: `filter_target=c("Strongylocentrotus_purpuratus","Homo_sapiens","Danio_rerio")`  
+-all three present in `contingency` before sampling 100x100
+-BUT in contingeny row names are organized alpha-numerically so Strongylo is always last - > row 100.
+-extending sample() to an index that is > row num of Strongylo leads to inclusion of Strongylo rows....! So sample() only takes the first n rows specified (!).
+-Changing `contingency<-contingency[sample(100),sample(100)]` to `contingency[sample(1:nrow(contingency),100,replace=FALSE),sample(1:nrow(contingency),100,replace=FALSE)]` leads to inclusion of rows and columns > 100, but almost all rows are Strongylo, no rows are Homo! Random chance? Repeated - yes.
+-This is because the number of Strongylo scaffols in contingency before subsetting by far outnumbers Homo/Danio scaffolds:  
+From `View(rownames(contingency))` - Homo + Danio ~123, Strongylo ~2253 - 5% of rows are Homo/Danio.  
+-This means that in real run through of all data, it will be dominated by whatever genomes have more scaffolds - which are lower quality scaffolds    
+-using instead Homo, Danio and Taeniopygia leads to same result as originally. If anything, the cluster 2 big + many small singletons pattern is even more pronounced. But possible now that this pattern only holds for high quality genomes, though it still seems to be a true pattern since null matrix does not match and that used the same sample.  
+-But how do we test this for the other genomes with many more lower quality scaffolds? This will always be a problem because these will always outnumber no. scaffolds in high quality genomes.   
+-next step: test if this pattern holds if there is a more similar proportion of Strongylo:Homo:Danio scaffs  
+
+
+###Other clustering methods:
+https://stats.stackexchange.com/questions/305179/cross-cluster-analysis-of-categorical-data-in-r/305218  
+https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0152333 
+kmed:  
+https://cran.r-project.org/web/packages/kmed/vignettes/kmedoid.html  
+
+for understanding tsne: https://www.youtube.com/watch?v=NEaUSP4YerM  
+
+
+
+# Contingency stats  
+```{r contingency stats}
+# The `Parse GFF3 and Agalma data` chunk and the `cluster` chunk must be run first before this chunk. *Whatever you have set as the contingency table there will be the input for this chunk.*  
+
+#number of scaffolds
+nrow(contingency)
+#number of homologs shared across scaffolds
+ncol(contingency)
+#sums of each column
+colsum<-colSums(contingency)
+#histogram of number of sacffolds occupied per homolog
+hist<-ggplot() + aes(colsum)+geom_histogram(fill="skyblue3",color="black")+xlab("Number of Scaffolds Occupied") + ylab("Count")+ggtitle("Number of Scaffolds Occupied Per Homolog (5taxa)")
+
+#median number of scaffolds occupied
+median(colsum)
+#average number of sacffolds occupied
+mean(colsum)
+#min number of scaffolds occupied
+min(colsum)
+#max number of scaffolds occupied.
+max(colsum)
+```
+
+
+
+
+###Algorithm for finding missing genes between ref vs comparison scaffold:
+**DEPRECATED. Replaced by Tree Approach (next chunk)**
+
+species *scaf* ref <-cluster id ref-> <-cluster id comp-> cluster *scaf* comp <-> compare genes
+go to next species scaf.
+
+each ref scaf -> cluster id
+
+subset by cluster id:
+analysis.table.comparison<-filter(master.table,animal==comparison & cluster_id=="2")
+each comp scaf
+  compare genes
+each comp scaf
+  compare genes
+each comp scaf
+
+next ref scaf....-> cluster id
+
+In data matrix:
+-homology_id = genes
+-cluster = scaffolds
+
+```{r final analysis eval = FALSE}
+reference="Homo_sapiens"
+comparison="Danio_rerio"
+result<-data.frame()
+
+#subset master.table for the reference or comparison animal; remove NAs
+analysis.table.reference<-filter(master.table,animal==reference & !is.na(homology_id))
+analysis.table.comparison<-filter(master.table,animal==comparison & !is.na(homology_id))
+
+
+#remove any genes in the analysis.table.reference that are present only in clades that arose after the comparison clade.
+#get a list of all unique homology_ids in the analysis table
+ref.homolog.list<-unique(analysis.table.reference$homology_id)
+#get species_index of comparison animal
+comp.species.index<-analysis.table.comparison$species_index[1]
+#for each gene in the ref analysis table
+for (h in ref.homolog.list){
+  #select all the rows of that particular genes for all animals (except your comp animal)
+  #for sample data:
+  #check<-filter(sample.table, homology_id==h & animal!=comparison)
+  check<-filter(master.table, homology_id==h & animal!=comparison)
+  
+  #check if any of the species indices in the check table have an index <= comparison index
+  if( any(check$species_index<=comp.species.index)==FALSE){
+    #if so, remove all rows with that gene in the analysis.table.reference
+    analysis.table.reference<-filter(analysis.table.reference,homology_id != h)
+  }
+}
+#list of unique scaffold ids in reference
+ref.scaffold.list<-unique(analysis.table.reference$species_scaffold)
+#for each unique scaffold in the reference table:
+for (r in ref.scaffold.list){
+  #find cluster id for each scaffold
+  reference.table.scaffold<-analysis.table.reference%>%filter(.,species_scaffold==r)
+  ref.cluster_id<-unique(reference.table.scaffold$cluster_id)
+  
+  #find all unique scaffolds in comparison table with that cluster_id
+  comp.scaffold<-analysis.table.comparison%>%filter(.,cluster_id==ref.cluster_id)
+  comp.scaffold<-unique(comp.scaffold$species_scaffold)
+  
+  #for each unique scaffold in comparison table w/ cluster_id
+  for (c in comp.scaffold){
+    #isolate genes from that scaffold and compare to original ref scaffold
+   comp.table.scaffold<-analysis.table.comparison%>%filter(.,species_scaffold==c)
+   comparison_absent<-anti_join(reference.table.scaffold,comp.table.scaffold,by="homology_id")
+   comparison_absent<-mutate(comparison_absent,comp_scaff=c)
+   result<-rbind(result,comparison_absent)
+  }
+  
+  }
+result
+write.csv(result,"result.csv",quote=FALSE,row.names=FALSE)
+```
+
+
+
+QUESTION: Why does some genes show up more than once with different homology ids in the relaxed bit agalma file?
+  -quick glance: doesn't seem to be a problem in any of the other agalma files.
+
+# To get Agalma homologs even if genetree fails:  
+CompGen_relaxedbit/multalign-29/alignments/
+grep ">" CompGen_relaxedbit/multalign-29/alignments/9998.fa = list of all sequences in cluster
+
+
+Trying to get around sparse matrix issue:
+-make a smaller matrix of more closely related animals  
+  -tried Drosophila, Danio, Human but error at homologize step: "main__.select_clusters: no clusters passed the filtering criteria"
+  -5 taxa: Drosophila, Danio, Strongylo, Taeniopgygia, Human: error at genetrees step. Looks like homologize worked - use.
+  
+# Tree approach to absence analysis  
+
+```{r tree}
+#initialize
+mrca.df<-data.frame()
+taxa.list<-NULL
+
+
+#phylogeny
+tree_text = "(Mnemiopsis_leidyi,(Amphimedon_queenslandica,(Trichoplax_adhaerens,(Nematostella_vectensis,((Drosophila_melanogaster,(Lottia_gigantea,(Capitella_telata,Helobdella_robusta))),(Strongylocentrotus_purpuratus,(Danio_rerio,(Homo_sapiens,Taeniopygia_guttata))))))));"
+phy = read.tree(text=tree_text)
+plot(phy)
+
+
+#create a list of unique homology_ids; do not include NAs
+homolog.list<-unique(master.table$homology_id)
+homolog.list<-homolog.list[!is.na(homolog.list)]
+
+
+       
+for (h in homolog.list){
+#1.Find all taxa that possess a particular homology_id. 
+homolog.animals<-master.table%>%filter(.,homology_id == h) %>% select(.,animal)%>%unique()
+
+#2. Find the most recent common ancestor of all those taxa. 
+#If homology_id is possessed by only 1 taxon (eg. shared among paralogs), then skip. By default, there is no opportunity for detecting absence.  
+if (nrow(homolog.animals) == 1){
+  next
+}
+
+if (nrow(homolog.animals) > 1){
+  mrca <-getMRCA(phy,as.character(homolog.animals$animal))
+  bind.df<-cbind(homology_id=h,mrca)
+  mrca.df<-rbind(mrca.df,bind.df)
+}
+
+}
+
+#Add MRCAs to master.table
+new.master.table<-left_join(master.table,mrca.df, by="homology_id")
+
+
+absent.df<-data.frame(h=integer(0),absent.in.taxa=integer(0))
+for (h in mrca.df$homology_id){
+#3. Find all the tips of the last common ancestor.  
+all.tips<-mrca.df$mrca[mrca.df$homology_id==h]%>%descendants(phy,.)
+all.tips<-all.tips[all.tips<=length(phy$tip.label)]
+
+taxa<-new.master.table%>%filter(homology_id==h)%>%select(.,animal)%>%unique()
+
+
+#first find the node number of all animals that taxa with that homology_id
+for (t in taxa$animal){
+  find.taxa<-which(phy$tip.label==t)
+  taxa.list<-append(taxa.list,find.taxa)
+}
+#4. Compare which tips do not possess the homology_id.
+#Where there are no instances in gene loss absent.in.taxa will equal integer(0). Hence need rbind.fill (not rbind) 
+absent.in.taxa<-setdiff(all.tips,taxa.list)
+taxa.list<-NULL
+
+#append to table of homology_id + absent taxa
+combine.df<-cbind(h,absent.in.taxa)%>%as.data.frame()
+absent.df<-rbind.fill(absent.df,combine.df)
+
+
+}
+
+#prep absent.df dataframe
+#remove NAs in 'absent' column - these are homologs not absent in any of the child taxa.
+absent.df<-na.omit(absent.df)
+names(absent.df)<-c("homology_id","absent")
+
+#Create table of scaffold - gene - homology id - taxa homolog is absent in
+absence.results<-left_join(master.table,absent.df,by="homology_id")%>%select(.,species_scaffold,gene,homology_id,absent)%>%na.omit(absent)%>%group_by(homology_id)
+
+write.csv(absence.results,"absence.analysis.results.csv",quote=FALSE,row.names=FALSE)
+
+#Add to master table.  
+new.master.table<-left_join(new.master.table,absent.df)
+```
+
+
+# Test Null Hypothesis  
+
+```{r test null model}
+
+#mixing up the columns or rows will not affect overall clustering pattern (i.e. all clustering)
+#make a data frame with the same proportion of 1's and 0's in random order
+dim(contingency)
+n_entries<-ncol(contingency)*nrow(contingency)
+proportion_1s<-sum(contingency)/n_entries
+proportion_0s<-1-proportion_1s
+
+random.matrix<-c(rep("1",proportion_1s*n_entries),rep("0",proportion_0s*n_entries))%>%sample(.,n_entries)%>%matrix(.,ncol=ncol(contingency),nrow=nrow(contingency))%>%as.data.frame()
+rownames(random.matrix)<-row.names(contingency)
+colnames(random.matrix)<-colnames(contingency)
+
+#cluster
+rand.dist.matrix<-daisy(random.matrix,metric="gower",stand=FALSE)
+
+#cross-clustering
+rand.cross.clust<-cc_crossclustering(rand.dist.matrix,out=FALSE)
+rand.clust<-cc_get_cluster(rand.cross.clust)
+rand.tsne_obj<-Rtsne(rand.dist.matrix,is_distance=TRUE,perplexity=1)
+rand.tsne_data<-rand.tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(rand.cluster=factor(rand.clust))
+rand.tsne_plot<-ggplot(aes(x = X, y = Y), data = rand.tsne_data) + geom_point(aes(color = rand.cluster))
+rand.tsne_plot
+
+#agglomerative
+rand.ag<-agnes(rand.dist.matrix,diss=TRUE)
+plot(rand.ag,labels=FALSE)
+
+#divisive
+rand.di<-diana(rand.dist.matrix)
+plot(rand.di,labels=FALSE)
+
+#kmeans
+rand.dist.matrix.coerced<-as.matrix(rand.dist.matrix)
+fviz_nbclust(rand.dist.matrix.coerced,kmeans,method="wss")
+rand.kmean<-kmeans(rand.dist.matrix,2)
+rand.kclust<-rand.kmean$cluster
+rand.tsne_obj<-Rtsne(rand.dist.matrix,is_distance=TRUE,perplexity=1)
+rand.tsne_data<-rand.tsne_obj$Y%>%data.frame()%>%setNames(c("X","Y"))%>%mutate(rand.cluster=factor(rand.kclust))
+rand.tsne_plot<-ggplot(aes(x = X, y = Y), data = rand.tsne_data) + geom_point(aes(color = rand.cluster))
+rand.tsne_plot
+
+
+
+```
+
+#Cluster troubleshooting
+Data vs Distance matrix vs clustering algorithm
+Data: relaxed bit, 5 taxa
+Clustering algorithm:
+-on 5 taxa, Hsap + Danio
+
+
+
+
+
+
+#FIGURES TO MAKE...soonish hmm   
+Comparison across clades of:  
+-how many genes total? the more the more likely to find syntney
+-median scaffold lengths  
+-median no. genes/contig or proportion of contigs with gene count >= 3  
+
+
+#Data
+
+
+##Genomes 
+###~~Genbank:~~  
+_Decided to go with Ensemblgenome version because Ensembl provides GFF3 files; Genbank only GFF._   
+
+###Ensembl:  
+File types:   
+-toplevel: includes chromosomes, regions not assembled into chromosomes, N padded haplotype/patch regions.  
+-nonchromosomal
+rm: masked  
+sm: soft-masked  
+-chose toplevel, not masked  
+
+Choanos:
+Monosiga
+https://protists.ensembl.org/Monosiga_brevicollis_mx1/Info/Index
+Salpingoeca
+http://protists.ensembl.org/Salpingoeca_rosetta/Info/Index
+
+
+Non-bilaterians:  
+Amphimedon  
+[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/amphimedon_queenslandica)  
+[genome:Aqu1](https://metazoa.ensembl.org/Amphimedon_queenslandica/Info/Index)  
+[genome prots](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/amphimedon_queenslandica/pep/)  
+-note: clicking "Aqu1" leads to an assembly with names that do not match GFF3. Instead click "Download DNA sequence"  
+
+Mnemiopsis  
+[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/mnemiopsis_leidyi)  
+[MneLei_Aug2011 genome FASTA](http://metazoa.ensembl.org/Mnemiopsis_leidyi/Info/Index)  
+[genome prots](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/mnemiopsis_leidyi/pep/)  
+
+Trichoplax adhaerens  
+[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/trichoplax_adhaerens)  
+[ASM15027v1 genome FASTA](https://metazoa.ensembl.org/Trichoplax_adhaerens/Info/Index)   
+[genome prot:](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/trichoplax_adhaerens/pep/)    
+
+
+Hydra vulgaris  
+[GFF3:](https://research.nhgri.nih.gov/hydra/download/?dl=nt)  
+**- gene models separated into separate gff3s for each scaffold (thousands...) >> see how R parses a catted file.**    
+[genome FASTA: Hydra 2.0](https://research.nhgri.nih.gov/hydra/download/?dl=asl)  
+[genome prot](https://research.nhgri.nih.gov/hydra/download/?dl=aa)
+
+Nemtostella  
+[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/nematostella_vectensis)  
+[genome FASTA:](https://metazoa.ensembl.org/Nematostella_vectensis/Info/Index)   
+[genome prot:]  
+   
+
+Deuteros
+Strongylocentrotus purpuratus  
+[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/strongylocentrotus_purpuratus)  
+[genome FASTA: Spur 3.1](https://metazoa.ensembl.org/Strongylocentrotus_purpuratus/Info/Index)  
+[genome pep](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/strongylocentrotus_purpuratus)   
+-according to this (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4489978/) strongylo has most mature draft genome of the echinoderms  
+
+Vertebrates
+Zebrafinch  
+[GFF3](ftp://ftp.ensembl.org/pub/release-95/gff3/taeniopygia_guttata/)  
+[genome FAST:taeGUT3.2.4](https://useast.ensembl.org/Taeniopygia_guttata/Info/Index)   
+[genome pep](ftp://ftp.ensembl.org/pub/release-95/fasta/taeniopygia_guttata/pep/)  
+ 
+
+Homo sapiens
+[GFF3](ftp://ftp.ensembl.org/pub/release-95/gff3/homo_sapiens/)  
+[genome FASTA:GRCh38.p12](https://useast.ensembl.org/Homo_sapiens/Info/Index)  
+[genome pep](ftp://ftp.ensembl.org/pub/release-95/fasta/homo_sapiens/pep/)  
+
+
+Danio rerio (non-euteleost fish)   
+[GFF3](ftp://ftp.ensembl.org/pub/release-95/gff3/danio_rerio/)  
+[genome FASTA:GRCz11 (GCA_000002035.4)](http://useast.ensembl.org/Danio_rerio/Info/Index)  
+[genome pep](ftp://ftp.ensembl.org/pub/release-95/fasta/danio_rerio/pep/)  
+
+
+Ecdysozoa:  
+-Gonzalo's take on current state of Ecdysozoan genomes: https://academic.oup.com/icb/article/57/3/455/4093795#96942899
+Helobdella
+[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/helobdella_robusta)  
+[genome FASTA:Helro1](http://metazoa.ensembl.org/Helobdella_robusta/Info/Index)  
+[genome pep](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/helobdella_robusta/pep/)  
+  
+
+Drosophila
+[GFF3](ftp://ftp.ensembl.org/pub/release-95/gff3/drosophila_melanogaster/)  
+[genome FASTA:BDGP6 (GCA_000001215.4)](https://useast.ensembl.org/Drosophila_melanogaster/Info/Index)  
+[genome pep](ftp://ftp.ensembl.org/pub/release-95/fasta/drosophila_melanogaster/pep/)  
+
+
+
+2 Spiralians:  
+Lottia gigantea and Capitella telata?  see https://www.nature.com/articles/nature11696 sounds like there is comparatively good conservation with some deuterostomes  
+
+Lottia
+http://metazoa.ensembl.org/Capitella_teleta/Info/Index
+[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/lottia_gigantea)  
+[genome FASTA:LotG1](https://metazoa.ensembl.org/Lottia_gigantea/Info/Index)  
+[genome pep](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/lottia_gigantea/pep/)  
+
+Capitella  
+[GFF3](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/gff3/capitella_teleta)    
+[genome FASTA:Capitella_teleta_v1.0](http://metazoa.ensembl.org/Capitella_teleta/Info/Index)   
+[genome pep](ftp://ftp.ensemblgenomes.org/pub/metazoa/release-42/fasta/capitella_teleta/pep/)  
+
+
+
+Warren has a good list of data sources [here](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5534336/)  
+
+##For future analyses (might not get to this for this course)  
+###Neurogenes Table  
+_Table abbreviations_  
+DBH - dopamine-B-hydroxylase  
+DDC - DOPA decarboxylase  
+TH - tyrosine hydroxylase  
+TPH - tryptophan hydroxylase  
+PAH - phenylalanine hydroxylase  
+GAD - glutamate decarboxylase  
+Qdpr -  quinoid dihydropteridine reductase,  
+Slc18A2 = Homo sapiens solute carrier family 18 member 2,  
+Pnmt = phenylethanolamine N-methyltransferase  
+
+Missing domains  
+Piccolo - Pleurobrachia - missing ZF (Moroz et al., 2014)  
+Erbin - Pleurobrachia - missing PDZ (Moroz et al., 2014)  
+
+Species names written to the broadest level - eg. Monosiga brevicollis in Riesgo et al but only Monosiga in Moroz, so put Monosiga only  
+
+Many entries have NA but if combine:  
+Salpingoeca + Monosiga = Choanoflagellida  
+Pleurobrachia + Mnemiopsis = Ctenophora  
+Amphimedon + Oscarella = Porifera  
+Nematostella + Hydra = Cnidaria  
+Get only 4 entries that have an NA.  
+(What about 0/1s (conflicting info?)  >> decided to transform 0/1s into NA
+
+Loss_Status:
+P1C0: present in Porifera, absent in Ctenphora - 6 instances  
+C1P0: present in Ctenophora, absent in Porifera - 3 instances  
+T0: absent in Trichoplax but present in Ctenophora or Porifera - 5 instances  
+
+Second Iteration:  
+-There is only 2 instances where Capsaspora has a 1 while choanoflagellates have 0: GABAR and DDC. Don't use column in second iteration  
+-'Fungi' is very vaguely defined - don't use column in second iteration  
+-Stopped at Delta catenin
+-Make new table where all 0/1s or missing_domains (i.e. not 0,1,NA) into NA  
+
+Via R
+Create a new table where species for Ctenophora, Porifera combined: https://stackoverflow.com/questions/14563531/combine-column-to-remove-nas  
+
+
+
+
+2. Should we be expecting these genes in these animals?  
+Why should they use similar genes?  
+How misguided is this approach? What is the true question implied by this approach?  
+
+
+
+Final notes
+-problem of paralogs: it's possible paralogy will be important in many cases
+  -apr 4 paper never really defined micro vs macro synteny, and the software they used were not designed for microsyteny
+
+
+##References  
