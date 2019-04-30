@@ -82,13 +82,13 @@ Total BUSCO groups searched | 1440 | 1440
 
 I also combined some data on genome size and completeness from Zhao and Schranz (2019) to see how our assembly compares to other angiosperm assemblies. The _P. amilis_ genome is among the highest quality (at least in terms of N50 and BUSCO) of publically available angiosperm genomes.
 
-<img src="https://github.com/isgilman/finalproject/blob/master/Figures/N50.BUSCO.png" align="middle" width="500"/>
+<img src="https://github.com/isgilman/finalproject/blob/master/Figures/N50.BUSCO.png" align="middle" width="1000"/>
 
 _**Genome content**_
 
 After the initial `MAKER` analysis I recovered **23,893 predicted genes** with a mean length of  3,661.38 bp. I estimated the genome to be constituted of ~46% repetitive elements.
 
-<img src="https://github.com/isgilman/finalproject/blob/master/Figures/P_amilis.repeatlandscape.png" align="middle" width="500"/>
+<img src="https://github.com/isgilman/finalproject/blob/master/Figures/P_amilis.repeatlandscape.png" align="middle" width="1000"/>
 
 ## Next steps
 The next computational steps in annotating the _Portulaca amilis_ genome include
