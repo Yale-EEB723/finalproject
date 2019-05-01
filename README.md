@@ -22,7 +22,7 @@ Investigating the presence and diversity of MHC genes required collection of tra
 
 A meaningful understanding of how MHC diversity in cold-adapted Antarctic notothenioids might differ from other temperate or tropical teleosts required collection of additional genomic and/or transcriptomic data. Assembled scaffolds for 10 other teleost species were downloaded from the dryad data repository (see Table 1 for species and accession info). 
 
-Finally, this project required a high-quality notothenioid genome for mapping transcriptomic reads. For this, the Antarctic bullhead notothen (Notothenia coriiceps) genome was obtained from BioProject (Accession No. ). 
+Finally, this project required a high-quality notothenioid genome for mapping transcriptomic reads. For this, the Antarctic bullhead notothen (Notothenia coriiceps) genome was obtained from BioProject (Accession No. PRJNA66471). 
 
 ## Methods
 
@@ -51,7 +51,7 @@ Finally, the evolution of MHC genes in notothenioids will be inferred using phyl
 
 ### Transcriptome Assembly Quality
 
-For each of the 16 notothenioid species included in this analysis, average overall alignment rate of the RNA-seq reads to the reference genome was ~44% and ranged from 20% to 60% (see Table 2 for Transcriptome Assembly stats). 
+For each of the 16 notothenioid species included in this analysis, average overall alignment rate of the RNA-seq reads to the reference genome was ~44% and ranged from 20% to 60% (see Table 2 for Transcriptome Assembly stats). For each species, of the reads that did map to the reference, almost all were aligned to only a single unique region of the genome. The reason for the relatively low rate of alignment of reads to the reference may be a result of the quality of the Notothenia coriiceps genome (see Table 3 for summary statistics). Future work will attempt to use another recently-sequenced genome from the icefish species Chaenocephalus aceratus for genome-guided de novo assembly. 
 
 ### MHC Gene Mining
 
