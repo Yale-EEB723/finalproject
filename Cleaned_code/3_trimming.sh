@@ -1,5 +1,5 @@
 # --- --- --- --- --- --- --- --- --- --- --- ---
-# [D] Trimming with Trimal
+# [3] Trimming with Trimal
 # --- --- --- --- --- --- --- --- --- --- --- ---
 # I tried with gBlock and had troubles, so I went from trimal for trimming
 # conda install -c bioconda gblocks

@@ -1,3 +1,31 @@
+rm(dat)
+setwd('/Users/diegoellis/Downloads/4_Diego/')
+list.files()
+load('10135184_ani.RData')
+ani<- dat
+head(ani)
+load('10135184_locs.RData')
+locs <- ani
+head(sort(ani$local_identifier), 10)
+head((test), 500)
+
+load('10722328_ani.RData')
+ani <- dat
+head(ani)
+load('10722328_locs.RData')
+head(dat)
+
+rm(dat)
+load('id_names.RData')
+test
+head(ani) # local_identifier # tag_local_identifier # tag_id
+head(locs) # tag_id local_identifier 
+head(test)
+head(ani$local_identifier)
+
+
+View(head(locs))
+View(head(ani))
 require(phytools);require(ggtree);require(BiocVersion);require(ape);require(treeio);require(seqinr);require(taxonomizr)
 setwd('/Users/diegoellis/projects/development/Comparative_genomics/finalproject/Data/All_TLR/') 
  
