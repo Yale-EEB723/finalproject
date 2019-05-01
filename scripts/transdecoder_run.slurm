@@ -9,5 +9,50 @@
 #SBATCH -o transdecoder.out
 #SBATCH -e transdecorder.err
 
-python /gpfs/ysm/home/cep4/bin/master/transdecoder_wrapper.py /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Crastrospinosus/Crastro_Trinity-GG.fasta 10 non-stranded .
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.LongOrfs -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Caceratus/Caceratus_Trinity-GG.fasta
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.Predict -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Caceratus/Caceratus_Trinity-GG.fasta
 
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.LongOrfs -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Chamatus/Chamatus_Trinity-GG.fasta
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.Predict -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Chamatus/Chamatus_Trinity-GG.fasta
+
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.LongOrfs -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Crastrospinosus/Crastrospinosus_Trinity-GG.fasta
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.Predict -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Crastrospinosus/Crastrospinosus_Trinity-GG.fasta
+
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.LongOrfs -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Deleginoides/Deleginoides_Trinity-GG.fasta
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.Predict -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Deleginoides/Deleginoides_Trinity-GG.fasta
+
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.LongOrfs -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Emaclovinus/Emaclovinus_Trinity-GG.fasta
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.Predict -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Emaclovinus/Emaclovinus_Trinity-GG.fasta
+
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.LongOrfs -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Gacuticeps/Gacuticeps_Trinity-GG.fasta
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.Predict -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Gacuticeps/Gacuticeps_Trinity-GG.fasta
+
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.LongOrfs -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Hantarcticus/Hantarcticus_Trinity-GG.fasta
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.Predict -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Hantarcticus/Hantarcticus_Trinity-GG.fasta
+
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.LongOrfs -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Lnudifrons/Lnudifrons_Trinity-GG.fasta
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.Predict -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Lnudifrons/Lnudifrons_Trinity-GG.fasta
+
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.LongOrfs -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Ncoriiceps/Ncoriiceps_Trinity-GG.fasta
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.Predict -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Ncoriiceps/Ncoriiceps_Trinity-GG.fasta
+
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.LongOrfs -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Nionah/Nionah_Trinity-GG.fasta
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.Predict -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Nionah/Nionah_Trinity-GG.fasta
+
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.LongOrfs -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Pborchgrevinki/Pborchgrevinki_Trinity-GG.fasta
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.Predict -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Pborchgrevinki/Pborchgrevinki_Trinity-GG.fasta
+
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.LongOrfs -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Pcharcoti/Pcharcoti_Trinity-GG.fasta
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.Predict -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Pcharcoti/Pcharcoti_Trinity-GG.fasta
+
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.LongOrfs -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Pgeorgianus/Pgeorgianus_Trinity-GG.fasta
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.Predict -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Pgeorgianus/Pgeorgianus_Trinity-GG.fasta
+
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.LongOrfs -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Tbernacchii/Tbernacchii_Trinity-GG.fasta
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.Predict -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Tbernacchii/Tbernacchii_Trinity-GG.fasta
+
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.LongOrfs -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Tpennellii/Tpennellii_Trinity-GG.fasta
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.Predict -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Tpennellii/Tpennellii_Trinity-GG.fasta
+
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.LongOrfs -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Dmawsoni/Dmawsoni_Trinity-GG.fasta
+/gpfs/ysm/home/cep4/bin/TransDecoder/TransDecoder.Predict -t /gpfs/ysm/scratch60/cep4/noto_immunity/transcriptomes/transdecoder/Dmawsoni/Dmawsoni_Trinity-GG.fasta
