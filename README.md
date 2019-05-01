@@ -6,6 +6,7 @@ This is a final project for the [Comparative Genomics](https://github.com/Yale-E
 
 ## Background
 The Major Histocompatibility Complex represents a fundamental component of the adaptive immune response in jawed vertebrates, and thus has been very well studied (Kasahara 1999; Neefjies et al. 2011; Parham 2015; Roche and Furuta 2015). MHC class I and class II genes encode cell surface proteins that are capable of binding to both self and non-self peptides and displaying them on the cell surface for inspection by the appropriate T-cells. Specifically, MHC class I molecules are primarily responsible for binding cytosolic antigens acquired in the endoplasmic reticulum and presenting them to CD8+ T cells (Gueguen and Long 1996). In contrast, MHC class II molecules bind antigens that are derived mostly from exogenous material and present them to CD4+ T cells (Gueguen and Long 1996). If a non-self antigen - that is, a peptide derived from a pathogen - is presented to a T cell, the immune response is activated and the infected cell is destroyed. In order to effectively defend against an array of diverse and rapidly-evolving pathogens, host immune genes are also under pressure to rapidly diversify. MHC genes, for instance, exhibit remarkable polymorphism across vertebrate species, thus enabling MHC molecules to bind and present to T cells a vast array of different antigens.  
+
 Comprising over 32,000 species, teleost fishes represent the most species-rich major vertebrate clade and are characterized by a number of interesting innovations in organization, functionality, and diversity of MHC genes. For instance, in all other vertebrate groups that have been studied, MHC I and II loci are found to be clustered in the same chromosomal region, while in teleosts, MHC class I and class II genes are characterized by an unlinked organization, with the two gene subfamilies present on different chromosomes in zebrafish (Danio rerio), stickleback (Gasterosteus aculeatus), the common guppy (Poecilia reticulata), and the cichlid Oreochromis niloticus (Sato et al. 2000, Stet et al. 2003). Furthermore, the number and diversity of functional copies of MHC I and MHC II genes can vary significantly both within and across species. A particularly dramatic modification of MHC gene functionality is observed in the Gadiformes lineage, which includes Atlantic cod. In this teleost clade, a complete loss of the MHC II pathway has been observed, and appears to be coupled with an increase in MHC I copy number and broader functionality of the MHC I pathway. It has been suggested that these significant modifications in features of the adaptive immune system long-thought to be highly conserved across vertebrates may be a result of strong selective pressures associated with specific biological or environmental factors. In the case of these cod-like fishes, it is been hypothesized that evolution of MHC genes has been strongly influenced by adaptation of this lineage to environments characterized by relatively low water temperatures. Indeed, it has been shown previously that low temperatures have been associated with weakening of the adaptive immune response coincident with strengthening of innate immunity. This begs the question: how generalizable is this pattern? Would we expect to see a similar dramatic modification of the adaptive immune response in other cold-adapted lineages? 
 
 The Antarctic notothenioid fishes provide a unique opportunity to study evolution of the MHC system in the coldest ocean waters on our planet. The Antarctic notothenioids are a clade of about 100 morphologically and ecologically diverse species that dominate the species diversity, abundance, and biomass of the Antarctic continental shelf and slope ichthyofauna. Water temperatures in this part of the world can reach as low as -1.86oC, and in order to survive in such extreme conditions, the notothenioids fishes have evolved several key adaptations related to freeze-avoidance and cold-stable biochemical and physiological functions. Among these are evolution of the antifreeze glycoprotein, which inhibits growth of ice crystals in the fishes’ bodily fluids, cold-efficient microtubule assembly, and increased mitochondrial densities. Antarctic notothenioids also exhibit unique features in immune response relative to non-Antarctic species, suggesting that evolution in extreme cold may be accompanied by adaptive changes in immunity. For example, previous study of transcriptomic and genomic evolution in notothenioids revealed duplication and elevated transcription of genes involved in the innate immune response, which is in line with the previously mentioned suggestion that lower water temperatures are associated with strengthening of the innate immune response. Furthermore, Antarctic teleosts have been shown to exhbit unique features of immunoglobulin genes comparted with non-Antarctic species, such as presence of a long hinge peptide. Thus, the Antarctic notothenioids provide an interesting case study for examining evolution of immune-related genes in an extreme environment. 
@@ -24,7 +25,7 @@ Finally, this project required a high-quality notothenioid genome for mapping tr
 
 ## Methods
 
-# Data Processing
+### Data Processing
 
 The raw RNA-seq reads were processed using the transcriptome assembly pipeline described in Yang & Smith 2014, and which can be accessed here. (link to repo). The first step involved using a suite of tools to:
 
@@ -37,21 +38,21 @@ Next, the Notothenia coriiceps genome was used for genome-guided de novo transcr
 
 Finally, for each of the assembled transcripts, candidate protein-coding regions are scored using Transdecoder. Identified candidates are then searched against publicly available proteomes for zebrafish (Danio rerio) and stickleback (Gasterosteus aculeatus) using BLAST+. Candidate ORFs with positive BLAST hits are retained for downstream analyses. 
 
-# MHC Gene Identification
+### MHC Gene Identification
 
 Following Malmstrom et al. 2016, presence of 27 immune-related genes (as well as of 3 "control" genes) was evaluated using query peptide sequences from 10 different model teleost species for blastp searches that applied an e-value threshold of 1e^-5 (see Supplementary Table 1 for list of immune related genes and associated accession numbers for queries - adapted from Supplementary Table 6 from Malmstrom et al. 2016). The identity of positive hits was further assessed by reciprocal BLAST against the UniProtKB protein sequence database. 
 
-# Analyses of MHC Sequences
+### Analyses of MHC Sequences
 
 Finally, the evolution of MHC genes in notothenioids will be inferred using phylogenetic analysis for the top-scoring hits identified for each MHC gene for each notothenioid species. For each gene, a multiple sequence alignment of the top-scoring hits for each notothenioid species as well as selected homologous sequences from 10 other teleost species will be generated using MAFFT. Phylogenetic relationships of the sequences identified as MHC genes will be inferred using a maximum likelihood approach implemented in the program IQTree. 
 
 ## Results (so far)
 
-# Transcriptome Assembly Quality
+### Transcriptome Assembly Quality
 
 For each of the 16 notothenioid species included in this analysis, average overall alignment rate of the RNA-seq reads to the reference genome was ~44% and ranged from 20% to 60% (see Table 2 for Transcriptome Assembly stats). 
 
-# MHC Gene Mining
+### MHC Gene Mining
 
 Ongoing. 
 
