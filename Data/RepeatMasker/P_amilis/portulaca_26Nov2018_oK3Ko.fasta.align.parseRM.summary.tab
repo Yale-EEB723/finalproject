@@ -1,0 +1,60 @@
+#This file gives some summary info about the masking, total, by class and by family
+#(all repeats are detailed in the file ./portulaca_26Nov2018_oK3Ko.fasta.align.parseRM.all-repeats.tab)
+#Overlap or double corresponds to DNA fragments that are masked by several elements.
+#These amounts need to be subtracted in order to get more accurate TE amount.
+#If a .align file was parsed, these amounts will be much higher than for the associated .out
+#Note that overlaps may not be parsed correctly if names are not formatted consistently (Rname#Rclass/Rfam)
+
+#TOTAL:
+#nt_total_in_genome	nt_masked-minus-double	%_masked	FYI:nt_masked_double
+nd	179078598	nd	51366434
+
+#BY CLASS
+#class	nt_masked-minus-double	%_masked	FYI:nt_masked_double
+Retro	12067886	nd	3860771
+LTR	74946410	nd	14787305
+SINE?	71975	nd	6701
+RC	1904242	nd	353313
+nonLTR	623475	nd	129936
+DNA	52524960	nd	9457173
+LINE	24862628	nd	4832340
+SINE	4827179	nd	705870
+Unknown	7249843	nd	1677211
+
+#BY FAMILY
+#family	nt_masked-minus-double	%_masked	FYI:nt_masked_double
+L2	44365	nd	2422
+Copia	14749727	nd	2455789
+hAT-hATm	2310	nd	1710
+PIF-Harbinger	2422325	nd	215594
+tRNA-RTE	703615	nd	115018
+Ginger-1	41374	nd	25382
+hAT	268237	nd	22542
+SINE	3554042	nd	527035
+Gypsy	32656271	nd	7402501
+Cassandra	701301	nd	17987
+TcMar-Stowaway	5880040	nd	971432
+DNA	30747597	nd	6614252
+hAT-Charlie	94703	nd	19391
+hAT-Tip100	295403	nd	13327
+Unknown	7249843	nd	1677211
+L1	10470250	nd	2047404
+R1-LOA	30539	nd	521
+Maverick	238943	nd	63407
+Caulimovirus	260932	nd	2523
+Retro	12067886	nd	3860771
+nonLTR	623475	nd	129936
+R2-NeSL	193539	nd	62242
+hAT-Ac	7102628	nd	833538
+RTE-BovB	4446960	nd	715311
+CMC-EnSpm	2625491	nd	379966
+LINE	9627826	nd	1993753
+TcMar-Pogo	197531	nd	9069
+hAT-Tag1	531827	nd	37982
+Pao	225653	nd	50072
+Helitron	1904242	nd	353313
+LTR	26352526	nd	4858433
+SINE?	71975	nd	6701
+MULE-MuDR	2076551	nd	249581
+Penelope	49149	nd	10687
+tRNA	569522	nd	63817

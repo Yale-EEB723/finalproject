@@ -1,0 +1,753 @@
+# nhmmer :: search a DNA model or alignment against a DNA database
+# HMMER 3.1b2 (February 2015); http://hmmer.org/
+# Copyright (C) 2015 Howard Hughes Medical Institute.
+# Freely distributed under the GNU General Public License (GPLv3).
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# query file:                      ppc1E1.hmm
+# target sequence database:        ../Data/portulaca_26Nov2018_oK3Ko.fixed.fasta
+# output directed to file:         ppc1E1.nhmmer.log
+# MSA of all hits saved to file:   ppc1E1.nhmmer.fasta
+# hits tabular output:             ppc1E1.nhmmer.tbl
+# number of worker threads:        20
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Query:       Moore2018_ppc1E1  [M=1575]
+Scores for complete hits:
+    E-value  score  bias  Sequence         start      end  Description
+    ------- ------ -----  --------         -----    -----  -----------
+     2e-271  908.2   2.2  Scaffold_4051 25432831 25431908  
+   3.3e-254  851.2   6.4  Scaffold_2366 34168050 34168973  
+   3.6e-120  407.2  12.8  Scaffold_2993 30561859 30562342  
+   1.8e-113  385.0   4.5  Scaffold_2993 30561016 30561468  
+   2.3e-112  381.4   3.6  Scaffold_1695  7132021  7131574  
+   1.3e-103  352.4   3.2  Scaffold_4051 25430578 25430185  
+    6.6e-98  333.5   3.6  Scaffold_2993 30563020 30563427  
+    1.4e-97  332.4   4.9  Scaffold_1695  7131348  7130981  
+    3.3e-91  311.3   2.8  Scaffold_1695  7130313  7129918  
+    1.8e-89  305.5   3.4  Scaffold_2366 34169476 34169868  
+    2.1e-56  196.0   0.5  Scaffold_4051 25429733 25429455  
+    5.4e-54  188.0   2.3  Scaffold_1695 28272928 28272163  
+    6.8e-52  181.1   0.7  Scaffold_2366 34169963 34170244  
+    5.2e-50  174.9   4.1  Scaffold_1695  7128984  7128689  
+    4.7e-47  165.0   3.1  Scaffold_2993 30565253 30565523  
+    1.3e-32  117.2   3.9  Scaffold_1695 28274334 28274127  
+    5.4e-13   52.2   4.1  Scaffold_1695 28275858 28275708  
+  ------ inclusion threshold ------
+       0.15   14.3   3.8  Scaffold_1695 28274719 28274589  
+       0.34   13.1   1.8  Scaffold_2366  4965024  4965152  
+       0.46   12.7   2.1  Scaffold_1695 28275610 28275525  
+        1.6   11.0   0.0  Scaffold_2225 37757920 37758033  
+        2.5   10.3   2.3  Scaffold_2366  4919761  4919887  
+
+
+Annotation for each hit  (and alignments):
+>> Scaffold_4051  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ !  908.2   2.2    2e-271         1       924 [.  25432831  25431908 ..  25432831  25431897 ..  45200182    0.99
+
+  Alignment:
+  score: 908.2 bits
+  Moore2018_ppc1E1        1 gatttcatgcgacaagtttccacttttgggctttgtcttgtgaggcttgatattaggcaagaatcagataggcacactgatgt 83      
+                            ga ttcatgcgacaagt +c ac tttgggct tgtcttgtgaggcttgatat+aggca gaatcaga aggca+ac gatgt
+     Scaffold_4051 25432831 GACTTCATGCGACAAGTCACAACGTTTGGGCTGTGTCTTGTGAGGCTTGATATAAGGCAGGAATCAGACAGGCATACCGATGT 25432749
+                            5789******************************************************************************* PP
+
+  Moore2018_ppc1E1       84 gatggatgccattactaggcatctggagattgggtcctaccgagaatggtcagaagagaagagacaggaatggctcttatctg 166     
+                             +tggat ccattactaggcatct gagattgggtc ta+cgagaatggtcaga+gagaagagacaggaatggctcttatc g
+     Scaffold_4051 25432748 CCTGGATTCCATTACTAGGCATCTTGAGATTGGGTCGTATCGAGAATGGTCAGAGGAGAAGAGACAGGAATGGCTCTTATCCG 25432666
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      167 agcttaggggcaagcgccctttgtttggcgctgatctccccaaaactgaagaaattgctgatgttttggacacatttcatgta 249     
+                            agct aggggcaa+cg+cct t  ttgg  c+gatctccccaaaactg  gaa+ttgc gatgttttgga acatt+catg a
+     Scaffold_4051 25432665 AGCTAAGGGGCAAACGTCCTCTAATTGGGACCGATCTCCCCAAAACTGTGGAAGTTGCAGATGTTTTGGATACATTCCATGCA 25432583
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      250 atctcagaactcccatcagatagttttggtgcatacatcatctccatggctactgccccttctgatgtgcttgctgttgagct 332     
+                            atctcaga+ct cca+cagata+ttttgg+gcatacatcatctccatggc actgccccttc gatgtgcttgctgttgagct
+     Scaffold_4051 25432582 ATCTCAGAGCTTCCACCAGATAATTTTGGGGCATACATCATCTCCATGGCAACTGCCCCTTCGGATGTGCTTGCTGTTGAGCT 25432500
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      333 tctgcaacgtgaatgccgtattaagaatccattgagggttgtcccattgtttgagaagcttgctgacctggaggctgctcctg 415     
+                            tct ca+cgtgaatgccg attaagaa ccattgagggt gt cc+ttgtt+gagaagct gctgac+tggaggctgctcct 
+     Scaffold_4051 25432499 TCTCCAGCGTGAATGCCGAATTAAGAACCCATTGAGGGTGGTTCCTTTGTTCGAGAAGCTAGCTGACTTGGAGGCTGCTCCTT 25432417
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      416 ctgccatggcccgcctattctctatagattggtacaaaaataggattaatgggaagcaagaagtcatgattggatactctgat 498     
+                            ctgccatggcccgcctattctctataga+tggta aaa a aggatt a ggga gcaagaagt atgat ggatactc gat
+     Scaffold_4051 25432416 CTGCCATGGCCCGCCTATTCTCTATAGACTGGTATAAACAAAGGATTCAAGGGAGGCAAGAAGTGATGATAGGATACTCAGAT 25432334
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      499 tctggtaaggatgctggtcgtctctcagctgcttggcaactgtacaaggttcaggaggagctagtaaaggttgctaagcaatt 581     
+                            tctggtaa gatgctggtcg ctctcagc gcttggcaact+t caaggt caggaggagct+gt aaggttgc+aag+a tt
+     Scaffold_4051 25432333 TCTGGTAAAGATGCTGGTCGCCTCTCAGCAGCTTGGCAACTCTTCAAGGTGCAGGAGGAGCTGGTCAAGGTTGCCAAGGAGTT 25432251
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      582 tggggtgaagcttacaatgtttcatgggcgaggagggactgtaggaagaggagggggccccactcatcttgccattttgtctc 664     
+                            tgg  t aagcttacaatgtt+catgg+cgagg gggactgt ggaagagg ggggg+cc  ctcatcttgccatt t tctc
+     Scaffold_4051 25432250 TGGCATCAAGCTTACAATGTTCCATGGACGAGGGGGGACTGTTGGAAGAGGTGGGGGTCCTGCTCATCTTGCCATTCTATCTC 25432168
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      665 agccacctgacactatcaatggatcacttcgtgttacagtacaaggtgaagtaattgaacagtcctttggagaggagcatttg 747     
+                            agccacc +acactatcaatgg+tc cttcg gttaca+tacaaggtgaagt attgaa agtcctttggagaggagcatttg
+     Scaffold_4051 25432167 AGCCACCGAACACTATCAATGGGTCTCTTCGCGTTACAATACAAGGTGAAGTTATTGAAAAGTCCTTTGGAGAGGAGCATTTG 25432085
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      748 tgttttaggacactacagaggtacacagctgctacacttgagcatgggatgcatccacctatctctcctaagccagaatggcg 830     
+                            tgttttaggac ct ca aggtacacagctgctac cttgagcatgg  tgca+ccacc+a ctctcctaagcc gaatggcg
+     Scaffold_4051 25432084 TGTTTTAGGACCCTTCAAAGGTACACAGCTGCTACCCTTGAGCATGGCCTGCACCCACCCAACTCTCCTAAGCCTGAATGGCG 25432002
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      831 tgctctgttggatgagatggctgttgttgccacaaaggagtaccgctctgttgtttttgaagagcctcgatttgtcgagtact 913     
+                             g tct+ttggatga atggct ttgt gccac+aa gagtac gctct+ tgtttt g+a a+cctc att gtc+a tact
+     Scaffold_4051 25432001 AGTTCTCTTGGATGACATGGCTATTGTCGCCACTAAAGAGTACTGCTCTAATGTTTTCGGAAATCCTCAATTCGTCAACTACT 25431919
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      914 tccgcctggca 924     
+                            t+c  ct g a
+     Scaffold_4051 25431918 TTCATCTCGTA 25431908
+                            *9988776655 PP
+
+>> Scaffold_2366  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ !  851.2   6.4  3.3e-254         1       924 [.  34168050  34168973 ..  34168050  34168980 ..  41005119    1.00
+
+  Alignment:
+  score: 851.2 bits
+  Moore2018_ppc1E1        1 gatttcatgcgacaagtttccacttttgggctttgtcttgtgaggcttgatattaggcaagaatcagataggcacactgatgt 83      
+                            ga ttcatg+gacaagtttccac tt gg ct t+ cttgtgaggct ga at+ g caagaatc gat g cacac gatgt
+     Scaffold_2366 34168050 GACTTCATGAGACAAGTTTCCACCTTCGGTCTGTCCCTTGTGAGGCTGGACATCCGCCAAGAATCGGATCGCCACACGGATGT 34168132
+                            5789******************************************************************************* PP
+
+  Moore2018_ppc1E1       84 gatggatgccattactaggcatctggagattgggtcctaccgagaatggtcagaagagaagagacaggaatggctcttatctg 166     
+                             atggatgccat ac  +gca++tggagat gg tcctac+ agaatggtcagaagagaagagacagga tggctc t+tctg
+     Scaffold_2366 34168133 CATGGATGCCATCACACAGCACTTGGAGATCGGCTCCTACAAAGAATGGTCAGAAGAGAAGAGACAGGAGTGGCTCCTGTCTG 34168215
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      167 agcttaggggcaagcgccctttgtttggcgctgatctccccaaaactgaagaaattgctgatgttttggacacatttcatgta 249     
+                            a+ct ag ggcaa+cg+cc  tgtttgg+ c+ga ctccccaa ac+ga ga attgc gatgt +tggacac tt+ca gt 
+     Scaffold_2366 34168216 AACTGAGTGGCAAACGTCCCCTGTTTGGTCCCGACCTCCCCAAGACCGAGGAGATTGCCGATGTCCTGGACACTTTCCACGTC 34168298
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      250 atctcagaactcccatcagatagttttggtgcatacatcatctccatggctactgccccttctgatgtgcttgctgttgagct 332     
+                            at  c+ga+ctccc tcaga+ g tttgg gc tacatcatctccatggc ac gc cc tctgatgt ct gc gt gagct
+     Scaffold_2366 34168299 ATTGCGGAGCTCCCCTCAGACTGCTTTGGAGCTTACATCATCTCCATGGCAACAGCTCCCTCTGATGTCCTCGCAGTCGAGCT 34168381
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      333 tctgcaacgtgaatgccgtattaagaatccattgagggttgtcccattgtttgagaagcttgctgacctggaggctgctcctg 415     
+                            tct ca+cg ga tgcc+t t   ga  cc ttgagggt gtccc  tgtttgagaagcttgctgacctgga gctgc cc g
+     Scaffold_2366 34168382 TCTCCAGCGCGAGTGCCATGTGCGGACCCCGTTGAGGGTGGTCCCGCTGTTTGAGAAGCTTGCTGACCTGGAAGCTGCCCCAG 34168464
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      416 ctgccatggcccgcctattctctatagattggtacaaaaataggattaatgggaagcaagaagtcatgattggatactctgat 498     
+                            ctgc  tggcccgcct ttctc ataga tggtacaaaaa+ ggat+aa ggga gca gaagt atgattgg+tactc ga 
+     Scaffold_2366 34168465 CTGCGGTGGCCCGCCTCTTCTCGATAGACTGGTACAAAAACCGGATCAACGGGAGGCAGGAAGTTATGATTGGGTACTCAGAC 34168547
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      499 tctggtaaggatgctggtcgtctctcagctgcttggcaactgtacaaggttcaggaggagctagtaaaggttgctaagcaatt 581     
+                            tctgg aaggatgctgg  g ctctc+gctgc tgg   +tgtacaagg+ ca+gaggagct+gt aaggtt ctaagcaat+
+     Scaffold_2366 34168548 TCTGGGAAGGATGCTGGGAGGCTCTCTGCTGCCTGGGCCTTGTACAAGGCACAAGAGGAGCTTGTGAAGGTTTCTAAGCAATA 34168630
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      582 tggggtgaagcttacaatgtttcatgggcgaggagggactgtaggaagaggagggggccccactcatcttgccattttgtctc 664     
+                             ggggt aag t ac atgtt ca+gg cg gg+gggac+gt ggaagaggagg gg cccac+cat t gc+attttgtc c
+     Scaffold_2366 34168631 CGGGGTCAAGTTGACCATGTTCCACGGTCGTGGTGGGACCGTGGGAAGAGGAGGCGGACCCACCCATTTGGCTATTTTGTCCC 34168713
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      665 agccacctgacactatcaatggatcacttcgtgttacagtacaaggtgaagtaattgaacagtcctttggagaggagcatttg 747     
+                            agcc cc+ga ac atcaa gg+tc cttcgtgt+ac+gt+ca ggtgaagt attgaacagtc tttggagaggagca+ttg
+     Scaffold_2366 34168714 AGCCGCCAGAAACCATCAACGGGTCGCTTCGTGTCACTGTTCAGGGTGAAGTCATTGAACAGTCATTTGGAGAGGAGCACTTG 34168796
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      748 tgttttaggacactacagaggtacacagctgctacacttgagcatgggatgcatccacctatctctcctaagccagaatggcg 830     
+                            tgttt+aggac ct cagaggt  acagctgc acacttgagcatgg atgca+ccacc+  ctc+cc aa cc gaatggcg
+     Scaffold_2366 34168797 TGTTTCAGGACTCTGCAGAGGTTTACAGCTGCCACACTTGAGCATGGTATGCACCCACCACCCTCACCCAAACCCGAATGGCG 34168879
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      831 tgctctgttggatgagatggctgttgttgccacaaaggagtaccgctctgttgtttttgaagagcctcgatttgtcgagtact 913     
+                             gc ct ttgga gagatggctgt  t gccac++a g  taccg tc++t gtttt +aagagcctcgatttgt+ga ta+t
+     Scaffold_2366 34168880 GGCACTATTGGACGAGATGGCTGTGATCGCCACTGAAGCTTACCGGTCCATAGTTTTCAAAGAGCCTCGATTTGTTGAATATT 34168962
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      914 tccgcctggca 924     
+                            tccgcctgg  
+     Scaffold_2366 34168963 TCCGCCTGGTT 34168973
+                            ******88765 PP
+
+>> Scaffold_2993  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ !  407.2  12.8  3.6e-120       442       925 ..  30561859  30562342 ..  30561843  30562352 ..  42597560    0.98
+
+  Alignment:
+  score: 407.2 bits
+  Moore2018_ppc1E1      442 gattggtacaaaaataggattaatgggaagcaagaagtcatgattggatactctgattctggtaaggatgctggtcgtctctc 524     
+                             a+ ggtac a  a+a+gat+ a gggaagcaaga gt atgattggatactc ga+tctgg aaggat+  gg cg ctctc
+     Scaffold_2993 30561859 AACAGGTACTATGACAAGATCCAGGGGAAGCAAGAGGTAATGATTGGATACTCAGACTCTGGCAAGGATTGCGGGCGGCTCTC 30561941
+                            47789****************************************************************************** PP
+
+  Moore2018_ppc1E1      525 agctgcttggcaactgtacaaggttcaggaggagctagtaaaggttgctaagcaatttggggtgaagcttacaatgtttcatg 607     
+                            +gc gc+tggcaact tacaaggt+caggagga ct g+   ggt gc a gca tt+ggggtgaa ct acaatgtt+catg
+     Scaffold_2993 30561942 TGCGGCATGGCAACTTTACAAGGTCCAGGAGGAACTGGCGGTGGTGGCGAGGCAGTTCGGGGTGAAACTGACAATGTTCCATG 30562024
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      608 ggcgaggagggactgtaggaagaggagggggccccactcatcttgccattttgtctcagccacctgacactatcaatggatca 690     
+                            ggcgagg gggac+gt+gg ag gg gg ggccccac catct +cc+t ttg+ctca+cc cc +acac+atcaa+ggatc 
+     Scaffold_2993 30562025 GGCGAGGGGGGACCGTTGGGAGGGGCGGCGGCCCCACGCATCTAACCCTGTTGACTCAACCGCCGAACACCATCAACGGATCG 30562107
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      691 cttcgtgttacagtacaaggtgaagtaattgaacagtcctttggagaggagcatttgtgttttaggacactacagaggtacac 773     
+                            ct  g gt acagt ca ggtgaagt attga+cagtc tttg +gagga cat t tgttttaggacacta agaggta ac
+     Scaffold_2993 30562108 CTGAGGGTGACAGTGCAGGGTGAAGTGATTGAGCAGTCATTTGCGGAGGAACATGTCTGTTTTAGGACACTAGAGAGGTATAC 30562190
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      774 agctgctacacttgagcatgggatgcatccacctatctctcctaagccagaatggcgtgctctgttggatgagatggctgttg 856     
+                             gc gctac cttg+gcatgggat   tcc+ c    tc cc  +gcc ga tggcg g tct ttggat agatggc gt g
+     Scaffold_2993 30562191 GGCCGCTACGCTTGTGCATGGGATATGTCCTACGGCATCGCCGTTGCCGGAGTGGCGAGTTCTATTGGATCAGATGGCGGTGG 30562273
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      857 ttgccacaaaggagtaccgctctgttgtttttgaagagcctcgatttgtcgagtacttccgcctggcaa 925     
+                             tgccac  aggagtaccgctc gttgtttttga ga cctcg tttgtc+agtacttccgcct+g aa
+     Scaffold_2993 30562274 CTGCCACGGAGGAGTACCGCTCGGTTGTTTTTGACGACCCTCGGTTTGTCAAGTACTTCCGCCTTGTAA 30562342
+                            ***************************************************************988765 PP
+
+>> Scaffold_2993  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ !  385.0   4.5  1.8e-113         1       453 [.  30561016  30561468 ..  30561016  30561486 ..  42597560    0.99
+
+  Alignment:
+  score: 385.0 bits
+  Moore2018_ppc1E1        1 gatttcatgcgacaagtttccacttttgggctttgtcttgtgaggcttgatattaggcaagaatcagataggcacactgatgt 83      
+                            gatttcatgcgacaagt +ccac tttgg ctttgtct+  ga gct ga at aggcaagaatc+ga ag cacactga g 
+     Scaffold_2993 30561016 GATTTCATGCGACAAGTCACCACCTTTGGTCTTTGTCTCACGAAGCTCGACATAAGGCAAGAATCTGAAAGACACACTGACGC 30561098
+                            699******************************************************************************** PP
+
+  Moore2018_ppc1E1       84 gatggatgccattactaggcatctggagattgggtcctaccgagaatggtcagaagagaagagacaggaatggctcttatctg 166     
+                            g t ga gccat act   +a+ct+gagattgg tcctaccg gaatggtc ga+gagaagagacaggaatgg t  ta c g
+     Scaffold_2993 30561099 GCTAGACGCCATCACTCAATACCTTGAGATTGGATCCTACCGCGAATGGTCTGAGGAGAAGAGACAGGAATGGTTGCTAACCG 30561181
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      167 agcttaggggcaagcgccctttgtttggcgctgatctccccaaaactgaagaaattgctgatgttttggacacatttcatgta 249     
+                            a ct a+ +gcaa+cgccct tgtt gg+gct atctccccaaaac  aagaa+t gctga gt  t gacacatt+c+   a
+     Scaffold_2993 30561182 AACTCAACAGCAAACGCCCTCTGTTCGGTGCTAATCTCCCCAAAACAAAAGAAGTCGCTGAAGTGCTTGACACATTCCGCACA 30561264
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      250 atctcagaactcccatcagatagttttggtgcatacatcatctccatggctactgccccttctgatgtgcttgctgttgagct 332     
+                            atc+c+ga+ctccca c ga+agttt gg gc tacatcatctc atggc ac gccccttc+ga gt ct gc gt gagct
+     Scaffold_2993 30561265 ATCGCGGAGCTCCCACCGGACAGTTTCGGCGCCTACATCATCTCAATGGCGACCGCCCCTTCGGACGTCCTCGCAGTCGAGCT 30561347
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      333 tctgcaacgtgaatgccgtattaagaatccattgagggttgtcccattgtttgagaagcttgctgacctggaggctgctcctg 415     
+                             ctgcaacg gaatg+cgt+ttaagaatcca tgagggt gtcccattgtt gagaagct  c ga+ctgga gc gc cc  
+     Scaffold_2993 30561348 CCTGCAACGAGAATGTCGTGTTAAGAATCCAATGAGGGTGGTCCCATTGTTCGAGAAGCTCACCGATCTGGAAGCGGCCCCCA 30561430
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1      416 ctgccatggcccgcctattctctatagattggtacaaa 453     
+                            c gccatg cccgcct+ttctctata a tggta  + 
+     Scaffold_2993 30561431 CCGCCATGTCCCGCCTTTTCTCTATAAAATGGTATTGT 30561468
+                            *********************************98765 PP
+
+>> Scaffold_1695  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ !  381.4   3.6  2.3e-112       123       570 ..   7132021   7131574 ..   7132026   7131554 ..  44979772    0.98
+
+  Alignment:
+  score: 381.4 bits
+  Moore2018_ppc1E1     123 ccgagaatggtcagaagagaagagacaggaatggctcttatctgagcttaggggcaagcgccctttgtttggcgctgatctcccc 207    
+                           ccgagaatggtc ga gag agag+ca+gaatggct+ tatctgagct  ggggcaag g cc ttgtt     c+ga ctcccc
+     Scaffold_1695 7132021 CCGAGAATGGTCTGAGGAGGAGAGGCAAGAATGGCTTCTATCTGAGCTCCGGGGCAAGAGGCCCTTGTTACCACCCGACCTCCCC 7131937
+                           6899********************************************************************************* PP
+
+  Moore2018_ppc1E1     208 aaaactgaagaaattgctgatgttttggacacatttcatgtaatctcagaactcccatcagatagttttggtgcatacatcatct 292    
+                           aaaactga ga attgctgatgt ttgg   catt  a gt atc caga+ctcccatcaga+ag tttggt cata atcatct
+     Scaffold_1695 7131936 AAAACTGAGGAGATTGCTGATGTATTGGGAGCATTGGAGGTCATCGCAGAGCTCCCATCAGACAGCTTTGGTCCATATATCATCT 7131852
+                           ************************************************************************************* PP
+
+  Moore2018_ppc1E1     293 ccatggctactgccccttctgatgtgcttgctgttgagcttctgcaacgtgaatgccgtattaagaatccattgagggttgtccc 377    
+                           ccatggctactgc cc tctgatgt ct gctgt gagct  tgca cg ga tgcc+tat aag a cc  tgagggt gtccc
+     Scaffold_1695 7131851 CCATGGCTACTGCTCCATCTGATGTCCTCGCTGTCGAGCTCTTGCAGCGCGAGTGCCATATAAAGGAGCCGCTGAGGGTGGTCCC 7131767
+                           ************************************************************************************* PP
+
+  Moore2018_ppc1E1     378 attgtttgagaagcttgctgacctggaggctgctcctgctgccatggcccgcctattctctatagattggtacaaaaataggatt 462    
+                             t tttgagaagctt   gacctg ag  tgc cc gc +ccatg c  g ct ttctct t ga tggtac +a+a+aggat+
+     Scaffold_1695 7131766 GCTCTTTGAGAAGCTTAAAGACCTGCAGAATGCCCCCGCCTCCATGACAAGGCTCTTCTCTGTCGACTGGTACCGAGACAGGATC 7131682
+                           ************************************************************************************* PP
+
+  Moore2018_ppc1E1     463 aatgggaagcaagaagtcatgattggatactctgattctggtaaggatgctggtcgtctctcagctgcttggcaactgtacaagg 547    
+                           aa gggaagca ga gtcatgat gg+tactc ga+tc gg aagga gctgg cgtct+tc+gctgcttggca ctgtacaa g
+     Scaffold_1695 7131681 AAGGGGAAGCAGGAGGTCATGATCGGGTACTCGGACTCCGGGAAGGACGCTGGGCGTCTTTCTGCTGCTTGGCATCTGTACAAAG 7131597
+                           ************************************************************************************* PP
+
+  Moore2018_ppc1E1     548 ttcaggaggagctagtaaaggtt 570    
+                           +tcaggaggagct +ta aggt 
+     Scaffold_1695 7131596 CTCAGGAGGAGCTCATACAGGTA 7131574
+                           *****************999975 PP
+
+>> Scaffold_4051  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ !  352.4   3.2  1.3e-103       918      1311 ..  25430578  25430185 ..  25430598  25430165 ..  45200182    0.97
+
+  Alignment:
+  score: 352.4 bits
+  Moore2018_ppc1E1      918 cctggcaacaccagagacggagtatggacgtatgaacattgggagtcgtccagcaaagagaaagccaagtggtggaattgaat 1000    
+                             c ggcaacacc g gac gagtatgg cg +t aacattgggagtcgtccagcaaagagaaagccaagtgg+ggaattgaa 
+     Scaffold_4051 25430578 GCAGGCAACACCGGTGACTGAGTATGGCCGGCTAAACATTGGGAGTCGTCCAGCAAAGAGAAAGCCAAGTGGAGGAATTGAAA 25430496
+                            34599****************************************************************************** PP
+
+  Moore2018_ppc1E1     1001 ctctccgtgcaattccttggatctttgcatggactcaaacaaggttccatctccctgtgtggctgggctttggtgcagcattt 1083    
+                            c+ct cgtgcaattcc tggat tt gcatggactcaaac+ag ttccatctccc gtgtggct gg tttggtgcagc ttt
+     Scaffold_4051 25430495 CACTGCGTGCAATTCCATGGATTTTCGCATGGACTCAAACCAGATTCCATCTCCCAGTGTGGCTAGGATTTGGTGCAGCGTTT 25430413
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1     1084 aaatatgctattgagaaagatacaaggaatcttaacatgcttaaggagatgtacaatatgtggcctttcttcagggtgaccat 1166    
+                            aa+tatgct ttga aaaga++caaggaatcttaacatgctta+ggagatgtacaa+atgtggcctttcttcag+gtgac  t
+     Scaffold_4051 25430412 AAGTATGCTGTTGACAAAGACCCAAGGAATCTTAACATGCTTAGGGAGATGTACAACATGTGGCCTTTCTTCAGAGTGACAGT 25430330
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1     1167 tgacttggttgaaatggtgtttgctaagggggaccctggaattgctgctttatatgacaaacttctggtgtcagaggatctgc 1249    
+                            tgacttggttgaaatggtgtttgc+aaggg gaccctggaattgctgc+ttatatgacaaacttctggtgtc gagga ctgc
+     Scaffold_4051 25430329 TGACTTGGTTGAAATGGTGTTTGCAAAGGGAGACCCTGGAATTGCTGCCTTATATGACAAACTTCTGGTGTCCGAGGACCTGC 25430247
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1     1250 agtcttttggggaacagttgagggaaaattatgaagaaactaagcgtcttctccttgaggtt 1311    
+                            agtc+tt gg  aacag+tgagg +aaatta+ aag aactaagc tcttct cttgaggt 
+     Scaffold_4051 25430246 AGTCCTTGGGTCAACAGCTGAGGACAAATTACCAAGTAACTAAGCATCTTCTGCTTGAGGTA 25430185
+                            ***********************************************************984 PP
+
+>> Scaffold_2993  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ !  333.5   3.6   6.6e-98       899      1310 ..  30563020  30563427 ..  30563000  30563448 ..  42597560    0.96
+
+  Alignment:
+  score: 333.5 bits
+  Moore2018_ppc1E1      899 gatttgtcgagtacttccgcctggcaacaccagagacggagtatggacgtatgaacattgggagtcgtccagcaaagagaaag 981     
+                            gattt t+   tact +     ggcaacaccagagac+gagta+ggacg +tgaacat+gg+ag+cgtccagcaaagagaaa+
+     Scaffold_2993 30563020 GATTTATTTGCTACTGT----AGGCAACACCAGAGACAGAGTACGGACGGTTGAACATCGGAAGCCGTCCAGCAAAGAGAAAA 30563098
+                            45555555555555533....4899********************************************************** PP
+
+  Moore2018_ppc1E1      982 ccaagtggtggaattgaatctctccgtgcaattccttggatctttgcatggactcaaacaaggttccatctccctgtgtggct 1064    
+                            ccaag+gg+ggaattgaatc+ct cgtgcaat+cc tggatcttt+catggac+caaacaaggttccatct cctgtgtgg t
+     Scaffold_2993 30563099 CCAAGCGGAGGAATTGAATCACTGCGTGCAATCCCATGGATCTTTTCATGGACCCAAACAAGGTTCCATCTGCCTGTGTGGTT 30563181
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1     1065 gggctttggtgcagcatttaaatatgctattgagaaagatacaaggaatcttaacatgcttaaggagatgtacaatatgtggc 1147    
+                            ggg tttggtgc gcatttaaat tgct t g  aaaga+ac a ga tct +a atgcttaa ga atgta  ++a  tggc
+     Scaffold_2993 30563182 GGGTTTTGGTGCCGCATTTAAATTTGCTCTAGCAAAAGACACGACGACTCTGGAGATGCTTAAAGAAATGTATGGCAGATGGC 30563264
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1     1148 ctttcttcagggtgaccattgacttggttgaaatggtgtttgctaagggggaccctggaattgctgctttatatgacaaactt 1230    
+                            ctttcttcag+gtgac+ t gac tggttgaaatg tgtttgc+aaggg ga cctggaattgc gc+tt+tatgacaaact 
+     Scaffold_2993 30563265 CTTTCTTCAGAGTGACTCTCGACATGGTTGAAATGATGTTTGCAAAGGGCGATCCTGGAATTGCGGCCTTGTATGACAAACTG 30563347
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1     1231 ctggtgtcagaggatctgcagtcttttggggaacagttgagggaaaattatgaagaaactaagcgtcttctccttgaggt 1310    
+                            ct+gt tcagaggatct   gtc+tttgg+gaacagttgaggga aa ta+ aagaaact a  gtcttctcct gaggt
+     Scaffold_2993 30563348 CTTGTTTCAGAGGATCTTATGTCCTTTGGAGAACAGTTGAGGGACAAGTACCAAGAAACTCAAGGTCTTCTCCTGGAGGT 30563427
+                            ******************************************************************************98 PP
+
+>> Scaffold_1695  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ !  332.4   4.9   1.4e-97       558       925 ..   7131348   7130981 ..   7131368   7130974 ..  44979772    0.98
+
+  Alignment:
+  score: 332.4 bits
+  Moore2018_ppc1E1     558 gctagtaaaggttgctaagcaatttggggtgaagcttacaatgtttcatgggcgaggagggactgtaggaagaggagggggcccc 642    
+                           gct +ta aggt gctaag aatttgg+gtgaagct ac atgtt ca+gggcgagg+gggac+gt ggaagagg+gg ggcccc
+     Scaffold_1695 7131348 GCTGATACAGGTGGCTAAGAAATTTGGTGTGAAGCTCACCATGTTCCACGGGCGAGGTGGGACCGTCGGAAGAGGTGGAGGCCCC 7131264
+                           688999******************************************************************************* PP
+
+  Moore2018_ppc1E1     643 actcatcttgccattttgtctcagccacctgacactatcaatggatcacttcgtgttacagtacaaggtgaagtaattgaacagt 727    
+                           ac+catcttgc+attttg ctca+ccacc+gacac atc+a gg+tcacttcg gt+acagt caagg ga gt attga+cagt
+     Scaffold_1695 7131263 ACCCATCTTGCTATTTTGGCTCAACCACCAGACACCATCCACGGGTCACTTCGGGTCACAGTCCAAGGGGAGGTCATTGAGCAGT 7131179
+                           ************************************************************************************* PP
+
+  Moore2018_ppc1E1     728 cctttggagaggagcatttgtgttttaggacactacagaggtacacagctgctacacttgagcatgggatgcatccacctatctc 812    
+                           c tttgg+ga gagca+ttgtgttt+aggacact cagaggt cac+g  gctacact gagca gggatg a+ccacc a c c
+     Scaffold_1695 7131178 CGTTTGGGGAAGAGCACTTGTGTTTCAGGACACTGCAGAGGTTCACTGTAGCTACACTGGAGCACGGGATGAACCCACCGACCCC 7131094
+                           ************************************************************************************* PP
+
+  Moore2018_ppc1E1     813 tcctaagccagaatggcgtgctctgttggatgagatggctgttgttgccacaaaggagtaccgctctgttgtttttgaagagcct 897    
+                           +cc aagccaga+tggcg gc ct ttggatgagatggc gttgtt+ccac  aggagtaccg tctgttgt+ t   +gagcct
+     Scaffold_1695 7131093 ACCCAAGCCAGAGTGGCGGGCCCTCTTGGATGAGATGGCGGTTGTTTCCACCGAGGAGTACCGGTCTGTTGTCATGCGGGAGCCT 7131009
+                           ************************************************************************************* PP
+
+  Moore2018_ppc1E1     898 cgatttgtcgagtacttccgcctggcaa 925    
+                           cg tt gt+gagta+ttccgcct+g aa
+     Scaffold_1695 7131008 CGCTTCGTTGAGTATTTCCGCCTTGTAA 7130981
+                           **********************999876 PP
+
+>> Scaffold_1695  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ !  311.3   2.8   3.3e-91       917      1310 ..   7130313   7129918 ..   7130333   7129898 ..  44979772    0.96
+
+  Alignment:
+  score: 311.3 bits
+  Moore2018_ppc1E1     917 gcctggcaacaccagagacggagtatggacgtatgaacattgggagtcgtccagcaaagagaaagccaagtggtggaattgaatc 1001   
+                           g c ggc ac cc gagacggagta+gg cgt+tgaacattgg+ag+cgtcc gc aagagaaagcc a  ggtgg at+ga+tc
+     Scaffold_1695 7130313 G-CAGGCGACCCCGGAGACGGAGTACGGGCGTTTGAACATTGGAAGCCGTCCGGCCAAGAGAAAGCCGAAGGGTGGGATCGAGTC 7130230
+                           3.3489******************************************************************************* PP
+
+  Moore2018_ppc1E1    1002 tctccgtgcaattccttggatctttgcatggactcaaacaaggttccatctccctgtgtggctgggctttggtgcagcatttaaa 1086   
+                           tct  g gc+at+cc tggatctttgcatggac+caaac++g ttccatctccc gtgtggct gg  ttggt cagcatt+aaa
+     Scaffold_1695 7130229 TCTGAGGGCGATCCCGTGGATCTTTGCATGGACCCAAACCCGTTTCCATCTCCCGGTGTGGCTCGGGATTGGTACAGCATTCAAA 7130145
+                           ************************************************************************************* PP
+
+  Moore2018_ppc1E1    1087 tatgctattgagaaagatacaaggaatcttaacatgcttaaggagatgtacaatatgtggcctttcttcagggtgaccattgact 1171   
+                           +atg+tatt agaa ga+a+ aggaa ct aa  tgctt aggagatgtacaa+a  tggcc ttctt+agggt accattgact
+     Scaffold_1695 7130144 CATGTTATTCAGAAGGACATTAGGAACCTCAAAGTGCTTCAGGAGATGTACAACAGTTGGCCCTTCTTTAGGGTCACCATTGACT 7130060
+                           ************************************************************************************* PP
+
+  Moore2018_ppc1E1    1172 tggttgaaatggtgtttgctaagggggaccctggaattgctgctttatatgacaaacttctggtgtcagagga...tctgcagtc 1253   
+                           tg ttgaaatggtgtttgc+aaggg  accctg+ attgctgct+t tatgacaa ct ctggtg c ga ga   +ct+c g  
+     Scaffold_1695 7130059 TGATTGAAATGGTGTTTGCCAAGGGTAACCCTGAGATTGCTGCTCTCTATGACAAGCTGCTGGTGACTGACGAtaaGCTACGGGA 7129975
+                           *******************************************************************99887522268999999* PP
+
+  Moore2018_ppc1E1    1254 ttttggggaacagttgagggaaaattatgaagaaactaagcgtcttctccttgaggt 1310   
+                           +tttgg+gaa + ttgagg a+aattatgaaga ac   gcgtctt t cttgaggt
+     Scaffold_1695 7129974 ATTTGGAGAAGGATTGAGGAAGAATTATGAAGAGACGCTGCGTCTTTTACTTGAGGT 7129918
+                           *******************************************************98 PP
+
+>> Scaffold_2366  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ !  305.5   3.4   1.8e-89       919      1311 ..  34169476  34169868 ..  34169456  34169888 ..  41005119    0.97
+
+  Alignment:
+  score: 305.5 bits
+  Moore2018_ppc1E1      919 ctggcaacaccagagacggagtatggacgtatgaacattgggagtcgtccagcaaagagaaagccaagtggtggaattgaatc 1001    
+                              ggc acacc gag++ggagtatgga g atgaa+at+gg+agtcgtcc +caaagagaaagccaagtgg+gg attga+tc
+     Scaffold_2366 34169476 TAGGCTACACCTGAGTTGGAGTATGGAAGAATGAATATCGGAAGTCGTCCTTCAAAGAGAAAGCCAAGTGGGGGCATTGAGTC 34169558
+                            3589******************************************************************************* PP
+
+  Moore2018_ppc1E1     1002 tctccgtgcaattccttggatctttgcatggactcaaacaaggttccatctccctgtgtggctgggctttggtgcagcattta 1084    
+                            +ct cg gc at+cc tggatctttgc tggactca acaaggttcca ct cc gtgtggctggg tttggtg agc tt+a
+     Scaffold_2366 34169559 ACTACGAGCCATCCCATGGATCTTTGCCTGGACTCAGACAAGGTTCCACCTGCCAGTGTGGCTGGGATTTGGTGGAGCCTTCA 34169641
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1     1085 aatatgctattgagaaagatacaaggaatcttaacatgcttaaggagatgtacaatatgtggcctttcttcagggtgaccatt 1167    
+                            aa+a  ++att agaaaga+   a gaatct aaca  ct  a  agatgtacaa+   tggcctttctt+agggt accat 
+     Scaffold_2366 34169642 AACACATCATTCAGAAAGACGGCAAGAATCTGAACACACTACAACAGATGTACAACGAATGGCCTTTCTTTAGGGTTACCATG 34169724
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1     1168 gacttggttgaaatggtgtttgctaagggggaccctggaattgctgctttatatgacaaacttctggtgtcagaggatctgca 1250    
+                            ga ttggttga+atggtgtt+gctaaggg gaccctgg attgctgctttata ga aa ct ct+gt tc  agga++tg  
+     Scaffold_2366 34169725 GATTTGGTTGAGATGGTGTTCGCTAAGGGAGACCCTGGGATTGCTGCTTTATACGATAAGCTACTTGTCTCTCAGGAGTTGTG 34169807
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1     1251 gtcttttggggaacagttgagggaaaattatgaagaaactaagcgtcttctccttgaggtt 1311    
+                            gtc+tttgg+ga  +gttgaggg+  a tatgaagaaac aag  +cttct+ct+ aggt 
+     Scaffold_2366 34169808 GTCATTTGGAGAGAGGTTGAGGGCCGACTATGAAGAAACAAAGACCCTTCTTCTCCAGGTA 34169868
+                            *******************************************************999984 PP
+
+>> Scaffold_4051  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ !  196.0   0.5   2.1e-56      1307      1575 .]  25429733  25429455 ..  25429755  25429455 ..  45200182    0.95
+
+  Alignment:
+  score: 196.0 bits
+  Moore2018_ppc1E1     1307 aggttgctgggcacaaggatctgctggaaggagatccttacttgaagcagagactccgtcttcgtgatccctacatcacaacc 1389    
+                            agg t c gggcaca gga  tgctggaagg gatccttactt aagcagag+ctccg cttcgtga cc tacat+aca+cc
+     Scaffold_4051 25429733 AGGCTACCGGGCACAGGGAGGTGCTGGAAGGGGATCCTTACTTAAAGCAGAGGCTCCGGCTTCGTGACCCGTACATTACAGCC 25429651
+                            7889999**************************************************************************** PP
+
+  Moore2018_ppc1E1     1390 ctcaatgtcttccaagcatatactctgaagcggattcgtgatccaaacttccatgtaacagagaggccacacttatccaagga 1472    
+                             t aatgt ttccaagc tatac+ctgaa cg attcgtgatccaaacttcc tgtaa   agaggccacacttatc aa+ga
+     Scaffold_4051 25429650 TTGAATGTTTTCCAAGCGTATACCCTGAAACGAATTCGTGATCCAAACTTCCGTGTAAAGCAGAGGCCACACTTATCAAAAGA 25429568
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1     1473 aataatggcgtccaa..........gctgctgagcttgtgaagctcaaccctacaagtgagtatgctcctggccttgaggaca 1545    
+                            aataa  gc tccaa          gctg tga cttgtgaa ct+aaccc++caag gagtatgctcctggcct+gaggaca
+     Scaffold_4051 25429567 AATAACAGCCTCCAAcaaggcggctGCTGATGATCTTGTGAATCTTAACCCCTCAAGCGAGTATGCTCCTGGCCTCGAGGACA 25429485
+                            *******99999876444444433367788899************************************************** PP
+
+  Moore2018_ppc1E1     1546 cccttatcttgaccatgaagggtattgctg 1575    
+                            ccct+atcttgaccatgaagggtat gctg
+     Scaffold_4051 25429484 CCCTCATCTTGACCATGAAGGGTATCGCTG 25429455
+                            **************************9985 PP
+
+>> Scaffold_1695  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ !  188.0   2.3   5.4e-54       670      1432 ..  28272928  28272163 ..  28272950  28272137 ..  44979772    0.86
+
+  Alignment:
+  score: 188.0 bits
+  Moore2018_ppc1E1      670 cctgacactatcaatggatcacttcgtgttacagtacaaggtgaagtaattgaacagtcctttggagaggagcatttgtgttt 752     
+                            cc  a actat +a gga c ct cg   +ac+g  caagg gaa t  t  aa  g   tttgg+      ca  t   t t
+     Scaffold_1695 28272928 CCATAAACTATGCAGGGAACCCTGCGGTCCACTGAGCAAGGAGAAATGGTGCAAGCGAAATTTGGGCTCCCTCAAATCGCTGT 28272846
+                            788899************************************99877666555555566788888766666666666666677 PP
+
+  Moore2018_ppc1E1      753 taggacactacagaggtacacagctgctacacttgagcatgggatgcatccacctatctctcctaagccag...aatggcgtg 832     
+                            + gg   cta a a  tacac  c gct  +ctt ++      atgc++cc cct tc c cc +    ag   a+tggcg  
+     Scaffold_1695 28272845 CCGGCAGCTAGAAATCTACACCACAGCTGTTCTTCTAGCAACCATGCGCCCCCCTCTCCCACCCCGAGAAGaaaAGTGGCGAA 28272763
+                            8888889999999999*99988888888777777544333457899999999999999888887665555522257******* PP
+
+  Moore2018_ppc1E1      833 ctctgttggatgagatggctgttgttgccacaaaggagtaccgctctgttgtttttgaagagcctcgatttgtcgagtacttc 915     
+                             tct  tgga ga at  c    gt   c  + a    taccg   +gttgt t  gaa a+cc   att  tc+  tacttc
+     Scaffold_1695 28272762 ATCTCATGGAAGAAATCTCAAAAGTCAGCTGTCAAAGCTACCGAAGCGTTGTGTACGAAAATCCAGAATTCCTCACATACTTC 28272680
+                            **************99888777777666666666666789999999999********************************** PP
+
+  Moore2018_ppc1E1      916 cgcctggcaacaccagagacggagtatggacgtatgaacattgggagtcgtccagcaaagagaaagccaagtggtggaattga 998     
+                            c     gc ac cc  ag c ga    gg+  ++t aacattgg+ag+cg cc  caa  agaaa+   a    +ggaat+g 
+     Scaffold_1695 28272679 CAGGAAGCCACCCCCCAGGCCGAACTGGGTTACCTCAACATTGGAAGCCGACCGACAAGAAGAAAAAGCACCATAGGAATCGG 28272597
+                            **999*****************************************************99999999988999999******** PP
+
+  Moore2018_ppc1E1      999 atctctccgtgcaattccttggatctttgcatggactcaaacaaggttccatctccctgtgtggctgggctttggtgcagcat 1081    
+                               tctccg gc at+cc tggatctt gcatggac+caaac +ggtt   t t cctg  tggct gg+ t gg gc g  t
+     Scaffold_1695 28272596 CCATCTCCGAGCCATCCCATGGATCTTCGCATGGACCCAAACCCGGTTTGTTTTACCTGCTTGGCTCGGTGTAGGAGCCGGCT 28272514
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1     1082 ttaaatatgctattgagaaagatacaaggaatcttaacatgcttaaggagatgtacaatatgtggcctttcttcagggtgacc 1164    
+                            t aa+  tg++  tgagaa+g        aat  t+a     t a+gg  atgtac ++  gtggcc tt tt+  g   ac 
+     Scaffold_1695 28272513 TGAAGGGTGTCTGTGAGAAGGG------CAATGCTGAGGAATTGAGGGCTATGTACCGCGAGTGGCCATTTTTTCAGAGCACA 28272437
+                            ******************9985......4566666677777789999********************88777666556689** PP
+
+  Moore2018_ppc1E1     1165 attgacttggttgaaatggtgtttgctaagggggaccctggaattgctgctttatatgacaaacttctggtgtcagagg...a 1244    
+                             t gac t  t gaaatggt tt g  aagg  ga   t   at gct   +t tatga+ a  t ct+gt tc ga     a
+     Scaffold_1695 28272436 TTAGACCTAATAGAAATGGTTTTGGTGAAGGCTGATGTTCCCATAGCTAAGCTCTATGATGAGGTGCTTGTTTCTGATCccaA 28272354
+                            *************************************************************************9987531112 PP
+
+  Moore2018_ppc1E1     1245 tctgcagtcttttggggaacagttgagggaaaattatgaagaaactaagcgtcttctccttgaggttgctgggcacaaggatc 1327    
+                            +  g  +    ttgg+g  ca ttgag  a+ a t    +   act +g     t t++ tg  gt  ctgg ca  ag a c
+     Scaffold_1695 28272353 GAGGAGAGAGCTTGGAGCTCACTTGAGAAAGGAGTTGATGACTACTGGGATGTATGTTTGTGTTGTCACTGGCCATGAGAAGC 28272271
+                            22233445667899*************99988877444444456776666666667777778889999*************** PP
+
+  Moore2018_ppc1E1     1328 tgctggaaggagatccttacttgaagcagagactccgtcttcgtgatccctacatcacaaccctcaatgtcttccaagcatat 1410    
+                               t ga+    a+c    cttg  + ag    t+  +    g    cc ta  t a   cc t aa  t tt ca g   a 
+     Scaffold_1695 28272270 CATTAGAGAATAACCGGAGCTTGCGAAAGCTTATTGAAACCAGGCTGCCGTATTTGAATCCCATGAACATGTTGCAGGTTGAG 28272188
+                            *********************99888777777776666666677778999********************************* PP
+
+  Moore2018_ppc1E1     1411 actctgaagcggat...tcgtgatc 1432    
+                            a +ctga g gg t    cgtga c
+     Scaffold_1695 28272187 ATCCTGAGGAGGTTgagGCGTGACC 28272163
+                            *****99987765511146666655 PP
+
+>> Scaffold_2366  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ !  181.1   0.7   6.8e-52      1305      1573 ..  34169963  34170244 ..  34169942  34170246 ..  41005119    0.93
+
+  Alignment:
+  score: 181.1 bits
+  Moore2018_ppc1E1     1305 tgaggttgctgggcacaaggatctgctggaaggagatccttacttgaagcagagactccgtcttcgtgatccctacatcacaa 1387    
+                            + ag ttg tgggcacaa ga ctgct+ga+gg gatcc tacttga gca agact+cgtct cgt a  c tacatcacaa
+     Scaffold_2366 34169963 ACAGATTGTTGGGCACAAAGACCTGCTTGAGGGGGATCCCTACTTGAGGCAAAGACTTCGTCTCCGTTACTCATACATCACAA 34170045
+                            56899****************************************************************************** PP
+
+  Moore2018_ppc1E1     1388 ccctcaatgtcttccaagcatatactctgaagcggattcgtgatccaaacttccatgtaacagagaggccacacttatccaag 1470    
+                            c  t+aa gt t ccaagc ta+ac ctgaagcg attcgtga cc aact ccatgt a + +gaggcc cac t tc aag
+     Scaffold_2366 34170046 CGTTGAACGTATGCCAAGCCTACACACTGAAGCGCATTCGTGACCCCAACTACCATGTCAAGTTGAGGCCCCACATCTCAAAG 34170128
+                            *********************************************************************************** PP
+
+  Moore2018_ppc1E1     1471 gaaataatggcgtcca.............agctgctgagcttgtgaagctcaaccctacaagtgagtatgctcctggccttga 1540    
+                            ga+ t atgg+ tcc              agctgctgag t gtgaag t aaccctac+agtgagtatgc cc gg cttga
+     Scaffold_2366 34170129 GAGTTCATGGATTCCTccaacaacaaaccAGCTGCTGAGTTGGTGAAGTTGAACCCTACGAGTGAGTATGCACCGGGTCTTGA 34170211
+                            *********9988653222222233333379**************************************************** PP
+
+  Moore2018_ppc1E1     1541 ggacacccttatcttgaccatgaagggtattgc 1573    
+                            ggacaccct+atc+t accatgaagggtattgc
+     Scaffold_2366 34170212 GGACACCCTCATCCTCACCATGAAGGGTATTGC 34170244
+                            *******************************98 PP
+
+>> Scaffold_1695  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ !  174.9   4.1   5.2e-50      1282      1574 ..   7128984   7128689 ..   7129006   7128688 ..  44979772    0.92
+
+  Alignment:
+  score: 174.9 bits
+  Moore2018_ppc1E1    1282 gaagaaactaagcgtcttctccttgaggttgctgggcacaaggatctgctggaaggagatccttacttgaagcagagactccgtc 1366   
+                           g +ga ac  + + tctt+ + t  aggttgc gggcacaagga ct ctgga+gg ga cc tacttgaagcagag+ctccg  
+     Scaffold_1695 7128984 GTTGACACCCGATTTCTTT-TGTGCAGGTTGCCGGGCACAAGGAACTCCTGGAGGGCGACCCCTACTTGAAGCAGAGGCTCCGGT 7128901
+                           4456666666666666654.45778************************************************************ PP
+
+  Moore2018_ppc1E1    1367 ttcgtgatccctacatcacaaccctcaatgtcttccaagcatatactctgaagcggattcgtgatccaaacttccatgtaacaga 1451   
+                           t cgtga cc tac t ac accct aa gt   cca gc+ta+act tgaag  gat  g ga cc a cttc+a gt+  aga
+     Scaffold_1695 7128900 TGCGTGACCCGTACGTGACTACCCTGAACGTGACCCAGGCTTACACTTTGAAGAAGATCAGGGACCCGAGCTTCAAGGTTGAAGA 7128816
+                           ************************************************************************************* PP
+
+  Moore2018_ppc1E1    1452 gaggccacacttatccaaggaaataatggcgtccaag....ctgctgagcttgtgaagctcaaccctacaagtgagtatgctcct 1532   
+                           g ggcc cac t tccaagga ata+ gg+gtc   g     tgc gagcttgtgaa ctcaaccctac ag gagta  c cc 
+     Scaffold_1695 7128815 GCGGCCCCACCTCTCCAAGGACATAGCGGAGTCAGGGtctaATGCAGAGCTTGTGAAACTCAACCCTACCAGCGAGTACCCGCCC 7128731
+                           *****************************999876552222589***************************************** PP
+
+  Moore2018_ppc1E1    1533 ggccttgaggacacccttatcttgaccatgaagggtattgct 1574   
+                           gg+ct gaggacaccctt tcttgaccatgaagggtattgc 
+     Scaffold_1695 7128730 GGTCTCGAGGACACCCTTCTCTTGACCATGAAGGGTATTGCC 7128689
+                           ***************************************985 PP
+
+>> Scaffold_2993  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ !  165.0   3.1   4.7e-47      1287      1574 ..  30565253  30565523 ..  30565233  30565524 ..  42597560    0.93
+
+  Alignment:
+  score: 165.0 bits
+  Moore2018_ppc1E1     1287 aactaagcgtcttctccttgaggttgctgggcacaaggatctgctggaaggagatccttacttgaagcagagactccgtcttc 1369    
+                            aa t a c t ttct+ t  aggt gc gggcacaaggat tg tgga+ ga a+cc  a ttgaagcagagact+c tcttc
+     Scaffold_2993 30565253 AATTCAACTTTTTCTTTTCCAGGTAGCCGGGCACAAGGATTTGTTGGAGAGAAACCCCAATTTGAAGCAGAGACTTCATCTTC 30565335
+                            55566778889999********************************************************************* PP
+
+  Moore2018_ppc1E1     1370 gtgatccctacatcacaaccctcaatgtcttccaagcatatactctgaagcggattcgtgatccaaacttccatgtaacagag 1452    
+                            g  +tcc tacat+aca+ccctcaatgtc tccaagcatatac ct aagcg at cgtga cc+aac               
+     Scaffold_2993 30565336 GCAGTCCTTACATTACAGCCCTCAATGTCCTCCAAGCATATACGCTAAAGCGAATCCGTGAACCGAAC--------------- 30565403
+                            ******************************************************************99............... PP
+
+  Moore2018_ppc1E1     1453 aggccacacttatccaaggaaataatggcgtccaa.......gctgctgagcttgtgaagctcaaccctacaagtgagtatgc 1528    
+                                     ttatc aa gaa+ aatggc t+ aa       g tgc+  gct  tgaagctcaacccta   gtga  atgc
+     Scaffold_2993 30565404 ---------TTATCGAATGAAGAAATGGCATTAAAcaagcagGATGCCATGCTAATGAAGCTCAACCCTAGCCGTGAACATGC 30565477
+                            .........899***************99987543222222278899999********************************* PP
+
+  Moore2018_ppc1E1     1529 tcctggccttgaggacacccttatcttgaccatgaagggtattgct 1574    
+                            tcctggc t gaggacac+ct+atc+t accatgaagggtattgc 
+     Scaffold_2993 30565478 TCCTGGCTTGGAGGACACTCTCATCCTCACCATGAAGGGTATTGCC 30565523
+                            *******************************************986 PP
+
+>> Scaffold_1695  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ !  117.2   3.9   1.3e-32       474       681 ..  28274334  28274127 ..  28274356  28274112 ..  44979772    0.95
+
+  Alignment:
+  score: 117.2 bits
+  Moore2018_ppc1E1      474 agaagtcatgattggatactctgattctggtaaggatgctggtcgtctctcagctgcttggcaactgtacaaggttcaggagg 556     
+                            a a gt atg ttggata tc ga+tc ggtaa gatgctgg cgt t+ cagc gc tgg a ctgtacaa g++ca+gagg
+     Scaffold_1695 28274334 ACAGGTTATGGTTGGATATTCAGACTCAGGTAAAGATGCTGGGCGTTTTACAGCAGCATGGGAGCTGTACAAAGCCCAAGAGG 28274252
+                            56889****************************************************************************** PP
+
+  Moore2018_ppc1E1      557 agctagtaaaggttgctaagcaatttggggtgaagcttacaatgtttcatgggcgaggagggactgtaggaagaggagggggc 639     
+                            a  t gt    g    +aag a tttgg  t aa  ttac  t tt+ca+gggcg gg gg a t t gg ag gg gg ggc
+     Scaffold_1695 28274251 ATGTTGTGGCTGCATGCAAGGAGTTTGGTATTAAAGTTACTCTTTTCCACGGGCGTGGTGGTAGTATTGGTAGGGGCGGCGGC 28274169
+                            ***99999999999999****************************************************************** PP
+
+  Moore2018_ppc1E1      640 cccactcatcttgccattttgtctcagccacctgacactatc 681     
+                            cc ac  atcttgccatt   tc cagcc cctg   ct t+
+     Scaffold_1695 28274168 CCAACATATCTTGCCATTCAATCACAGCCTCCTGGTTCTGTT 28274127
+                            ********************************9988777665 PP
+
+>> Scaffold_1695  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ !   52.2   4.1   5.4e-13        51       201 ..  28275858  28275708 ..  28275878  28275690 ..  44979772    0.90
+
+  Alignment:
+  score: 52.2 bits
+  Moore2018_ppc1E1       51 tattaggcaagaatcagataggcacactgatgtgatggatgccattactaggcatctggagattgggtcctaccgagaatggt 133     
+                            tatt  g a gaatc+  taggca+ ctgatg  +tggatgc attactag +a++tgga at gg  c tac   ga tgg 
+     Scaffold_1695 28275858 TATTTTGTAGGAATCCAGTAGGCATTCTGATGCACTGGATGCAATTACTAGATACTTGGATATGGGTGCATACACCGAGTGGA 28275776
+                            5677778899************************************************************************* PP
+
+  Moore2018_ppc1E1      134 cagaagagaagagacaggaatggctcttatctgagcttaggggcaagcgccctttgtttggcgctgat 201     
+                              gaagagaa a ac  ga+t  ct       gagct+a  gg aag g ccttt  tt    c+ at
+     Scaffold_1695 28275775 GTGAAGAGAAAAAACTCGAGTTTCTGACTAAAGAGCTCAAAGGAAAGAGGCCTTTAGTTCCGACCCAT 28275708
+                            *******************9988888888889*********************998777655555444 PP
+
+>> Scaffold_1695  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ ?   14.3   3.8      0.15       364       482 ..  28274719  28274589 ..  28274740  28274585 ..  44979772    0.79
+
+  Alignment:
+  score: 14.3 bits
+  Moore2018_ppc1E1      364 ttgagggttgtcccattgtttgagaagcttgctgacctggaggctgctcctgctgccatggcccgcctattctctatagattg 446     
+                            tt  g gt gt cc tt tttga a + t    ga  t   gg  gct    c g  at       ct+tt tc+at gattg
+     Scaffold_1695 28274719 TTACGTGTGGTTCCTTTATTTGAAACAGTGAAGGATTTAAGGGAAGCTGGATCGGTTATCCGGAAGCTCTTGTCCATTGATTG 28274637
+                            6778899******************9999999******99888888877666666666666666789**************** PP
+
+  Moore2018_ppc1E1      447 gtacaaaaataggatta............atgggaagcaagaagtcat 482     
+                            gtaca+ +a    atta            atgg  a ca ga gt at
+     Scaffold_1695 28274636 GTACAGGGAGCACATTAtaaagaatcaccATGGCCAACAGGAGGTAAT 28274589
+                            *****9988776666542222222222336788888888888888765 PP
+
+>> Scaffold_2366  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ ?   13.1   1.8      0.34      1103      1244 ..   4965024   4965152 ..   4964998   4965179 ..  41005119    0.77
+
+  Alignment:
+  score: 13.1 bits
+  Moore2018_ppc1E1    1103 atacaaggaatcttaacatgcttaaggagatgtacaatatgtggcctttcttcagggtgaccattgacttggttgaaatggtgtt 1187   
+                           a+a  agga  c  a   tgc  aagga   gtaca +atgtg c ttt  tca      c  ttgactt gt    atgg    
+     Scaffold_2366 4965024 ACAAGAGGATACAAACTTTGCCAAAGGA---GTACATCATGTGTCTTTTGGTCA-----TCGCTTGACTTCGT---CATGGAAAG 4965097
+                           4444455666666667778888888887...69*********988887766666.....46789999998766...589999999 PP
+
+  Moore2018_ppc1E1    1188 tgctaagggggaccctggaattgctgctttatatgacaaacttctggtgtcagagga 1244   
+                           tgc+aag g     ctg aattgc+gct t    gacaa c t t+  g c gag a
+     Scaffold_2366 4965098 TGCCAAGAGAACTGCTGAAATTGCCGCTATTGCGGACAATCCTTTT--GCCTGAGCA 4965152
+                           **************************************98876665..556666554 PP
+
+>> Scaffold_1695  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ ?   12.7   2.1      0.46       217       302 ..  28275610  28275525 ..  28275630  28275505 ..  44979772    0.92
+
+  Alignment:
+  score: 12.7 bits
+  Moore2018_ppc1E1      217 gaaattgctgatgttttggacacatttcatgtaatctcagaactcccatcagatagttttggtgcatacatcatctccatggc 299     
+                            ga +tt   ga gt ttggacacatt+ca gt   + c  aact       gat    ttgg gc ta  t at tc atggc
+     Scaffold_1695 28275610 GATGTTCAAGAGGTCTTGGACACATTCCAGGTTGCAGCTAAACTAGGGAGTGATTCACTTGGAGCTTATGTGATTTCAATGGC 28275528
+                            6667777889************************************************************************9 PP
+
+  Moore2018_ppc1E1      300 tac 302     
+                              c
+     Scaffold_1695 28275527 ATC 28275525
+                            644 PP
+
+>> Scaffold_2225  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ ?   11.0   0.0       1.6       312       406 ..  37757920  37758033 ..  37757900  37758054 ..  45464428    0.67
+
+  Alignment:
+  score: 11.0 bits
+  Moore2018_ppc1E1      312 tgatgtgcttgctgttgagcttctgcaacgtgaatgccgtattaagaatccattgagg..gttgtccc......attgt.... 382     
+                            +ga gt c tgc gttgagcttct caa g   a    +  t    aa c +ttgagg  gttg  cc      att t    
+     Scaffold_2225 37757920 AGAAGTCCGTGCAGTTGAGCTTCTCCAAGGGCCAACATACGTG--CAAACATTTGAGGggGTTGCACCtaacccATTTTgtat 37758000
+                            6899**********************98765444333333333..34566778887651167776554222222333222233 PP
+
+  Moore2018_ppc1E1      383 .........ttgagaagcttgctgacctggagg 406     
+                                     t+g  aagcttgctgacct ga  
+     Scaffold_2225 37758001 ccaagtgtcTCGGAAAGCTTGCTGACCTAGAAA 37758033
+                            333333334678889*************99864 PP
+
+>> Scaffold_2366  
+    score  bias    Evalue   hmmfrom    hmm to     alifrom    ali to      envfrom    env to       sq len      acc
+   ------ ----- ---------   -------   -------    --------- ---------    --------- ---------    ---------    ----
+ ?   10.3   2.3       2.5      1105      1244 ..   4919761   4919887 ..   4919739   4919914 ..  41005119    0.78
+
+  Alignment:
+  score: 10.3 bits
+  Moore2018_ppc1E1    1105 acaaggaatcttaacatgcttaaggagatgtacaatatgtggcctttcttcagggtgaccattgacttggttgaaatggtgtttg 1189   
+                           a  agga  c  a   tgc  aagga   gtaca +atgtg      ctt+ gg t  c +ttgactt gt    atgg    tg
+     Scaffold_2366 4919761 AAGAGGATACAAACTTTGCCAAAGGA---GTACATCATGTGT-----CTTTTGGTTATCGCTTGACTTCGT---CATGGAAAGTG 4919834
+                           44455555566667778888888887...69********995.....55566777778999*****98766...589999999** PP
+
+  Moore2018_ppc1E1    1190 ctaagggggaccctggaattgctgctttatatgacaaacttctggtgtcagagga 1244   
+                           c+aag g     ctg aattgc+ ct t    gacaa c t t+  g c gag a
+     Scaffold_2366 4919835 CCAAGAGAACTGCTGAAATTGCCACTATTGCGGACAATCCTTTT--GCCTGAGCA 4919887
+                           ************************************98876665..556666544 PP
+
+
+
+Internal pipeline statistics summary:
+-------------------------------------
+Query model(s):                              1  (1575 nodes)
+Target sequences:                         4053  (807770346 residues searched)
+Residues passing SSV filter:          27892401  (0.0345); expected (0.02)
+Residues passing bias filter:         19537897  (0.0242); expected (0.02)
+Residues passing Vit filter:           1007038  (0.00125); expected (0.003)
+Residues passing Fwd filter:             37577  (4.65e-05); expected (3e-05)
+Total number of hits:                       22  (9.94e-06)
+# CPU time: 126.49u 0.38s 00:02:06.86 Elapsed: 00:02:06.88
+# Mc/sec: 10027.10
+//
+# Alignment of 17 hits satisfying inclusion thresholds saved to: ppc1E1.nhmmer.fasta
+[ok]
