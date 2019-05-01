@@ -77,16 +77,20 @@ To confirm the predicted and low quality TLR protein sequences
 BlastP
 I did this for TLR 3,4,5,7
 
+## Failed step with SUMAC
+I initally tried using Sumac to automize a blast search of Myotis bats and their outgroups to identify TLR genes across several bat species. While I was able to compelte this step, I was unable to create supermatrices for phylogenetic analyiss using SUMAC. In addition, I was interested to better understand each step necessary for phylogenetic analyiss which is why I stopped using this project.
+This step was conducted using SUMAC. See script diego-ellis-soto/finalproject/Cleaned_code/1_sumac.sh
+
 # --- --- --- --- --- --- --- --- --- --- --- ---
 # [D] Alignment with mafft
 # --- --- --- --- --- --- --- --- --- --- --- ---
 
-Alignment was conducted using Mafft. See script XXX
+Alignment was conducted using Mafft. See script diego-ellis-soto/finalproject/Cleaned_code/2_alignment.sh
 # --- --- --- --- --- --- --- --- --- --- --- ---
 # [E] Trimming
 # --- --- --- --- --- --- --- --- --- --- --- ---
 
-Triming was conducted using Trimal. See script XXX
+Trimming was conducted using Trimal. See script diego-ellis-soto/finalproject/Cleaned_code/3_trimming.sh
 
 # --- --- --- --- --- --- --- --- --- --- --- ---
 # [F] Building TLR gene tree
@@ -96,7 +100,7 @@ Building the tree was conducted using iqtree using a total of 1000 bootstrap rep
 
 Now that we have aligned and trimmed our sequences its time to build our gene tree
 We further store a copy of our gene trees into newick format.
-For tree building see script XXX
+For tree building see script diego-ellis-soto/finalproject/Cleaned_code/4_phylotree.sh
 
 # --- --- --- --- --- --- --- --- --- --- --- ---
 # [G] Visualizing the gene tree
@@ -108,6 +112,7 @@ Please see script XXX
 ### Next steps:
 I would like to identify signs of gene contractions or expansion and look at signs of positive or negative selection of TLR genes within the Chiroptera species group. I would further use tools such as Mr. Base or R packages such as picante and ape for phylogenetic analysiss. Further I would use CAFE: A computational tool to study gene family evolution (De Bie et al. 2006).
 I hope that this comparative analysis allows me to better understand the evolution of key innate immune genes across several bat species.
+For tree visualization see script diego-ellis-soto/finalproject/Cleaned_code/5_vis_phylo.sh
 
 
 ## Assessment
