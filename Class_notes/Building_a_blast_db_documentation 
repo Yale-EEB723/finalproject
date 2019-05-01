@@ -1,0 +1,56 @@
+# Go to NCBI Protein:
+[1] Type in TLR7 Myotis
+[2] Download them all together as .FASTA
+[3] Finding a outgroup to the TLR gen:
+The tree is rooted by the outgroup TIR domain of Homo sapiens TLR5
+outgroup TIR domain Homo sapiens interleukin 1 receptor
+interleukin 1 Homo sapiens from the paper # Phylogeny of Toll-Like Receptor Signaling: Adapting the Innate Response Plos One
+https://www.ncbi.nlm.nih.gov/protein
+In NCBI Protein type in "interleukin 1 Homo sapiens"
+Mistake! We need the receptor not just the interleukin 1 -> This is probably just the signaling molecule
+In NCBI Protein type in  "Interleukin-1 Receptor Homo sapiens"
+[4] Blast the downloaded sequenes against the entire NCBI databases ->
+To confirm the predicted and low quality TLR protein sequences
+BlastP
+
+[5] Now we can try to align our sequences on TLR 7 using mafft
+# We Download MAFFT on https://anaconda.org/bioconda/mafft
+# I pasted all my sequences TLR gene and outgroup into a signle new fasta file that I will be aligning with MAST.
+# MAFFT is a multiple sequence alignment program for unix-like operating systems. It offers a range of multiple alignment methods.
+For this we have to put the ingroup (TLR genes) and the outgroup .fasta sequences into a single file.
+
+[6] Lets run mafft
+Now we have aligned our TLR genes with the outgroup TIR gene of humans! Yayyyy
+mafft --auto ingroup_w_outgroup.fasta > aligned_ingroup_w_outgroup.fasta
+# Input output
+When we align things not every thing aligns, could be due to low quality sequences and this  affects my phylogeny when I make it
+# phylogeny needs a degree im similarity in order to move.
+[7] Now we try to install gBlock for trimming
+conda install -c bioconda gblocks
+INDIR=/Users/diegoellis/projects/development/Comparative_genomics/finalproject/Data/TLR_7/
+gblocks and trimmomatic are failing; lets try trimAL
+trimal -in aligned_ingroup_w_outgroup.fasta -out trimmed_al_in_outgroup.fasta  -htmlout trimmed_al_in_outgroup.html -gt 1
+# will remove all columns with any gap (equivalent to -nogaps option)
+
+
+[8] Now that we have aligned and trimmed our sequences its time to build our gene tree
+# Lets try Iqtree
+conda install -c bioconda iqtree
+# Say bioconda is super useful instead of going to github pages or such to download
+iqtree -nt AUTO -s trimmed_al_in_outgroup.fasta # Makes the outgroup # trimmed_al_in_outgroup.fasta.treefile
+
+[9] The tree is in Newack format; i have to download figtree for this:
+ iqtree -nt AUTO -b 100 -s trimmed_al_in_outgroup.fasta  # Make a tree with 100 bootstrap.
+# For command line visualizaiton:
+conda install -c bioconda ete3
+ete3 view --text MyTreeFile.nw
+
+[10] Ape? Try this out.
+ete3 view --text MyTreeFile.nw
+Load a tree and link it to the alignment:
+from ete3 import PhyloTree
+# http://etetoolkit.org/docs/latest/tutorial/tutorial_phylogeny.html
+# Make a pipeline for everything else.
+was there diversification of TLR between bats or did it arose efore that?
+# Get the protein name and accesion number -> Show in my presentation for all my TLR genes.
+#

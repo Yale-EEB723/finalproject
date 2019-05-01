@@ -1,0 +1,4 @@
+dyld: Library not loaded: /Users/jhc/_Devel/ext_apps/local/lib/libargtable2.0.dylib
+  Referenced from: /anaconda3/bin/ete3_apps/bin/clustalo
+  Reason: image not found
+/Users/diegoellis/projects/development/Comparative_genomics/finalproject/Data/All_TLR/mytree/tasks/f2bbf54d49c61dea25881bf99996ba18/__cmd__: line 3: 13926 Abort trap: 6           /anaconda3/bin/ete3_apps/bin/clustalo --threads 1 -i /Users/diegoellis/projects/development/Comparative_genomics/finalproject/Data/All_TLR/mytree/input/f14ff03158516d83b7fac6dafca6ee50.100 -o clustalo_alg.fasta --outfmt fa

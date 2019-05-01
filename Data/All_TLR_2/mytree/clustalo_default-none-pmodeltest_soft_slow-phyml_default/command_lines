@@ -1,0 +1,1 @@
+Sun Apr 21 00:38:12 2019	ea0b15bd152dc9025fb10e5f557b6eb4	False	/anaconda3/bin/ete3 -a trimed_inout_TLR.fasta -w soft_modeltest -o mytree/

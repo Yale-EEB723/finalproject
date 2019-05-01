@@ -1,0 +1,9 @@
+# --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+# Identifying ingroups and outgroups for my analysis
+# --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+# The most high quality genome is Myotis lucifugus
+# Thus, I plan on using the ingroup Myotis for my analyiss.
+# Using the phylogenetic mammal tree of Nate Upham (in prep.) and a phylogenomic paper published in https://www.nature.com/articles/srep27726 .
+# Thus, I use Murina as a outgroup for my analysis. 
+# I further looked at the NCBI taxonomy browser. 
+https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi

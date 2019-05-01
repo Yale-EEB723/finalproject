@@ -1,0 +1,45 @@
+# Computational genomics: Finding Ghost loci
+Gene loss
+Sponghe has nervous system
+Ctenophore has nervous system
+Establish loss -> Do a synteny analysis and look for gene loss
+Cnidaria genome: 2 sponghe genomes
+
+# Sampling of animals:
+# Iqtree
+
+# Distribution of scaffold length -> Most genomes/assemblies are pretty fragmented
+# Identify homologous genes -> find homologs with Agalma
+# Does all vs all blast.
+
+
+# generate ML Tree in IQTree -> Fix the topology using ML Tree and estimate divergence time chronograms in BEAST
+# Use FastML infer ancestral states given tree topology and branches
+
+
+
+
+
+
+
+# Nate
+# Nate ask a phylogeny for all the animals of Myotis and the outgroup!
+
+
+# SUMAC -g not really working or recognizing the FASTA file that I gave it.
+# IQtree reading on it.
+# Cant install Uclust !
+
+
+# BUSCO on HPC -> Look at busco scores and assembly length.
+# Assembly length not related to busco completeness
+
+
+# FASTA file of guide sequences not found. Please re-try.
+TLR 3 and 9 failed. TLR 7.
+MAKER gives us GFF files tells us genomic features and places in genome -> takes 5 day -> Use this info for ab initio gene prediciton software.
+
+
+Jim Nunan. 
+#
+Human gneomics -> 3-4 pset +

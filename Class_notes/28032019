@@ -1,0 +1,81 @@
+# Phylogenetic course:
+
+Maximum likelihood estimation:
+
+Note and edges!
+
+Node any point collected by a branch. Nodes are allmost allways implicit.
+
+Bi-partition: Split tips into 2 groups. -> Split -> A division that occurs along the edge.
+1:1 relation between split and edges.
+
+Often many trees zB bootstrap sample.
+
+Make a list of all the splits you see in all the trees -> Count how often splits are found.
+
+Newick format: Text string to represent a tree.
+Things that are sisters to each other are placed with a coma and in a parentesis.
+
+AND rule: multiply probability
+OR rule: Add probabilities
+Combining AND and OR:
+Whats the probability of all of these things hapenning in combination.
+Independence: Dices are independent.
+
+Likelihood:
+Surprise = what happens and what our expectation was what would have happened.
+Expectation = our model.
+Our implicit model was that these are fair dice.
+
+Likelihood: The probability of the data given the model. How probable was the result we got, given our model understanding of the system
+the likelihood of all mdoels for a particular set of data are NOT expected to sum to one. These likelihood are super small normally.
+
+Maximum likelihood: Whats the probability of the data under all different models -> The model explaining the highest likelihood is the max likelihood.
+Actual probability of any specific outcome aproaches zero with increasing number.
+
+Relationships are depicted by the edges. -> Likelihood of what we see at A given what the ancestral sequence was. Now this is
+conditional likelihood.
+
+Check the legend to tell you what the edge length is. -> edge length could mean anything
+phylogram: Expected number of substitutions per site
+
+Maximum likelihood estimation of a phylogenetic trees:
+
+# Transition probability:
+Likelihood: Probability
+Max likelihood: The hypothesis with the highest likelihood given the data of the model.
+Likelihood for any given hypothesis is allways gonna be very small. ->
+Likelihood function is NOT a probability distribution function -> Does not encessarily sum up to 1.
+
+For likeliood: We need data, a model of evolution, a hypothesis and a mechanism to calculate the likelihood given the above.
+
+MU: gas pedal how fast the matrix is operating. Mean instantenaous rate.
+Relative rate: Tuning term; difference in rate from going to one state to another state.
+Assumptiion: Tme is reversible.
+
+# Sequence:
+
+How certain are you that your model is correct? Im absolutely certain that this is wrong! -> There is no way that these are the actual estiamtes!
+For what I want to know -> Are the vlaues close enough to the actual values to obtain a reasonable estimate of what i wanna predict.
+all models are wrong but some models are useful
+How much variation in the data can the model explain? -> This tells me whether I have a very inaequate model -> I have parameters that do a poor job in fitting my model to the data.
+
+
+Character evolution:
+DNA is a discrete trait.
+
+MK model: Assumes all the relative rates are the same.
+Sturdyng the morphology of the genome. Which orders are genes in, where do the introns go -> Quesitons on spatial organization
+-> Where is this limb, what colour is the limb in that spot?
+
+Cuz phylogenetics methods came out of systematics which came out of museum work which came out of morphology ->
+Analyze morphologica data is more advanced than methods sued to study evolution of genome morphology = comaprative genomics
+Genomics is new and fancy and tehcnologically crazy and descriptive morphology is measuring stuff with a caliper.
+Comparative genomics: scott roy san francisco state
+Intron gain and loss:
+Continious trait models:
+DNA and protein sequence evolution drove discrete trait models forward.
+
+
+Brownian walk: Is a independent proces! Markov process -> Only thing that is determining the next step is where I was on the current step. Nothing where I was before matters.
+The distribution is approximating a normal distributuon. 
