@@ -55,7 +55,9 @@ For each of the 16 notothenioid species included in this analysis, average overa
 
 ### MHC Gene Mining
 
-Ongoing. 
+Across each of the notothenioid species examined in this study, gene mining using BLAST revealed that almost all of the 27 genes associated with MHC I, MHC II, and cross-presentation pathways were identified in each transcript (Table 4). Specficially, rather than seeing a loss of MHC II genes and functionality, as might have been expected for a lineage adapted to extreme cold, most genes associated with MHC II are present for most notothenioid transcriptomes. The next step will involve estimation of copy number for each of these genes. 
+
+We were consistently unable to identify the genes RAG2 (one of our "control" genes), CD8a (associated with MHC I), or Sec61G (associated with cross-presentation pathways). However, this does not indicate that these genes have been lost, and future work will rely additionally on using HMMER for identifying MHC-related genes in nototothenioids as well as on synteny analyses to confirm lack of these genes in these species.  
 
 ## Assessment
 
