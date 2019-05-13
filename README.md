@@ -265,7 +265,7 @@ I also inputted the alignment.fa file produced from the speciestree pipeline int
 Both the RAxML and IQ-Tree analyses support the sister relationship of Petromyzontiformes and Myxiniformes, as related to gnathostomes and invertebrates (see figure below). These results expel the Craniata hypothesis which suggested that lampreys are the sister group to Gnathostomata, and reaffirm the sister relationship between all extant agnathans (Cyclostomata) and all gnathostomes.
 
 
-![Phylogeny inferred using IQ-Tree's ultrafast bootstrapping algorithm (1000 bootstrap replicates), which is identical in topology and support values to the tree inferred using RAxML (100 bootstrap replicates).](/./cyclostome_all.png)
+![Phylogeny inferred using IQ-Tree's ultrafast bootstrapping algorithm (1000 bootstrap replicates), which is identical in topology and support values to the tree inferred using RAxML (100 bootstrap replicates).](/./cyclostome\_\all.png)
 
 ## Assessment
 
