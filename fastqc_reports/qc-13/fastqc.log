@@ -1,0 +1,10 @@
+[biolite] timestamp=2019-04-22 14:28:10
+Failed to process /home/ag662/scratch60/agalma/data/transcriptomes/GCA_004367855.1_ASM436785v1_genomic.fastq
+uk.ac.babraham.FastQC.Sequence.SequenceFormatException: ID line didn't start with '@'
+	at uk.ac.babraham.FastQC.Sequence.FastQFile.readNext(FastQFile.java:158)
+	at uk.ac.babraham.FastQC.Sequence.FastQFile.<init>(FastQFile.java:89)
+	at uk.ac.babraham.FastQC.Sequence.SequenceFactory.getSequenceFile(SequenceFactory.java:87)
+	at uk.ac.babraham.FastQC.Sequence.SequenceFactory.getSequenceFile(SequenceFactory.java:62)
+	at uk.ac.babraham.FastQC.Analysis.OfflineRunner.processFile(OfflineRunner.java:129)
+	at uk.ac.babraham.FastQC.Analysis.OfflineRunner.<init>(OfflineRunner.java:102)
+	at uk.ac.babraham.FastQC.FastQCApplication.main(FastQCApplication.java:316)

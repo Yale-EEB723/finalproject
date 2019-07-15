@@ -1,0 +1,11 @@
+PASS	Basic Statistics	SRR3213614_2.fastq
+PASS	Per base sequence quality	SRR3213614_2.fastq
+PASS	Per sequence quality scores	SRR3213614_2.fastq
+WARN	Per base sequence content	SRR3213614_2.fastq
+PASS	Per sequence GC content	SRR3213614_2.fastq
+PASS	Per base N content	SRR3213614_2.fastq
+PASS	Sequence Length Distribution	SRR3213614_2.fastq
+FAIL	Sequence Duplication Levels	SRR3213614_2.fastq
+PASS	Overrepresented sequences	SRR3213614_2.fastq
+WARN	Adapter Content	SRR3213614_2.fastq
+FAIL	Kmer Content	SRR3213614_2.fastq
