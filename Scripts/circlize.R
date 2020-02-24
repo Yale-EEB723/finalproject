@@ -1,18 +1,22 @@
 # circlize circos plot
 # see: https://jokergoo.github.io/circlize_book/book/
 #install.packages("circlize")
-library(circlize)
+require(circlize)
 library(stringr)
+library(readr)
 
+## Introduction ##
 #generate some random data
-
 set.seed(999)
 n = 1000
-df = data.frame(factors = sample(letters[1:8], n, replace = TRUE),
-                x = rnorm(n), y = runif(n))
-circos.par("track.height" = 0.1)
-circos.initialize(factors = df$factors, x = df$x)
+df = data.frame(factors = sample(letters[1:8], n, replace = TRUE), x = rnorm(n), y = runif(n))
 
+# Set track height and initialize plot. The circle used by circlize always has a radius of 1, 
+# so a height of 0.1 means 10% of the circle radius.
+circos.par("track.height" = 0.1)
+# When we initialize the plot, the "factors" will correspond to the sectors and must be categorical
+circos.initialize(factors = df$factors, x = df$x)
+# Add track
 circos.track(factors = df$factors, y = df$y,
              panel.fun = function(x, y) {
                circos.text(CELL_META$xcenter, CELL_META$cell.ylim[2] + uy(5, "mm"), 
@@ -21,196 +25,94 @@ circos.track(factors = df$factors, y = df$y,
              })
 col = rep(c("#FF0000", "#00FF00"), 4)
 circos.trackPoints(df$factors, df$x, df$y, col = col, pch = 16, cex = 0.5)
-circos.text(-1, 0.5, "text", sector.index = "a", track.index = 1)
+circos.text(-1, 0.5, "foo", sector.index = "b", track.index = 1)
 
+bgcol = rep(c("#EFEFEF", "#CCCCCC"), 4)
+circos.trackHist(df$factors, df$x, bin.size = 0.2, bg.col = bgcol, col = NA)
 
-## read in bed file
+circos.track(factors = df$factors, x = df$x, y = df$y,
+             panel.fun = function(x, y) {
+               ind = sample(length(x), 10)
+               x2 = x[ind]
+               y2 = y[ind]
+               od = order(x2)
+               circos.lines(x2[od], y2[od])
+             })
 
-bed = read_tsv("roughScaffolding_bedFile.bed")
-bed <- as.data.frame(bed)
-bed
+# We can update regions (instead of having to plot everything again). This erases
+# the current graphics of the in the region of interest and rewrites them
+circos.update(sector.index = "d", track.index = 2, 
+              bg.col = "#FF8080", bg.border = "red")
+circos.points(x = -2:2, y = rep(0.5, 5), col = "white")
+circos.text(CELL_META$xcenter, CELL_META$ycenter, "updated", col = "white")
 
-bed2 = read_tsv("PGA_scaffolds.bed")
-bed <-as.data.frame(bed2)
+# Add a heatmap-style track
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+  xlim = CELL_META$xlim
+  ylim = CELL_META$ylim
+  breaks = seq(xlim[1], xlim[2], by = 0.1)
+  n_breaks = length(breaks)
+  circos.rect(breaks[-n_breaks], rep(ylim[1], n_breaks - 1),
+              breaks[-1], rep(ylim[2], n_breaks - 1),
+              col = rand_color(n_breaks), border = NA)
+})
 
+# Add inside links
+circos.link("a", 0, "b", 0, h = 0.4)
+circos.link("c", c(-0.5, 0.5), "d", c(-0.5,0.5), col = "red",
+            border = "blue", h = 0.2)
+circos.link("e", 0, "g", c(-1,1), col = "green", border = "black", lwd = 2, lty = 2)
+circos.link(sector.index1 = "c", point1 = c(-2,2), sector.index2 = "f", point2 = c(-3,3), col="purple")
 
-repeats = read_tsv("PGA_trim.fasta.out.bed",col_names=FALSE)
-repeats <- as.data.frame(repeats)
-head(repeats)
+# Clear everything for new plot
+circos.clear()
 
-#initialize basic plot
-circos.genomicInitialize(bed)
+## Applications in genomics ##
+# Generate random BED file
+set.seed(999)
+bed = generateRandomBed()
+head(bed)
 
-#initialize custom
-circos.initializeWithIdeogram(plotType = NULL)
+# Initialize human data
+circos.initializeWithIdeogram()
+text(0, 0, "default", cex = 1)
+circos.info()
+
+# Custom chromosomes
+cytoband.df = read.table(file = "./Portulaca_karyotype.txt", 
+                         colClasses = c("character", "numeric", "numeric"), 
+                         sep = "\t", header = TRUE)
+circos.initializeWithIdeogram(cytoband = cytoband.df)
+
+# Give scaffolds random colors
 circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
   chr = CELL_META$sector.index
   xlim = CELL_META$xlim
   ylim = CELL_META$ylim
   circos.rect(xlim[1], 0, xlim[2], 1, col = rand_color(1))
-  #circos.text(mean(xlim), mean(ylim), chr, cex = 0.7, col = "white",
-  #            facing = "inside", niceFacing = TRUE)
+  circos.text(mean(xlim), mean(ylim), chr, cex = 0.7, col = "white",
+              facing = "inside", niceFacing = TRUE)
 }, track.height = 0.15, bg.border = NA)
+circos.clear()
 
-#circos.genomicTrack(repeats)
+rgb2hex <- function(r,g,b) sprintf('#%s',paste(as.hexmode(c(r,g,b)),collapse = ''))
 
+circos.clear()
+portulaca_bed = portulaca_1MB_density
+portulaca_bed$value = as.numeric(portulaca_bed$value)
+circos.initializeWithIdeogram(cytoband = cytoband.df)
+col_genes = colorRamp2(c(0, 100, 200), c(rgb2hex(247, 228, 28), rgb2hex(30, 127, 121), rgb2hex(52,0,72)))
+col_repeats = colorRamp2(c(0, 1500, 3000), c(rgb2hex(247, 228, 28), rgb2hex(30, 127, 121), rgb2hex(52,0,72)))
+circos.genomicHeatmap(portulaca_bed[1:4], col = col_genes, side = "inside", border = "white", 
+                      connection_height = 1e-10, line_col = "white", line_lwd = 1e-10,)
+circos.genomicHeatmap(portulaca_bed[c(1:3,5)], col = col_repeats, side = "inside", border = "white", 
+                      connection_height = 1e-10, line_col = "white", line_lwd = 1e-10,)
 
-# circos.genomicTrackPlotRegion(repeats, numeric.column = c(2, 3), 
-#                               panel.fun = function(region, value, ...) {
-#                                 circos.genomicPoints(region, value, ...)
-#                               })
-
-# 
-# circos.genomicTrackPlotRegion(repeats, numeric.column=c(2,3),
-#                               panel.fun = function(region, value, ...) {
-#   if(repeats[,10] == regex("(TA)n")) {
-#     print(head(region, n = 2))
-#     print(head(value, n = 2))
-#   }
-# })
-
-
-head( str_extract(repeats[,10], ".Motif:(AAGTTG)n.") )
-
-# filter out only rows of TA repeats
-TA_rep <- filter(repeats, str_detect(repeats[,10],"\\(TA\\)n"))
+circos.initializeWithIdeogram()
+bed = generateRandomBed(nr = 100, nc = 4)
+col_fun = colorRamp2(c(-1, 0, 1), c("green", "white", "red"))
+circos.genomicHeatmap(bed, col = col_fun, side = "inside", border = "white", connection_height = 0.0)
 
 
-head(TA_rep)
-
-# plot
-
-circos.genomicTrackPlotRegion(TA_rep, panel.fun = function(region, value, ...) {
-  circos.genomicLines(region, value, ...)
-})
-
-#subsetting to types of repeats
-TATA_rep <- filter(repeats, str_detect(repeats[,10],"\\(TATA\\)n"))
-TATA_rep <- as.data.frame(TATA_rep)
-Arich_rep <- filter(repeats, str_detect(repeats[,10],"A\\-rich"))
-Arich_rep <- as.data.frame(Arich_rep)
-
-  
-  
-  ## points
-circos.genomicInitialize(bed)
-circos.genomicTrackPlotRegion(TATA_rep, panel.fun = function(region, value, ...) {
-  circos.genomicPoints(region, value, ...)
-})
-
-# h type lines
-circos.genomicTrack(TATA_rep, 
-                    panel.fun = function(region, value, ...) {
-                      circos.genomicLines(region, value, type = "h")
-                    })
-#area type lines
-circos.genomicTrack(TATA_rep, 
-                    panel.fun = function(region, value, ...) {
-                      circos.genomicLines(region, value, area = TRUE)
-                    })
-
-# finalizing a plot for TATA and A-rich
-circos.genomicInitialize(bed)
-
-circos.genomicTrack(TATA_rep, 
-                    panel.fun = function(region, value, ...) {
-                      circos.genomicLines(region, value, area = TRUE)
-                    })
-
-circos.genomicTrack(Arich_rep, 
-                    panel.fun = function(region, value, ...) {
-                      circos.genomicLines(region, value, area = TRUE)
-                    })
-
-## using the full output table
-
-RepeatMaskerOut <- read_table2("PGA_trim.fasta.out")
-head(RepeatMaskerOut)
-
-masker <- select(RepeatMaskerOut,querySeq,begin,end,matchingRepeat,repeatClass)
-head(masker)
-write_csv(masker,"RepeatMaskerOut.csv")
-
-## then removed tigs and PGA_ 
-
-maskerEdit <- read_csv("RepeatMaskerOut.csv")
-head(maskerEdit)
-maskerEdit <- as.data.frame(maskerEdit)
-
-## now plotting classess of repeats
-
-LTR_Gypsy <- as.data.frame( filter(maskerEdit,str_detect(repeatClass,"LTR/Gypsy")) )
-head(LTR_Gypsy)
-str(LTR_Gypsy)
-
-LINE_L2 <- as.data.frame( filter(maskerEdit,str_detect(repeatClass,"LINE/L2")) )
-head(LINE_L2)  
-str(LINE_L2)
-
-Low_complexity <- as.data.frame( filter(maskerEdit,str_detect(repeatClass,"Low_complexity")) )
-
-#initialize the plot
-circos.genomicInitialize(bed)
-
-#plotting density of LTR/Gypsy repeats and LINE_L2
-circos.genomicDensity(LTR_Gypsy, col = c("#FF000080"), track.height = 0.1)
-circos.genomicDensity(LINE_L2, col = c("#0000FF80"), track.height = 0.1)
-circos.genomicDensity(Low_complexity, col = c("#00FF00"), track.height = 0.1)
-
-
-## or a way to plot points along a single horizontal line
-# circos.genomicTrack(LTR_Gypsy, stack = TRUE, 
-#                     panel.fun = function(region, value, ...) {
-#                       circos.genomicPoints(region, value, pch = 16, cex = 0.5,...)
-#                       i = getI(...)
-#                       circos.lines(CELL_META$cell.xlim, c(i, i), lty = 2, col = "#00000040")
-#                     })
-
-
-####
-# making pie chart
-
-blank_theme <- theme_minimal()+
-  theme(
-    axis.title.x = element_blank(),
-    axis.title.y = element_blank(),
-    panel.border = element_blank(),
-    panel.grid=element_blank(),
-    axis.ticks = element_blank(),
-    plot.title=element_text(size=14, face="bold")
-  )
-
-pie <- ggplot(maskerEdit, aes(x=factor(1), fill=repeatClass))+
-  geom_bar(width = 1) +
-  coord_polar("y") +
-  guides(fill=guide_legend(title="Repeat Class")) +
-  blank_theme
-
-
-pie 
-
-ggsave(plot = pie,filename = "repeat classes.pdf", device = pdf, width = 12, height = 6)
-
-repeatOverview <- tibble (
-  Class = c( "1) Non-repetitive", "3) LINEs", "6) LTR", "4) DNA", "2) Unclassified", "5) Simple", "7) Low complexity"),
-  Percent = c( 33.9, 23.99, 1.42, 10.71, 25.21, 4.64, 0.13)
-  )
-repeatOverview
-
-
-
-pie2 <- ggplot(repeatOverview, aes(x="", y=Percent, fill=Class))+
-  geom_bar(width = 1, stat = "identity") +
-  coord_polar("y") +
-  guides(fill=guide_legend(title="Repeat Class")) +
-  blank_theme +
-  theme(axis.text.x=element_blank()) +
-  scale_fill_brewer(palette="YlGnBu")
-
-
-pie2
-
-ggsave(plot = pie2, filename = "repeat overview.pdf", device = pdf, width = 10, height  = 6)
-  
 
 
